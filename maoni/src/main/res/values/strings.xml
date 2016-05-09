@@ -9,5 +9,6 @@
     <string name="maoni_touch_to_preview">Touch to preview</string>
     <string name="maoni_screenshot_informational_text">The screenshot allows us to have more contextual information about your feedback, and will never ever be shared with third parties.</string>
     <string name="send_feedback">Send Feedback</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
