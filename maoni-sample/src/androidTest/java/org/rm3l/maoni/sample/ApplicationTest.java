@@ -1,4 +1,4 @@
-package org.rm3l.maoni;
+package org.rm3l.maoni.sample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

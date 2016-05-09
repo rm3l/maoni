@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.rm3l.maoni.MaoniSampleMainActivity"
+    tools:context="org.rm3l.maoni.sample.MaoniSampleMainActivity"
     tools:showIn="@layout/activity_maoni_sample_main">
 
 </RelativeLayout>

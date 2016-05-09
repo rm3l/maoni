@@ -1,4 +1,4 @@
-package org.rm3l.maoni;
+package org.rm3l.maoni.sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
