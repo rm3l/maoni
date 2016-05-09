@@ -21,6 +21,6 @@ public class MyFeedbackActivity extends MaoniActivity {
 
     @Override
     protected void onSendButtonClicked(@NonNull Feedback feedback) {
-
+	Toast.makeText(MyFeedbackActivity.this, "onSendButtonClicked", Toast.LENGTH_SHORT).show();
     }
 }

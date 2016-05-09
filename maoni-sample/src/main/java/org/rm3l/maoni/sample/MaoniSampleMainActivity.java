@@ -1,5 +1,6 @@
 package org.rm3l.maoni.sample;
 
+import org.rm3l.maoni.Maoni;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
