@@ -20,15 +20,19 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -77,12 +81,13 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
     // duration is ideal for subtle animations or animations that occur
     // very frequently.
     private int mShortAnimationDuration;
-    private Toolbar mToolbar;
+    private AppBarLayout mAppBarLayout;
 
     private String mFeedbackUniqueId;
     private Feedback.App mAppInfo;
     private Feedback.Phone mPhoneInfo;
     private View mRootView;
+    private Menu mMenu;
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
@@ -96,18 +101,20 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
 
         final Context applicationContext = getApplicationContext();
 
-        mToolbar = (Toolbar) findViewById(R.id.maoni_toolbar);
-        if (mToolbar != null) {
-            mToolbar.setTitle(R.string.send_feedback);
-            mToolbar.setTitleTextAppearance(applicationContext,
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.maoni_app_bar);
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.maoni_toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle(R.string.send_feedback);
+            toolbar.setTitleTextAppearance(applicationContext,
                     R.style.ToolbarTitle);
-            mToolbar.setSubtitleTextAppearance(applicationContext,
+            toolbar.setSubtitleTextAppearance(applicationContext,
                     R.style.ToolbarSubtitle);
-            mToolbar.setTitleTextColor(ContextCompat.getColor(this,
+            toolbar.setTitleTextColor(ContextCompat.getColor(this,
                     R.color.white));
-            mToolbar.setSubtitleTextColor(ContextCompat.getColor(this,
+            toolbar.setSubtitleTextColor(ContextCompat.getColor(this,
                     R.color.white));
-            setSupportActionBar(mToolbar);
+            setSupportActionBar(toolbar);
         }
 
         final ActionBar actionBar = getSupportActionBar();
@@ -158,7 +165,7 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
                     @Override
                     public void onClick(View view) {
                         zoomImageFromThumb(mScreenshotThumb, mBitmap);
-                        ViewUtils.hideToolbar(mToolbar);
+                        ViewUtils.hideAppBarLayout(mAppBarLayout);
                     }
                 });
             } else {
@@ -172,15 +179,39 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
 
         mFeedbackUniqueId = UUID.randomUUID().toString();
 
-        findViewById(R.id.maoni_fab).setOnClickListener(new View.OnClickListener() {
+        final View fab = findViewById(R.id.maoni_fab);
+        final ViewTreeObserver viewTreeObserver = fab.getViewTreeObserver();
+        if (viewTreeObserver == null) {
+            if (this.mMenu != null) {
+                this.mMenu.findItem(R.id.maoni_feedback_send)
+                        .setVisible(false);
+            }
+        } else {
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (mMenu != null) {
+                        mMenu.findItem(R.id.maoni_feedback_send)
+                                .setVisible(fab.getVisibility() != View.VISIBLE);
+                    }
+                }
+            });
+        }
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validateAndSubmitForm();
             }
         });
-
         setAppRelatedInfo();
         setPhoneRelatedInfo();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.maoni_activity_menu, menu);
+        this.mMenu = menu;
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void setAppRelatedInfo() {
@@ -287,15 +318,11 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
 
     @Override
     public final boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-
-            default:
-                break;
+        final int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            onBackPressed();
+        } else if (itemId == R.id.maoni_feedback_send) {
+            validateForm(mRootView);
         }
         return true;
     }
@@ -451,7 +478,7 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
                 set.start();
                 mCurrentAnimator = set;
 
-                ViewUtils.showToolbar(mToolbar);
+                ViewUtils.showAppBarLayout(mAppBarLayout);
             }
         });
     }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -28,20 +29,20 @@ public final class ViewUtils {
     private ViewUtils() {
     }
 
-    public static void hideToolbar(@Nullable final Toolbar toolbar) {
-        if (toolbar == null) {
+    public static void hideAppBarLayout(@Nullable final AppBarLayout appBarLayout) {
+        if (appBarLayout == null) {
             return;
         }
-        toolbar.animate()
-                .translationY(-toolbar.getHeight())
+        appBarLayout.animate()
+                .translationY(-appBarLayout.getHeight())
                 .setInterpolator(new AccelerateInterpolator(2));
     }
 
-    public static void showToolbar(@Nullable final Toolbar toolbar) {
-        if (toolbar == null) {
+    public static void showAppBarLayout(@Nullable final AppBarLayout appBarLayout) {
+        if (appBarLayout == null) {
             return;
         }
-        toolbar.animate()
+        appBarLayout.animate()
                 .translationY(0)
                 .setInterpolator(new DecelerateInterpolator(2));
     }

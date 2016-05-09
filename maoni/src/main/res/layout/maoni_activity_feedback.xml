@@ -48,13 +48,14 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:title="@string/maoni_demo"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/maoni_form_content" />
-    
+
     <!-- This initially-hidden ImageView will hold the expanded/zoomed version of
      the images above. Without transformations applied, it takes up the entire
      screen. To achieve the "zoom" animation, this view's bounds are animated
@@ -66,9 +67,9 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:background="@color/transparent_semi"
         android:contentDescription="@string/maoni_screenshot"
-        android:padding="15dp"
+        android:padding="23dp"
+        android:scaleType="fitXY"
         android:visibility="gone" />
 
     <android.support.design.widget.FloatingActionButton
