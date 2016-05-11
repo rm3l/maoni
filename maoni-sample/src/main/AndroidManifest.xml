@@ -27,24 +27,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Just like any other activity, your "Maoni" activity has to be declared -->
-        <activity
-            android:name=".MyFeedbackActivity"
-            android:excludeFromRecents="true"
-            android:label="@string/feedback"
-            android:launchMode="singleInstance"
-            android:windowSoftInputMode="adjustResize" />
-
-        <!--<activity-->
-            <!--android:name=".MaoniSampleMainActivity"-->
-            <!--android:label="@string/title_activity_maoni_sample_main"-->
-            <!--android:theme="@style/AppTheme.NoActionBar">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
     </application>
 
 </manifest>

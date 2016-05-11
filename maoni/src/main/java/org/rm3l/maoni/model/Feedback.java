@@ -58,6 +58,12 @@ public class Feedback {
         return this.additionalData.get(key);
     }
 
+    @Nullable
+    public Object get(@NonNull final String key, @Nullable final Object defaultValue) {
+        final Object existingValue = this.additionalData.get(key);
+        return existingValue != null ? existingValue : defaultValue;
+    }
+
     @NonNull
     public String getId() {
         return id;

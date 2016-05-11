@@ -1,6 +1,5 @@
 package org.rm3l.maoni.sample;
 
-import org.rm3l.maoni.Maoni;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +12,8 @@ import android.view.View;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
+import org.rm3l.maoni.MaoniBuilder;
+
 public class MaoniSampleMainActivity extends AppCompatActivity {
 
     @Override
@@ -23,9 +24,9 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
         if (toolbar != null) {
             toolbar.setTitle(R.string.app_name);
             toolbar.setTitleTextAppearance(getApplicationContext(),
-                    R.style.ToolbarTitle);
+                    R.style.MaoniTheme_ToolbarSubtitle);
             toolbar.setSubtitleTextAppearance(getApplicationContext(),
-                    R.style.ToolbarSubtitle);
+                    R.style.MaoniTheme_ToolbarSubtitle);
             toolbar.setTitleTextColor(ContextCompat.getColor(this,
                     R.color.white));
             toolbar.setSubtitleTextColor(ContextCompat.getColor(this,
@@ -35,12 +36,15 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
+            final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(this);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new Maoni<>(MyFeedbackActivity.class)
+                    new MaoniBuilder()
                             .windowTitle("Feedback") //Set to an empty string to clear it
                             .message(null) //Use the default. Set to an empty string to clear it
+                            .extraLayout(R.layout.my_feedback_activity_extra_content)
+                            .handler(handlerForMaoni)
                             .start(MaoniSampleMainActivity.this);
                 }
             });

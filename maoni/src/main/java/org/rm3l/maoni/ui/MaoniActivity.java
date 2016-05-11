@@ -43,8 +43,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.rm3l.maoni.BuildConfig;
+import org.rm3l.maoni.MaoniConfiguration;
 import org.rm3l.maoni.R;
-import org.rm3l.maoni.contract.Validator;
 import org.rm3l.maoni.model.Feedback;
 import org.rm3l.maoni.utils.ViewUtils;
 
@@ -52,13 +52,14 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public abstract class MaoniActivity extends AppCompatActivity implements Validator {
+public class MaoniActivity extends AppCompatActivity {
 
     public static final String SCREENSHOT_FILE = "SCREENSHOT_FILE";
     public static final String CALLER_ACTIVITY = "CALLER_ACTIVITY";
     public static final String WINDOW_TITLE = "WINDOW_TITLE";
     public static final String MESSAGE = "MESSAGE";
     public static final String SCREENSHOT_HINT = "SCREENSHOT_HINT";
+    public static final String EXTRA_LAYOUT_RES = "EXTRA_LAYOUT_RES";
     private Bitmap mBitmap;
 
     @Nullable
@@ -96,11 +97,12 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
     private Feedback.App mAppInfo;
     private Feedback.Phone mPhoneInfo;
 
-    @Nullable
     @LayoutRes
-    protected Integer getExtraLayout() {
-        return null;
-    }
+    @Nullable
+    private Integer mExtraLayout;
+
+    private MaoniConfiguration.Validator mValidator;
+    private MaoniConfiguration.Listener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +118,11 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
                     "Layout must contain a root view with the following id: maoni_container");
         }
 
-        final Integer extraLayout = getExtraLayout();
+        final Intent intent = getIntent();
+
+        final MaoniConfiguration maoniConfiguration = MaoniConfiguration.getInstance();
+
+        final Integer extraLayout = maoniConfiguration.getExtraLayout();
         if (extraLayout != null) {
             final View extraContentView = findViewById(R.id.maoni_content_extra);
             if (extraContentView instanceof LinearLayout) {
@@ -127,8 +133,10 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
             }
         }
 
+        mListener = maoniConfiguration.getListener();
+        mValidator = maoniConfiguration.getValidator();
+
         final Context applicationContext = getApplicationContext();
-        final Intent intent = getIntent();
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.maoni_app_bar);
 
@@ -138,9 +146,9 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
             toolbar.setTitle(windowTitle == null ?
                     getString(R.string.send_feedback) : windowTitle);
             toolbar.setTitleTextAppearance(applicationContext,
-                    R.style.ToolbarTitle);
+                    R.style.MaoniTheme_ToolbarTitle);
             toolbar.setSubtitleTextAppearance(applicationContext,
-                    R.style.ToolbarSubtitle);
+                    R.style.MaoniTheme_ToolbarSubtitle);
             toolbar.setTitleTextColor(ContextCompat.getColor(this,
                     R.color.white));
             toolbar.setSubtitleTextColor(ContextCompat.getColor(this,
@@ -266,6 +274,11 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
 
         setAppRelatedInfo();
         setPhoneRelatedInfo();
+
+        final MaoniConfiguration.UiListener uiListener = maoniConfiguration.getUiListener();
+        if (uiListener != null) {
+            uiListener.onCreate(mRootView, savedInstanceState);
+        }
     }
 
     @Override
@@ -348,20 +361,21 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
     }
 
     @Override
-    public final void onBackPressed() {
+    public void onBackPressed() {
         if (mScreenshotExpanded != null) {
             if (mScreenshotExpanded.getVisibility() == View.VISIBLE) {
                 //Unzoom
                 mScreenshotExpanded.performClick();
             } else {
-                onDismiss();
+                if (mListener != null) {
+                    mListener.onDismiss();
+                }
                 super.onBackPressed();
             }
         }
     }
 
-    @Override
-    public boolean validateForm(@NonNull View rootView) {
+    private boolean validateForm(@NonNull View rootView) {
         if (mContent != null) {
             if (TextUtils.isEmpty(mContent.getText())) {
                 if (mContentInputLayout != null) {
@@ -375,7 +389,8 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
                 }
             }
         }
-        return true;
+        //Call the validator implementation instead
+        return mValidator == null || mValidator.validateForm(rootView);
     }
 
     @Override
@@ -406,7 +421,9 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
             final Feedback feedback =
                     new Feedback(mFeedbackUniqueId, mPhoneInfo, mAppInfo,
                             contentText, includeScreenshot, mScreenshotFilePath);
-            this.onSendButtonClicked(feedback);
+            if (mListener != null) {
+                mListener.onSendButtonClicked(feedback);
+            }
             finish();
         } //else do nothing - this is up to the implementation
     }
@@ -555,9 +572,5 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
             });
         }
     }
-
-    protected abstract void onDismiss();
-
-    protected abstract void onSendButtonClicked(@NonNull final Feedback feedback);
 
 }

@@ -43,6 +43,17 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <ImageView
+                android:src="@drawable/header"
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"
+                android:contentDescription="@string/maoni_header" />
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/maoni_toolbar"
                 android:layout_width="match_parent"
@@ -62,15 +73,24 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
      from the bounds of the thumbnail button above, to its final laid-out
      bounds.
     -->
+    <!--<ImageView-->
+        <!--android:id="@+id/maoni_screenshot_expanded"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:contentDescription="@string/maoni_screenshot"-->
+        <!--android:padding="23dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:visibility="gone" />-->
     <ImageView
         android:id="@+id/maoni_screenshot_expanded"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="15dp"
+        android:visibility="gone"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/maoni_screenshot"
-        android:padding="23dp"
-        android:scaleType="fitXY"
-        android:visibility="gone" />
+        android:background="@color/transparent_semi"
+        android:contentDescription="@string/maoni_screenshot" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/maoni_fab"
@@ -82,165 +102,3 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
         app:layout_anchorGravity="bottom|end" />
 
 </android.support.design.widget.CoordinatorLayout>
-
-
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:id="@+id/maoni_container"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/maoni_toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--android:minHeight="?attr/actionBarSize" />-->
-
-        <!--&lt;!&ndash; This initially-hidden ImageView will hold the expanded/zoomed version of-->
-             <!--the images above. Without transformations applied, it takes up the entire-->
-             <!--screen. To achieve the "zoom" animation, this view's bounds are animated-->
-             <!--from the bounds of the thumbnail button above, to its final laid-out-->
-             <!--bounds.-->
-         <!--&ndash;&gt;-->
-        <!--<ImageView-->
-            <!--android:id="@+id/maoni_include_screenshot_and_logs_content_screenshot_expanded"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:adjustViewBounds="true"-->
-            <!--android:background="@color/transparent_semi"-->
-            <!--android:contentDescription="@string/maoni_screenshot"-->
-            <!--android:padding="15dp"-->
-            <!--android:visibility="gone" />-->
-
-    <!--</FrameLayout>-->
-
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scrollbars="vertical">-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/maoni_activity_vertical_margin"-->
-            <!--android:layout_marginRight="@dimen/maoni_activity_vertical_margin"-->
-            <!--android:layout_marginTop="@dimen/maoni_activity_vertical_margin"-->
-            <!--android:orientation="vertical">-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"-->
-                <!--android:text="@string/maoni_feedback_title" />-->
-
-            <!--<android.support.design.widget.TextInputLayout-->
-                <!--android:id="@+id/maoni_email_input_layout"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/maoni_activity_vertical_margin">-->
-
-                <!--<EditText-->
-                    <!--android:id="@+id/maoni_email"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:hint="@string/maoni_feedback_email_hint"-->
-                    <!--android:imeOptions="flagNoExtractUi"-->
-                    <!--android:inputType="textEmailAddress"-->
-                    <!--android:maxLines="1" />-->
-            <!--</android.support.design.widget.TextInputLayout>-->
-
-            <!--<android.support.design.widget.TextInputLayout-->
-                <!--android:id="@+id/maoni_content_input_layout"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/maoni_activity_vertical_margin">-->
-
-                <!--<EditText-->
-                    <!--android:id="@+id/maoni_content"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:hint="@string/maoni_feedback_content_hint"-->
-                    <!--android:inputType="textCapSentences|textMultiLine"-->
-                    <!--android:isScrollContainer="true"-->
-                    <!--android:minLines="5" />-->
-            <!--</android.support.design.widget.TextInputLayout>-->
-
-            <!--&lt;!&ndash; TODO Support dynamic items &ndash;&gt;-->
-            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/maoni_router_information"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_marginBottom="@dimen/maoni_activity_vertical_margin">&ndash;&gt;-->
-            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:text="Router Information"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;<EditText&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/maoni_router_information_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:inputType="textCapSentences|textMultiLine"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:minLines="10"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:isScrollContainer="true"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:hint="If you are reporting a bug, please specify (unless auto-detected) your Router model and DD-WRT Build Number."/>&ndash;&gt;-->
-            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-
-            <!--<CheckBox-->
-                <!--android:id="@+id/maoni_include_screenshot_and_logs"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"-->
-                <!--android:checked="true"-->
-                <!--android:text="@string/maoni_feedback_include_screenshot_checkbox_title" />-->
-
-            <!--<LinearLayout-->
-                <!--android:id="@+id/maoni_include_screenshot_and_logs_content"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"-->
-                <!--android:layout_marginEnd="15dp"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_marginRight="15dp"-->
-                <!--android:layout_marginStart="15dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="4">-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="150dp"-->
-                    <!--android:layout_height="200dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<ImageButton-->
-                        <!--android:id="@+id/maoni_include_screenshot_and_logs_content_screenshot"-->
-                        <!--android:layout_width="100dp"-->
-                        <!--android:layout_height="165dp"-->
-                        <!--android:contentDescription="@string/maoni_screenshot"-->
-                        <!--android:scaleType="centerCrop" />-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="@string/maoni_touch_to_preview" />-->
-                <!--</LinearLayout>-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginStart="10dp"-->
-                    <!--android:layout_weight="3"-->
-                    <!--android:text="@string/maoni_screenshot_informational_text"-->
-                    <!--android:textAppearance="?android:textAppearanceSmall" />-->
-            <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
-    <!--</ScrollView>-->
-<!--</LinearLayout>-->
