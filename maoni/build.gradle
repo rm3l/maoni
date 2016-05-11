@@ -1,14 +1,15 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 10
+        versionCode 1
         versionName "1.0"
     }
     buildTypes {
@@ -17,19 +18,60 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
-
-    lintOptions {
-        abortOnError false
-    }
 }
 
-apply from: 'gradle-mvn-push.gradle'
-apply from: 'gradle-jcenter-push.gradle'
+group = 'org.rm3l'
+version = '1.0'
 
 dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
+}
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavadocs(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
+}
+
+//TODO Read sensitive info (e.g., API Key) from an external roperties file (or prompt or env. var)
+bintray {
+    user = 'rm3l'
+    key = '01234567890abcdef01234567890abcdef' //TODO
+    pkg {
+        repo = 'maven'
+        name = 'org.rm3l.Maoni'
+
+        version {
+            name = '1.0'
+            desc = 'Maoni Library'
+            released  = new Date()
+            vcsTag = '1.0'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/rm3l/Maoni.git'
+        websiteUrl = 'https://rm3l.github.io/Maoni'
+    }
+    configurations = ['archives']
 }
