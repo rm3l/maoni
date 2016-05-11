@@ -14,8 +14,9 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maoni_sample_main);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.maoni_toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
+            toolbar.setTitle(R.string.app_name);
             toolbar.setTitleTextAppearance(getApplicationContext(),
                     R.style.ToolbarTitle);
             toolbar.setSubtitleTextAppearance(getApplicationContext(),
@@ -33,6 +34,8 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     new Maoni<>(MyFeedbackActivity.class)
+                            .windowTitle("Feedback") //Set to an empty string to clear it
+                            .message(null) //Use the default. Set to an empty string to clear it
                             .start(MaoniSampleMainActivity.this);
                 }
             });

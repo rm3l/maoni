@@ -31,6 +31,7 @@ public class Maoni<T extends MaoniActivity> {
     private boolean closeOnCallbackError;
     @Nullable
     private Validator validator;
+    private String screenshotHint;
 
     public Maoni(@Nullable final Class<T> concreteActivityType) {
         this.mConcreteActivityType = concreteActivityType;
@@ -56,9 +57,18 @@ public class Maoni<T extends MaoniActivity> {
         return this;
     }
 
-    public void start(@NonNull final Activity callerActivity) {
+    @Nullable
+    public String getScreenshotHint() {
+        return screenshotHint;
+    }
+
+    public Maoni screenshotHint(@Nullable String screenshotHint) {
+        this.screenshotHint = screenshotHint;
+        return this;
+    }
+
+    public void start(@Nullable final Activity callerActivity) {
         if (callerActivity == null) {
-            Toast.makeText(callerActivity, "Target activity is undefined - please try again later", Toast.LENGTH_SHORT).show();
             Log.d(LOG_TAG, "Target activity is undefined");
             return;
         }
@@ -68,7 +78,9 @@ public class Maoni<T extends MaoniActivity> {
         ViewUtils.exportViewToFile(callerActivity, callerActivity.getWindow().getDecorView(), screenshotFile);
         maoniIntent.putExtra(MaoniActivity.SCREENSHOT_FILE, screenshotFile.getAbsolutePath());
         maoniIntent.putExtra(MaoniActivity.CALLER_ACTIVITY, callerActivity.getClass().getCanonicalName());
-        //TODO Add parameters over here
+        maoniIntent.putExtra(MaoniActivity.WINDOW_TITLE, getWindowTitle());
+        maoniIntent.putExtra(MaoniActivity.MESSAGE, getMessage());
+        maoniIntent.putExtra(MaoniActivity.SCREENSHOT_HINT, getScreenshotHint());
         callerActivity.startActivity(maoniIntent);
     }
 

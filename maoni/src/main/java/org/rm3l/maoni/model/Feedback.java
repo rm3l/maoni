@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by rm3l on 08/05/16.
@@ -21,9 +23,6 @@ public class Feedback {
     public final App appInfo;
 
     @NonNull
-    public final String userId;
-
-    @NonNull
     public final String userComment;
 
     public final boolean includeScreenshot;
@@ -31,10 +30,12 @@ public class Feedback {
     @Nullable
     public final File screenshotFilePath;
 
+    @NonNull
+    private final Map<String, Object> additionalData = new HashMap<>();
+
     public Feedback(@NonNull String id,
                     @NonNull Phone phoneInfo,
                     @NonNull App appInfo,
-                    @NonNull String userId,
                     @NonNull String userComment,
                     boolean includeScreenshot,
                     @Nullable String screenshotFilePath) {
@@ -42,18 +43,25 @@ public class Feedback {
         this.id = id;
         this.phoneInfo = phoneInfo;
         this.appInfo = appInfo;
-        this.userId = userId;
         this.userComment = userComment;
         this.includeScreenshot = includeScreenshot;
         this.screenshotFilePath =
                 (screenshotFilePath != null ? new File(screenshotFilePath) : null);
     }
 
+    public void put(@NonNull final String key, @Nullable final Object value) {
+        this.additionalData.put(key, value);
+    }
+
+    @Nullable
+    public Object get(@NonNull final String key) {
+        return this.additionalData.get(key);
+    }
+
     @NonNull
     public String getId() {
         return id;
     }
-
 
     public static class Phone {
 

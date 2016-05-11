@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/extra_email_inputlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/maoni_activity_vertical_margin">
+        <EditText
+            android:id="@+id/extra_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email address"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="An extra text area"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/extra_edittext"
+        android:inputType="textCapSentences|textMultiLine"
+        android:minLines="10"
+        android:isScrollContainer="true"
+        android:hint="EditText hint. Write something here."
+        android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="An extra RadioGroup"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/extra_radiogroup"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/extra_rg1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:checked="true"
+            android:text="RG 1"/>
+        <RadioButton
+            android:id="@+id/extra_rg2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="RG 2"/>
+        <RadioButton
+            android:id="@+id/extra_rg3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="RG 3"/>
+    </RadioGroup>
+    
+</LinearLayout>

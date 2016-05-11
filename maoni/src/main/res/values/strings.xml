@@ -2,8 +2,7 @@
     <string name="app_name">Maoni Library</string>
 
     <string name="maoni_screenshot">Screenshot</string>
-    <string name="maoni_feedback_title">Hey! Love or hate this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
-    <string name="maoni_feedback_email_hint">Your email address</string>
+    <string name="maoni_feedback_message">Hey! Love or hate this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
     <string name="maoni_feedback_content_hint">Write your feedback here</string>
     <string name="maoni_feedback_include_screenshot_checkbox_title">Include screenshot</string>
     <string name="maoni_touch_to_preview">Touch to preview</string>
@@ -11,5 +10,6 @@
     <string name="send_feedback">Send Feedback</string>
     <string name="action_settings">Settings</string>
     <string name="maoni_demo">Maoni Demo</string>
+    <string name="validate_must_not_be_blank">Must not be blank</string>
 
 </resources>

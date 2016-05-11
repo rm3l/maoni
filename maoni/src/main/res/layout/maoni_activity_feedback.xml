@@ -63,7 +63,7 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
      bounds.
     -->
     <ImageView
-        android:id="@+id/maoni_include_screenshot_and_logs_content_screenshot_expanded"
+        android:id="@+id/maoni_screenshot_expanded"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"

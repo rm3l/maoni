@@ -19,10 +19,11 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.rm3l.maoni.BuildConfig;
 import org.rm3l.maoni.R;
@@ -49,29 +52,33 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-/**
- * Created by rm3l on 05/05/16.
- */
 public abstract class MaoniActivity extends AppCompatActivity implements Validator {
 
-    public static final String USER_IDNETIFIER = "UDER_IDENTIFIER";
     public static final String SCREENSHOT_FILE = "SCREENSHOT_FILE";
     public static final String CALLER_ACTIVITY = "CALLER_ACTIVITY";
-    private static final String LOG_TAG = MaoniActivity.class.getSimpleName();
+    public static final String WINDOW_TITLE = "WINDOW_TITLE";
+    public static final String MESSAGE = "MESSAGE";
+    public static final String SCREENSHOT_HINT = "SCREENSHOT_HINT";
     private Bitmap mBitmap;
 
-    private TextInputLayout mEmailInputLayout;
-    private EditText mEmail;
-
+    @Nullable
     private TextInputLayout mContentInputLayout;
+    @Nullable
     private EditText mContent;
 
-    private CheckBox mIncludeScreenshotAndLogs;
+    @Nullable
+    private CheckBox mIncludeScreenshot;
 
+    @Nullable
     private ImageButton mScreenshotThumb;
+    @Nullable
     private ImageView mScreenshotExpanded;
 
+    @Nullable
     private String mScreenshotFilePath;
+
+    protected View mRootView;
+    private Menu mMenu;
 
     // Hold a reference to the current animator,
     // so that it can be canceled mid-way.
@@ -81,16 +88,22 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
     // duration is ideal for subtle animations or animations that occur
     // very frequently.
     private int mShortAnimationDuration;
+
+    @Nullable
     private AppBarLayout mAppBarLayout;
 
     private String mFeedbackUniqueId;
     private Feedback.App mAppInfo;
     private Feedback.Phone mPhoneInfo;
-    private View mRootView;
-    private Menu mMenu;
+
+    @Nullable
+    @LayoutRes
+    protected Integer getExtraLayout() {
+        return null;
+    }
 
     @Override
-    protected final void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTheme(R.style.AppTheme_NoActionBar);
@@ -98,14 +111,32 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
         setContentView(R.layout.maoni_activity_feedback);
 
         mRootView = findViewById(R.id.maoni_container);
+        if (mRootView == null) {
+            throw new IllegalStateException(
+                    "Layout must contain a root view with the following id: maoni_container");
+        }
+
+        final Integer extraLayout = getExtraLayout();
+        if (extraLayout != null) {
+            final View extraContentView = findViewById(R.id.maoni_content_extra);
+            if (extraContentView instanceof LinearLayout) {
+                final LinearLayout extraContent = (LinearLayout) extraContentView;
+                extraContent.setVisibility(View.VISIBLE);
+                extraContent
+                        .addView(getLayoutInflater().inflate(extraLayout, extraContent, false));
+            }
+        }
 
         final Context applicationContext = getApplicationContext();
+        final Intent intent = getIntent();
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.maoni_app_bar);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.maoni_toolbar);
         if (toolbar != null) {
-            toolbar.setTitle(R.string.send_feedback);
+            final String windowTitle = intent.getStringExtra(WINDOW_TITLE);
+            toolbar.setTitle(windowTitle == null ?
+                    getString(R.string.send_feedback) : windowTitle);
             toolbar.setTitleTextAppearance(applicationContext,
                     R.style.ToolbarTitle);
             toolbar.setSubtitleTextAppearance(applicationContext,
@@ -124,40 +155,55 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
             actionBar.setHomeButtonEnabled(true);
         }
 
-        mEmailInputLayout = (TextInputLayout) findViewById(R.id.maoni_email_input_layout);
-        mEmail = (EditText) findViewById(R.id.maoni_email);
+        final String message = intent.getStringExtra(MESSAGE);
+        final TextView activityMessageTv = (TextView) findViewById(R.id.maoni_feedback_message);
+        if (activityMessageTv != null) {
+            activityMessageTv.setText(message != null ? message :
+                    getString(R.string.maoni_feedback_message));
+        }
+
+        final String screenshotInformationalHint = intent.getStringExtra(SCREENSHOT_HINT);
+        final TextView screenshotInformationalHintTv =
+                (TextView) findViewById(R.id.maoni_screenshot_informational_text);
+        if (screenshotInformationalHintTv != null) {
+            screenshotInformationalHintTv.setText(screenshotInformationalHint != null ?
+                    screenshotInformationalHint :
+                    getString(R.string.maoni_screenshot_informational_text));
+        }
 
         mContentInputLayout = (TextInputLayout) findViewById(R.id.maoni_content_input_layout);
         mContent = (EditText) findViewById(R.id.maoni_content);
 
-        mIncludeScreenshotAndLogs = (CheckBox) findViewById(R.id.maoni_include_screenshot_and_logs);
+        mIncludeScreenshot = (CheckBox) findViewById(R.id.maoni_include_screenshot);
 
         mScreenshotThumb = (ImageButton)
-                findViewById(R.id.maoni_include_screenshot_and_logs_content_screenshot);
+                findViewById(R.id.maoni_screenshot);
         mScreenshotExpanded = (ImageView)
-                findViewById(R.id.maoni_include_screenshot_and_logs_content_screenshot_expanded);
+                findViewById(R.id.maoni_screenshot_expanded);
 
         // Retrieve and cache the system's default "short" animation time.
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
-        final Intent intent = getIntent();
-
-        //Set user-defined email if any
-        mEmail.setText(intent.getStringExtra(USER_IDNETIFIER));
-
         final View screenshotAndLogsContentView =
-                findViewById(R.id.maoni_include_screenshot_and_logs_content);
-
+                findViewById(R.id.maoni_include_screenshot_content);
         mScreenshotFilePath = intent.getStringExtra(SCREENSHOT_FILE);
         if (!TextUtils.isEmpty(mScreenshotFilePath)) {
             final File file = new File(mScreenshotFilePath);
             if (file.exists()) {
-                mIncludeScreenshotAndLogs.setVisibility(View.VISIBLE);
-                screenshotAndLogsContentView.setVisibility(View.VISIBLE);
+                if (mIncludeScreenshot != null) {
+                    mIncludeScreenshot.setVisibility(View.VISIBLE);
+                }
+                if (screenshotAndLogsContentView != null) {
+                    screenshotAndLogsContentView.setVisibility(View.VISIBLE);
+                }
                 mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                mScreenshotThumb.setImageBitmap(mBitmap);
-                mScreenshotExpanded.setImageBitmap(mBitmap);
+                if (mScreenshotThumb != null) {
+                    mScreenshotThumb.setImageBitmap(mBitmap);
+                }
+                if (mScreenshotExpanded != null) {
+                    mScreenshotExpanded.setImageBitmap(mBitmap);
+                }
 
                 // Hook up clicks on the thumbnail views.
 
@@ -169,40 +215,55 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
                     }
                 });
             } else {
-                mIncludeScreenshotAndLogs.setVisibility(View.GONE);
-                screenshotAndLogsContentView.setVisibility(View.GONE);
+                if (mIncludeScreenshot != null) {
+                    mIncludeScreenshot.setVisibility(View.GONE);
+                }
+                if (screenshotAndLogsContentView != null) {
+                    screenshotAndLogsContentView.setVisibility(View.GONE);
+                }
             }
         } else {
-            mIncludeScreenshotAndLogs.setVisibility(View.GONE);
-            screenshotAndLogsContentView.setVisibility(View.GONE);
+            if (mIncludeScreenshot != null) {
+                mIncludeScreenshot.setVisibility(View.GONE);
+            }
+            if (screenshotAndLogsContentView != null) {
+                screenshotAndLogsContentView.setVisibility(View.GONE);
+            }
         }
 
         mFeedbackUniqueId = UUID.randomUUID().toString();
 
         final View fab = findViewById(R.id.maoni_fab);
-        final ViewTreeObserver viewTreeObserver = fab.getViewTreeObserver();
-        if (viewTreeObserver == null) {
-            if (this.mMenu != null) {
-                this.mMenu.findItem(R.id.maoni_feedback_send)
-                        .setVisible(false);
-            }
-        } else {
-            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    if (mMenu != null) {
-                        mMenu.findItem(R.id.maoni_feedback_send)
-                                .setVisible(fab.getVisibility() != View.VISIBLE);
+        if (fab != null) {
+            final ViewTreeObserver viewTreeObserver = fab.getViewTreeObserver();
+            if (viewTreeObserver == null) {
+                if (this.mMenu != null) {
+                    final MenuItem item = this.mMenu.findItem(R.id.maoni_feedback_send);
+                    if (item != null) {
+                        item.setVisible(false);
                     }
+                }
+            } else {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        if (mMenu != null) {
+                            final MenuItem item = mMenu.findItem(R.id.maoni_feedback_send);
+                            if (item != null) {
+                                item.setVisible(fab.getVisibility() != View.VISIBLE);
+                            }
+                        }
+                    }
+                });
+            }
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    validateAndSubmitForm();
                 }
             });
         }
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                validateAndSubmitForm();
-            }
-        });
+
         setAppRelatedInfo();
         setPhoneRelatedInfo();
     }
@@ -288,30 +349,31 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
 
     @Override
     public final void onBackPressed() {
-        if (mScreenshotExpanded.getVisibility() == View.VISIBLE) {
-            //Unzoom
-            mScreenshotExpanded.performClick();
-        } else {
-            onDismiss();
-            super.onBackPressed();
+        if (mScreenshotExpanded != null) {
+            if (mScreenshotExpanded.getVisibility() == View.VISIBLE) {
+                //Unzoom
+                mScreenshotExpanded.performClick();
+            } else {
+                onDismiss();
+                super.onBackPressed();
+            }
         }
     }
 
     @Override
     public boolean validateForm(@NonNull View rootView) {
-        if (TextUtils.isEmpty(mEmail.getText())) {
-            mEmailInputLayout.setErrorEnabled(true);
-            mEmailInputLayout.setError("Must not be blank");
-            return false;
-        } else {
-            mEmailInputLayout.setErrorEnabled(false);
-        }
-        if (TextUtils.isEmpty(mContent.getText())) {
-            mContentInputLayout.setErrorEnabled(true);
-            mContentInputLayout.setError("Must not be blank");
-            return false;
-        } else {
-            mContentInputLayout.setErrorEnabled(false);
+        if (mContent != null) {
+            if (TextUtils.isEmpty(mContent.getText())) {
+                if (mContentInputLayout != null) {
+                    mContentInputLayout.setErrorEnabled(true);
+                    mContentInputLayout.setError(getString(R.string.validate_must_not_be_blank));
+                }
+                return false;
+            } else {
+                if (mContentInputLayout != null) {
+                    mContentInputLayout.setErrorEnabled(false);
+                }
+            }
         }
         return true;
     }
@@ -322,7 +384,7 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
         if (itemId == android.R.id.home) {
             onBackPressed();
         } else if (itemId == R.id.maoni_feedback_send) {
-            validateForm(mRootView);
+            validateAndSubmitForm();
         }
         return true;
     }
@@ -331,15 +393,21 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
         //Validate form
         if (this.validateForm(mRootView)) {
             //Check that device is actually connected to the internet prior to going any further
-            final boolean includeScreenshot = mIncludeScreenshotAndLogs.isChecked();
-            final String emailText = mEmail.getText().toString();
-            final String contentText = mContent.getText().toString();
+            boolean includeScreenshot = false;
+            if (mIncludeScreenshot != null) {
+                includeScreenshot = mIncludeScreenshot.isChecked();
+            }
+            String contentText = "";
+            if (mContent != null) {
+                contentText = mContent.getText().toString();
+            }
 
             //Call actual implementation
             final Feedback feedback =
                     new Feedback(mFeedbackUniqueId, mPhoneInfo, mAppInfo,
-                            emailText, contentText, includeScreenshot, mScreenshotFilePath);
+                            contentText, includeScreenshot, mScreenshotFilePath);
             this.onSendButtonClicked(feedback);
+            finish();
         } //else do nothing - this is up to the implementation
     }
 
@@ -352,8 +420,10 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
 
         // Load the high-resolution "zoomed-in" image.
         final ImageView expandedImageView = (ImageView) findViewById(
-                R.id.maoni_include_screenshot_and_logs_content_screenshot_expanded);
-        expandedImageView.setImageBitmap(bitmap);
+                R.id.maoni_screenshot_expanded);
+        if (expandedImageView != null) {
+            expandedImageView.setImageBitmap(bitmap);
+        }
 
         // Calculate the starting and ending bounds for the zoomed-in image.
         // This step involves lots of math. Yay, math.
@@ -367,8 +437,7 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
         // bounds, since that's the origin for the positioning animation
         // properties (X, Y).
         thumbView.getGlobalVisibleRect(startBounds);
-        findViewById(R.id.maoni_container)
-                .getGlobalVisibleRect(finalBounds, globalOffset);
+        mRootView.getGlobalVisibleRect(finalBounds, globalOffset);
         startBounds.offset(-globalOffset.x, -globalOffset.y);
         finalBounds.offset(-globalOffset.x, -globalOffset.y);
 
@@ -398,13 +467,15 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
         // begins, it will position the zoomed-in view in the place of the
         // thumbnail.
         thumbView.setAlpha(0f);
-        expandedImageView.setVisibility(View.VISIBLE);
+        if (expandedImageView != null) {
+            expandedImageView.setVisibility(View.VISIBLE);
+            // Set the pivot point for SCALE_X and SCALE_Y transformations
+            // to the top-left corner of the zoomed-in view (the default
+            // is the center of the view).
+            expandedImageView.setPivotX(0f);
+            expandedImageView.setPivotY(0f);
 
-        // Set the pivot point for SCALE_X and SCALE_Y transformations
-        // to the top-left corner of the zoomed-in view (the default
-        // is the center of the view).
-        expandedImageView.setPivotX(0f);
-        expandedImageView.setPivotY(0f);
+        }
 
         // Construct and run the parallel animation of the four translation and
         // scale properties (X, Y, SCALE_X, and SCALE_Y).
@@ -437,50 +508,52 @@ public abstract class MaoniActivity extends AppCompatActivity implements Validat
         // to the original bounds and show the thumbnail instead of
         // the expanded image.
         final float startScaleFinal = startScale;
-        expandedImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mCurrentAnimator != null) {
-                    mCurrentAnimator.cancel();
+        if (expandedImageView != null) {
+            expandedImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mCurrentAnimator != null) {
+                        mCurrentAnimator.cancel();
+                    }
+
+                    // Animate the four positioning/sizing properties in parallel,
+                    // back to their original values.
+                    AnimatorSet set = new AnimatorSet();
+                    set.play(ObjectAnimator
+                            .ofFloat(expandedImageView, View.X, startBounds.left))
+                            .with(ObjectAnimator
+                                    .ofFloat(expandedImageView,
+                                            View.Y, startBounds.top))
+                            .with(ObjectAnimator
+                                    .ofFloat(expandedImageView,
+                                            View.SCALE_X, startScaleFinal))
+                            .with(ObjectAnimator
+                                    .ofFloat(expandedImageView,
+                                            View.SCALE_Y, startScaleFinal));
+                    set.setDuration(mShortAnimationDuration);
+                    set.setInterpolator(new DecelerateInterpolator());
+                    set.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            thumbView.setAlpha(1f);
+                            expandedImageView.setVisibility(View.GONE);
+                            mCurrentAnimator = null;
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            thumbView.setAlpha(1f);
+                            expandedImageView.setVisibility(View.GONE);
+                            mCurrentAnimator = null;
+                        }
+                    });
+                    set.start();
+                    mCurrentAnimator = set;
+
+                    ViewUtils.showAppBarLayout(mAppBarLayout);
                 }
-
-                // Animate the four positioning/sizing properties in parallel,
-                // back to their original values.
-                AnimatorSet set = new AnimatorSet();
-                set.play(ObjectAnimator
-                        .ofFloat(expandedImageView, View.X, startBounds.left))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.Y, startBounds.top))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_X, startScaleFinal))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_Y, startScaleFinal));
-                set.setDuration(mShortAnimationDuration);
-                set.setInterpolator(new DecelerateInterpolator());
-                set.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        thumbView.setAlpha(1f);
-                        expandedImageView.setVisibility(View.GONE);
-                        mCurrentAnimator = null;
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                        thumbView.setAlpha(1f);
-                        expandedImageView.setVisibility(View.GONE);
-                        mCurrentAnimator = null;
-                    }
-                });
-                set.start();
-                mCurrentAnimator = set;
-
-                ViewUtils.showAppBarLayout(mAppBarLayout);
-            }
-        });
+            });
+        }
     }
 
     protected abstract void onDismiss();

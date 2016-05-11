@@ -18,26 +18,11 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/maoni_feedback_message"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/maoni_activity_vertical_margin"
             android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
-            android:text="@string/maoni_feedback_title" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/maoni_email_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/maoni_activity_vertical_margin">
-
-            <EditText
-                android:id="@+id/maoni_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/maoni_feedback_email_hint"
-                android:imeOptions="flagNoExtractUi"
-                android:inputType="textEmailAddress"
-                android:maxLines="1" />
-        </android.support.design.widget.TextInputLayout>
+            android:text="@string/maoni_feedback_message" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/maoni_content_input_layout"
@@ -55,29 +40,16 @@
                 android:minLines="5" />
         </android.support.design.widget.TextInputLayout>
 
-        <!-- TODO Support dynamic items -->
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/maoni_router_information"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_marginBottom="@dimen/maoni_activity_vertical_margin">-->
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Router Information"/>-->
-        <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/maoni_router_information_content"-->
-        <!--android:inputType="textCapSentences|textMultiLine"-->
-        <!--android:minLines="10"-->
-        <!--android:isScrollContainer="true"-->
-        <!--android:hint="If you are reporting a bug, please specify (unless auto-detected) your Router model and DD-WRT Build Number."/>-->
-        <!--</LinearLayout>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/maoni_content_extra"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"/>
 
         <CheckBox
-            android:id="@+id/maoni_include_screenshot_and_logs"
+            android:id="@+id/maoni_include_screenshot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
@@ -85,7 +57,7 @@
             android:text="@string/maoni_feedback_include_screenshot_checkbox_title" />
 
         <LinearLayout
-            android:id="@+id/maoni_include_screenshot_and_logs_content"
+            android:id="@+id/maoni_include_screenshot_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
@@ -103,7 +75,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/maoni_include_screenshot_and_logs_content_screenshot"
+                    android:id="@+id/maoni_screenshot"
                     android:layout_width="100dp"
                     android:layout_height="165dp"
                     android:contentDescription="@string/maoni_screenshot"
@@ -121,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
+                android:id="@+id/maoni_screenshot_informational_text"
                 android:layout_weight="3"
                 android:text="@string/maoni_screenshot_informational_text"
                 android:textAppearance="?android:textAppearanceSmall" />
