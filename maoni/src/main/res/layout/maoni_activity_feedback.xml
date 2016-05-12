@@ -67,31 +67,6 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
 
     <include layout="@layout/maoni_form_content" />
 
-    <!-- This initially-hidden ImageView will hold the expanded/zoomed version of
-     the images above. Without transformations applied, it takes up the entire
-     screen. To achieve the "zoom" animation, this view's bounds are animated
-     from the bounds of the thumbnail button above, to its final laid-out
-     bounds.
-    -->
-    <!--<ImageView-->
-        <!--android:id="@+id/maoni_screenshot_expanded"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:contentDescription="@string/maoni_screenshot"-->
-        <!--android:padding="23dp"-->
-        <!--android:scaleType="fitXY"-->
-        <!--android:visibility="gone" />-->
-    <ImageView
-        android:id="@+id/maoni_screenshot_expanded"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp"
-        android:visibility="gone"
-        android:adjustViewBounds="true"
-        android:background="@color/transparent_semi"
-        android:contentDescription="@string/maoni_screenshot" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/maoni_fab"
         android:layout_width="wrap_content"

@@ -12,5 +12,7 @@
     <string name="maoni_demo">Maoni Demo</string>
     <string name="validate_must_not_be_blank">Must not be blank</string>
     <string name="maoni_header">Header</string>
+    <string name="maoni_screenshot_preview_internal_error">Internal Error. Please try again later.</string>
+    <string name="maoni_screenshot_preview">Preview</string>
 
 </resources>
