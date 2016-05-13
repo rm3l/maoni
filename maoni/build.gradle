@@ -56,22 +56,31 @@ artifacts {
 
 //TODO Read sensitive info (e.g., API Key) from an external roperties file (or prompt or env. var)
 bintray {
-    user = 'rm3l'
-    key = '01234567890abcdef01234567890abcdef' //TODO
+    user = System.getenv('BINTRAY_USER')
+    // user = 'rm3l'
+    key = System.getenv('BINTRAY_KEY')
+    // key = '01234567890abcdef01234567890abcdef'
+    
+    publish = true //If version should be auto published after an upload
+    
     pkg {
         repo = 'maven'
-        name = 'org.rm3l.Maoni'
-
+        name = 'org.rm3l:maoni'
+        labels = ['maoni', 'android', 'feedback', 'android-lib', 'comments', 'review', 'bug', 'issue']
+        
         version {
             name = '1.0'
-            desc = 'Maoni Library'
+            desc = 'Maoni Android Library'
             released  = new Date()
             vcsTag = '1.0'
         }
 
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/rm3l/Maoni.git'
-        websiteUrl = 'https://rm3l.github.io/Maoni'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/rm3l/maoni.git'
+        websiteUrl = 'https://rm3l.github.io/maoni'
+        
+        githubRepo = 'rm3l/maoni' //Optional Github repository
+        githubReleaseNotesFile = 'Changelog.md' //Optional Github readme file
     }
     configurations = ['archives']
 }
