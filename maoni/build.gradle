@@ -23,6 +23,8 @@ android {
 group = 'org.rm3l'
 version = '1.0'
 
+final homePath = System.properties['user.home']
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -54,13 +56,22 @@ artifacts {
     archives generateSourcesJar
 }
 
-//TODO Read sensitive info (e.g., API Key) from an external roperties file (or prompt or env. var)
 bintray {
-    user = System.getenv('BINTRAY_USER')
-    // user = 'rm3l'
-    key = System.getenv('BINTRAY_KEY')
-    // key = '01234567890abcdef01234567890abcdef'
-    
+
+    //Attempt to read keystore.properties file, if any first
+    final propsFile = new File(homePath.toString() + "/.droid/", "maoni.bintray.properties")
+
+    if (propsFile.exists()) {
+        printf("[Bintray] Using properties file located at " + propsFile.absolutePath)
+        final props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        user = props['user']
+        key = props['key']
+    } else {
+        user = ""
+        key = ""
+    }
+
     publish = true //If version should be auto published after an upload
     
     pkg {
@@ -75,12 +86,13 @@ bintray {
             vcsTag = '1.0'
         }
 
+        publicDownloadNumbers = true
+
         licenses = ['MIT']
         vcsUrl = 'https://github.com/rm3l/maoni.git'
         websiteUrl = 'https://rm3l.github.io/maoni'
-        
-        githubRepo = 'rm3l/maoni' //Optional Github repository
-        githubReleaseNotesFile = 'Changelog.md' //Optional Github readme file
+        issueTrackerUrl = 'https://github.com/rm3l/maoni/issues'
+
     }
     configurations = ['archives']
 }
