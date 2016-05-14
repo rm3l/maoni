@@ -10,9 +10,22 @@ and call your callbacks.
 
 Add this to your build.gradle:
 
-compile 'org.rm3l:maoni:1.0@aar'
+```gradle
+repositories {
+    //...
+    
+    maven {
+        url 'https://dl.bintray.com/rm3l/maven'
+    }
+}
+
+dependencies {
+    // ...
+    
+    compile 'org.rm3l:maoni:1.0@aar'
+}
+```
 
 And refer to MaoniBuilder to start Maoni.
 
 Please also check out the sample app for more details.
-
