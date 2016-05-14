@@ -33,9 +33,16 @@ import org.rm3l.maoni.utils.ViewUtils;
 
 import java.io.File;
 
-/**
- * TODO Created by rm3l on 05/05/16.
- */
+import static org.rm3l.maoni.ui.MaoniActivity.CALLER_ACTIVITY;
+import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_HINT;
+import static org.rm3l.maoni.ui.MaoniActivity.HEADER;
+import static org.rm3l.maoni.ui.MaoniActivity.INCLUDE_SCREENSHOT_TEXT;
+import static org.rm3l.maoni.ui.MaoniActivity.MESSAGE;
+import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_FILE;
+import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_HINT;
+import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_TOUCH_TO_PREVIEW_HINT;
+import static org.rm3l.maoni.ui.MaoniActivity.WINDOW_TITLE;
+
 public class MaoniBuilder {
 
     private static final String LOG_TAG = MaoniBuilder.class.getSimpleName();
@@ -172,33 +179,36 @@ public class MaoniBuilder {
         final File screenshotFile = new File(callerActivity.getCacheDir(),
                 "maoni_feedback_screenshot.png");
         ViewUtils.exportViewToFile(callerActivity, callerActivity.getWindow().getDecorView(), screenshotFile);
-        maoniIntent.putExtra(MaoniActivity.SCREENSHOT_FILE, screenshotFile.getAbsolutePath());
+        maoniIntent.putExtra(SCREENSHOT_FILE, screenshotFile.getAbsolutePath());
 
-        maoniIntent.putExtra(MaoniActivity.CALLER_ACTIVITY, callerActivity.getClass().getCanonicalName());
+        maoniIntent.putExtra(CALLER_ACTIVITY, callerActivity.getClass().getCanonicalName());
+
+        if (windowTitle != null) {
+            maoniIntent.putExtra(WINDOW_TITLE, windowTitle);
+        }
 
         if (message != null) {
-            maoniIntent.putExtra(MaoniActivity.MESSAGE, message);
+            maoniIntent.putExtra(MESSAGE, message);
         }
 
         if (header != null) {
-            maoniIntent.putExtra(MaoniActivity.HEADER, header);
+            maoniIntent.putExtra(HEADER, header);
         }
 
         if (feedbackContentHint != null) {
-            maoniIntent.putExtra(MaoniActivity.CONTENT_HINT, feedbackContentHint);
+            maoniIntent.putExtra(CONTENT_HINT, feedbackContentHint);
         }
 
         if (screenshotHint != null) {
-            maoniIntent.putExtra(MaoniActivity.SCREENSHOT_HINT, screenshotHint);
+            maoniIntent.putExtra(SCREENSHOT_HINT, screenshotHint);
         }
 
         if (includeScreenshotText != null) {
-            maoniIntent.putExtra(MaoniActivity.INCLUDE_SCREENSHOT_TEXT, includeScreenshotText);
+            maoniIntent.putExtra(INCLUDE_SCREENSHOT_TEXT, includeScreenshotText);
         }
 
         if (touchToPreviewScreenshotText != null) {
-            maoniIntent.putExtra(MaoniActivity.SCREENSHOT_TOUCH_TO_PREVIEW_HINT,
-                    touchToPreviewScreenshotText);
+            maoniIntent.putExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT, touchToPreviewScreenshotText);
         }
 
         callerActivity.startActivity(maoniIntent);
