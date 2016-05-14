@@ -34,6 +34,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Utilities for manipulating views
+ */
 public final class ViewUtils {
 
     public static final int COMPRESSION_QUALITY = 100;
@@ -43,6 +46,12 @@ public final class ViewUtils {
     private ViewUtils() {
     }
 
+    /**
+     * Convert the specified view to a drawable, if possible
+     *
+     * @param view the view to convert
+     * @return the bitmap or {@code null} if the {@code view} is null
+     */
     @Nullable
     public static Bitmap toBitmap(@Nullable final View view) {
         if (view == null) {
@@ -59,6 +68,12 @@ public final class ViewUtils {
         return bitmapToExport;
     }
 
+    /**
+     * Export the given view to the specified {@code File}
+     * @param context the context
+     * @param view the view to export
+     * @param file the file in which to save the view
+     */
     public static void exportViewToFile(@NonNull final Context context,
                                         @NonNull final View view, @NonNull final File file) {
         final Bitmap bitmap = toBitmap(view);
@@ -68,8 +83,15 @@ public final class ViewUtils {
         exportBitmapToFile(context, bitmap, file);
     }
 
+    /**
+     * Export the given bitmap to the specified {@code File}
+     * @param context the context
+     * @param bitmap the bitmap to export
+     * @param file the file in which to save the view
+     */
     public static void exportBitmapToFile(@NonNull final Context context,
-                                          @NonNull final Bitmap bitmap, @NonNull final File file) {
+                                          @NonNull final Bitmap bitmap,
+                                          @NonNull final File file) {
         OutputStream outputStream = null;
         try {
             outputStream = new BufferedOutputStream(new FileOutputStream(file, false));

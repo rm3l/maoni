@@ -91,7 +91,7 @@ public class MaoniActivity extends AppCompatActivity {
 
     private String mFeedbackUniqueId;
     private Feedback.App mAppInfo;
-    private Feedback.Phone mPhoneInfo;
+    private Feedback.Device mDeviceInfo;
 
     private MaoniConfiguration.Validator mValidator;
     private MaoniConfiguration.Listener mListener;
@@ -100,7 +100,7 @@ public class MaoniActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTheme(R.style.AppTheme_NoActionBar);
+        setTheme(R.style.Maoni_AppTheme_NoActionBar);
 
         setContentView(R.layout.maoni_activity_feedback);
 
@@ -238,16 +238,19 @@ public class MaoniActivity extends AppCompatActivity {
 
                             imagePreviewDialog.setContentView(R.layout.maoni_screenshot_preview);
 
+                            final View.OnClickListener clickListener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    imagePreviewDialog.dismiss();
+                                }
+                            };
+
                             final ImageView imageView = (ImageView)
                                     imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image);
                             imageView.setImageBitmap(mBitmap);
+                            imageView.setOnClickListener(clickListener);
                             imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_close)
-                                    .setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            imagePreviewDialog.dismiss();
-                                        }
-                                    });
+                                    .setOnClickListener(clickListener);
 
                             imagePreviewDialog.setCancelable(true);
                             imagePreviewDialog.setCanceledOnTouchOutside(true);
@@ -386,7 +389,7 @@ public class MaoniActivity extends AppCompatActivity {
             //No worries
         }
 
-        mPhoneInfo = new Feedback.Phone(Build.MODEL,
+        mDeviceInfo = new Feedback.Device(Build.MODEL,
                 Build.VERSION.RELEASE,
                 supplicantState,
                 mobileDataEnabled,
@@ -423,6 +426,14 @@ public class MaoniActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mListener != null) {
+            mListener.onDismiss();
+        }
+        super.onBackPressed();
+    }
+
     private void validateAndSubmitForm() {
         //Validate form
         if (this.validateForm(mRootView)) {
@@ -438,13 +449,13 @@ public class MaoniActivity extends AppCompatActivity {
 
             //Call actual implementation
             final Feedback feedback =
-                    new Feedback(mFeedbackUniqueId, mPhoneInfo, mAppInfo,
+                    new Feedback(mFeedbackUniqueId, mDeviceInfo, mAppInfo,
                             contentText, includeScreenshot, mScreenshotFilePath);
             if (mListener != null) {
                 mListener.onSendButtonClicked(feedback);
             }
             finish();
-        } //else do nothing - this is up to the implementation
+        } //else do nothing - this is up to the callback implementation
     }
 
 }
