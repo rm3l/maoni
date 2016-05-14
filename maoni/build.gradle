@@ -101,6 +101,7 @@ bintray {
         name = 'org.rm3l:maoni'
         labels = ['maoni', 'android', 'feedback', 'android-lib', 'comments', 'review', 'bug', 'issue']
 
+        //noinspection GroovyAssignabilityCheck
         version {
             name = '1.0'
             desc = 'Maoni Android Library'
