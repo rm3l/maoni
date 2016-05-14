@@ -64,9 +64,13 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     new MaoniBuilder()
                             .windowTitle("Feedback") //Set to an empty string to clear it
-                            .message(null) //Use the default. Set to an empty string to clear it
+                            .message("Hey! Love or hate this app? We would love to hear from you.\n\n" +
+                                    "Note: Almost everything in Maoni is customizable.")
                             .extraLayout(R.layout.my_feedback_activity_extra_content)
                             .handler(handlerForMaoni)
+                            .feedbackContentHint("[Custom hint] Write your feedback here")
+                            .includeScreenshotText("[Custom text] Include screenshot")
+                            .touchToPreviewScreenshotText("Touch To Preview")
                             .start(MaoniSampleMainActivity.this);
                 }
             });
