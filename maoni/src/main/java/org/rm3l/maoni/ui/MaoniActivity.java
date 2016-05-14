@@ -76,6 +76,7 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String HEADER = "HEADER";
     public static final String SCREENSHOT_HINT = "SCREENSHOT_HINT";
     public static final String CONTENT_HINT = "CONTENT_HINT";
+    public static final String CONTENT_ERROR_TEXT = "CONTENT_ERROR_TEXT";
     public static final String SCREENSHOT_TOUCH_TO_PREVIEW_HINT = "SCREENSHOT_PREVIEW_HINT";
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
     protected View mRootView;
@@ -87,6 +88,10 @@ public class MaoniActivity extends AppCompatActivity {
     private CheckBox mIncludeScreenshot;
     @Nullable
     private CharSequence mScreenshotFilePath;
+
+    @Nullable
+    private CharSequence mContentErrorText;
+
     private Menu mMenu;
 
     private String mFeedbackUniqueId;
@@ -183,6 +188,12 @@ public class MaoniActivity extends AppCompatActivity {
 
         if (mContent != null && intent.hasExtra(CONTENT_HINT)) {
             mContent.setHint(intent.getCharSequenceExtra(CONTENT_HINT));
+        }
+
+        if (intent.hasExtra(CONTENT_ERROR_TEXT)) {
+            mContentErrorText = intent.getCharSequenceExtra(CONTENT_ERROR_TEXT);
+        } else {
+            mContentErrorText = getString(R.string.maoni_validate_must_not_be_blank);
         }
 
         mIncludeScreenshot = (CheckBox) findViewById(R.id.maoni_include_screenshot);
@@ -402,7 +413,7 @@ public class MaoniActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(mContent.getText())) {
                 if (mContentInputLayout != null) {
                     mContentInputLayout.setErrorEnabled(true);
-                    mContentInputLayout.setError(getString(R.string.maoni_validate_must_not_be_blank));
+                    mContentInputLayout.setError(mContentErrorText);
                 }
                 return false;
             } else {

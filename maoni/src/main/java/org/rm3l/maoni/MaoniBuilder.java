@@ -34,6 +34,7 @@ import org.rm3l.maoni.utils.ViewUtils;
 import java.io.File;
 
 import static org.rm3l.maoni.ui.MaoniActivity.CALLER_ACTIVITY;
+import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_ERROR_TEXT;
 import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.HEADER;
 import static org.rm3l.maoni.ui.MaoniActivity.INCLUDE_SCREENSHOT_TEXT;
@@ -52,6 +53,9 @@ public class MaoniBuilder {
 
     @Nullable
     private CharSequence message;
+
+    @Nullable
+    private CharSequence contentErrorMessage;
 
     @Nullable
     private CharSequence feedbackContentHint;
@@ -116,6 +120,16 @@ public class MaoniBuilder {
 
     public MaoniBuilder message(@Nullable CharSequence message) {
         this.message = message;
+        return this;
+    }
+
+    @Nullable
+    public CharSequence getContentErrorMessage() {
+        return contentErrorMessage;
+    }
+
+    public MaoniBuilder contentErrorMessage(@Nullable CharSequence contentErrorMessage) {
+        this.contentErrorMessage = contentErrorMessage;
         return this;
     }
 
@@ -197,6 +211,10 @@ public class MaoniBuilder {
 
         if (feedbackContentHint != null) {
             maoniIntent.putExtra(CONTENT_HINT, feedbackContentHint);
+        }
+
+        if (contentErrorMessage != null) {
+            maoniIntent.putExtra(CONTENT_ERROR_TEXT, contentErrorMessage);
         }
 
         if (screenshotHint != null) {

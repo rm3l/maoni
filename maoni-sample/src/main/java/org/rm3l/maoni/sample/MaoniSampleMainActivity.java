@@ -71,6 +71,8 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                             .feedbackContentHint("[Custom hint] Write your feedback here")
                             .includeScreenshotText("[Custom text] Include screenshot")
                             .touchToPreviewScreenshotText("Touch To Preview")
+                            .contentErrorMessage("Custom error message")
+                            .screenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
                             .start(MaoniSampleMainActivity.this);
                 }
             });
