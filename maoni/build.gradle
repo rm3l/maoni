@@ -50,8 +50,8 @@ final homePath = System.properties['user.home']
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
 }
 
 task generateSourcesJar(type: Jar) {
@@ -100,7 +100,7 @@ bintray {
         repo = 'maven'
         name = 'org.rm3l:maoni'
         labels = ['maoni', 'android', 'feedback', 'android-lib', 'comments', 'review', 'bug', 'issue']
-        
+
         version {
             name = '1.0'
             desc = 'Maoni Android Library'
