@@ -33,7 +33,7 @@ import java.util.Map;
 
 /**
  * A Feedback object.
- * <p/>
+ * <p>
  * This is what is returned in the Maoni Activity callbacks,
  * which you can manipulate later on (e.g, by forwarding to a remote service).
  */
