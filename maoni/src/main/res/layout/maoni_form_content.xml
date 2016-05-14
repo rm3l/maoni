@@ -82,6 +82,7 @@
                     android:scaleType="centerCrop" />
 
                 <TextView
+                    android:id="@+id/maoni_screenshot_touch_to_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"

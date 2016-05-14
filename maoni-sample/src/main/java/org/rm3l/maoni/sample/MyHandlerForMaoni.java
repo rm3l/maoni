@@ -54,7 +54,7 @@ public class MyHandlerForMaoni implements MaoniConfiguration.Handler {
             if (TextUtils.isEmpty(mEmail.getText())) {
                 if (mEmailInputLayout != null) {
                     mEmailInputLayout.setErrorEnabled(true);
-                    mEmailInputLayout.setError(mContext.getString(R.string.validate_must_not_be_blank));
+                    mEmailInputLayout.setError(mContext.getString(R.string.maoni_validate_must_not_be_blank));
                 }
                 return false;
             } else {

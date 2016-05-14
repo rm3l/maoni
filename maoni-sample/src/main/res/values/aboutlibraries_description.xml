@@ -2,10 +2,9 @@
 <resources>
     <string name="aboutLibraries_description_showIcon">true</string>
     <string name="aboutLibraries_description_showVersion">true</string>
-    <string name="aboutLibraries_description_text">
-    <![CDATA[Maoni is a lightweight lib which provides
-        a ready-to-use Material-ized activity for collecting user feedbacks from within an existing app.<br/>]]>
-    </string>
+    <string name="aboutLibraries_description_text"><![CDATA[
+    Copyright © 2016 Armel Soro.<br/>
+    ]]></string>
     <string name="aboutLibraries_description_name">Maoni Sample</string>
 
     <!-- Just remove those entries if you don't want to use a special button with a text within your about this app view :D -->

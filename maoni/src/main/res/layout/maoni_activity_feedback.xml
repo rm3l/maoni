@@ -44,6 +44,7 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
+                android:id="@+id/maoni_toolbar_header_image"
                 android:src="@drawable/header"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 android:layout_width="wrap_content"
@@ -59,8 +60,7 @@ Contact Info: Armel Soro &lt;apps AT rm3l DOT org&gt;
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                android:title="@string/maoni_demo"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

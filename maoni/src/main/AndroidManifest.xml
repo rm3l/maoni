@@ -3,7 +3,6 @@
 
     <application>
         <activity android:name=".ui.MaoniActivity"/>
-        <activity android:name=".ui.ScreenshotPreviewActivity"/>
     </application>
 
 </manifest>

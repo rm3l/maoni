@@ -1,11 +1,14 @@
 package org.rm3l.maoni.ui;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.wifi.SupplicantState;
@@ -16,8 +19,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +29,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,10 +52,15 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String CALLER_ACTIVITY = "CALLER_ACTIVITY";
     public static final String WINDOW_TITLE = "WINDOW_TITLE";
     public static final String MESSAGE = "MESSAGE";
+    public static final String HEADER = "HEADER";
     public static final String SCREENSHOT_HINT = "SCREENSHOT_HINT";
+    public static final String CONTENT_HINT = "CONTENT_HINT";
+    public static final String SCREENSHOT_TOUCH_TO_PREVIEW_HINT = "SCREENSHOT_PREVIEW_HINT";
+    public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
 
     @Nullable
     private TextInputLayout mContentInputLayout;
+
     @Nullable
     private EditText mContent;
 
@@ -60,7 +68,7 @@ public class MaoniActivity extends AppCompatActivity {
     private CheckBox mIncludeScreenshot;
 
     @Nullable
-    private String mScreenshotFilePath;
+    private CharSequence mScreenshotFilePath;
 
     protected View mRootView;
     private Menu mMenu;
@@ -88,6 +96,14 @@ public class MaoniActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
 
+        final ImageView headerImageView = (ImageView) findViewById(R.id.maoni_toolbar_header_image);
+        if (headerImageView != null && intent.hasExtra(HEADER)) {
+            final int headerLayoutId = intent.getIntExtra(HEADER, -1);
+            if (headerLayoutId != -1) {
+                headerImageView.setImageResource(headerLayoutId);
+            }
+        }
+
         final MaoniConfiguration maoniConfiguration = MaoniConfiguration.getInstance();
 
         final Integer extraLayout = maoniConfiguration.getExtraLayout();
@@ -108,9 +124,9 @@ public class MaoniActivity extends AppCompatActivity {
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.maoni_toolbar);
         if (toolbar != null) {
-            final String windowTitle = intent.getStringExtra(WINDOW_TITLE);
-            toolbar.setTitle(windowTitle == null ?
-                    getString(R.string.send_feedback) : windowTitle);
+            toolbar.setTitle(intent.hasExtra(WINDOW_TITLE) ?
+                    intent.getCharSequenceExtra(WINDOW_TITLE) :
+                    getString(R.string.send_feedback));
             toolbar.setTitleTextAppearance(applicationContext,
                     R.style.MaoniTheme_ToolbarTitle);
             toolbar.setSubtitleTextAppearance(applicationContext,
@@ -129,75 +145,115 @@ public class MaoniActivity extends AppCompatActivity {
             actionBar.setHomeButtonEnabled(true);
         }
 
-        final String message = intent.getStringExtra(MESSAGE);
-        final TextView activityMessageTv = (TextView) findViewById(R.id.maoni_feedback_message);
-        if (activityMessageTv != null) {
-            activityMessageTv.setText(message != null ? message :
-                    getString(R.string.maoni_feedback_message));
+        if (intent.hasExtra(MESSAGE)) {
+            final CharSequence message = intent.getCharSequenceExtra(MESSAGE);
+            final TextView activityMessageTv = (TextView) findViewById(R.id.maoni_feedback_message);
+            if (activityMessageTv != null) {
+                activityMessageTv.setText(message);
+            }
         }
 
-        final String screenshotInformationalHint = intent.getStringExtra(SCREENSHOT_HINT);
-        final TextView screenshotInformationalHintTv =
-                (TextView) findViewById(R.id.maoni_screenshot_informational_text);
-        if (screenshotInformationalHintTv != null) {
-            screenshotInformationalHintTv.setText(screenshotInformationalHint != null ?
-                    screenshotInformationalHint :
-                    getString(R.string.maoni_screenshot_informational_text));
+        if (intent.hasExtra(SCREENSHOT_HINT)) {
+            final CharSequence screenshotInformationalHint = intent.getCharSequenceExtra(SCREENSHOT_HINT);
+            final TextView screenshotInformationalHintTv =
+                    (TextView) findViewById(R.id.maoni_screenshot_informational_text);
+            if (screenshotInformationalHintTv != null) {
+                screenshotInformationalHintTv.setText(screenshotInformationalHint);
+            }
         }
 
         mContentInputLayout = (TextInputLayout) findViewById(R.id.maoni_content_input_layout);
         mContent = (EditText) findViewById(R.id.maoni_content);
 
+        if (mContent != null && intent.hasExtra(CONTENT_HINT)) {
+            mContent.setHint(intent.getCharSequenceExtra(CONTENT_HINT));
+        }
+
         mIncludeScreenshot = (CheckBox) findViewById(R.id.maoni_include_screenshot);
+        if (mIncludeScreenshot != null && intent.hasExtra(INCLUDE_SCREENSHOT_TEXT)) {
+            mIncludeScreenshot.setText(intent.getCharSequenceExtra(INCLUDE_SCREENSHOT_TEXT));
+        }
 
         final ImageButton screenshotThumb = (ImageButton)
                 findViewById(R.id.maoni_screenshot);
 
-        final View screenshotAndLogsContentView =
+        final TextView touchToPreviewTextView =
+                (TextView) findViewById(R.id.maoni_screenshot_touch_to_preview);
+        if (touchToPreviewTextView != null && intent.hasExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT)) {
+            touchToPreviewTextView.setText(
+                    intent.getCharSequenceExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT));
+        }
+
+        final View screenshotContentView =
                 findViewById(R.id.maoni_include_screenshot_content);
-        mScreenshotFilePath = intent.getStringExtra(SCREENSHOT_FILE);
+        mScreenshotFilePath = intent.getCharSequenceExtra(SCREENSHOT_FILE);
         if (!TextUtils.isEmpty(mScreenshotFilePath)) {
-            final File file = new File(mScreenshotFilePath);
+            final File file = new File(mScreenshotFilePath.toString());
             if (file.exists()) {
                 if (mIncludeScreenshot != null) {
                     mIncludeScreenshot.setVisibility(View.VISIBLE);
                 }
-                if (screenshotAndLogsContentView != null) {
-                    screenshotAndLogsContentView.setVisibility(View.VISIBLE);
+                if (screenshotContentView != null) {
+                    screenshotContentView.setVisibility(View.VISIBLE);
                 }
-                Bitmap mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                final Bitmap mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                 if (screenshotThumb != null) {
                     screenshotThumb.setImageBitmap(mBitmap);
                 }
 
                 // Hook up clicks on the thumbnail views.
-                screenshotThumb.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final Intent screenshotPreviewIntent =
-                                new Intent(MaoniActivity.this, ScreenshotPreviewActivity.class);
-                        screenshotPreviewIntent
-                                .putExtra(ScreenshotPreviewActivity.FILE_PATH,
-                                        file.getAbsolutePath());
-                        final ActivityOptionsCompat options = ActivityOptionsCompat
-                                .makeScaleUpAnimation(view, 0, 0,view.getWidth(), view.getHeight());
-                        ActivityCompat.startActivity(MaoniActivity.this, screenshotPreviewIntent, options.toBundle());
-                    }
-                });
+                if (screenshotThumb != null) {
+                    screenshotThumb.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            final Dialog imagePreviewDialog = new Dialog(MaoniActivity.this);
+
+                            imagePreviewDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            imagePreviewDialog.getWindow().setBackgroundDrawable(
+                                    new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                            imagePreviewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    //nothing;
+                                }
+                            });
+
+                            imagePreviewDialog.setContentView(R.layout.maoni_screenshot_preview);
+
+                            final ImageView imageView = (ImageView)
+                                    imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image);
+                            imageView.setImageBitmap(mBitmap);
+                            imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_close)
+                                    .setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            imagePreviewDialog.dismiss();
+                                        }
+                                    });
+
+                            imagePreviewDialog.setCancelable(true);
+                            imagePreviewDialog.setCanceledOnTouchOutside(true);
+
+                            imagePreviewDialog.show();
+                        }
+                    });
+                }
             } else {
                 if (mIncludeScreenshot != null) {
                     mIncludeScreenshot.setVisibility(View.GONE);
                 }
-                if (screenshotAndLogsContentView != null) {
-                    screenshotAndLogsContentView.setVisibility(View.GONE);
+                if (screenshotContentView != null) {
+                    screenshotContentView.setVisibility(View.GONE);
                 }
             }
         } else {
             if (mIncludeScreenshot != null) {
                 mIncludeScreenshot.setVisibility(View.GONE);
             }
-            if (screenshotAndLogsContentView != null) {
-                screenshotAndLogsContentView.setVisibility(View.GONE);
+            if (screenshotContentView != null) {
+                screenshotContentView.setVisibility(View.GONE);
             }
         }
 
@@ -261,7 +317,7 @@ public class MaoniActivity extends AppCompatActivity {
             //No worries
         }
 
-        final String callerActivity = getIntent().getStringExtra(CALLER_ACTIVITY);
+        final CharSequence callerActivity = getIntent().getCharSequenceExtra(CALLER_ACTIVITY);
         mAppInfo = new Feedback.App(
                 callerActivity != null ? callerActivity : getClass().getSimpleName(),
                 BuildConfig.DEBUG,
@@ -295,7 +351,7 @@ public class MaoniActivity extends AppCompatActivity {
             // get the setting for "mobile data"
             mobileDataEnabled = (Boolean) method.invoke(cm);
         } catch (Exception e) {
-            // Some problem accessible private API
+            // Some problem accessible private API - no worries
         }
         boolean gpsEnabled = false;
         try {
@@ -327,7 +383,7 @@ public class MaoniActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(mContent.getText())) {
                 if (mContentInputLayout != null) {
                     mContentInputLayout.setErrorEnabled(true);
-                    mContentInputLayout.setError(getString(R.string.validate_must_not_be_blank));
+                    mContentInputLayout.setError(getString(R.string.maoni_validate_must_not_be_blank));
                 }
                 return false;
             } else {

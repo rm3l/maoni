@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/extra_edittext"
         android:inputType="textCapSentences|textMultiLine"
-        android:minLines="10"
+        android:maxLines="2"
         android:isScrollContainer="true"
         android:hint="EditText hint. Write something here."
         android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"/>

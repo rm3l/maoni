@@ -14,7 +14,7 @@ import java.util.Map;
 public class Feedback {
 
     @NonNull
-    public final String id;
+    public final CharSequence id;
 
     @NonNull
     public final Phone phoneInfo;
@@ -23,7 +23,7 @@ public class Feedback {
     public final App appInfo;
 
     @NonNull
-    public final String userComment;
+    public final CharSequence userComment;
 
     public final boolean includeScreenshot;
 
@@ -31,14 +31,14 @@ public class Feedback {
     public final File screenshotFilePath;
 
     @NonNull
-    private final Map<String, Object> additionalData = new HashMap<>();
+    private final Map<CharSequence, Object> additionalData = new HashMap<>();
 
-    public Feedback(@NonNull String id,
+    public Feedback(@NonNull CharSequence id,
                     @NonNull Phone phoneInfo,
                     @NonNull App appInfo,
-                    @NonNull String userComment,
+                    @NonNull CharSequence userComment,
                     boolean includeScreenshot,
-                    @Nullable String screenshotFilePath) {
+                    @Nullable CharSequence screenshotFilePath) {
 
         this.id = id;
         this.phoneInfo = phoneInfo;
@@ -46,34 +46,34 @@ public class Feedback {
         this.userComment = userComment;
         this.includeScreenshot = includeScreenshot;
         this.screenshotFilePath =
-                (screenshotFilePath != null ? new File(screenshotFilePath) : null);
+                (screenshotFilePath != null ? new File(screenshotFilePath.toString()) : null);
     }
 
-    public void put(@NonNull final String key, @Nullable final Object value) {
+    public void put(@NonNull final CharSequence key, @Nullable final Object value) {
         this.additionalData.put(key, value);
     }
 
     @Nullable
-    public Object get(@NonNull final String key) {
+    public Object get(@NonNull final CharSequence key) {
         return this.additionalData.get(key);
     }
 
     @Nullable
-    public Object get(@NonNull final String key, @Nullable final Object defaultValue) {
+    public Object get(@NonNull final CharSequence key, @Nullable final Object defaultValue) {
         final Object existingValue = this.additionalData.get(key);
         return existingValue != null ? existingValue : defaultValue;
     }
 
     @NonNull
-    public String getId() {
+    public CharSequence getId() {
         return id;
     }
 
     public static class Phone {
 
-        public final String model;
+        public final CharSequence model;
 
-        public final String androidVersion;
+        public final CharSequence androidVersion;
 
         public final SupplicantState wifiState;
 
@@ -81,14 +81,14 @@ public class Feedback {
 
         public final boolean gpsEnabled;
 
-        public final String screenResolution;
+        public final CharSequence screenResolution;
 
-        public Phone(String model,
-                     String androidVersion,
+        public Phone(CharSequence model,
+                     CharSequence androidVersion,
                      SupplicantState wifiState,
                      boolean mobileDataEnabled,
                      boolean gpsEnabled,
-                     String screenResolution) {
+                     CharSequence screenResolution) {
 
             this.model = model;
             this.androidVersion = androidVersion;
@@ -102,26 +102,26 @@ public class Feedback {
 
     public static class App {
 
-        public final String caller;
+        public final CharSequence caller;
 
         public final boolean debug;
 
-        public final String applicationId;
+        public final CharSequence applicationId;
 
         public final int versionCode;
 
-        public final String flavor;
+        public final CharSequence flavor;
 
-        public final String buildType;
+        public final CharSequence buildType;
 
-        public final String versionName;
+        public final CharSequence versionName;
 
-        public App(String caller, boolean debug,
-                   String applicationId,
+        public App(CharSequence caller, boolean debug,
+                   CharSequence applicationId,
                    int versionCode,
-                   String flavor,
-                   String buildType,
-                   String versionName) {
+                   CharSequence flavor,
+                   CharSequence buildType,
+                   CharSequence versionName) {
 
             this.caller = caller;
             this.debug = debug;

@@ -2,6 +2,7 @@ package org.rm3l.maoni;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -17,40 +18,96 @@ import java.io.File;
 public class MaoniBuilder {
 
     private static final String LOG_TAG = MaoniBuilder.class.getSimpleName();
-    @Nullable
-    private String windowTitle;
-    @Nullable
-    private String message;
-    private boolean withEmailField;
-    private boolean closeOnCallbackError;
-    private String screenshotHint;
 
     @Nullable
-    public String getWindowTitle() {
+    private CharSequence windowTitle;
+
+    @Nullable
+    private CharSequence message;
+
+    @Nullable
+    private CharSequence feedbackContentHint;
+
+    @Nullable
+    private CharSequence screenshotHint;
+
+    @DrawableRes
+    @Nullable
+    private Integer header;
+
+    @Nullable
+    private CharSequence includeScreenshotText;
+
+    @Nullable
+    private CharSequence touchToPreviewScreenshotText;
+
+    @Nullable
+    public CharSequence getWindowTitle() {
         return windowTitle;
     }
 
-    public MaoniBuilder windowTitle(@Nullable String windowTitle) {
+    public MaoniBuilder windowTitle(@Nullable CharSequence windowTitle) {
         this.windowTitle = windowTitle;
         return this;
     }
 
     @Nullable
-    public String getMessage() {
-        return message;
+    public CharSequence getFeedbackContentHint() {
+        return feedbackContentHint;
     }
 
-    public MaoniBuilder message(@Nullable String message) {
-        this.message = message;
+    public MaoniBuilder feedbackContentHint(@Nullable CharSequence feedbackContentHint) {
+        this.feedbackContentHint = feedbackContentHint;
+        return this;
+    }
+    
+    @Nullable
+    public CharSequence getIncludeScreenshotText() {
+        return includeScreenshotText;
+    }
+
+    public MaoniBuilder includeScreenshotText(@Nullable CharSequence includeScreenshotText) {
+        this.includeScreenshotText = includeScreenshotText;
         return this;
     }
 
     @Nullable
-    public String getScreenshotHint() {
+    public CharSequence getTouchToPreviewScreenshotText() {
+        return touchToPreviewScreenshotText;
+    }
+
+    public MaoniBuilder touchToPreviewScreenshotText(@Nullable CharSequence touchToPreviewScreenshotText) {
+        this.touchToPreviewScreenshotText = touchToPreviewScreenshotText;
+        return this;
+    }
+
+    @Nullable
+    public CharSequence getMessage() {
+        return message;
+    }
+
+    public MaoniBuilder message(@Nullable CharSequence message) {
+        this.message = message;
+        return this;
+    }
+
+    @DrawableRes
+    @Nullable
+    public Integer getHeader() {
+        return header;
+    }
+
+    public MaoniBuilder header(@Nullable Integer header) {
+        this.header = header;
+        return this;
+    }
+
+    @Nullable
+    public CharSequence getScreenshotHint() {
         return screenshotHint;
     }
 
-    public MaoniBuilder screenshotHint(@Nullable String screenshotHint) {
+    public MaoniBuilder screenshotHint(@Nullable CharSequence screenshotHint) {
         this.screenshotHint = screenshotHint;
         return this;
     }
@@ -76,8 +133,10 @@ public class MaoniBuilder {
     }
 
     public MaoniBuilder handler(@Nullable final MaoniConfiguration.Handler handler) {
-        MaoniConfiguration.getInstance().setHandler(handler);
-        return this;
+        return this
+                .listener(handler)
+                .validator(handler)
+                .uiListener(handler);
     }
 
     public void start(@Nullable final Activity callerActivity) {
@@ -87,12 +146,40 @@ public class MaoniBuilder {
         }
 
         final Intent maoniIntent = new Intent(callerActivity, MaoniActivity.class);
-        final File screenshotFile = new File(callerActivity.getCacheDir(), "feedback_screenshot.png");
+
+        //Create screenshot file
+        final File screenshotFile = new File(callerActivity.getCacheDir(),
+                "maoni_feedback_screenshot.png");
         ViewUtils.exportViewToFile(callerActivity, callerActivity.getWindow().getDecorView(), screenshotFile);
         maoniIntent.putExtra(MaoniActivity.SCREENSHOT_FILE, screenshotFile.getAbsolutePath());
+
         maoniIntent.putExtra(MaoniActivity.CALLER_ACTIVITY, callerActivity.getClass().getCanonicalName());
-        maoniIntent.putExtra(MaoniActivity.WINDOW_TITLE, getWindowTitle());
-        maoniIntent.putExtra(MaoniActivity.MESSAGE, getMessage());
+
+        if (message != null) {
+            maoniIntent.putExtra(MaoniActivity.MESSAGE, message);
+        }
+
+        if (header != null) {
+            maoniIntent.putExtra(MaoniActivity.HEADER, header);
+        }
+
+        if (feedbackContentHint != null) {
+            maoniIntent.putExtra(MaoniActivity.CONTENT_HINT, feedbackContentHint);
+        }
+
+        if (screenshotHint != null) {
+            maoniIntent.putExtra(MaoniActivity.SCREENSHOT_HINT, screenshotHint);
+        }
+
+        if (includeScreenshotText != null) {
+            maoniIntent.putExtra(MaoniActivity.INCLUDE_SCREENSHOT_TEXT, includeScreenshotText);
+        }
+
+        if (touchToPreviewScreenshotText != null) {
+            maoniIntent.putExtra(MaoniActivity.SCREENSHOT_TOUCH_TO_PREVIEW_HINT,
+                    touchToPreviewScreenshotText);
+        }
+
         callerActivity.startActivity(maoniIntent);
     }
 
