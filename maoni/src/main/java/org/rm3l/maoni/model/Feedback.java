@@ -115,7 +115,7 @@ public class Feedback {
         this.appInfo = appInfo;
         this.userComment = userComment;
         this.includeScreenshot = includeScreenshot;
-        if (!this.includeScreenshot) {
+        if (this.includeScreenshot) {
             this.screenshotFilePath =
                     (screenshotFilePath != null ? new File(screenshotFilePath.toString()) : null);
         } else {
