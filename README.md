@@ -7,11 +7,12 @@ Just provide callback implementations and Maoni will take care of collecting you
 and call your callbacks.
 
 = Usage = 
+
 Add this to your build.gradle:
 
 compile 'org.rm3l:maoni:1.0@aar'
 
 And refer to MaoniBuilder to start Maoni.
 
-Please check out the sample app for more details.
+Please also check out the sample app for more details.
 
