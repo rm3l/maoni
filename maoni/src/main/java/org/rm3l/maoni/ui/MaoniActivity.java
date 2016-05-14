@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2016 Armel Soro
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package org.rm3l.maoni.ui;
 
 import android.app.Dialog;
@@ -57,20 +78,15 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String CONTENT_HINT = "CONTENT_HINT";
     public static final String SCREENSHOT_TOUCH_TO_PREVIEW_HINT = "SCREENSHOT_PREVIEW_HINT";
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
-
+    protected View mRootView;
     @Nullable
     private TextInputLayout mContentInputLayout;
-
     @Nullable
     private EditText mContent;
-
     @Nullable
     private CheckBox mIncludeScreenshot;
-
     @Nullable
     private CharSequence mScreenshotFilePath;
-
-    protected View mRootView;
     private Menu mMenu;
 
     private String mFeedbackUniqueId;

@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+Copyright (c) 2016 Armel Soro
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,11 +37,11 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
             android:id="@+id/maoni_feedback_message"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/maoni_activity_vertical_margin"
             android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
+            android:layout_marginTop="@dimen/maoni_activity_vertical_margin"
             android:text="@string/maoni_feedback_message" />
 
         <android.support.design.widget.TextInputLayout
@@ -41,12 +61,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
+            android:id="@+id/maoni_content_extra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/maoni_content_extra"
+            android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"/>
+            android:visibility="gone" />
 
         <CheckBox
             android:id="@+id/maoni_include_screenshot"
@@ -90,11 +110,11 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/maoni_screenshot_informational_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:id="@+id/maoni_screenshot_informational_text"
                 android:layout_weight="3"
                 android:text="@string/maoni_screenshot_informational_text"
                 android:textAppearance="?android:textAppearanceSmall" />
