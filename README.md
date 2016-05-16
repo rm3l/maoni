@@ -1,5 +1,7 @@
 TODO - Documentation in Progress
 
+[![Build Status](https://travis-ci.org/rm3l/maoni.svg?branch=master)](https://travis-ci.org/rm3l/maoni)
+
 Maoni is a lightweight library for integrating a way to collect user feedbacks from within Android applications.
 Using a beautiful Material-ized activity, it allows to capture a screenshot of the current activity and attach it to the feedback.
 
