@@ -25,6 +25,7 @@ package org.rm3l.maoni.sample;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,10 +34,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.rm3l.maoni.MaoniConfiguration;
+import org.rm3l.maoni.Maoni;
 import org.rm3l.maoni.model.Feedback;
 
-public class MyHandlerForMaoni implements MaoniConfiguration.Handler {
+public class MyHandlerForMaoni implements Maoni.Handler {
 
     public static final String EMAIL = "EMAIL";
 
@@ -86,7 +87,7 @@ public class MyHandlerForMaoni implements MaoniConfiguration.Handler {
     }
 
     @Override
-    public void onCreate(@NonNull View rootView, Bundle savedInstanceState) {
+    public void onCreate(@NonNull View rootView, @Nullable final Bundle savedInstanceState) {
         mEmailInputLayout = (TextInputLayout) rootView.findViewById(R.id.extra_email_inputlayout);
         mEmail = (EditText) rootView.findViewById(R.id.extra_email);
 

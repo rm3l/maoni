@@ -59,7 +59,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.rm3l.maoni.BuildConfig;
-import org.rm3l.maoni.MaoniConfiguration;
+import org.rm3l.maoni.Maoni;
 import org.rm3l.maoni.R;
 import org.rm3l.maoni.model.Feedback;
 
@@ -67,6 +67,9 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
+/**
+ * Maoni Activity
+ */
 public class MaoniActivity extends AppCompatActivity {
 
     public static final String SCREENSHOT_FILE = "SCREENSHOT_FILE";
@@ -79,13 +82,19 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String CONTENT_ERROR_TEXT = "CONTENT_ERROR_TEXT";
     public static final String SCREENSHOT_TOUCH_TO_PREVIEW_HINT = "SCREENSHOT_PREVIEW_HINT";
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
+    public static final String EXTRA_LAYOUT = "EXTRA_LAYOUT";
+
     protected View mRootView;
+
     @Nullable
     private TextInputLayout mContentInputLayout;
+
     @Nullable
     private EditText mContent;
+
     @Nullable
     private CheckBox mIncludeScreenshot;
+
     @Nullable
     private CharSequence mScreenshotFilePath;
 
@@ -98,8 +107,8 @@ public class MaoniActivity extends AppCompatActivity {
     private Feedback.App mAppInfo;
     private Feedback.Device mDeviceInfo;
 
-    private MaoniConfiguration.Validator mValidator;
-    private MaoniConfiguration.Listener mListener;
+    private Maoni.Validator mValidator;
+    private Maoni.Listener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,18 +134,21 @@ public class MaoniActivity extends AppCompatActivity {
             }
         }
 
-        final MaoniConfiguration maoniConfiguration = MaoniConfiguration.getInstance();
-
-        final Integer extraLayout = maoniConfiguration.getExtraLayout();
-        if (extraLayout != null) {
+        if (intent.hasExtra(EXTRA_LAYOUT)) {
             final View extraContentView = findViewById(R.id.maoni_content_extra);
             if (extraContentView instanceof LinearLayout) {
-                final LinearLayout extraContent = (LinearLayout) extraContentView;
-                extraContent.setVisibility(View.VISIBLE);
-                extraContent
-                        .addView(getLayoutInflater().inflate(extraLayout, extraContent, false));
+                final int extraLayout = intent.getIntExtra(EXTRA_LAYOUT, -1);
+                if (extraLayout != -1) {
+                    final LinearLayout extraContent = (LinearLayout) extraContentView;
+                    extraContent.setVisibility(View.VISIBLE);
+                    extraContent
+                            .addView(getLayoutInflater().inflate(extraLayout, extraContent, false));
+                }
             }
         }
+
+        final Maoni.Configuration maoniConfiguration = Maoni.Configuration.getInstance();
+
 
         mListener = maoniConfiguration.getListener();
         mValidator = maoniConfiguration.getValidator();
@@ -323,7 +335,7 @@ public class MaoniActivity extends AppCompatActivity {
         setAppRelatedInfo();
         setPhoneRelatedInfo();
 
-        final MaoniConfiguration.UiListener uiListener = maoniConfiguration.getUiListener();
+        final Maoni.UiListener uiListener = maoniConfiguration.getUiListener();
         if (uiListener != null) {
             uiListener.onCreate(mRootView, savedInstanceState);
         }

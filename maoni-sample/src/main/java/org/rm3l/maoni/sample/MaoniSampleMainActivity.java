@@ -34,7 +34,7 @@ import android.view.View;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
-import org.rm3l.maoni.MaoniBuilder;
+import org.rm3l.maoni.Maoni;
 
 public class MaoniSampleMainActivity extends AppCompatActivity {
 
@@ -62,7 +62,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new MaoniBuilder()
+                    new Maoni.Builder()
                             .windowTitle("Feedback") //Set to an empty string to clear it
                             .message("Hey! Love or hate this app? We would love to hear from you.\n\n" +
                                     "Note: Almost everything in Maoni is customizable.")
@@ -73,6 +73,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                             .touchToPreviewScreenshotText("Touch To Preview")
                             .contentErrorMessage("Custom error message")
                             .screenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
+                            .build()
                             .start(MaoniSampleMainActivity.this);
                 }
             });
