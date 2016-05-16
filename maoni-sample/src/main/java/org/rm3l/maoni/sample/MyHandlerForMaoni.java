@@ -94,7 +94,7 @@ public class MyHandlerForMaoni implements Maoni.Handler {
         mExtraEditText = (EditText) rootView.findViewById(R.id.extra_edittext);
         mExtraRadioGroup = (RadioGroup) rootView.findViewById(R.id.extra_radiogroup);
 
-        //If user ID is available (e.g., from preferences), you may prefill the field accordingly
+        //You may prefill some fields accordingly, before they are displayed to the user
         mEmail.setText("a@b.cd", TextView.BufferType.EDITABLE);
     }
 }

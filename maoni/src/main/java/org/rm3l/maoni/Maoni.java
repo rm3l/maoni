@@ -28,6 +28,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.util.Log;
 import android.view.View;
 
@@ -116,9 +117,14 @@ public class Maoni {
     @Nullable
     public final Integer extraLayout;
 
+    @StyleRes
+    @Nullable
+    public final Integer style;
+
     /**
      * Constructor
      *
+     * @param style                        the style to apply
      * @param header                       the header image
      * @param windowTitle                  the feedback dialog title
      * @param message                      the feedback form field error message to display to the user
@@ -130,6 +136,7 @@ public class Maoni {
      * @param screenshotHint               the text to display to the user
      */
     public Maoni(
+            @StyleRes @Nullable final Integer style,
             @DrawableRes @Nullable final Integer header,
             @Nullable final CharSequence windowTitle,
             @Nullable final CharSequence message,
@@ -139,7 +146,7 @@ public class Maoni {
             @Nullable final CharSequence includeScreenshotText,
             @Nullable final CharSequence touchToPreviewScreenshotText,
             @Nullable final CharSequence screenshotHint) {
-
+        this.style = style;
         this.windowTitle = windowTitle;
         this.message = message;
         this.contentErrorMessage = contentErrorMessage;
@@ -279,6 +286,10 @@ public class Maoni {
      */
     public static class Builder {
 
+        @StyleRes
+        @Nullable
+        public Integer style;
+
         @Nullable
         private CharSequence windowTitle;
 
@@ -307,6 +318,16 @@ public class Maoni {
         @LayoutRes
         @Nullable
         private Integer extraLayout;
+
+        @Nullable
+        public Integer getStyle() {
+            return style;
+        }
+
+        public Builder style(@Nullable Integer style) {
+            this.style = style;
+            return this;
+        }
 
         @Nullable
         public CharSequence getWindowTitle() {
@@ -423,6 +444,7 @@ public class Maoni {
 
         public Maoni build() {
             return new Maoni(
+                    style,
                     header,
                     windowTitle,
                     message,

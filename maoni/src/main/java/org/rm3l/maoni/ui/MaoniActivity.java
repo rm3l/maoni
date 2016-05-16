@@ -72,6 +72,7 @@ import java.util.UUID;
  */
 public class MaoniActivity extends AppCompatActivity {
 
+    public static final String STYLE = "STYLE";
     public static final String SCREENSHOT_FILE = "SCREENSHOT_FILE";
     public static final String CALLER_ACTIVITY = "CALLER_ACTIVITY";
     public static final String WINDOW_TITLE = "WINDOW_TITLE";
@@ -114,7 +115,9 @@ public class MaoniActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTheme(R.style.Maoni_AppTheme_NoActionBar);
+        final Intent intent = getIntent();
+
+        setTheme(intent.getIntExtra(STYLE, R.style.Maoni_AppTheme));
 
         setContentView(R.layout.maoni_activity_feedback);
 
@@ -123,8 +126,6 @@ public class MaoniActivity extends AppCompatActivity {
             throw new IllegalStateException(
                     "Layout must contain a root view with the following id: maoni_container");
         }
-
-        final Intent intent = getIntent();
 
         final ImageView headerImageView = (ImageView) findViewById(R.id.maoni_toolbar_header_image);
         if (headerImageView != null && intent.hasExtra(HEADER)) {

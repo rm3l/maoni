@@ -25,7 +25,7 @@ SOFTWARE.
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.rm3l.maoni.ui.MaoniActivity"
+    tools:context=".ui.MaoniActivity"
     tools:showIn="@layout/maoni_activity_feedback">
 
     <LinearLayout

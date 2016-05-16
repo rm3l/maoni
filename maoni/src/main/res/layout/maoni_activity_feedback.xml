@@ -26,14 +26,13 @@ SOFTWARE.
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="org.rm3l.maoni.ui.MaoniActivity">
+    tools:context=".ui.MaoniActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/maoni_app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/Maoni_AppTheme.AppBarOverlay">
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/maoni_toolbar_layout"
@@ -59,8 +58,7 @@ SOFTWARE.
                 android:id="@+id/maoni_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/Maoni_AppTheme.PopupOverlay" />
+                app:layout_collapseMode="pin" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
