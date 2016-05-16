@@ -49,6 +49,7 @@ import static org.rm3l.maoni.ui.MaoniActivity.MESSAGE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_FILE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_TOUCH_TO_PREVIEW_HINT;
+import static org.rm3l.maoni.ui.MaoniActivity.STYLE;
 import static org.rm3l.maoni.ui.MaoniActivity.WINDOW_TITLE;
 
 /**
@@ -180,6 +181,10 @@ public class Maoni {
         maoniIntent.putExtra(SCREENSHOT_FILE, screenshotFile.getAbsolutePath());
 
         maoniIntent.putExtra(CALLER_ACTIVITY, callerActivity.getClass().getCanonicalName());
+
+        if (style != null) {
+            maoniIntent.putExtra(STYLE, style);
+        }
 
         if (windowTitle != null) {
             maoniIntent.putExtra(WINDOW_TITLE, windowTitle);
