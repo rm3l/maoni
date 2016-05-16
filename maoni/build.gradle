@@ -31,8 +31,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 102
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -43,7 +43,7 @@ android {
 }
 
 group = 'org.rm3l'
-version = '1.0'
+version = '1.0.2'
 
 final homePath = System.properties['user.home']
 
@@ -103,10 +103,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '1.0'
+            name = '1.0.2'
             desc = 'Maoni Android Library'
             released  = new Date()
-            vcsTag = '1.0'
+            vcsTag = '1.0.2'
         }
 
         publicDownloadNumbers = true
