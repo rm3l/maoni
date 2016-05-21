@@ -17,7 +17,7 @@ Add this to your build.gradle:
 dependencies {
     // ...
     
-    compile 'org.rm3l:maoni:1.0.2@aar'
+    compile 'org.rm3l:maoni:1.1.0@aar'
 }
 ```
 
