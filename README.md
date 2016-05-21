@@ -104,13 +104,13 @@ You can also use the sample app to send your feedback with Maoni. ;-)
 (If you use this library, please drop me a line 
 (or again, fork, modify this file and submit a pull request) so I can list your app(s) here.)
 
-* [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt), by Armel Soro (integration is coming very very soon :))
+* [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt) (integration is rolling out to App marketplaces)
 
 
 ## Credits
 
 * Armel Soro
- * [https://rm3l.org](https://rm3l.org) - <apps+maoni@rm3l.org>
+ * [https://rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt;
  * [paypal.me/rm3l](https://paypal.me/rm3l)
 
 
