@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package org.rm3l.maoni.sample;
+package org.rm3l.maoni.sample.feedback;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import org.rm3l.maoni.Maoni;
 import org.rm3l.maoni.model.Feedback;
+import org.rm3l.maoni.sample.R;
 
 public class MyHandlerForMaoni implements Maoni.Handler {
 

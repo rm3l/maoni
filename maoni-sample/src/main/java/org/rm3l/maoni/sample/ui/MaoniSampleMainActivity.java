@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package org.rm3l.maoni.sample;
+package org.rm3l.maoni.sample.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -35,6 +35,8 @@ import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import org.rm3l.maoni.Maoni;
+import org.rm3l.maoni.sample.R;
+import org.rm3l.maoni.sample.feedback.MyHandlerForMaoni;
 
 public class MaoniSampleMainActivity extends AppCompatActivity {
 

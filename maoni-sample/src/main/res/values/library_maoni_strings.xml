@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="define_maoni"></string>
+    <!-- Author section -->
+    <string name="library_maoni_author">Armel Soro</string>
+    <string name="library_maoni_authorWebsite">https://www.rm3l.org</string>
+    <!-- Library section -->
+    <string name="library_maoni_libraryName">Maoni</string>
+    <string name="library_maoni_libraryDescription">Maoni is a lightweight library for integrating a way to collect user feedbacks from within Android applications</string>
+    <string name="library_maoni_libraryWebsite">https://github.com/rm3l/maoni</string>
+    <string name="library_maoni_libraryVersion">1.0.2</string>
+    <!-- OpenSource section -->
+    <string name="library_maoni_isOpenSource">true</string>
+    <string name="library_maoni_repositoryLink">https://github.com/rm3l/maoni</string>
+    <!-- ClassPath for autoDetect section -->
+    <!--<string name="library_maoni_classPath">com.facebook.maoni</string>-->
+    <!-- License section -->
+    <string name="library_maoni_licenseId">mit</string>
+    <!-- Custom variables section -->
+</resources>

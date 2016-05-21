@@ -22,7 +22,7 @@ SOFTWARE.
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.rm3l.maoni.sample.MaoniSampleMainActivity">
+    tools:context=".ui.MaoniSampleMainActivity">
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
