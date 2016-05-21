@@ -45,12 +45,24 @@ I decided to create Maoni as a separate library project.
 
 As a side note, Maoni is a Swahili word for comments or opinions.
 
+
 ## Sample App
 
 <a href="https://play.google.com/store/apps/details?id=org.rm3l.maoni">
   <img alt="Get it on Google Play"
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a>
+
+
+## Screenshots
+
+<div align="center">
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/1_Maoni_main_activity.png"/>
+    <img height="0" width="8px"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/2_Maoni_main_activity_with_screenshot_thumbnail.png"/>
+    <img height="0" width="8px"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview.png"/>
+</div>
 
 
 ## Getting started
@@ -72,12 +84,23 @@ Android applications.
 Just leverage the fluent Maoni Builder to construct and start an Maoni instance at the right place 
 within your application workflow (for example a button click listener, or a touch of a menu item).
 
-For example:
-
+For example, to start with just the defaults:
 ```java
     // MyHandlerForMaoni is a custom implementation of Maoni.Handler, 
     // which is a shortcut interface for defining both a validator and listeners for Maoni
-    final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(this);
+    final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(MaoniSampleMainActivity.this);
+    
+    new Maoni.Builder()
+        .withHandler(myHandlerForMaoniInstance) //Custom Callback for Maoni
+        .build()
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
+```
+
+To customize every aspect of your Maoni activity, call the fluent methods of `Maoni.Builder`, e.g.:
+```java
+    // MyHandlerForMaoni is a custom implementation of Maoni.Handler, 
+    // which is a shortcut interface for defining both a validator and listeners for Maoni
+    final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(MaoniSampleMainActivity.this);
     
     new Maoni.Builder()
         .withWindowTitle("Send Feedback") //Set to an empty string to clear it
@@ -89,23 +112,13 @@ For example:
         .withTouchToPreviewScreenshotText("Touch To Preview")
         .withContentErrorMessage("Custom error message")
         .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
+        //... there are other aspects you can customize
         .build()
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
 ```
 
 **You're good to go!** Maoni will take care of validating / collecting your users' feedbacks 
 and call your callbacks implementations. 
-
-
-## Screenshots
-
-<div align="center">
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/1_Maoni_main_activity.png"/>
-    <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/2_Maoni_main_activity_with_screenshot_thumbnail.png"/>
-    <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview.png"/>
-</div>
 
 
 ## Contribute and Improve Maoni!
@@ -135,7 +148,6 @@ to send your feedback with Maoni. ;-)
 * Armel Soro
  * [https://rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt;
  * [paypal.me/rm3l](https://paypal.me/rm3l)
-
 
 
 ## License
