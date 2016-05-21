@@ -81,9 +81,13 @@ and call your callbacks implementations.
 
 ## Screenshots
 
-![Image](https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/1_Maoni_main_activity.png)
-![Image](https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/2_Maoni_main_activity_with_screenshot_thumbnail.png)
-![Image](https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/3_Maoni_main_activity_with_screenshot_touch_to_preview.png)
+<div align="center">
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/1_Maoni_main_activity.png"/>
+    <img height="0" width="8px"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/2_Maoni_main_activity_with_screenshot_thumbnail.png"/>
+    <img height="0" width="8px"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview.png"/>
+</div>
 
 
 ## Contribute and Improve Maoni!
