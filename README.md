@@ -11,6 +11,8 @@ Just provide callbacks implementations and you're good to go.
 Maoni will take care of collecting your users' feedbacks and call those implementations.
 
 Below is a quick overview of the features included:
+- **Contextual information**. Device and application information, if available.
+    - Device screen resolution, mobile data and GPS states, ...
 - **Screenshot capture**. 
     - Because receiving a feedback with contextual information is much much 
     better for analysis, Maoni allows to take a screenshot of the calling activity. 
@@ -25,7 +27,23 @@ Below is a quick overview of the features included:
     - Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier.
     So you just have limitless possibilities for an integration with any other systems.
 
-Take a look at the [sample application](https://play.google.com/store/apps/details?id=org.rm3l.maoni) for a quick overview.
+Take a look at the [sample application](https://play.google.com/store/apps/details?id=org.rm3l.maoni) 
+for a quick overview.
+
+
+## Motivations
+
+While working on a new version of [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt), 
+one my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
+along with some contextual information.
+I experimented with a simple dialog, then tried a bunch of other libraries, 
+but did not find one with screenshot capturing capabilities, not vendor lock-in, 
+and which is almost a no-brainer as to integrating with any remote services.
+
+So as a way to give back to the Open Source community, 
+I decided to create Maoni as a separate library project.
+
+As a side note, Maoni is a Swahili word for comments or opinions.
 
 ## Sample App
 
@@ -65,7 +83,7 @@ For example:
         .withWindowTitle("Send Feedback") //Set to an empty string to clear it
         .withMessage("Hey! Love or hate this app? We would love to hear from you.")
         .withExtraLayout(R.layout.my_feedback_activity_extra_content)
-        .withHandler(myHandlerForMaoniInstance) //MyHandlerForMaoni implements the Maoni.
+        .withHandler(myHandlerForMaoniInstance) //Custom Callback for Maoni
         .withFeedbackContentHint("[Custom hint] Write your feedback here")
         .withIncludeScreenshotText("[Custom text] Include screenshot")
         .withTouchToPreviewScreenshotText("Touch To Preview")
@@ -97,16 +115,17 @@ So to help out, do feel free to fork this repo and open up a pull request.
 I'll review and merge as quickly as possible.
 
 You can use [GitHub issues](https://github.com/rm3l/maoni/issues) to report bugs. 
-However, please make ensure your description is clear enough and has sufficient instructions 
+However, please make sure your description is clear enough and has sufficient instructions 
 to be able to reproduce the issue.
 
-You can also use the sample app to send your feedback with Maoni. ;-)
+You can also use the [sample app](https://play.google.com/store/apps/details?id=org.rm3l.maoni) 
+to send your feedback with Maoni. ;-)
 
 
 ## In use in the following apps
 
-(If you use this library, please drop me a line 
-(or again, fork, modify this file and submit a pull request) so I can list your app(s) here.)
+(If you use this library, please drop me a line at &lt;apps+maoni@rm3l.org&gt; 
+(or again, fork, modify this file and submit a pull request), so I can list your app(s) here)
 
 * [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt) (integration is rolling out to App marketplaces)
 
