@@ -113,6 +113,7 @@ public class MaoniActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
