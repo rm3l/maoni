@@ -21,24 +21,25 @@ SOFTWARE.
 -->
 <resources>
 
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1976D2</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="maoni_colorPrimary">#2196F3</color>
+    <color name="maoni_colorPrimaryDark">#1976D2</color>
+    <color name="maoni_colorAccent">#FF4081</color>
     <!-- for backwards compatiblity make a color chain :D -->
-    <color name="theme_default_primary">@color/colorPrimary</color>
-    <color name="theme_default_primary_dark">@color/colorPrimaryDark</color>
-    <color name="theme_accent">@color/colorAccent</color>
-    <color name="maoni_primary">@color/theme_default_primary</color>
-    <color name="maoni_primary_dark">@color/theme_default_primary_dark</color>
-    <color name="maoni_accent">@color/theme_accent</color>
+    <color name="maoni_theme_default_primary">@color/maoni_colorPrimary</color>
+    <color name="maoni_theme_default_primary_dark">@color/maoni_colorPrimaryDark</color>
+    <color name="maoni_theme_accent">@color/maoni_colorAccent</color>
+    <color name="maoni_primary">@color/maoni_theme_default_primary</color>
+    <color name="maoni_primary_dark">@color/maoni_theme_default_primary_dark</color>
+    <color name="maoni_accent">@color/maoni_theme_accent</color>
     
     <!-- Common -->
-    <color name="white">#FFFFFF</color>
+    <color name="maoni_white">#FFFFFF</color>
+    <color name="maoni_black">#000000</color>
 
-    <color name="normal_opaque_black">#000000</color>
-    <color name="transparent_full">#00000000</color>
-    <color name="opaque_full">#FF000000</color>
-    <color name="transparent_semi">#80000000</color>
+    <color name="maoni_normal_opaque_black">#000000</color>
+    <color name="maoni_transparent_full">#00000000</color>
+    <color name="maoni_opaque_full">#FF000000</color>
+    <color name="maoni_transparent_semi">#80000000</color>
 
     <!-- AboutLibraries DEFAULT colors -->
     <color name="maoni_window_background">#ECECEC</color>

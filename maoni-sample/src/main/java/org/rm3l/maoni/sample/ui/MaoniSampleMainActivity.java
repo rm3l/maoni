@@ -24,7 +24,6 @@ package org.rm3l.maoni.sample.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -47,14 +46,6 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitle(R.string.app_name);
-            toolbar.setTitleTextAppearance(getApplicationContext(),
-                    R.style.MaoniTheme_ToolbarSubtitle);
-            toolbar.setSubtitleTextAppearance(getApplicationContext(),
-                    R.style.MaoniTheme_ToolbarSubtitle);
-            toolbar.setTitleTextColor(ContextCompat.getColor(this,
-                    R.color.white));
-            toolbar.setSubtitleTextColor(ContextCompat.getColor(this,
-                    R.color.white));
             setSupportActionBar(toolbar);
         }
 
@@ -65,16 +56,16 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     new Maoni.Builder()
-                            .windowTitle("Feedback") //Set to an empty string to clear it
-                            .message("Hey! Love or hate this app? We would love to hear from you.\n\n" +
+                            .withWindowTitle("Feedback") //Set to an empty string to clear it
+                            .withMessage("Hey! Love or hate this app? We would love to hear from you.\n\n" +
                                     "Note: Almost everything in Maoni is customizable.")
-                            .extraLayout(R.layout.my_feedback_activity_extra_content)
-                            .handler(handlerForMaoni)
-                            .feedbackContentHint("[Custom hint] Write your feedback here")
-                            .includeScreenshotText("[Custom text] Include screenshot")
-                            .touchToPreviewScreenshotText("Touch To Preview")
-                            .contentErrorMessage("Custom error message")
-                            .screenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
+                            .withExtraLayout(R.layout.my_feedback_activity_extra_content)
+                            .withHandler(handlerForMaoni)
+                            .withFeedbackContentHint("[Custom hint] Write your feedback here")
+                            .withIncludeScreenshotText("[Custom text] Include screenshot")
+                            .withTouchToPreviewScreenshotText("Touch To Preview")
+                            .withContentErrorMessage("Custom error message")
+                            .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
                             .build()
                             .start(MaoniSampleMainActivity.this);
                 }

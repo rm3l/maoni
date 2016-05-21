@@ -21,10 +21,15 @@ SOFTWARE.
 -->
 <resources>
 
-    <style name="Maoni_AppTheme.NoActionBar">
+    <!-- Base application theme. -->
+    <style name="Maoni_AppTheme_Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/maoni_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/maoni_colorPrimaryDark</item>
+        <item name="colorAccent">@color/maoni_colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
 </resources>

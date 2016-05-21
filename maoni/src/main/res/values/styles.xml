@@ -22,22 +22,35 @@ SOFTWARE.
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Maoni_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="Maoni_AppTheme_Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/maoni_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/maoni_colorPrimaryDark</item>
+        <item name="colorAccent">@color/maoni_colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Maoni_AppTheme_Light" parent="Maoni_AppTheme_Base">
+        <item name="android:textColorPrimary">@color/maoni_black</item>
+        <item name="android:windowBackground">@color/maoni_white</item>
+    </style>
+
+    <style name="Maoni_AppTheme_Dark" parent="Maoni_AppTheme_Base">
+        <item name="android:textColorPrimary">@color/maoni_white</item>
+        <item name="android:windowBackground">@color/maoni_black</item>
+    </style>
+
+    <!-- Toolbar title style -->
     <style name="MaoniTheme.ToolbarTitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/maoni_white</item>
     </style>
 
+    <!-- Toolbar sub-title style -->
     <style name="MaoniTheme.ToolbarSubtitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/maoni_white</item>
     </style>
 
 </resources>

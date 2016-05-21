@@ -40,7 +40,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -72,10 +71,13 @@ import java.util.UUID;
  */
 public class MaoniActivity extends AppCompatActivity {
 
-    public static final String STYLE = "STYLE";
+    public static final String THEME = "THEME";
+    public static final String TOOLBAR_TITLE_TEXT_COLOR = "TOOLBAR_TITLE_TEXT_COLOR";
+    public static final String TOOLBAR_SUBTITLE_TEXT_COLOR = "TOOLBAR_SUBTITLE_TEXT_COLOR";
     public static final String SCREENSHOT_FILE = "SCREENSHOT_FILE";
     public static final String CALLER_ACTIVITY = "CALLER_ACTIVITY";
     public static final String WINDOW_TITLE = "WINDOW_TITLE";
+    public static final String WINDOW_SUBTITLE = "WINDOW_SUBTITLE";
     public static final String MESSAGE = "MESSAGE";
     public static final String HEADER = "HEADER";
     public static final String SCREENSHOT_HINT = "SCREENSHOT_HINT";
@@ -84,6 +86,7 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String SCREENSHOT_TOUCH_TO_PREVIEW_HINT = "SCREENSHOT_PREVIEW_HINT";
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
     public static final String EXTRA_LAYOUT = "EXTRA_LAYOUT";
+    public static final String GET_MOBILE_DATA_ENABLED = "getMobileDataEnabled";
 
     protected View mRootView;
 
@@ -118,7 +121,7 @@ public class MaoniActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
 
-        setTheme(intent.getIntExtra(STYLE, R.style.Maoni_AppTheme));
+        setTheme(intent.getIntExtra(THEME, R.style.Maoni_AppTheme_Light));
 
         setContentView(R.layout.maoni_activity_feedback);
 
@@ -155,21 +158,22 @@ public class MaoniActivity extends AppCompatActivity {
         mListener = maoniConfiguration.getListener();
         mValidator = maoniConfiguration.getValidator();
 
-        final Context applicationContext = getApplicationContext();
-
         final Toolbar toolbar = (Toolbar) findViewById(R.id.maoni_toolbar);
         if (toolbar != null) {
             toolbar.setTitle(intent.hasExtra(WINDOW_TITLE) ?
                     intent.getCharSequenceExtra(WINDOW_TITLE) :
                     getString(R.string.send_feedback));
-            toolbar.setTitleTextAppearance(applicationContext,
-                    R.style.MaoniTheme_ToolbarTitle);
-            toolbar.setSubtitleTextAppearance(applicationContext,
-                    R.style.MaoniTheme_ToolbarSubtitle);
-            toolbar.setTitleTextColor(ContextCompat.getColor(this,
-                    R.color.white));
-            toolbar.setSubtitleTextColor(ContextCompat.getColor(this,
-                    R.color.white));
+            if (intent.hasExtra(WINDOW_SUBTITLE)) {
+                toolbar.setSubtitle(intent.getCharSequenceExtra(WINDOW_SUBTITLE));
+            }
+            if (intent.hasExtra(TOOLBAR_TITLE_TEXT_COLOR)) {
+                toolbar.setTitleTextColor(
+                        intent.getIntExtra(TOOLBAR_TITLE_TEXT_COLOR, R.color.maoni_white));
+            }
+            if (intent.hasExtra(TOOLBAR_SUBTITLE_TEXT_COLOR)) {
+                toolbar.setSubtitleTextColor(
+                        intent.getIntExtra(TOOLBAR_SUBTITLE_TEXT_COLOR, R.color.maoni_white));
+            }
             setSupportActionBar(toolbar);
         }
 
@@ -225,8 +229,7 @@ public class MaoniActivity extends AppCompatActivity {
                     intent.getCharSequenceExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT));
         }
 
-        final View screenshotContentView =
-                findViewById(R.id.maoni_include_screenshot_content);
+        final View screenshotContentView = findViewById(R.id.maoni_include_screenshot_content);
         mScreenshotFilePath = intent.getCharSequenceExtra(SCREENSHOT_FILE);
         if (!TextUtils.isEmpty(mScreenshotFilePath)) {
             final File file = new File(mScreenshotFilePath.toString());
@@ -388,9 +391,9 @@ public class MaoniActivity extends AppCompatActivity {
         boolean mobileDataEnabled = false; // Assume disabled
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         try {
-            Class cmClass = Class.forName(cm.getClass().getName());
+            final Class cmClass = Class.forName(cm.getClass().getName());
             @SuppressWarnings("unchecked")
-            Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
+            final Method method = cmClass.getDeclaredMethod(GET_MOBILE_DATA_ENABLED);
             method.setAccessible(true); // Make the method callable
             // get the setting for "mobile data"
             mobileDataEnabled = (Boolean) method.invoke(cm);
@@ -407,9 +410,10 @@ public class MaoniActivity extends AppCompatActivity {
 
         String resolution = null;
         try {
-            DisplayMetrics metrics = new DisplayMetrics();
+            final DisplayMetrics metrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            resolution = Integer.toString(metrics.widthPixels) + "x" + Integer.toString(metrics.heightPixels);
+            resolution = (Integer.toString(metrics.widthPixels) + "x" +
+                    Integer.toString(metrics.heightPixels));
         } catch (Exception e) {
             //No worries
         }

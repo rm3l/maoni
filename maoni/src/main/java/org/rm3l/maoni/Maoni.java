@@ -24,6 +24,7 @@ package org.rm3l.maoni;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -49,7 +50,10 @@ import static org.rm3l.maoni.ui.MaoniActivity.MESSAGE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_FILE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_TOUCH_TO_PREVIEW_HINT;
-import static org.rm3l.maoni.ui.MaoniActivity.STYLE;
+import static org.rm3l.maoni.ui.MaoniActivity.THEME;
+import static org.rm3l.maoni.ui.MaoniActivity.TOOLBAR_SUBTITLE_TEXT_COLOR;
+import static org.rm3l.maoni.ui.MaoniActivity.TOOLBAR_TITLE_TEXT_COLOR;
+import static org.rm3l.maoni.ui.MaoniActivity.WINDOW_SUBTITLE;
 import static org.rm3l.maoni.ui.MaoniActivity.WINDOW_TITLE;
 
 /**
@@ -60,10 +64,30 @@ public class Maoni {
     public static final String MAONI_FEEDBACK_SCREENSHOT_FILENAME = "maoni_feedback_screenshot.png";
     private static final String LOG_TAG = Maoni.class.getSimpleName();
     /**
-     * The feedback dialog title
+     * The feedback window title
      */
     @Nullable
     public final CharSequence windowTitle;
+
+    /**
+     * The feedback window sub-title
+     */
+    @Nullable
+    public final CharSequence windowSubTitle;
+
+    /**
+     * The feedback window title color
+     */
+    @ColorRes
+    @Nullable
+    public final Integer windowTitleTextColor;
+
+    /**
+     * The feedback window sub-title color
+     */
+    @ColorRes
+    @Nullable
+    public final Integer windowSubTitleTextColor;
 
     /**
      * The message to display to the user
@@ -120,14 +144,18 @@ public class Maoni {
 
     @StyleRes
     @Nullable
-    public final Integer style;
+    public final Integer theme;
 
     /**
      * Constructor
-     *
-     * @param style                        the style to apply
+     *  @param windowTitle                  the feedback window title
+     * @param windowSubTitle                the feedback window sub-title
+     * @param windowTitleTextColor          the feedback window title text color
+     *                                      (use {@literal null} for the default)
+     * @param windowSubTitleTextColor       the feedback window sub-title text color
+     *                                      (use {@literal null} for the default)
+     * @param theme                        the theme to apply
      * @param header                       the header image
-     * @param windowTitle                  the feedback dialog title
      * @param message                      the feedback form field error message to display to the user
      * @param feedbackContentHint          the feedback form field hint message
      * @param contentErrorMessage          the feedback form field error message to display to the user
@@ -137,9 +165,12 @@ public class Maoni {
      * @param screenshotHint               the text to display to the user
      */
     public Maoni(
-            @StyleRes @Nullable final Integer style,
-            @DrawableRes @Nullable final Integer header,
             @Nullable final CharSequence windowTitle,
+            @Nullable final CharSequence windowSubTitle,
+            @ColorRes @Nullable final Integer windowTitleTextColor,
+            @ColorRes @Nullable final Integer windowSubTitleTextColor,
+            @StyleRes @Nullable final Integer theme,
+            @DrawableRes @Nullable final Integer header,
             @Nullable final CharSequence message,
             @Nullable final CharSequence feedbackContentHint,
             @Nullable final CharSequence contentErrorMessage,
@@ -147,7 +178,10 @@ public class Maoni {
             @Nullable final CharSequence includeScreenshotText,
             @Nullable final CharSequence touchToPreviewScreenshotText,
             @Nullable final CharSequence screenshotHint) {
-        this.style = style;
+        this.windowSubTitle = windowSubTitle;
+        this.windowTitleTextColor = windowTitleTextColor;
+        this.windowSubTitleTextColor = windowSubTitleTextColor;
+        this.theme = theme;
         this.windowTitle = windowTitle;
         this.message = message;
         this.contentErrorMessage = contentErrorMessage;
@@ -182,12 +216,24 @@ public class Maoni {
 
         maoniIntent.putExtra(CALLER_ACTIVITY, callerActivity.getClass().getCanonicalName());
 
-        if (style != null) {
-            maoniIntent.putExtra(STYLE, style);
+        if (theme != null) {
+            maoniIntent.putExtra(THEME, theme);
         }
 
         if (windowTitle != null) {
             maoniIntent.putExtra(WINDOW_TITLE, windowTitle);
+        }
+
+        if (windowSubTitle != null) {
+            maoniIntent.putExtra(WINDOW_SUBTITLE, windowSubTitle);
+        }
+
+        if (windowTitleTextColor != null) {
+            maoniIntent.putExtra(TOOLBAR_TITLE_TEXT_COLOR, windowTitleTextColor);
+        }
+
+        if (windowSubTitleTextColor != null) {
+            maoniIntent.putExtra(TOOLBAR_SUBTITLE_TEXT_COLOR, windowSubTitleTextColor);
         }
 
         if (message != null) {
@@ -293,10 +339,21 @@ public class Maoni {
 
         @StyleRes
         @Nullable
-        public Integer style;
+        public Integer theme;
 
         @Nullable
         private CharSequence windowTitle;
+
+        @Nullable
+        private CharSequence windowSubTitle;
+
+        @ColorRes
+        @Nullable
+        private Integer windowTitleTextColor;
+
+        @ColorRes
+        @Nullable
+        private Integer windowSubTitleTextColor;
 
         @Nullable
         private CharSequence message;
@@ -325,12 +382,12 @@ public class Maoni {
         private Integer extraLayout;
 
         @Nullable
-        public Integer getStyle() {
-            return style;
+        public Integer getTheme() {
+            return theme;
         }
 
-        public Builder style(@Nullable Integer style) {
-            this.style = style;
+        public Builder withTheme(@StyleRes @Nullable Integer theme) {
+            this.theme = theme;
             return this;
         }
 
@@ -339,8 +396,38 @@ public class Maoni {
             return windowTitle;
         }
 
-        public Builder windowTitle(@Nullable CharSequence windowTitle) {
+        public Builder withWindowTitle(@Nullable CharSequence windowTitle) {
             this.windowTitle = windowTitle;
+            return this;
+        }
+
+        @Nullable
+        public CharSequence getWindowSubTitle() {
+            return windowSubTitle;
+        }
+
+        public Builder withWindowSubTitle(@Nullable CharSequence windowSubTitle) {
+            this.windowSubTitle = windowSubTitle;
+            return this;
+        }
+
+        @Nullable
+        public Integer getWindowTitleTextColor() {
+            return windowTitleTextColor;
+        }
+
+        public Builder withWindowTitleTextColor(@ColorRes @Nullable Integer windowTitleTextColor) {
+            this.windowTitleTextColor = windowTitleTextColor;
+            return this;
+        }
+
+        @Nullable
+        public Integer getWindowSubTitleTextColor() {
+            return windowSubTitleTextColor;
+        }
+
+        public Builder withWindowSubTitleTextColor(@ColorRes @Nullable Integer windowSubTitleTextColor) {
+            this.windowSubTitleTextColor = windowSubTitleTextColor;
             return this;
         }
 
@@ -349,7 +436,7 @@ public class Maoni {
             return extraLayout;
         }
 
-        public Builder extraLayout(@Nullable Integer extraLayout) {
+        public Builder withExtraLayout(@LayoutRes @Nullable Integer extraLayout) {
             this.extraLayout = extraLayout;
             return this;
         }
@@ -359,7 +446,7 @@ public class Maoni {
             return feedbackContentHint;
         }
 
-        public Builder feedbackContentHint(@Nullable CharSequence feedbackContentHint) {
+        public Builder withFeedbackContentHint(@Nullable CharSequence feedbackContentHint) {
             this.feedbackContentHint = feedbackContentHint;
             return this;
         }
@@ -369,7 +456,7 @@ public class Maoni {
             return includeScreenshotText;
         }
 
-        public Builder includeScreenshotText(@Nullable CharSequence includeScreenshotText) {
+        public Builder withIncludeScreenshotText(@Nullable CharSequence includeScreenshotText) {
             this.includeScreenshotText = includeScreenshotText;
             return this;
         }
@@ -379,7 +466,7 @@ public class Maoni {
             return touchToPreviewScreenshotText;
         }
 
-        public Builder touchToPreviewScreenshotText(@Nullable CharSequence touchToPreviewScreenshotText) {
+        public Builder withTouchToPreviewScreenshotText(@Nullable CharSequence touchToPreviewScreenshotText) {
             this.touchToPreviewScreenshotText = touchToPreviewScreenshotText;
             return this;
         }
@@ -389,7 +476,7 @@ public class Maoni {
             return message;
         }
 
-        public Builder message(@Nullable CharSequence message) {
+        public Builder withMessage(@Nullable CharSequence message) {
             this.message = message;
             return this;
         }
@@ -399,7 +486,7 @@ public class Maoni {
             return contentErrorMessage;
         }
 
-        public Builder contentErrorMessage(@Nullable CharSequence contentErrorMessage) {
+        public Builder withContentErrorMessage(@Nullable CharSequence contentErrorMessage) {
             this.contentErrorMessage = contentErrorMessage;
             return this;
         }
@@ -410,7 +497,7 @@ public class Maoni {
             return header;
         }
 
-        public Builder header(@Nullable Integer header) {
+        public Builder withHeader(@Nullable Integer header) {
             this.header = header;
             return this;
         }
@@ -420,38 +507,41 @@ public class Maoni {
             return screenshotHint;
         }
 
-        public Builder screenshotHint(@Nullable CharSequence screenshotHint) {
+        public Builder withScreenshotHint(@Nullable CharSequence screenshotHint) {
             this.screenshotHint = screenshotHint;
             return this;
         }
 
-        public Builder validator(@Nullable final Validator validator) {
+        public Builder withValidator(@Nullable final Validator validator) {
             getInstance().setValidator(validator);
             return this;
         }
 
-        public Builder listener(@Nullable final Listener listener) {
+        public Builder withListener(@Nullable final Listener listener) {
             getInstance().setListener(listener);
             return this;
         }
 
-        public Builder uiListener(@Nullable final UiListener uiListener) {
+        public Builder withUiListener(@Nullable final UiListener uiListener) {
             getInstance().setUiListener(uiListener);
             return this;
         }
 
-        public Builder handler(@Nullable final Handler handler) {
+        public Builder withHandler(@Nullable final Handler handler) {
             return this
-                    .listener(handler)
-                    .validator(handler)
-                    .uiListener(handler);
+                    .withListener(handler)
+                    .withValidator(handler)
+                    .withUiListener(handler);
         }
 
         public Maoni build() {
             return new Maoni(
-                    style,
-                    header,
                     windowTitle,
+                    windowSubTitle,
+                    windowTitleTextColor,
+                    windowSubTitleTextColor,
+                    theme,
+                    header,
                     message,
                     feedbackContentHint,
                     contentErrorMessage,
