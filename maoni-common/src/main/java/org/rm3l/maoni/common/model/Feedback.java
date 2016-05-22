@@ -256,7 +256,7 @@ public class Feedback {
         /**
          * Is debug-mode enabled or not?
          */
-        public final boolean debug;
+        public final Boolean debug;
 
         /**
          * The application ID
@@ -267,7 +267,7 @@ public class Feedback {
         /**
          * The version code
          */
-        public final int versionCode;
+        public final Integer versionCode;
 
         /**
          * The build flavor
@@ -299,9 +299,9 @@ public class Feedback {
          * @param versionName   the version name
          */
         public App(final CharSequence caller,
-                   final boolean debug,
+                   final Boolean debug,
                    final CharSequence applicationId,
-                   final int versionCode,
+                   final Integer versionCode,
                    final CharSequence flavor,
                    final CharSequence buildType,
                    final CharSequence versionName) {

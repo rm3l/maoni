@@ -23,6 +23,8 @@ package org.rm3l.maoni;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -36,11 +38,18 @@ import org.rm3l.maoni.common.contract.Listener;
 import org.rm3l.maoni.common.contract.UiListener;
 import org.rm3l.maoni.common.contract.Validator;
 import org.rm3l.maoni.ui.MaoniActivity;
+import org.rm3l.maoni.utils.ContextUtils;
 import org.rm3l.maoni.utils.ViewUtils;
 
 import java.io.File;
 
 import static org.rm3l.maoni.Maoni.CallbacksConfiguration.getInstance;
+import static org.rm3l.maoni.ui.MaoniActivity.APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE;
+import static org.rm3l.maoni.ui.MaoniActivity.APPLICATION_INFO_BUILD_CONFIG_DEBUG;
+import static org.rm3l.maoni.ui.MaoniActivity.APPLICATION_INFO_BUILD_CONFIG_FLAVOR;
+import static org.rm3l.maoni.ui.MaoniActivity.APPLICATION_INFO_PACKAGE_NAME;
+import static org.rm3l.maoni.ui.MaoniActivity.APPLICATION_INFO_VERSION_CODE;
+import static org.rm3l.maoni.ui.MaoniActivity.APPLICATION_INFO_VERSION_NAME;
 import static org.rm3l.maoni.ui.MaoniActivity.CALLER_ACTIVITY;
 import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_ERROR_TEXT;
 import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_HINT;
@@ -63,8 +72,14 @@ import static org.rm3l.maoni.ui.MaoniActivity.WINDOW_TITLE;
  */
 public class Maoni {
 
-    public static final String MAONI_FEEDBACK_SCREENSHOT_FILENAME = "maoni_feedback_screenshot.png";
     private static final String LOG_TAG = Maoni.class.getSimpleName();
+
+    private static final String MAONI_FEEDBACK_SCREENSHOT_FILENAME = "maoni_feedback_screenshot.png";
+
+    private static final String DEBUG = "DEBUG";
+    private static final String FLAVOR = "FLAVOR";
+    private static final String BUILD_TYPE = "BUILD_TYPE";
+
     /**
      * The feedback window title
      */
@@ -207,6 +222,41 @@ public class Maoni {
         }
 
         final Intent maoniIntent = new Intent(callerActivity, MaoniActivity.class);
+
+        //Set app-related info
+        final PackageManager packageManager = callerActivity.getPackageManager();
+        try {
+            if (packageManager != null) {
+                final PackageInfo packageInfo = packageManager
+                        .getPackageInfo(callerActivity.getPackageName(), 0);
+                if (packageInfo != null) {
+                    maoniIntent.putExtra(APPLICATION_INFO_VERSION_CODE, packageInfo.versionCode);
+                    maoniIntent.putExtra(APPLICATION_INFO_VERSION_NAME, packageInfo.versionName);
+                    maoniIntent.putExtra(APPLICATION_INFO_PACKAGE_NAME, packageInfo.packageName);
+                }
+            }
+        } catch (final PackageManager.NameNotFoundException nnfe) {
+            //No worries
+            nnfe.printStackTrace();
+        }
+        final Object buildConfigDebugValue = ContextUtils.getBuildConfigValue(callerActivity,
+                DEBUG);
+        if (buildConfigDebugValue != null && buildConfigDebugValue instanceof Boolean) {
+            maoniIntent.putExtra(APPLICATION_INFO_BUILD_CONFIG_DEBUG,
+                    (Boolean) buildConfigDebugValue);
+        }
+        final Object buildConfigFlavorValue = ContextUtils.getBuildConfigValue(callerActivity,
+                FLAVOR);
+        if (buildConfigFlavorValue != null) {
+            maoniIntent.putExtra(APPLICATION_INFO_BUILD_CONFIG_FLAVOR,
+                    buildConfigFlavorValue.toString());
+        }
+        final Object buildConfigBuildTypeValue = ContextUtils.getBuildConfigValue(callerActivity,
+                BUILD_TYPE);
+        if (buildConfigBuildTypeValue != null) {
+            maoniIntent.putExtra(APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE,
+                    buildConfigBuildTypeValue.toString());
+        }
 
         maoniIntent.putExtra(FILE_PROVIDER_AUTHORITY, fileProviderAuthority);
 

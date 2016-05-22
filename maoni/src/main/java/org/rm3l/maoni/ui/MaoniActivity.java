@@ -25,8 +25,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -59,7 +57,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.rm3l.maoni.BuildConfig;
 import org.rm3l.maoni.Maoni.CallbacksConfiguration;
 import org.rm3l.maoni.R;
 import org.rm3l.maoni.common.contract.Listener;
@@ -76,6 +73,15 @@ import java.util.UUID;
  */
 public class MaoniActivity extends AppCompatActivity {
 
+    public static final String APPLICATION_INFO_VERSION_CODE = "APPLICATION_INFO_VERSION_CODE";
+    public static final String APPLICATION_INFO_VERSION_NAME = "APPLICATION_INFO_VERSION_NAME";
+    public static final String APPLICATION_INFO_PACKAGE_NAME = "APPLICATION_INFO_PACKAGE_NAME";
+    public static final String APPLICATION_INFO_BUILD_CONFIG_DEBUG =
+            "APPLICATION_INFO_BUILD_CONFIG_DEBUG";
+    public static final String APPLICATION_INFO_BUILD_CONFIG_FLAVOR =
+            "APPLICATION_INFO_BUILD_CONFIG_FLAVOR";
+    public static final String APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE =
+            "APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE";
     public static final String FILE_PROVIDER_AUTHORITY = "FILE_PROVIDER_AUTHORITY";
     public static final String THEME = "THEME";
     public static final String TOOLBAR_TITLE_TEXT_COLOR = "TOOLBAR_TITLE_TEXT_COLOR";
@@ -360,29 +366,22 @@ public class MaoniActivity extends AppCompatActivity {
 
     private void setAppRelatedInfo() {
 
-        // Set app related properties
-        final PackageManager manager = getPackageManager();
-        PackageInfo info = null;
-        try {
-            info = manager.getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            //No worries
-        }
-
-        final CharSequence callerActivity = getIntent().getCharSequenceExtra(CALLER_ACTIVITY);
+        final Intent intent = getIntent();
+        final CharSequence callerActivity = intent.getCharSequenceExtra(CALLER_ACTIVITY);
         mAppInfo = new Feedback.App(
                 callerActivity != null ? callerActivity : getClass().getSimpleName(),
-                BuildConfig.DEBUG,
-                BuildConfig.APPLICATION_ID,
-                info != null ? info.versionCode : BuildConfig.VERSION_CODE,
-                BuildConfig.FLAVOR,
-                BuildConfig.BUILD_TYPE,
-                info != null ? info.versionName : BuildConfig.VERSION_NAME);
+                intent.hasExtra(APPLICATION_INFO_BUILD_CONFIG_DEBUG) ?
+                        intent.getBooleanExtra(APPLICATION_INFO_BUILD_CONFIG_DEBUG, false) : null,
+                intent.getStringExtra(APPLICATION_INFO_PACKAGE_NAME),
+                intent.getIntExtra(APPLICATION_INFO_VERSION_CODE, -1),
+                intent.getStringExtra(APPLICATION_INFO_BUILD_CONFIG_FLAVOR),
+                intent.getStringExtra(APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE),
+                intent.hasExtra(APPLICATION_INFO_VERSION_NAME) ?
+                        intent.getStringExtra(APPLICATION_INFO_VERSION_NAME) : null);
     }
 
     private void setPhoneRelatedInfo() {
 
-        // Set phone related properties
         SupplicantState supplicantState = null;
         try {
             final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -393,17 +392,16 @@ public class MaoniActivity extends AppCompatActivity {
             //No worries
         }
 
-        boolean mobileDataEnabled = false; // Assume disabled
+        boolean mobileDataEnabled = false;
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         try {
             final Class cmClass = Class.forName(cm.getClass().getName());
             @SuppressWarnings("unchecked")
             final Method method = cmClass.getDeclaredMethod(GET_MOBILE_DATA_ENABLED);
-            method.setAccessible(true); // Make the method callable
-            // get the setting for "mobile data"
+            method.setAccessible(true);
             mobileDataEnabled = (Boolean) method.invoke(cm);
         } catch (Exception e) {
-            // Some problem accessible private API - no worries
+            // Private API access - no worries
         }
         boolean gpsEnabled = false;
         try {
@@ -423,7 +421,8 @@ public class MaoniActivity extends AppCompatActivity {
             //No worries
         }
 
-        mDeviceInfo = new Feedback.Device(Build.MODEL,
+        mDeviceInfo = new Feedback.Device(
+                Build.MODEL,
                 Build.VERSION.RELEASE,
                 supplicantState,
                 mobileDataEnabled,
