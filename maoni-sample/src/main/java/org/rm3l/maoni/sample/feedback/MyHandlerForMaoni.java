@@ -58,7 +58,6 @@ import org.rm3l.maoni.sample.R;
  */
 public class MyHandlerForMaoni extends MaoniEmailListener implements Handler {
 
-    public static final String EMAIL = "EMAIL";
     private final Context mContext;
     private TextInputLayout mEmailInputLayout;
     private EditText mEmail;
@@ -99,11 +98,31 @@ public class MyHandlerForMaoni extends MaoniEmailListener implements Handler {
 
     @Override
     public void onSendButtonClicked(@NonNull Feedback feedback) {
+
         // Depending on your use case, you may add specific data in the feedback object returned,
         // and manipulate it accordingly
-        feedback.put(EMAIL, mEmail.getText());
-        feedback.put("EXTRA_EDIT_TEXT", mExtraEditText.getText());
-        feedback.put("EXTRA_RADIO_GROUP", mExtraRadioGroup.getCheckedRadioButtonId());
+        feedback.put("Email", mEmail.getText());
+        feedback.put("My Extra Edit Text", mExtraEditText.getText());
+
+        final String myExtraRadioGroupChecked;
+        switch (mExtraRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.extra_rg1:
+                myExtraRadioGroupChecked = "RG 1";
+                break;
+            case R.id.extra_rg2:
+                myExtraRadioGroupChecked = "RG 2";
+                break;
+            case R.id.extra_rg3:
+                myExtraRadioGroupChecked = "RG 3";
+                break;
+            default:
+                myExtraRadioGroupChecked = null;
+                break;
+        }
+        feedback.put("My Extra Radio Group",
+                myExtraRadioGroupChecked != null ? myExtraRadioGroupChecked : "???");
+
+        //Forward to the Email Listener for opening up the "Send Email" Intent
         super.onSendButtonClicked(feedback);
     }
 
