@@ -35,6 +35,8 @@ files:
       - /**/src/main/res/values/colors.xml
       - /**/src/main/res/values/dimens.xml
       - /**/src/main/res/values/styles.xml
+      - /**/src/main/res/values/aboutlibraries_description.xml
+      - /**/src/main/res/values/library_*_strings.xml
    languages_mapping: &anchor
          android_code:
            af: af
