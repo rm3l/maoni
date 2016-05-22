@@ -1,0 +1,101 @@
+#
+# Copyright (c) 2016 Armel Soro
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#
+#  The above copyright notice and this permission notice shall be included in all
+#  copies or substantial portions of the Software.
+#
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#  SOFTWARE.
+#
+#
+
+---
+project_identifier: 'maoni'
+api_key_env: 'CROWDIN_API_KEY'
+base_url: 'https://api.crowdin.com'
+preserve_hierarchy: true
+
+files:
+  -
+   source: '/**/src/main/res/values/*.xml'
+   translation: '/%original_path%-%android_code%/%original_file_name%'
+   ignore:
+      - /**/src/main/res/values/colors.xml
+      - /**/src/main/res/values/dimens.xml
+      - /**/src/main/res/values/styles.xml
+   languages_mapping: &anchor
+         android_code:
+           af: af
+           am: am
+           ar: ar
+           ast: es-rXA
+           az: az
+           be: be
+           bg: bg
+           bn: bn
+           ca: ca
+           cs: cs
+           da: da
+           de: de
+           el: el
+           es-ES: es
+           et: et
+           eu: eu
+           fa: fa
+           fi: fi
+           fr: fr
+           gl: gl
+           he: iw
+           hi: hi
+           hr: hr
+           hu: hu
+           hy-AM: hy
+           id: in
+           is: is
+           it: it
+           ja: ja
+           ka: ka
+           km: km
+           ko: ko
+           ku: ku
+           lb: lb
+           lo: lo
+           lt: lt
+           lv: lv
+           ml-IN: ml
+           mn: mn
+           ms: ms
+           nb: nb
+           ne-NP: ne
+           nl: nl
+           pa-IN: pa
+           pl: pl
+           rm-CH: rm
+           ro: ro
+           ru: ru
+           si-LK: si
+           sk: sk
+           sl: sl
+           sr: sr
+           sv-SE: sv
+           sw: sw
+           ta: ta
+           th: th
+           tl: tl
+           tr: tr
+           ug: ug
+           uk: uk
+           vi: vi
+           zu: zu

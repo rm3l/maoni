@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Copyright (c) 2016 Armel Soro
 #
@@ -21,36 +22,31 @@
 #
 #
 
-language: android
+if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  echo -e "Starting translation import...\n"
 
-jdk:
- - oraclejdk8
+  #go to home and setup git
+  cd $HOME
+  git config --global user.email "armel@rm3l.org"
+  git config --global user.name "Armel S."
 
-android:
-  components:
-    - platform-tools
-    - tools
-    - build-tools-23.0.2
-    - android-23
-    - extra-android-support
-    - extra-google-google_play_services
-    - extra-android-m2repository
-    - extra-google-m2repository
-  licenses:
-    - '.+'
+  git clone --branch=master https://$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
 
-script:
-    - ./gradlew clean assemble --stacktrace
+  cd master
+  wget https://crowdin.com/downloads/crowdin-cli.jar
+  # Update sources
+  java -jar crowdin-cli.jar upload sources
+  # Download translations
+  java -jar crowdin-cli.jar download
+  rm crowdin-cli.jar
 
-notifications:
-  email: false
+  #add, commit and push files
+  git add -f .
+  git remote rm origin
+  git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
+  git add -f .
+  git commit -m "Automatic translation import (build $TRAVIS_BUILD_NUMBER)."
+  git push -f origin master > /dev/null
 
-sudo: false
-
-cache:
-  directories:
-    - $HOME/.gradle
-
-after_success:
-     - chmod +x ./tools/import-translations-github.sh
-     - ./tools/import-translations-github.sh
+  echo -e "... Done with importing translations from Crowdin\n"
+fi

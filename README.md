@@ -220,15 +220,23 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
   }
 ```
 
-<!--
+
 ### Translations
-TODO
--->
+ 
+We use Crowdin as our translation system. 
+All related resources are automatically generated from files got with Crowdin. 
+
+To help out with any translation, please head to [Crowdin](http://crowdin.net/project/maoni) 
+and request to join the translation team. 
+Please do **not** submit GitHub pull requests with translation fixes as any changes will be overwritten 
+with the next update from Crowdin.
+
+If your language is not listed there, just drop me an e-mail at &lt;apps+maoni@rm3l.org&gt;.
 
 
 ## In use in the following apps
 
-(If you use this library, please drop me a line at &lt;apps+maoni@rm3l.org&gt; 
+(If you use Maoni, please drop me a line at &lt;apps+maoni@rm3l.org&gt; 
 (or again, fork, modify this file and submit a pull request), so I can list your app(s) here)
 
 * [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt) (integration is rolling out to App marketplaces)
