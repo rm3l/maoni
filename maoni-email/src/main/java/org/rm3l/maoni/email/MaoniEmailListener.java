@@ -37,7 +37,7 @@ import java.util.Map;
  */
 public class MaoniEmailListener implements Listener {
 
-    public static final String DEFAULT_EMAIL_SUBJECT = "Your feedback";
+    public static final String DEFAULT_EMAIL_SUBJECT = "Feedback";
 
     private final Context mContext;
     private final String mMimeType;
@@ -99,7 +99,10 @@ public class MaoniEmailListener implements Listener {
             body.append(mBodyHeader).append("\n\n");
         }
 
-        body.append(feedback.userComment).append("\n");
+        body.append(feedback.userComment).append("\n\n");
+
+        body.append("\n------------\n");
+        body.append("- Feedback ID: ").append(feedback.id).append("\n");
 
         final Map<CharSequence, Object> additionalData = feedback.getAdditionalData();
         if (additionalData != null) {
@@ -113,13 +116,24 @@ public class MaoniEmailListener implements Listener {
 
         body.append("\n------ Application ------\n");
         if (feedback.appInfo != null) {
-            body.append("- Application ID: ").append(feedback.appInfo.applicationId).append("\n");
-            body.append("- Build Type: ").append(feedback.appInfo.buildType).append("\n");
-            body.append("- Caller Activity: ").append(feedback.appInfo.caller).append("\n");
-            body.append("- Debug: ").append(feedback.appInfo.debug).append("\n");
-            body.append("- Flavor: ").append(feedback.appInfo.flavor).append("\n");
-            body.append("- Version Code: ").append(feedback.appInfo.versionCode).append("\n");
-            body.append("- Version Code: ").append(feedback.appInfo.versionName).append("\n");
+            if (feedback.appInfo.applicationId != null) {
+                body.append("- Application ID: ").append(feedback.appInfo.applicationId).append("\n");
+            }
+            if (feedback.appInfo.caller != null) {
+                body.append("- Activity: ").append(feedback.appInfo.caller).append("\n");
+            }
+            if (feedback.appInfo.buildType != null) {
+                body.append("- Build Type: ").append(feedback.appInfo.buildType).append("\n");
+            }
+            if (feedback.appInfo.flavor != null) {
+                body.append("- Flavor: ").append(feedback.appInfo.flavor).append("\n");
+            }
+            if (feedback.appInfo.versionCode != null) {
+                body.append("- Version Code: ").append(feedback.appInfo.versionCode).append("\n");
+            }
+            if (feedback.appInfo.versionName != null) {
+                body.append("- Version Name: ").append(feedback.appInfo.versionName).append("\n");
+            }
         }
 
         body.append("\n------ Device ------\n");
