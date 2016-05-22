@@ -37,7 +37,7 @@ While working on a new version of [DD-WRT Companion](https://play.google.com/sto
 one my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
 along with some contextual information.
 I experimented with a simple dialog, then tried a bunch of other libraries, 
-but did not find one with screenshot capturing capabilities, not vendor lock-in, 
+but could not find one with screenshot capturing capabilities, not vendor lock-in, 
 and which is almost a no-brainer as to integrating with any remote services.
 
 So as a way to give back to the Open Source community, 
@@ -57,11 +57,11 @@ As a side note, Maoni is a Swahili word for comments or opinions.
 ## Screenshots
 
 <div align="center">
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/1_Maoni_main_activity.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/1_Maoni_main_activity.png"/>
     <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/2_Maoni_main_activity_with_screenshot_thumbnail.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/2_Maoni_main_activity_with_screenshot_thumbnail.png"/>
     <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/tools/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview.png"/>
 </div>
 
 
@@ -72,7 +72,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni:1.1.0@aar'
+    compile 'org.rm3l:maoni:1.2.0@aar'
   }
 ```
 
@@ -86,11 +86,13 @@ within your application workflow (for example a button click listener, or a touc
 
 For example, to start with just the defaults:
 ```java
-    // MyHandlerForMaoni is a custom implementation of Maoni.Handler, 
+    // MyHandlerForMaoni is a custom implementation of Handler, 
     // which is a shortcut interface for defining both a validator and listeners for Maoni
     final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(MaoniSampleMainActivity.this);
     
-    new Maoni.Builder()
+    //The optional file provider authority allows you to 
+    //share the screenshot capture file to other apps (depending on your callback implementation)
+    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
         .withHandler(myHandlerForMaoniInstance) //Custom Callback for Maoni
         .build()
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
@@ -102,7 +104,9 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
     // which is a shortcut interface for defining both a validator and listeners for Maoni
     final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(MaoniSampleMainActivity.this);
     
-    new Maoni.Builder()
+    //The optional file provider authority allows you to 
+    //share the screenshot capture file to other apps (depending on your callback implementation)
+    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
         .withWindowTitle("Send Feedback") //Set to an empty string to clear it
         .withMessage("Hey! Love or hate this app? We would love to hear from you.")
         .withExtraLayout(R.layout.my_feedback_activity_extra_content)
@@ -119,6 +123,73 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
 
 **You're good to go!** Maoni will take care of validating / collecting your users' feedbacks 
 and call your callbacks implementations. 
+
+#### Available callbacks
+Some common callbacks for Maoni are available as external dependencies to include in your application.
+
+##### maoni-email
+
+This callback opens up an Intent for sending an email with the feedback collected.
+
+Add this additional line to your `build.gradle`:
+
+```gradle
+  dependencies {
+    // ...
+    compile 'org.rm3l:maoni-email:1.2.0'
+  }
+```
+
+And set it as the listener for your Maoni instance:
+```java
+    final org.rm3l.maoni.email.MaoniEmailListener listenerForMaoni = 
+            new org.rm3l.maoni.email.MaoniEmailListener(...);
+    
+    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
+        .withListener(listenerForMaoni) //Callback from maoni-email
+        //...
+        .build()
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
+```
+
+
+#### Sharing the screenshot with other apps
+
+The optional file provider authority specified in the `Maoni.Builder` constructor allows you to 
+share the screenshot capture file to other apps (depending on your callback implementation).
+By default, Maoni stores the screenshot file in your application cache directory, 
+but this is (again) entirely customizable.
+
+You must declare a file content provider in your `AndroidManifest.xml` file with an explicit list 
+of sharable directories for other apps to be able to read the screenshot file. 
+For example:
+```xml
+<application>
+    <!-- ... -->
+    <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
+    <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="org.rm3l.maoni.sample.fileprovider"
+        android:grantUriPermissions="true"
+        android:exported="false">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/filepaths" />
+    </provider>
+</application>
+```
+
+Along with the XML file that specifies the sharable directories (under `res/xml/filepaths.xml` as specified above):
+```xml
+<paths>
+    <!-- By default, Maoni stores screenshots captures in the application cache directory. 
+    So you must declare the path '.' as shareable. Specify something else if you are using a different path -->
+    <cache-path name="maoni-shares" path="." />
+    <!-- <files-path path="maoni-working-dir/" name="myCustomWorkingDirForMaoni" /> -->
+</paths>
+```
+
+See https://goo.gl/31nStZ for further instructions on how to setup file sharing.
 
 
 ## Contribute and Improve Maoni!
@@ -146,7 +217,7 @@ to send your feedback with Maoni. ;-)
 ## Credits
 
 * Armel Soro
- * [https://rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt;
+ * [rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt;
  * [paypal.me/rm3l](https://paypal.me/rm3l)
 
 
