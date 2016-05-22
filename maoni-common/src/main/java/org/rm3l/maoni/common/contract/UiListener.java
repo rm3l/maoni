@@ -19,5 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.rm3l.maoni.common.contract;
 
-include ':maoni-sample', ':maoni', ':maoni-email', ':maoni-common'
+import android.os.Bundle;
+import android.view.View;
+
+/**
+ * UI Listener for Maoni
+ */
+public interface UiListener {
+
+    /**
+     * Called when starting the initialization of Maoni activity.
+     * <p>Can be used for example to perform some extra fields initialization.
+     *
+     * @param rootView           the root view of Maoni activity
+     * @param savedInstanceState the saved instance state
+     */
+    void onCreate(final View rootView, Bundle savedInstanceState);
+}

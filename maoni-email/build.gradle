@@ -19,27 +19,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-apply plugin: 'com.android.library'
+apply plugin: 'java'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
 
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 110
-        versionName "1.2.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+/*
+ * This is to mark some artifacts (such as Android's) as provided
+ * so that we don't get dependency conflicts
+ */
+configurations {
+    provided
+    compile.extendsFrom provided
 }
 
 group = 'org.rm3l'
@@ -49,22 +42,16 @@ final homePath = System.properties['user.home']
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(":maoni-common")
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile project(":maoni-common")
 }
 
 task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
     classifier 'sources'
 }
 
 task generateJavadocs(type: Javadoc) {
     failOnError false
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath()
-            .join(File.pathSeparator))
 }
 
 task generateJavadocsJar(type: Jar) {
@@ -96,17 +83,17 @@ bintray {
     }
 
     publish = true //If version should be auto published after an upload
-    
+
     pkg {
         repo = 'maven'
-        name = 'org.rm3l:maoni'
+        name = 'org.rm3l:maoni-email'
         labels = ['maoni', 'android', 'feedback', 'android-lib', 'comments', 'review', 'bug', 'issue']
 
         //noinspection GroovyAssignabilityCheck
         version {
             name = '1.2.0'
-            desc = 'Maoni Android Library'
-            released  = new Date()
+            desc = 'Maoni Android Library - Email Handler'
+            released = new Date()
             vcsTag = '1.2.0'
         }
 

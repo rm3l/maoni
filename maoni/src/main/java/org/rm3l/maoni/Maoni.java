@@ -23,7 +23,6 @@ package org.rm3l.maoni;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -31,19 +30,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.util.Log;
-import android.view.View;
 
-import org.rm3l.maoni.model.Feedback;
+import org.rm3l.maoni.common.contract.Handler;
+import org.rm3l.maoni.common.contract.Listener;
+import org.rm3l.maoni.common.contract.UiListener;
+import org.rm3l.maoni.common.contract.Validator;
 import org.rm3l.maoni.ui.MaoniActivity;
 import org.rm3l.maoni.utils.ViewUtils;
 
 import java.io.File;
 
-import static org.rm3l.maoni.Maoni.Configuration.getInstance;
+import static org.rm3l.maoni.Maoni.CallbacksConfiguration.getInstance;
 import static org.rm3l.maoni.ui.MaoniActivity.CALLER_ACTIVITY;
 import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_ERROR_TEXT;
 import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.EXTRA_LAYOUT;
+import static org.rm3l.maoni.ui.MaoniActivity.FILE_PROVIDER_AUTHORITY;
 import static org.rm3l.maoni.ui.MaoniActivity.HEADER;
 import static org.rm3l.maoni.ui.MaoniActivity.INCLUDE_SCREENSHOT_TEXT;
 import static org.rm3l.maoni.ui.MaoniActivity.MESSAGE;
@@ -68,72 +70,61 @@ public class Maoni {
      */
     @Nullable
     public final CharSequence windowTitle;
-
     /**
      * The feedback window sub-title
      */
     @Nullable
     public final CharSequence windowSubTitle;
-
     /**
      * The feedback window title color
      */
     @ColorRes
     @Nullable
     public final Integer windowTitleTextColor;
-
     /**
      * The feedback window sub-title color
      */
     @ColorRes
     @Nullable
     public final Integer windowSubTitleTextColor;
-
     /**
      * The message to display to the user
      */
     @Nullable
     public final CharSequence message;
-
     /**
      * The feedback form field error message to display to the user
      */
     @Nullable
     public final CharSequence contentErrorMessage;
-
     /**
      * The feedback form field hint message
      */
     @Nullable
     public final CharSequence feedbackContentHint;
-
     /**
      * Some text to display to the user, such as how the screenshot will be used by you,
      * and any links to your privacy policy
      */
     @Nullable
     public final CharSequence screenshotHint;
-
     /**
      * Header image
      */
     @DrawableRes
     @Nullable
     public final Integer header;
-
     /**
      * Text do display next to the "Include screenshot" checkbox
      */
     @Nullable
     public final CharSequence includeScreenshotText;
-
     /**
      * The "Touch to preview" text (displayed below the screenshot thumbnail).
      * Keep it short and to the point
      */
     @Nullable
     public final CharSequence touchToPreviewScreenshotText;
-
     /**
      * Extra layout resource.
      * Will be displayed between the feedback content field and the "Include screenshot" checkbox.
@@ -141,14 +132,20 @@ public class Maoni {
     @LayoutRes
     @Nullable
     public final Integer extraLayout;
-
     @StyleRes
     @Nullable
     public final Integer theme;
+    private final String fileProviderAuthority;
+    private File maoniWorkingDir;
 
     /**
      * Constructor
-     *  @param windowTitle                  the feedback window title
+     * @param fileProviderAuthority        the file provider authority.
+     *                                     If {@literal null}, file sharing will not be available
+     * @param maoniWorkingDir                the working directory for Maoni.
+     *                                       Will default to the caller activity cache directory if none was specified.
+     *                                       This is where screenshots are typically stored.
+     * @param windowTitle                  the feedback window title
      * @param windowSubTitle                the feedback window sub-title
      * @param windowTitleTextColor          the feedback window title text color
      *                                      (use {@literal null} for the default)
@@ -165,6 +162,8 @@ public class Maoni {
      * @param screenshotHint               the text to display to the user
      */
     public Maoni(
+            @Nullable String fileProviderAuthority,
+            @Nullable final File maoniWorkingDir,
             @Nullable final CharSequence windowTitle,
             @Nullable final CharSequence windowSubTitle,
             @ColorRes @Nullable final Integer windowTitleTextColor,
@@ -178,6 +177,8 @@ public class Maoni {
             @Nullable final CharSequence includeScreenshotText,
             @Nullable final CharSequence touchToPreviewScreenshotText,
             @Nullable final CharSequence screenshotHint) {
+
+        this.fileProviderAuthority = fileProviderAuthority;
         this.windowSubTitle = windowSubTitle;
         this.windowTitleTextColor = windowTitleTextColor;
         this.windowSubTitleTextColor = windowSubTitleTextColor;
@@ -191,6 +192,7 @@ public class Maoni {
         this.includeScreenshotText = includeScreenshotText;
         this.touchToPreviewScreenshotText = touchToPreviewScreenshotText;
         this.extraLayout = extraLayout;
+        this.maoniWorkingDir = maoniWorkingDir;
     }
 
     /**
@@ -206,9 +208,11 @@ public class Maoni {
 
         final Intent maoniIntent = new Intent(callerActivity, MaoniActivity.class);
 
+        maoniIntent.putExtra(FILE_PROVIDER_AUTHORITY, fileProviderAuthority);
+
         //Create screenshot file
         final File screenshotFile = new File(
-                callerActivity.getCacheDir(),
+                maoniWorkingDir != null ? maoniWorkingDir : callerActivity.getCacheDir(),
                 MAONI_FEEDBACK_SCREENSHOT_FILENAME);
         ViewUtils.exportViewToFile(callerActivity,
                 callerActivity.getWindow().getDecorView(), screenshotFile);
@@ -272,114 +276,65 @@ public class Maoni {
     }
 
     /**
-     * Form Validator for Maoni
-     */
-    public interface Validator {
-
-        /**
-         * Check and validate user input.
-         * Note that the form validation is synchronous and executed in the UI main thread.
-         * As such, it should not be blocking.
-         *
-         * @param rootView the root view of Maoni activity
-         * @return the validation status. Returning {@code true} makes Maoni close
-         * and call your callback {@link Listener#onSendButtonClicked(Feedback)} method.
-         */
-        boolean validateForm(@NonNull final View rootView);
-    }
-
-    /**
-     * Listener for Maoni. Also referred to as Maoni Callback.
-     * <p>
-     * Note that all the methods here are called in the UI thread and in a synchronous manner.
-     */
-    public interface Listener {
-
-        /**
-         * Called when the user has dismissed the Maoni feedback form,
-         * without having touched the "Send Feedback" button
-         */
-        void onDismiss();
-
-        /**
-         * Called upon a successful form validation.
-         *
-         * @param feedback the feedback object,
-         *                 which you can manipulate to interact with other remote feedback systems.
-         */
-        void onSendButtonClicked(@NonNull final Feedback feedback);
-
-    }
-
-    /**
-     * UI Listener for Maoni
-     */
-    public interface UiListener {
-
-        /**
-         * Called when starting the initialization of Maoni activity.
-         * <p>Can be used for example to perform some extra fields initialization.
-         *
-         * @param rootView           the root view of Maoni activity
-         * @param savedInstanceState the saved instance state
-         */
-        void onCreate(@NonNull final View rootView, @Nullable Bundle savedInstanceState);
-    }
-
-    /**
-     * Shortcut to Maoni interfaces
-     */
-    public interface Handler extends Validator, Listener, UiListener {
-    }
-
-    /**
      * Maoni Builder
      */
     public static class Builder {
 
+        @Nullable
+        private final String fileProviderAuthority;
         @StyleRes
         @Nullable
         public Integer theme;
-
+        @Nullable
+        private File maoniWorkingDir;
         @Nullable
         private CharSequence windowTitle;
-
         @Nullable
         private CharSequence windowSubTitle;
-
         @ColorRes
         @Nullable
         private Integer windowTitleTextColor;
-
         @ColorRes
         @Nullable
         private Integer windowSubTitleTextColor;
-
         @Nullable
         private CharSequence message;
-
         @Nullable
         private CharSequence contentErrorMessage;
-
         @Nullable
         private CharSequence feedbackContentHint;
-
         @Nullable
         private CharSequence screenshotHint;
-
         @DrawableRes
         @Nullable
         private Integer header;
-
         @Nullable
         private CharSequence includeScreenshotText;
-
         @Nullable
         private CharSequence touchToPreviewScreenshotText;
-
         @LayoutRes
         @Nullable
         private Integer extraLayout;
+
+        /**
+         * Constructor
+         *
+         * @param fileProviderAuthority the file provider authority.
+         *                              If {@literal null}, screenshot file sharing will not be available
+         */
+        public Builder(@Nullable final String fileProviderAuthority) {
+            this.fileProviderAuthority = fileProviderAuthority;
+        }
+
+        @Nullable
+        public File getMaoniWorkingDir() {
+            return maoniWorkingDir;
+        }
+
+        public Builder withMaoniWorkingDir(@Nullable File maoniWorkingDir) {
+            this.maoniWorkingDir = maoniWorkingDir;
+            return this;
+        }
 
         @Nullable
         public Integer getTheme() {
@@ -536,6 +491,8 @@ public class Maoni {
 
         public Maoni build() {
             return new Maoni(
+                    fileProviderAuthority,
+                    maoniWorkingDir,
                     windowTitle,
                     windowSubTitle,
                     windowTitleTextColor,
@@ -553,11 +510,12 @@ public class Maoni {
     }
 
     /**
-     * Maoni Configuration
+     * Callbacks Configuration for Maoni
      */
-    public static class Configuration {
+    public static class CallbacksConfiguration {
 
-        private static Configuration SINGLETON = null;
+        @Nullable
+        private static CallbacksConfiguration SINGLETON = null;
 
         @Nullable
         private Validator validator;
@@ -568,13 +526,13 @@ public class Maoni {
         @Nullable
         private UiListener uiListener;
 
-        private Configuration() {
+        private CallbacksConfiguration() {
         }
 
         @NonNull
-        public static Configuration getInstance() {
+        public static CallbacksConfiguration getInstance() {
             if (SINGLETON == null) {
-                SINGLETON = new Configuration();
+                SINGLETON = new CallbacksConfiguration();
             }
             return SINGLETON;
         }
@@ -584,7 +542,8 @@ public class Maoni {
             return validator;
         }
 
-        public Configuration setValidator(@Nullable Validator validator) {
+        @NonNull
+        public CallbacksConfiguration setValidator(@Nullable final Validator validator) {
             this.validator = validator;
             return this;
         }
@@ -594,7 +553,8 @@ public class Maoni {
             return listener;
         }
 
-        public Configuration setListener(@Nullable Listener listener) {
+        @NonNull
+        public CallbacksConfiguration setListener(@Nullable final Listener listener) {
             this.listener = listener;
             return this;
         }
@@ -604,9 +564,11 @@ public class Maoni {
             return uiListener;
         }
 
-        public Configuration setUiListener(@Nullable UiListener uiListener) {
+        @NonNull
+        public CallbacksConfiguration setUiListener(@Nullable final UiListener uiListener) {
             this.uiListener = uiListener;
             return this;
         }
     }
+
 }

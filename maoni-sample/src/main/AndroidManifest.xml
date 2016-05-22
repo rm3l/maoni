@@ -32,6 +32,17 @@ SOFTWARE.
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
+        <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="org.rm3l.maoni.sample.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
         <activity
             android:name=".ui.MaoniSampleMainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"

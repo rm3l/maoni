@@ -19,21 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.rm3l.maoni.model;
+package org.rm3l.maoni.common.model;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.net.wifi.SupplicantState;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * A Feedback object.
- * <p>
+ * <p/>
  * This is what is returned in the Maoni Activity callbacks,
  * which you can manipulate later on (e.g, by forwarding to a remote service).
  */
@@ -42,73 +40,77 @@ public class Feedback {
     /**
      * An internal identifier for the feedback collected (auto-generated)
      */
-    @NonNull
+
     public final CharSequence id;
 
     /**
      * Information about the user device
      */
-    @NonNull
+
     public final Device deviceInfo;
 
     /**
      * Information about your application
      */
-    @NonNull
+
     public final App appInfo;
 
     /**
      * The actual user comment
      */
-    @NonNull
+
     public final CharSequence userComment;
 
     /**
      * User choice: whether to take the screenshot into account or not.
-     * <p>
+     * <p/>
      * Note that if this is set to {@code false},
-     * the {@link #screenshotFilePath} (and {@code #screenshot}, subsequently)
+     * the {@link #screenshotFileUri} (and {@code #screenshotFile}, subsequently)
      * returned will be {@code null}
      */
     public final boolean includeScreenshot;
 
     /**
-     * The absolute path to the screenshot file.
-     * <p>
+     * The screenshot file URI.
+     * <p/>
      * It is set to {@code null} if {@link #includeScreenshot} is {@code null}.
      */
-    @Nullable
-    public final File screenshotFilePath;
+
+    public final Uri screenshotFileUri;
 
     /**
-     * The actual screenshot content
+     * The screenshot file object.
+     * <p/>
+     * It is set to {@code null} if {@link #includeScreenshot} is {@code null}.
      */
-    @Nullable
-    public final Bitmap screenshot;
+
+    public final File screenshotFile;
 
     /**
      * Generic metadata to attach to the feedback.
-     * <p>
+     * <p/>
      * This may be useful for storing information coming from your extra layout for example.
      */
-    @NonNull
+
     private final Map<CharSequence, Object> additionalData = new HashMap<>();
 
     /**
      * Construct an immutable feedback
-     * @param id the internal identifier
-     * @param deviceInfo the device information
-     * @param appInfo the application information
-     * @param userComment the user comment
+     *
+     * @param id                the internal identifier
+     * @param deviceInfo        the device information
+     * @param appInfo           the application information
+     * @param userComment       the user comment
      * @param includeScreenshot whether to include the screenshot into the feedback or not
-     * @param screenshotFilePath the absolute path to the screenshot file
+     * @param screenshotFileUri the screenshot file URI
      */
-    public Feedback(@NonNull CharSequence id,
-                    @NonNull Device deviceInfo,
-                    @NonNull App appInfo,
-                    @NonNull CharSequence userComment,
+    public Feedback(CharSequence id,
+                    Device deviceInfo,
+                    App appInfo,
+                    CharSequence userComment,
                     boolean includeScreenshot,
-                    @Nullable CharSequence screenshotFilePath) {
+                    Uri screenshotFileUri,
+                    File screenshotFile) {
 
         this.id = id;
         this.deviceInfo = deviceInfo;
@@ -116,53 +118,59 @@ public class Feedback {
         this.userComment = userComment;
         this.includeScreenshot = includeScreenshot;
         if (this.includeScreenshot) {
-            this.screenshotFilePath =
-                    (screenshotFilePath != null ? new File(screenshotFilePath.toString()) : null);
+            this.screenshotFile = screenshotFile;
+            this.screenshotFileUri = screenshotFileUri;
         } else {
-            this.screenshotFilePath = null;
-        }
-        if (this.screenshotFilePath != null) {
-            this.screenshot = BitmapFactory.decodeFile(this.screenshotFilePath.getAbsolutePath());
-        } else {
-            this.screenshot = null;
+            this.screenshotFileUri = null;
+            this.screenshotFile = null;
         }
     }
 
     /**
      * @return the feedback internal identifier
      */
-    @NonNull
+
     public CharSequence getId() {
         return id;
     }
 
     /**
      * Attach a new metadata to the feedback
-     * @param key the metadata key
+     *
+     * @param key   the metadata key
      * @param value the metadata value
      */
-    public void put(@NonNull final CharSequence key, @Nullable final Object value) {
+    public void put(final CharSequence key, final Object value) {
         this.additionalData.put(key, value);
     }
 
     /**
      * Get the metadata value
+     *
      * @param key the metadata key
      * @return the metadata value
      */
-    @Nullable
-    public Object get(@NonNull final CharSequence key) {
+
+    public Object get(final CharSequence key) {
         return this.additionalData.get(key);
     }
 
     /**
+     * @return an unmodifiable view of the additional map
+     */
+    public Map<CharSequence, Object> getAdditionalData() {
+        return Collections.unmodifiableMap(this.additionalData);
+    }
+
+    /**
      * Get the metadata value, or return the value specified if not found
-     * @param key the metadata key
+     *
+     * @param key          the metadata key
      * @param defaultValue the default value to return if the metadata was not found
      * @return the metadata value, or return the value specified if not found
      */
-    @Nullable
-    public Object get(@NonNull final CharSequence key, @Nullable final Object defaultValue) {
+
+    public Object get(final CharSequence key, final Object defaultValue) {
         if (!this.additionalData.containsKey(key)) {
             return defaultValue;
         }
@@ -177,19 +185,19 @@ public class Feedback {
         /**
          * The device model
          */
-        @Nullable
+
         public final CharSequence model;
 
         /**
          * The Android version
          */
-        @Nullable
+
         public final CharSequence androidVersion;
 
         /**
          * The Wifi state
          */
-        @Nullable
+
         public final SupplicantState wifiState;
 
         /**
@@ -205,7 +213,7 @@ public class Feedback {
         /**
          * The screen resolution
          */
-        @Nullable
+
         public final CharSequence screenResolution;
 
         /**
@@ -218,12 +226,12 @@ public class Feedback {
          * @param gpsEnabled        the GPS state
          * @param screenResolution  the device screen resolution
          */
-        public Device(@Nullable final CharSequence model,
-                      @Nullable final CharSequence androidVersion,
-                      @Nullable final SupplicantState wifiState,
+        public Device(final CharSequence model,
+                      final CharSequence androidVersion,
+                      final SupplicantState wifiState,
                       final boolean mobileDataEnabled,
                       final boolean gpsEnabled,
-                      @Nullable final CharSequence screenResolution) {
+                      final CharSequence screenResolution) {
             this.model = model;
             this.androidVersion = androidVersion;
             this.wifiState = wifiState;
@@ -242,7 +250,7 @@ public class Feedback {
         /**
          * The caller activity class name (the activity that called Maoni)
          */
-        @Nullable
+
         public final CharSequence caller;
 
         /**
@@ -253,7 +261,7 @@ public class Feedback {
         /**
          * The application ID
          */
-        @Nullable
+
         public final CharSequence applicationId;
 
         /**
@@ -264,19 +272,19 @@ public class Feedback {
         /**
          * The build flavor
          */
-        @Nullable
+
         public final CharSequence flavor;
 
         /**
          * The build type
          */
-        @Nullable
+
         public final CharSequence buildType;
 
         /**
          * The version name
          */
-        @Nullable
+
         public final CharSequence versionName;
 
         /**
@@ -290,13 +298,13 @@ public class Feedback {
          * @param buildType     the build type
          * @param versionName   the version name
          */
-        public App(@Nullable final CharSequence caller,
+        public App(final CharSequence caller,
                    final boolean debug,
-                   @Nullable final CharSequence applicationId,
+                   final CharSequence applicationId,
                    final int versionCode,
-                   @Nullable final CharSequence flavor,
-                   @Nullable final CharSequence buildType,
-                   @Nullable final CharSequence versionName) {
+                   final CharSequence flavor,
+                   final CharSequence buildType,
+                   final CharSequence versionName) {
             this.caller = caller;
             this.debug = debug;
             this.applicationId = applicationId;

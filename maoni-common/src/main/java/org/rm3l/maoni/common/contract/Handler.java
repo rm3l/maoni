@@ -19,5 +19,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.rm3l.maoni.common.contract;
 
-include ':maoni-sample', ':maoni', ':maoni-email', ':maoni-common'
+/**
+ * Shortcut to Maoni interfaces
+ */
+public interface Handler extends Validator, Listener, UiListener {
+}

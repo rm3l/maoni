@@ -19,5 +19,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.rm3l.maoni.common.contract;
 
-include ':maoni-sample', ':maoni', ':maoni-email', ':maoni-common'
+import android.view.View;
+
+import org.rm3l.maoni.common.model.Feedback;
+
+/**
+ * Form Validator for Maoni
+ */
+public interface Validator {
+
+    /**
+     * Check and validate user input.
+     * Note that the form validation is synchronous and executed in the UI main thread.
+     * As such, it should not be blocking.
+     *
+     * @param rootView the root view of Maoni activity
+     * @return the validation status. Returning {@code true} makes Maoni close
+     * and call your callback {@link Listener#onSendButtonClicked(Feedback)} method.
+     */
+    boolean validateForm(final View rootView);
+}

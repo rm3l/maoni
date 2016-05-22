@@ -34,10 +34,14 @@ import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import org.rm3l.maoni.Maoni;
+import org.rm3l.maoni.sample.BuildConfig;
 import org.rm3l.maoni.sample.R;
 import org.rm3l.maoni.sample.feedback.MyHandlerForMaoni;
 
 public class MaoniSampleMainActivity extends AppCompatActivity {
+
+    private static final String MY_FILE_PROVIDER_AUTHORITY =
+            (BuildConfig.APPLICATION_ID + ".fileprovider");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new Maoni.Builder()
+                    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
                             .withWindowTitle("Feedback") //Set to an empty string to clear it
                             .withMessage("Hey! Love or hate this app? We would love to hear from you.\n\n" +
                                     "Note: Almost everything in Maoni is customizable.")

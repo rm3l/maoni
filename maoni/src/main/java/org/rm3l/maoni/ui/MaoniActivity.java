@@ -32,6 +32,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -40,6 +41,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -58,9 +60,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.rm3l.maoni.BuildConfig;
-import org.rm3l.maoni.Maoni;
+import org.rm3l.maoni.Maoni.CallbacksConfiguration;
 import org.rm3l.maoni.R;
-import org.rm3l.maoni.model.Feedback;
+import org.rm3l.maoni.common.contract.Listener;
+import org.rm3l.maoni.common.contract.UiListener;
+import org.rm3l.maoni.common.contract.Validator;
+import org.rm3l.maoni.common.model.Feedback;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -71,6 +76,7 @@ import java.util.UUID;
  */
 public class MaoniActivity extends AppCompatActivity {
 
+    public static final String FILE_PROVIDER_AUTHORITY = "FILE_PROVIDER_AUTHORITY";
     public static final String THEME = "THEME";
     public static final String TOOLBAR_TITLE_TEXT_COLOR = "TOOLBAR_TITLE_TEXT_COLOR";
     public static final String TOOLBAR_SUBTITLE_TEXT_COLOR = "TOOLBAR_SUBTITLE_TEXT_COLOR";
@@ -111,8 +117,8 @@ public class MaoniActivity extends AppCompatActivity {
     private Feedback.App mAppInfo;
     private Feedback.Device mDeviceInfo;
 
-    private Maoni.Validator mValidator;
-    private Maoni.Listener mListener;
+    private Validator mValidator;
+    private Listener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,8 +158,7 @@ public class MaoniActivity extends AppCompatActivity {
             }
         }
 
-        final Maoni.Configuration maoniConfiguration = Maoni.Configuration.getInstance();
-
+        final CallbacksConfiguration maoniConfiguration = CallbacksConfiguration.getInstance();
 
         mListener = maoniConfiguration.getListener();
         mValidator = maoniConfiguration.getValidator();
@@ -340,7 +345,7 @@ public class MaoniActivity extends AppCompatActivity {
         setAppRelatedInfo();
         setPhoneRelatedInfo();
 
-        final Maoni.UiListener uiListener = maoniConfiguration.getUiListener();
+        final UiListener uiListener = maoniConfiguration.getUiListener();
         if (uiListener != null) {
             uiListener.onCreate(mRootView, savedInstanceState);
         }
@@ -476,10 +481,25 @@ public class MaoniActivity extends AppCompatActivity {
                 contentText = mContent.getText().toString();
             }
 
-            //Call actual implementation
+            final Intent intent = getIntent();
+
+            Uri screenshotUri = null;
+            File screenshotFile = null;
+            if (intent.hasExtra(FILE_PROVIDER_AUTHORITY)) {
+                final String fileProviderAuthority = intent.getStringExtra(FILE_PROVIDER_AUTHORITY);
+                if (mScreenshotFilePath != null) {
+                    screenshotFile = new File(mScreenshotFilePath.toString());
+                    screenshotUri = FileProvider
+                            .getUriForFile(this, fileProviderAuthority, screenshotFile);
+                    grantUriPermission(intent.getComponent().getPackageName(),
+                            screenshotUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                }
+            }
+
+            //Construct the feedback object and call the actual implementation
             final Feedback feedback =
                     new Feedback(mFeedbackUniqueId, mDeviceInfo, mAppInfo,
-                            contentText, includeScreenshot, mScreenshotFilePath);
+                            contentText, includeScreenshot, screenshotUri, screenshotFile);
             if (mListener != null) {
                 mListener.onSendButtonClicked(feedback);
             }

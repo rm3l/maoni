@@ -34,26 +34,64 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.rm3l.maoni.Maoni;
-import org.rm3l.maoni.model.Feedback;
+import org.rm3l.maoni.common.contract.Handler;
+import org.rm3l.maoni.common.model.Feedback;
+import org.rm3l.maoni.email.MaoniEmailListener;
+import org.rm3l.maoni.sample.BuildConfig;
 import org.rm3l.maoni.sample.R;
 
-public class MyHandlerForMaoni implements Maoni.Handler {
+/**
+ * {@link MaoniEmailListener} is a Maoni listener class allowing to send emails.
+ * It comes as an external contrib, which can be included to your {@literal build.gradle},
+ * as follows:
+ * <p/>
+ * <pre>
+ *     <code>
+ *         dependencies {
+ *             //...
+ *             compile 'org.rm3l:maoni-email:<versionToReplace>'
+ *         }
+ *     </code>
+ * </pre>
+ * <p/>
+ * Anyways, you are free to just implement {@link Handler} and provide your own implementation.
+ */
+public class MyHandlerForMaoni extends MaoniEmailListener implements Handler {
 
     public static final String EMAIL = "EMAIL";
-
+    private final Context mContext;
     private TextInputLayout mEmailInputLayout;
     private EditText mEmail;
-
     private EditText mExtraEditText;
     private RadioGroup mExtraRadioGroup;
-    
-    private Context mContext;
-    
+
     public MyHandlerForMaoni(Context context) {
+        this(context,
+                "text/html",
+                "Feedback for Maoni Sample App (" +
+                        BuildConfig.APPLICATION_ID + ":" +
+                        BuildConfig.VERSION_NAME + ")",
+                null,
+                null,
+                new String[]{"apps+maoni@rm3l.org"},
+                null,
+                new String[]{"apps+maoni_sample@rm3l.org"});
+    }
+
+    private MyHandlerForMaoni(Context context,
+                              String mimeType,
+                              String subject,
+                              String bodyHeader,
+                              String bodyFooter,
+                              String[] toAddresses,
+                              String[] ccAddresses,
+                              String[] bccAddresses) {
+        super(context,
+                mimeType, subject, bodyHeader, bodyFooter,
+                toAddresses, ccAddresses, bccAddresses);
         this.mContext = context;
     }
-    
+
     @Override
     public void onDismiss() {
         Toast.makeText(mContext, "Activity Dismissed", Toast.LENGTH_SHORT).show();
@@ -61,12 +99,12 @@ public class MyHandlerForMaoni implements Maoni.Handler {
 
     @Override
     public void onSendButtonClicked(@NonNull Feedback feedback) {
-        // Depending on your use case, you may add specific data i the feedback object returned,
+        // Depending on your use case, you may add specific data in the feedback object returned,
         // and manipulate it accordingly
         feedback.put(EMAIL, mEmail.getText());
         feedback.put("EXTRA_EDIT_TEXT", mExtraEditText.getText());
         feedback.put("EXTRA_RADIO_GROUP", mExtraRadioGroup.getCheckedRadioButtonId());
-        Toast.makeText(mContext, "'Send Feedback' Callback", Toast.LENGTH_SHORT).show();
+        super.onSendButtonClicked(feedback);
     }
 
     @Override
@@ -95,7 +133,7 @@ public class MyHandlerForMaoni implements Maoni.Handler {
         mExtraEditText = (EditText) rootView.findViewById(R.id.extra_edittext);
         mExtraRadioGroup = (RadioGroup) rootView.findViewById(R.id.extra_radiogroup);
 
-        //You may prefill some fields accordingly, before they are displayed to the user
+        //You may pre-fill some fields accordingly, before they are displayed to the user
         mEmail.setText("a@b.cd", TextView.BufferType.EDITABLE);
     }
 }

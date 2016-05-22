@@ -19,5 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.rm3l.maoni.common.contract;
 
-include ':maoni-sample', ':maoni', ':maoni-email', ':maoni-common'
+import org.rm3l.maoni.common.model.Feedback;
+
+/**
+ * Listener for Maoni. Also referred to as Maoni Callback.
+ * <p/>
+ * Note that all the methods here are called in the UI thread and in a synchronous manner.
+ */
+public interface Listener {
+
+    /**
+     * Called when the user has dismissed the Maoni feedback form,
+     * without having touched the "Send Feedback" button
+     */
+    void onDismiss();
+
+    /**
+     * Called upon a successful form validation.
+     *
+     * @param feedback the feedback object,
+     *                 which you can manipulate to interact with other remote feedback systems.
+     */
+    void onSendButtonClicked(final Feedback feedback);
+
+}
