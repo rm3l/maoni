@@ -205,6 +205,26 @@ to be able to reproduce the issue.
 You can also use the [sample app](https://play.google.com/store/apps/details?id=org.rm3l.maoni) 
 to send your feedback with Maoni. ;-)
 
+### Contributing callbacks for Maoni
+
+You can create separate Java projects that implements any of the Maoni callbacks interfaces 
+(`Validator`, `Listener`, `UiListener`, `Handler` or any combination), 
+so users can use them in their projects.
+
+You just have to include `maoni-common` as a dependency in your project, e.g., with Gradle:
+
+```gradle
+  dependencies {
+    // ...
+    compile 'org.rm3l:maoni-common:1.2.0'
+  }
+```
+
+<!--
+### Translations
+TODO
+-->
+
 
 ## In use in the following apps
 
