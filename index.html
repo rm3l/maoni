@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Maoni by rm3l</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Maoni</h1>
+      <h2 class="project-tagline">Maoni is a lightweight library for integrating a way to collect user feedbacks from within Android applications</h2>
+      <a href="https://github.com/rm3l/maoni" class="btn">View on GitHub</a>
+      <a href="https://github.com/rm3l/maoni/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/rm3l/maoni/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="maoni-" class="anchor" href="#maoni-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Maoni <a href="https://travis-ci.org/rm3l/maoni"><img src="https://travis-ci.org/rm3l/maoni.svg?branch=master" alt="Build Status"></a>
+</h1>
+
+<p><strong>Maoni</strong> is a lightweight open-source library for integrating 
+a way to collect user feedbacks from within Android applications.</p>
+
+<p>Built from the ground up with the <a href="https://www.google.com/design/spec/material-design">Material Design</a> 
+principles in mind, it allows to capture a screenshot of the activity the user is currently viewing 
+and attach it to the feedback.</p>
+
+<p>Just provide callbacks implementations and you're good to go. 
+Maoni will take care of collecting your users' feedbacks and call those implementations.</p>
+
+<p>Below is a quick overview of the features included:</p>
+
+<ul>
+<li>
+<strong>Contextual information</strong>. Device and application information, if available.
+
+<ul>
+<li>Device screen resolution, mobile data and GPS states, ...</li>
+</ul>
+</li>
+<li>
+<strong>Screenshot capture</strong>. 
+
+<ul>
+<li>Because receiving a feedback with contextual information is much much 
+better for analysis, Maoni allows to take a screenshot of the calling activity. 
+Of course, users always are free to include or not this screenshot in their feedback.</li>
+<li>Touch to preview screenshot</li>
+</ul>
+</li>
+<li>
+<strong>Customization</strong>.
+
+<ul>
+<li>Besides the default form fields, you are free to include an extra layout 
+with additional views. And you always have access to the underlying view elements.</li>
+<li>Theme elements and styles can be adjusted.</li>
+</ul>
+</li>
+<li>
+<strong>Callbacks</strong>.
+
+<ul>
+<li>Form validation. You can provide your own if needed for example for your extra fields.</li>
+<li>Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier.
+So you just have limitless possibilities for an integration with any other systems.</li>
+</ul>
+</li>
+</ul>
+
+<p>Take a look at the <a href="https://play.google.com/store/apps/details?id=org.rm3l.maoni">sample application</a> 
+for a quick overview.</p>
+
+<h2>
+<a id="motivations" class="anchor" href="#motivations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivations</h2>
+
+<p>While working on a new version of <a href="https://play.google.com/store/apps/details?id=org.rm3l.ddwrt">DD-WRT Companion</a>, 
+one my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
+along with some contextual information.
+I experimented with a simple dialog, then tried a bunch of other libraries, 
+but could not find one with screenshot capturing capabilities, not vendor lock-in, 
+and which is almost a no-brainer as to integrating with any remote services.</p>
+
+<p>So as a way to give back to the Open Source community, 
+I decided to create Maoni as a separate library project.</p>
+
+<p>As a side note, Maoni is a Swahili word for comments or opinions.</p>
+
+<h2>
+<a id="sample-app" class="anchor" href="#sample-app" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sample App</h2>
+
+<p><a href="https://play.google.com/store/apps/details?id=org.rm3l.maoni">
+  <img alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png">
+</a></p>
+
+<h2>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h2>
+
+<div align="center">
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/1_Maoni_main_activity.png">
+    <img height="0" width="8px">
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/2_Maoni_main_activity_with_screenshot_thumbnail.png">
+    <img height="0" width="8px">
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview.png">
+</div>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting started</h2>
+
+<p>Grab via Gradle, by adding this to your <code>build.gradle</code>:</p>
+
+<div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
+    <span class="pl-c">// ...</span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni:1.2.0@aar<span class="pl-pds">'</span></span>
+  }</pre></div>
+
+<h3>
+<a id="putting-it-together" class="anchor" href="#putting-it-together" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Putting it together</h3>
+
+<p>Integrating with Maoni is intended to be seamless and straightforward for most existing 
+Android applications.</p>
+
+<p>Just leverage the fluent Maoni Builder to construct and start an Maoni instance at the right place 
+within your application workflow (for example a button click listener, or a touch of a menu item).</p>
+
+<p>For example, to start with just the defaults:</p>
+
+<div class="highlight highlight-source-java"><pre>    <span class="pl-c">// MyHandlerForMaoni is a custom implementation of Handler, </span>
+    <span class="pl-c">// which is a shortcut interface for defining both a validator and listeners for Maoni</span>
+    <span class="pl-k">final</span> <span class="pl-smi">MyHandlerForMaoni</span> handlerForMaoni <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MyHandlerForMaoni</span>(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>);
+
+    <span class="pl-c">//The optional file provider authority allows you to </span>
+    <span class="pl-c">//share the screenshot capture file to other apps (depending on your callback implementation)</span>
+    <span class="pl-k">new</span> <span class="pl-smi">Maoni</span>.<span class="pl-smi">Builder</span>(<span class="pl-c1">MY_FILE_PROVIDER_AUTHORITY</span>)
+        .withHandler(myHandlerForMaoniInstance) <span class="pl-c">//Custom Callback for Maoni</span>
+        .build()
+        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling context </span></pre></div>
+
+<p>To customize every aspect of your Maoni activity, call the fluent methods of <code>Maoni.Builder</code>, e.g.:</p>
+
+<div class="highlight highlight-source-java"><pre>    <span class="pl-c">// MyHandlerForMaoni is a custom implementation of Maoni.Handler, </span>
+    <span class="pl-c">// which is a shortcut interface for defining both a validator and listeners for Maoni</span>
+    <span class="pl-k">final</span> <span class="pl-smi">MyHandlerForMaoni</span> handlerForMaoni <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MyHandlerForMaoni</span>(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>);
+
+    <span class="pl-c">//The optional file provider authority allows you to </span>
+    <span class="pl-c">//share the screenshot capture file to other apps (depending on your callback implementation)</span>
+    <span class="pl-k">new</span> <span class="pl-smi">Maoni</span>.<span class="pl-smi">Builder</span>(<span class="pl-c1">MY_FILE_PROVIDER_AUTHORITY</span>)
+        .withWindowTitle(<span class="pl-s"><span class="pl-pds">"</span>Send Feedback<span class="pl-pds">"</span></span>) <span class="pl-c">//Set to an empty string to clear it</span>
+        .withMessage(<span class="pl-s"><span class="pl-pds">"</span>Hey! Love or hate this app? We would love to hear from you.<span class="pl-pds">"</span></span>)
+        .withExtraLayout(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>my_feedback_activity_extra_content)
+        .withHandler(myHandlerForMaoniInstance) <span class="pl-c">//Custom Callback for Maoni</span>
+        .withFeedbackContentHint(<span class="pl-s"><span class="pl-pds">"</span>[Custom hint] Write your feedback here<span class="pl-pds">"</span></span>)
+        .withIncludeScreenshotText(<span class="pl-s"><span class="pl-pds">"</span>[Custom text] Include screenshot<span class="pl-pds">"</span></span>)
+        .withTouchToPreviewScreenshotText(<span class="pl-s"><span class="pl-pds">"</span>Touch To Preview<span class="pl-pds">"</span></span>)
+        .withContentErrorMessage(<span class="pl-s"><span class="pl-pds">"</span>Custom error message<span class="pl-pds">"</span></span>)
+        .withScreenshotHint(<span class="pl-s"><span class="pl-pds">"</span>Custom test: Lorem Ipsum Dolor Sit Amet...<span class="pl-pds">"</span></span>)
+        <span class="pl-c">//... there are other aspects you can customize</span>
+        .build()
+        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling context </span></pre></div>
+
+<p><strong>You're good to go!</strong> Maoni will take care of validating / collecting your users' feedbacks 
+and call your callbacks implementations. </p>
+
+<h4>
+<a id="available-callbacks" class="anchor" href="#available-callbacks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Available callbacks</h4>
+
+<p>Some common callbacks for Maoni are available as external dependencies to include in your application.</p>
+
+<h5>
+<a id="maoni-email" class="anchor" href="#maoni-email" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>maoni-email</h5>
+
+<p>This callback opens up an Intent for sending an email with the feedback collected.</p>
+
+<p>Add this additional line to your <code>build.gradle</code>:</p>
+
+<div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
+    <span class="pl-c">// ...</span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni-email:1.2.0<span class="pl-pds">'</span></span>
+  }</pre></div>
+
+<p>And set it as the listener for your Maoni instance:</p>
+
+<div class="highlight highlight-source-java"><pre>    <span class="pl-k">final</span> <span class="pl-smi">org.rm3l.maoni.email<span class="pl-k">.</span>MaoniEmailListener</span> listenerForMaoni <span class="pl-k">=</span> 
+            <span class="pl-k">new</span> <span class="pl-smi">org.rm3l.maoni.email<span class="pl-k">.</span>MaoniEmailListener</span>(<span class="pl-c1">...</span>);
+
+    <span class="pl-k">new</span> <span class="pl-smi">Maoni</span>.<span class="pl-smi">Builder</span>(<span class="pl-c1">MY_FILE_PROVIDER_AUTHORITY</span>)
+        .withListener(listenerForMaoni) <span class="pl-c">//Callback from maoni-email</span>
+        <span class="pl-c">//...</span>
+        .build()
+        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling context </span></pre></div>
+
+<h4>
+<a id="sharing-the-screenshot-with-other-apps" class="anchor" href="#sharing-the-screenshot-with-other-apps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sharing the screenshot with other apps</h4>
+
+<p>The optional file provider authority specified in the <code>Maoni.Builder</code> constructor allows you to 
+share the screenshot capture file to other apps (depending on your callback implementation).
+By default, Maoni stores the screenshot file in your application cache directory, 
+but this is (again) entirely customizable.</p>
+
+<p>You must declare a file content provider in your <code>AndroidManifest.xml</code> file with an explicit list 
+of sharable directories for other apps to be able to read the screenshot file. 
+For example:</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">application</span>&gt;
+    <span class="pl-c">&lt;!-- ... --&gt;</span>
+    <span class="pl-c">&lt;!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni --&gt;</span>
+    &lt;<span class="pl-ent">provider</span>
+        <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>android.support.v4.content.FileProvider<span class="pl-pds">"</span></span>
+        <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">authorities</span>=<span class="pl-s"><span class="pl-pds">"</span>org.rm3l.maoni.sample.fileprovider<span class="pl-pds">"</span></span>
+        <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">grantUriPermissions</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span>
+        <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">exported</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">meta-data</span>
+            <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>android.support.FILE_PROVIDER_PATHS<span class="pl-pds">"</span></span>
+            <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">resource</span>=<span class="pl-s"><span class="pl-pds">"</span>@xml/filepaths<span class="pl-pds">"</span></span> /&gt;
+    &lt;/<span class="pl-ent">provider</span>&gt;
+&lt;/<span class="pl-ent">application</span>&gt;</pre></div>
+
+<p>Along with the XML file that specifies the sharable directories (under <code>res/xml/filepaths.xml</code> as specified above):</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">paths</span>&gt;
+    <span class="pl-c">&lt;!-- By default, Maoni stores screenshots captures in the application cache directory. </span>
+<span class="pl-c">    So you must declare the path '.' as shareable. Specify something else if you are using a different path --&gt;</span>
+    &lt;<span class="pl-ent">cache-path</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>maoni-shares<span class="pl-pds">"</span></span> <span class="pl-e">path</span>=<span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span> /&gt;
+    <span class="pl-c">&lt;!-- &lt;files-path path="maoni-working-dir/" name="myCustomWorkingDirForMaoni" /&gt; --&gt;</span>
+&lt;/<span class="pl-ent">paths</span>&gt;</pre></div>
+
+<p>See <a href="https://goo.gl/31nStZ">https://goo.gl/31nStZ</a> for further instructions on how to setup file sharing.</p>
+
+<h2>
+<a id="contribute-and-improve-maoni" class="anchor" href="#contribute-and-improve-maoni" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contribute and Improve Maoni!</h2>
+
+<p>Contributions and issue reporting are more than welcome. 
+So to help out, do feel free to fork this repo and open up a pull request. 
+I'll review and merge as quickly as possible.</p>
+
+<p>You can use <a href="https://github.com/rm3l/maoni/issues">GitHub issues</a> to report bugs. 
+However, please make sure your description is clear enough and has sufficient instructions 
+to be able to reproduce the issue.</p>
+
+<p>You can also use the <a href="https://play.google.com/store/apps/details?id=org.rm3l.maoni">sample app</a> 
+to send your feedback with Maoni. ;-)</p>
+
+<h3>
+<a id="contributing-callbacks-for-maoni" class="anchor" href="#contributing-callbacks-for-maoni" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing callbacks for Maoni</h3>
+
+<p>You can create separate Java projects that implements any of the Maoni callbacks interfaces 
+(<code>Validator</code>, <code>Listener</code>, <code>UiListener</code>, <code>Handler</code> or any combination), 
+so users can use them in their projects.</p>
+
+<p>You just have to include <code>maoni-common</code> as a dependency in your project, e.g., with Gradle:</p>
+
+<div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
+    <span class="pl-c">// ...</span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni-common:1.2.0<span class="pl-pds">'</span></span>
+  }</pre></div>
+
+
+
+<h2>
+<a id="in-use-in-the-following-apps" class="anchor" href="#in-use-in-the-following-apps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>In use in the following apps</h2>
+
+<p>(If you use this library, please drop me a line at &lt;<a href="mailto:apps+maoni@rm3l.org">apps+maoni@rm3l.org</a>&gt; 
+(or again, fork, modify this file and submit a pull request), so I can list your app(s) here)</p>
+
+<ul>
+<li>
+<a href="https://play.google.com/store/apps/details?id=org.rm3l.ddwrt">DD-WRT Companion</a> (integration is rolling out to App marketplaces)</li>
+</ul>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>Armel Soro
+
+<ul>
+<li>
+<a href="https://rm3l.org">rm3l.org</a> - &lt;<a href="mailto:apps+maoni@rm3l.org">apps+maoni@rm3l.org</a>&gt;</li>
+<li><a href="https://paypal.me/rm3l">paypal.me/rm3l</a></li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<pre><code>The MIT License (MIT)
+
+Copyright (c) 2016 Armel Soro
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</code></pre>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/rm3l/maoni">Maoni</a> is maintained by <a href="https://github.com/rm3l">rm3l</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
