@@ -24,15 +24,17 @@ SOFTWARE.
 <resources>
   <string name="app_name">Bibliothèque Maoni</string>
   <string name="maoni_screenshot">Capture d\'écran</string>
-  <string name="maoni_feedback_message">Hey! Love or hate this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
-  <string name="maoni_feedback_content_hint">Write your feedback here</string>
-  <string name="maoni_feedback_include_screenshot_checkbox_title">Include screenshot</string>
-  <string name="maoni_touch_to_preview">Touch to preview</string>
-  <string name="maoni_screenshot_informational_text">The screenshot allows us to have more contextual information about your feedback.</string>
-  <string name="send_feedback">Send Feedback</string>
-  <string name="action_settings">Settings</string>
-  <string name="maoni_validate_must_not_be_blank">Must not be blank</string>
-  <string name="maoni_header">Header</string>
-  <string name="maoni_screenshot_preview_internal_error">Internal Error. Please try again later.</string>
-  <string name="maoni_screenshot_preview">Preview</string>
+  <string name="maoni_feedback_message">Bonjour!\n
+Aimez-vous cette application? Souhaitez-vous suggérer de nouvelles fonctionnalités, signaler des dysfonctionnements ou simplement nous dire bonjour?\n
+Hâte de vous lire.</string>
+  <string name="maoni_feedback_content_hint">Ecrivez votre message ici</string>
+  <string name="maoni_feedback_include_screenshot_checkbox_title">Joindre la capture d\'écran au rapport</string>
+  <string name="maoni_touch_to_preview">Touchez pour aperçu</string>
+  <string name="maoni_screenshot_informational_text">La capture d\'écran nous permet d\'avoir plus d\'éléments contextuels relatifs à votre commentaire.</string>
+  <string name="send_feedback">Envoyer un commentaire</string>
+  <string name="action_settings">Paramètres</string>
+  <string name="maoni_validate_must_not_be_blank">Doit être renseigné</string>
+  <string name="maoni_header">En-tête</string>
+  <string name="maoni_screenshot_preview_internal_error">Erreur interne. Merci de réessayer ultérieurement.</string>
+  <string name="maoni_screenshot_preview">Aperçu</string>
 </resources>
