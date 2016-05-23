@@ -21,21 +21,21 @@ SOFTWARE.
 -->
 
 <resources>
-    <string name="define_leakcanary"></string>
+    <string name="define_leakcanary" translatable="false" />
     <!-- Author section -->
-    <string name="library_leakcanary_author">Square</string>
-    <string name="library_leakcanary_authorWebsite">http://square.github.io</string>
+    <string name="library_leakcanary_author" translatable="false">Square</string>
+    <string name="library_leakcanary_authorWebsite" translatable="false">http://square.github.io</string>
     <!-- Library section -->
-    <string name="library_leakcanary_libraryName">LeakCanary</string>
-    <string name="library_leakcanary_libraryDescription">A memory leak detection library for Android and Java.</string>
-    <string name="library_leakcanary_libraryWebsite">https://github.com/square/leakcanary</string>
-    <string name="library_leakcanary_libraryVersion">1.4-beta2</string>
+    <string name="library_leakcanary_libraryName" translatable="false">LeakCanary</string>
+    <string name="library_leakcanary_libraryDescription" translatable="false">A memory leak detection library for Android and Java.</string>
+    <string name="library_leakcanary_libraryWebsite" translatable="false">https://github.com/square/leakcanary</string>
+    <string name="library_leakcanary_libraryVersion" translatable="false">1.4-beta2</string>
     <!-- OpenSource section -->
-    <string name="library_leakcanary_isOpenSource">true</string>
-    <string name="library_leakcanary_repositoryLink">https://github.com/square/leakcanary</string>
+    <string name="library_leakcanary_isOpenSource" translatable="false">true</string>
+    <string name="library_leakcanary_repositoryLink" translatable="false">https://github.com/square/leakcanary</string>
     <!-- ClassPath for autoDetect section -->
-    <!--<string name="library_leakcanary_classPath">com.facebook.leakcanary</string>-->
+    <!--<string translatable="false" name="library_leakcanary_classPath">com.facebook.leakcanary</string>-->
     <!-- License section -->
-    <string name="library_leakcanary_licenseId">apache_2_0</string>
+    <string name="library_leakcanary_licenseId" translatable="false">apache_2_0</string>
     <!-- Custom variables section -->
 </resources>

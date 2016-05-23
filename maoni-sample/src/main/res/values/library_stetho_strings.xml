@@ -21,25 +21,25 @@ SOFTWARE.
 -->
 
 <resources>
-    <string name="define_stetho"></string>
+    <string name="define_stetho" translatable="false" />
     <!-- Author section -->
-    <string name="library_stetho_author">Facebook</string>
-    <string name="library_stetho_authorWebsite">facebook.github.io/stetho</string>
+    <string name="library_stetho_author" translatable="false">Facebook</string>
+    <string name="library_stetho_authorWebsite" translatable="false">facebook.github.io/stetho</string>
     <!-- Library section -->
-    <string name="library_stetho_libraryName">Stetho</string>
-    <string name="library_stetho_libraryDescription">A debug bridge for Android applications.</string>
-    <string name="library_stetho_libraryWebsite">http://facebook.github.io/stetho</string>
-    <string name="library_stetho_libraryVersion">1.3.1</string>
+    <string name="library_stetho_libraryName" translatable="false">Stetho</string>
+    <string name="library_stetho_libraryDescription" translatable="false">A debug bridge for Android applications.</string>
+    <string name="library_stetho_libraryWebsite" translatable="false">http://facebook.github.io/stetho</string>
+    <string name="library_stetho_libraryVersion" translatable="false">1.3.1</string>
     <!-- OpenSource section -->
-    <string name="library_stetho_isOpenSource">true</string>
-    <string name="library_stetho_repositoryLink">https://github.com/facebook/stetho</string>
+    <string name="library_stetho_isOpenSource" translatable="false">true</string>
+    <string name="library_stetho_repositoryLink" translatable="false">https://github.com/facebook/stetho</string>
     <!-- ClassPath for autoDetect section -->
-    <!--<string name="library_stetho_classPath">com.facebook.stetho</string>-->
+    <!--<string translatable="false" name="library_stetho_classPath">com.facebook.stetho</string>-->
     <!-- License section -->
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_leakcanary_licenseVersion"></string>
-    <string name="library_leakcanary_licenseLink">https://github.com/facebook/stetho/blob/master/LICENSE</string>
-	<string name="library_leakcanary_licenseContent"><![CDATA[
+    <string name="library_leakcanary_licenseVersion" translatable="false" />
+    <string name="library_leakcanary_licenseLink" translatable="false">https://github.com/facebook/stetho/blob/master/LICENSE</string>
+	<string name="library_leakcanary_licenseContent" translatable="false"><![CDATA[
     BSD License
 
 For Stetho software

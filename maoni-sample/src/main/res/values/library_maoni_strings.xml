@@ -21,21 +21,21 @@ SOFTWARE.
 -->
 
 <resources>
-    <string name="define_maoni"></string>
+    <string name="define_maoni" translatable="false" />
     <!-- Author section -->
-    <string name="library_maoni_author">Armel Soro</string>
-    <string name="library_maoni_authorWebsite">https://www.rm3l.org</string>
+    <string name="library_maoni_author" translatable="false">Armel Soro</string>
+    <string name="library_maoni_authorWebsite" translatable="false">https://www.rm3l.org</string>
     <!-- Library section -->
-    <string name="library_maoni_libraryName">Maoni</string>
-    <string name="library_maoni_libraryDescription">Maoni is a lightweight library for integrating a way to collect user feedbacks from within Android applications</string>
-    <string name="library_maoni_libraryWebsite">https://github.com/rm3l/maoni</string>
-    <string name="library_maoni_libraryVersion">1.2.0</string>
+    <string name="library_maoni_libraryName" translatable="false">Maoni</string>
+    <string name="library_maoni_libraryDescription" translatable="false">Maoni is a lightweight library for integrating a way to collect user feedbacks from within Android applications</string>
+    <string name="library_maoni_libraryWebsite" translatable="false">https://github.com/rm3l/maoni</string>
+    <string name="library_maoni_libraryVersion" translatable="false">1.2.0</string>
     <!-- OpenSource section -->
-    <string name="library_maoni_isOpenSource">true</string>
-    <string name="library_maoni_repositoryLink">https://github.com/rm3l/maoni</string>
+    <string name="library_maoni_isOpenSource" translatable="false">true</string>
+    <string name="library_maoni_repositoryLink" translatable="false">https://github.com/rm3l/maoni</string>
     <!-- ClassPath for autoDetect section -->
-    <!--<string name="library_maoni_classPath">com.facebook.maoni</string>-->
+    <!--<string translatable="false" name="library_maoni_classPath">com.facebook.maoni</string>-->
     <!-- License section -->
-    <string name="library_maoni_licenseId">mit</string>
+    <string name="library_maoni_licenseId" translatable="false">mit</string>
     <!-- Custom variables section -->
 </resources>

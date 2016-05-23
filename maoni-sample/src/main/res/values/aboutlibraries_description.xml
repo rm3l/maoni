@@ -20,24 +20,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-    <string name="aboutLibraries_description_showIcon">true</string>
-    <string name="aboutLibraries_description_showVersion">true</string>
-    <string name="aboutLibraries_description_text"><![CDATA[
+    <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
+    <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+    <string name="aboutLibraries_description_text" translatable="false"><![CDATA[
     Copyright © 2016 Armel Soro.<br/>
     ]]></string>
-    <string name="aboutLibraries_description_name">Maoni Sample</string>
+    <string name="aboutLibraries_description_name" translatable="false">Maoni Sample</string>
 
     <!-- Just remove those entries if you don't want to use a special button with a text within your about this app view :D -->
-    <!--<string name="aboutLibraries_description_special1_name">EULA</string>-->
-    <!--<string name="aboutLibraries_description_special1_text">-->
+    <!--<string translatable="false" name="aboutLibraries_description_special1_name">EULA</string>-->
+    <!--<string translatable="false" name="aboutLibraries_description_special1_text">-->
         <!--<![CDATA[This is a small sample which can be set in the about my app description file.<br /><br /><b>You can style this with html markup :D</b>]]>-->
     <!--</string>-->
-    <!--<string name="aboutLibraries_description_special2_name">AGB</string>-->
-    <!--<string name="aboutLibraries_description_special2_text">-->
+    <!--<string translatable="false" name="aboutLibraries_description_special2_name">AGB</string>-->
+    <!--<string translatable="false" name="aboutLibraries_description_special2_text">-->
         <!--<![CDATA[This is a small <i>sample</i> which can be set in the about my app description file.<br /><br /><b>You can style this with html markup :D</b>]]>-->
     <!--</string>-->
-    <!--<string name="aboutLibraries_description_special3_name">Changelog</string>-->
-    <!--<string name="aboutLibraries_description_special3_text">-->
+    <!--<string translatable="false" name="aboutLibraries_description_special3_name">Changelog</string>-->
+    <!--<string translatable="false" name="aboutLibraries_description_special3_text">-->
         <!--<![CDATA[-->
         <!--<i>Version 1.1.0</i><br />-->
         <!-- - Something nice ;)<br />-->
