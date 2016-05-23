@@ -36,6 +36,9 @@ SOFTWARE.
     <color name="maoni_white">#FFFFFF</color>
     <color name="maoni_black">#000000</color>
 
+    <color name="maoni_windowBackgroundDark">#37474F</color>
+    <color name="maoni_windowBackgroundLight">@color/maoni_white</color>
+
     <color name="maoni_normal_opaque_black">#000000</color>
     <color name="maoni_transparent_full">#00000000</color>
     <color name="maoni_opaque_full">#FF000000</color>

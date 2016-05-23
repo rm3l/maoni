@@ -31,13 +31,17 @@ SOFTWARE.
     </style>
 
     <style name="Maoni_AppTheme_Light" parent="Maoni_AppTheme_Base">
+        <item name="android:textColor">@color/maoni_black</item>
         <item name="android:textColorPrimary">@color/maoni_black</item>
-        <item name="android:windowBackground">@color/maoni_white</item>
+        <item name="android:windowBackground">@color/maoni_windowBackgroundLight</item>
+        <item name="android:colorBackground">@color/maoni_windowBackgroundLight</item>
     </style>
 
     <style name="Maoni_AppTheme_Dark" parent="Maoni_AppTheme_Base">
+        <item name="android:textColor">@color/maoni_white</item>
         <item name="android:textColorPrimary">@color/maoni_white</item>
-        <item name="android:windowBackground">@color/maoni_black</item>
+        <item name="android:windowBackground">@color/maoni_windowBackgroundDark</item>
+        <item name="android:colorBackground">@color/maoni_windowBackgroundDark</item>
     </style>
 
     <!-- Toolbar title style -->
