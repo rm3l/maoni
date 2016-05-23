@@ -215,8 +215,11 @@ public class MaoniActivity extends AppCompatActivity {
         mContentInputLayout = (TextInputLayout) findViewById(R.id.maoni_content_input_layout);
         mContent = (EditText) findViewById(R.id.maoni_content);
 
-        if (mContent != null && intent.hasExtra(CONTENT_HINT)) {
-            mContent.setHint(intent.getCharSequenceExtra(CONTENT_HINT));
+        if (intent.hasExtra(CONTENT_HINT)) {
+            final CharSequence contentHint = intent.getCharSequenceExtra(CONTENT_HINT);
+            if (mContentInputLayout != null) {
+                mContentInputLayout.setHint(contentHint);
+            }
         }
 
         if (intent.hasExtra(CONTENT_ERROR_TEXT)) {

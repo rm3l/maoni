@@ -48,13 +48,13 @@ SOFTWARE.
             android:id="@+id/maoni_content_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/maoni_activity_vertical_margin">
+            android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
+            android:hint="@string/maoni_feedback_content_hint">
 
             <EditText
                 android:id="@+id/maoni_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/maoni_feedback_content_hint"
                 android:inputType="textCapSentences|textMultiLine"
                 android:isScrollContainer="true"
                 android:minLines="5" />
