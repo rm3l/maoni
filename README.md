@@ -16,7 +16,7 @@ Below is a quick overview of the features included:
 - **Screenshot capture**. 
     - Because receiving a feedback with contextual information is much much 
     better for analysis, Maoni allows to take a screenshot of the calling activity. 
-    Of course, users always are free to include or not this screenshot in their feedback.
+    Note that the inclusion of such screenshot in the feedback object is opt-out, at the user's discretion.
     - Touch to preview screenshot
 - **Customization**.
     - Besides the default form fields, you are free to include an extra layout 
