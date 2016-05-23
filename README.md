@@ -1,4 +1,5 @@
-# Maoni [![Build Status](https://travis-ci.org/rm3l/maoni.svg?branch=master)](https://travis-ci.org/rm3l/maoni)
+# Maoni [![Build Status](https://travis-ci.org/rm3l/maoni.svg?branch=master)](https://travis-ci.org/rm3l/maoni) 
+[![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni?branch=master)
 
 **Maoni** is a lightweight open-source library for integrating 
 a way to collect user feedbacks from within Android applications.
