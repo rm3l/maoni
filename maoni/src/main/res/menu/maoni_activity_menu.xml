@@ -29,7 +29,7 @@ SOFTWARE.
         android:alphabeticShortcut="s"
         android:icon="@drawable/ic_send_white_24dp"
         android:orderInCategory="1"
-        android:title="@string/send_feedback"
+        android:title="@string/maoni_send_feedback"
         app:showAsAction="always"/>
 
 </menu>

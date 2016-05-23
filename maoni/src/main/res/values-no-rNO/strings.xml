@@ -22,15 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="app_name">Maoni Library</string>
+  <string name="maoni_app_name">Maoni Library</string>
   <string name="maoni_screenshot">Screenshot</string>
   <string name="maoni_feedback_message">Hey! Love or hate this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
   <string name="maoni_feedback_content_hint">Write your feedback here</string>
   <string name="maoni_feedback_include_screenshot_checkbox_title">Include screenshot</string>
   <string name="maoni_touch_to_preview">Touch to preview</string>
   <string name="maoni_screenshot_informational_text">The screenshot allows us to have more contextual information about your feedback.</string>
-  <string name="send_feedback">Send Feedback</string>
-  <string name="action_settings">Settings</string>
+  <string name="maoni_send_feedback">Send Feedback</string>
+  <string name="maoni_action_settings">Settings</string>
   <string name="maoni_validate_must_not_be_blank">Must not be blank</string>
   <string name="maoni_header">Header</string>
   <string name="maoni_screenshot_preview_internal_error">Internal Error. Please try again later.</string>

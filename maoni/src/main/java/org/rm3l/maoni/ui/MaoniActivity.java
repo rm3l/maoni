@@ -173,7 +173,7 @@ public class MaoniActivity extends AppCompatActivity {
         if (toolbar != null) {
             toolbar.setTitle(intent.hasExtra(WINDOW_TITLE) ?
                     intent.getCharSequenceExtra(WINDOW_TITLE) :
-                    getString(R.string.send_feedback));
+                    getString(R.string.maoni_send_feedback));
             if (intent.hasExtra(WINDOW_SUBTITLE)) {
                 toolbar.setSubtitle(intent.getCharSequenceExtra(WINDOW_SUBTITLE));
             }

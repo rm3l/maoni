@@ -49,7 +49,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maoni_sample_main);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
-            toolbar.setTitle(R.string.app_name);
+            toolbar.setTitle(R.string.maoni_app_name);
             setSupportActionBar(toolbar);
         }
 

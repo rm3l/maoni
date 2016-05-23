@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="app_name">Maoni Demo</string>
+  <string name="maoni_app_name">Maoni Demo</string>
   <string name="feedback">Commentaire</string>
   <string name="title_activity_maoni_sample_main">Maoni Demo</string>
   <string name="main_activity_text"><![CDATA[
