@@ -72,7 +72,9 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni:1.2.0@aar'
+    compile ('org.rm3l:maoni:1.2.0@aar') {
+        transitive = true;
+    }
   }
 ```
 
