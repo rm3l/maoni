@@ -114,7 +114,9 @@ I decided to create Maoni as a separate library project.</p>
 
 <div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
     <span class="pl-c">// ...</span>
-    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni:1.2.0@aar<span class="pl-pds">'</span></span>
+    compile (<span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni:1.2.0@aar<span class="pl-pds">'</span></span>) {
+        transitive <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+    }
   }</pre></div>
 
 <h3>
