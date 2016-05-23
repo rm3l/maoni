@@ -196,7 +196,7 @@ See https://goo.gl/31nStZ for further instructions on how to setup file sharing.
 
 Contributions and issue reporting are more than welcome. 
 So to help out, do feel free to fork this repo and open up a pull request. 
-I'll review and merge as quickly as possible.
+I'll review and merge your changes as quickly as possible.
 
 You can use [GitHub issues](https://github.com/rm3l/maoni/issues) to report bugs. 
 However, please make sure your description is clear enough and has sufficient instructions 
@@ -204,6 +204,19 @@ to be able to reproduce the issue.
 
 You can also use the [sample app](https://play.google.com/store/apps/details?id=org.rm3l.maoni) 
 to send your feedback with Maoni. ;-)
+
+
+### Translations
+ 
+I use Crowdin as the translation system. All related resources for localization are automatically generated from files got with Crowdin. 
+
+To help out with any translation, please head to [Crowdin](http://crowdin.net/project/maoni) 
+and request to join the translation team. 
+If your language is not listed there, just drop me an e-mail at &lt;apps+maoni@rm3l.org&gt;.
+
+Please do **not** submit GitHub pull requests with translation fixes as any changes will be overwritten 
+with the next update from Crowdin.
+
 
 ### Contributing callbacks for Maoni
 
@@ -219,19 +232,6 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
     compile 'org.rm3l:maoni-common:1.2.0'
   }
 ```
-
-
-### Translations
- 
-We use Crowdin as our translation system. 
-All related resources are automatically generated from files got with Crowdin. 
-
-To help out with any translation, please head to [Crowdin](http://crowdin.net/project/maoni) 
-and request to join the translation team. 
-Please do **not** submit GitHub pull requests with translation fixes as any changes will be overwritten 
-with the next update from Crowdin.
-
-If your language is not listed there, just drop me an e-mail at &lt;apps+maoni@rm3l.org&gt;.
 
 
 ## In use in the following apps
