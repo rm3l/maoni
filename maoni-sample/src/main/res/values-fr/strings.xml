@@ -23,7 +23,7 @@ SOFTWARE.
 -->
 <resources>
   <string name="app_name">Maoni Demo</string>
-  <string name="feedback">Feedback</string>
+  <string name="feedback">Commentaire</string>
   <string name="title_activity_maoni_sample_main">Maoni Demo</string>
   <string name="main_activity_text"><![CDATA[
         This is a demo application for Maoni, a lightweight library which provides
