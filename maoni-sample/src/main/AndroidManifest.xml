@@ -26,7 +26,7 @@ SOFTWARE.
     <application
         android:name=".MaoniSampleApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/maoni_ic_launcher"
         android:label="@string/maoni_app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
