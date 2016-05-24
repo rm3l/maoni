@@ -38,3 +38,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# For AboutLibraries, exclude R from ProGuard to enable the library auto detection
+-keep class .R
+-keep class **.R$* {
+    <fields>;
+}
