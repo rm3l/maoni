@@ -1,3 +1,5 @@
+import groovy.swing.SwingBuilder
+
 /*
  * Copyright (c) 2016 Armel Soro
  *
@@ -26,17 +28,60 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+    signingConfigs {
+        release {
+
+            (storeFile, storePassword, keyAlias, keyPassword) = rootProject.getReleaseSigningInfo(android)
+
+            //User will be prompted for the parameters below, for 'assemble*Release' tasks
+            keyAlias keyAlias
+            keyPassword keyPassword
+            storeFile storeFile
+            storePassword storePassword
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            //noinspection GroovyAssignabilityCheck
+            java.srcDirs = ['src/main/java']
+            //noinspection GroovyAssignabilityCheck
+            resources.srcDirs = ['src/main/res']
+            aidl.srcDirs = ['src/main/res']
+            renderscript.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('src/androidTests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
     defaultConfig {
         applicationId "org.rm3l.maoni.sample"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0.0"
+
+        vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

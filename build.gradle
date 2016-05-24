@@ -1,3 +1,5 @@
+import groovy.swing.SwingBuilder
+
 /*
  * Copyright (c) 2016 Armel Soro
  *
@@ -22,6 +24,8 @@
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+final homePath = System.properties['user.home']
+
 buildscript {
     repositories {
         jcenter()
@@ -44,3 +48,81 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext.getReleaseSigningInfo = {
+    android ->
+        def storeFile = ""
+        def storePassword = ""
+        def keyAlias = ""
+        def keyPassword = ""
+
+        //Attempt to read keystore.properties file, if any first
+        final propsFile = new File(homePath.toString() + "/.droid/", "maoni-keystore.properties")
+        final configName = 'release'
+
+        if (propsFile.exists() && android.signingConfigs.hasProperty(configName)) {
+            printf("Using properties file located at " + propsFile.absolutePath)
+            final props = new Properties()
+            props.load(new FileInputStream(propsFile))
+            storeFile = new File(props['keystore'].toString())
+            storePassword = props['storePassword']
+            keyAlias = props['keyAlias']
+            keyPassword = props['keyPassword']
+
+        } else if (System.console() == null) {
+            new SwingBuilder().edt {
+                dialog(modal: true,
+                        title: 'Enter signing configuration',
+                        alwaysOnTop: true,
+                        resizable: true,
+                        locationRelativeTo: null,
+                        pack: true,
+                        show: true) {
+                    vbox { // Put everything below each other
+                        label(text: "Please select keystore file:")
+                        final javax.swing.JFileChooser fileInput = fileChooser()
+                        label(text: "Please enter store password:")
+                        final javax.swing.JPasswordField storePasswordInput = passwordField()
+                        label(text: "Please enter key alias:")
+                        final javax.swing.JTextField keyAliasInput = textField()
+                        label(text: "Please enter key password:")
+                        final javax.swing.JPasswordField keyPasswordInput = passwordField()
+                        button(defaultButton: true, text: 'OK', actionPerformed: {
+                            storeFile = fileInput.selectedFile
+                            storePassword = storePasswordInput.password
+                            keyAlias = keyAliasInput.text
+                            keyPassword = keyPasswordInput.password
+                            dispose()
+                        })
+                    }
+                }
+            }
+        } else {
+            storeFile = System.console().readLine("\nPlease enter path to keystore file: ")
+            storeFile = new File(storeFile)
+            storePassword = System.console().readPassword("\nPlease enter the store password: ")
+            keyAlias = System.console().readLine("\nPlease enter the key alias: ")
+            keyPassword = System.console().readPassword("\nPlease enter the key password: ")
+        }
+
+        if (storeFile == null || !storeFile.exists()) {
+            throw new InvalidUserDataException("Keystore path not specified or file does not exist")
+        }
+
+        if (keyAlias.size() <= 0) {
+            throw new InvalidUserDataException("You must enter the key alias to proceed.")
+        }
+
+        if (storePassword.size() <= 0 || keyPassword.size() <= 0) {
+            throw new InvalidUserDataException("You must enter both the store and key passwords to proceed.")
+        }
+
+        // For debugging, friendly print the version output to the Gradle console
+        printf("\n-------- SIGNING CONFIG --------\n" +
+                "- storeFile.absolutePath: [" + storeFile.absolutePath +
+                "]\n----------------------------\n")
+
+        return [storeFile, storePassword, keyAlias, keyPassword]
+
+}
+
