@@ -40,7 +40,7 @@ android:
     - '.+'
 
 script:
-    - ./gradlew clean assemble --stacktrace
+    - ./gradlew clean assembleDebug --stacktrace
 
 notifications:
   email: false
@@ -52,5 +52,6 @@ cache:
     - $HOME/.gradle
 
 after_success:
-     - chmod +x ./tools/import-translations-github.sh
+     - chmod +x ./tools/*.sh
+     - bash <(curl -s https://codecov.io/bash)
      - ./tools/import-translations-github.sh
