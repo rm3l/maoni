@@ -47,13 +47,12 @@ before_script:
     - echo "keyPassword=${KEY_PASSWORD}" >> ${HOME}/.droid/maoni-keystore.properties
 
 script:
-    - echo "Travis branch is $TRAVIS_BRANCH"
-    - echo "Travis branch is in pull request $TRAVIS_PULL_REQUEST"
+    - echo "Travis branch is $TRAVIS_BRANCH, and is in pull request $TRAVIS_PULL_REQUEST"
     - ./gradlew clean assembleDebug --stacktrace
 
 notifications:
   email:
-    - apps+maoni__builds_${TRAVIS_BRANCH}_${TRAVIS_PULL_REQUEST}@rm3l.org
+    - apps+maoni__builds@rm3l.org
 
 sudo: false
 
