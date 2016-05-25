@@ -39,11 +39,21 @@ android:
   licenses:
     - '.+'
 
+before_script:
+    - mkdir -p ${HOME}/.droid
+    - echo "keystore=${KEYSTORE}" >> ${HOME}/.droid/maoni-keystore.properties
+    - echo "storePassword=${STORE_PASSWORD}" >> ${HOME}/.droid/maoni-keystore.properties
+    - echo "keyAlias=${KEY_ALIAS}" >> ${HOME}/.droid/maoni-keystore.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> ${HOME}/.droid/maoni-keystore.properties
+
 script:
+    - echo "Travis branch is $TRAVIS_BRANCH"
+    - echo "Travis branch is in pull request $TRAVIS_PULL_REQUEST"
     - ./gradlew clean assembleDebug --stacktrace
 
 notifications:
-  email: false
+  email:
+    - apps+maoni__builds_${TRAVIS_BRANCH}_${TRAVIS_PULL_REQUEST}@rm3l.org
 
 sudo: false
 
