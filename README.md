@@ -27,7 +27,7 @@ Below is a quick overview of the features included:
     - Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier.
     So you just have limitless possibilities for an integration with any other systems.
 
-Take a look at the [sample application](https://play.google.com/store/apps/details?id=org.rm3l.maoni) 
+Take a look at the [sample application](https://play.google.com/store/apps/details?id=org.rm3l.maoni.sample) 
 for a quick overview.
 
 
@@ -48,7 +48,7 @@ As a side note, Maoni is a Swahili word for comments or opinions.
 
 ## Sample App
 
-<a href="https://play.google.com/store/apps/details?id=org.rm3l.maoni">
+<a href="https://play.google.com/store/apps/details?id=org.rm3l.maoni.sample">
   <img alt="Get it on Google Play"
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a>
@@ -204,7 +204,7 @@ You can use [GitHub issues](https://github.com/rm3l/maoni/issues) to report bugs
 However, please make sure your description is clear enough and has sufficient instructions 
 to be able to reproduce the issue.
 
-You can also use the [sample app](https://play.google.com/store/apps/details?id=org.rm3l.maoni) 
+You can also use the [sample app](https://play.google.com/store/apps/details?id=org.rm3l.maoni.sample) 
 to send your feedback with Maoni. ;-)
 
 
