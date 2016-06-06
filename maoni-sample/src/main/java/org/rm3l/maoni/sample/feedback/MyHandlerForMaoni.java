@@ -97,7 +97,7 @@ public class MyHandlerForMaoni extends MaoniEmailListener implements Handler {
     }
 
     @Override
-    public void onSendButtonClicked(@NonNull Feedback feedback) {
+    public boolean onSendButtonClicked(@NonNull Feedback feedback) {
 
         // Depending on your use case, you may add specific data in the feedback object returned,
         // and manipulate it accordingly
@@ -123,7 +123,7 @@ public class MyHandlerForMaoni extends MaoniEmailListener implements Handler {
                 myExtraRadioGroupChecked != null ? myExtraRadioGroupChecked : "???");
 
         //Forward to the Email Listener for opening up the "Send Email" Intent
-        super.onSendButtonClicked(feedback);
+        return super.onSendButtonClicked(feedback);
     }
 
     @Override

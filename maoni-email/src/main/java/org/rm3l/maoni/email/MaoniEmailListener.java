@@ -73,7 +73,7 @@ public class MaoniEmailListener implements Listener {
     }
 
     @Override
-    public void onSendButtonClicked(final Feedback feedback) {
+    public boolean onSendButtonClicked(final Feedback feedback) {
 
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
@@ -166,5 +166,7 @@ public class MaoniEmailListener implements Listener {
             }
             mContext.startActivity(intent);
         }
+
+        return true;
     }
 }

@@ -503,9 +503,12 @@ public class MaoniActivity extends AppCompatActivity {
                     new Feedback(mFeedbackUniqueId, mDeviceInfo, mAppInfo,
                             contentText, includeScreenshot, screenshotUri, screenshotFile);
             if (mListener != null) {
-                mListener.onSendButtonClicked(feedback);
+                if (mListener.onSendButtonClicked(feedback)) {
+                    finish();
+                } // else do *not* finish the activity
+            } else {
+                finish();
             }
-            finish();
         } //else do nothing - this is up to the callback implementation
     }
 

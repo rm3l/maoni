@@ -41,7 +41,8 @@ public interface Listener {
      *
      * @param feedback the feedback object,
      *                 which you can manipulate to interact with other remote feedback systems.
+     *
+     * @return {@code true} if activity should be destroyed or {@code false} otherwise.
      */
-    void onSendButtonClicked(final Feedback feedback);
-
+    boolean onSendButtonClicked(final Feedback feedback);
 }
