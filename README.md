@@ -241,7 +241,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 (If you use Maoni, please drop me a line at &lt;apps+maoni@rm3l.org&gt; 
 (or again, fork, modify this file and submit a pull request), so I can list your app(s) here)
 
-* [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt) (integration is rolling out to App marketplaces)
+* [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt)
 
 
 ## Credits
