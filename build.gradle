@@ -1,5 +1,3 @@
-import groovy.swing.SwingBuilder
-
 /*
  * Copyright (c) 2016 Armel Soro
  *
@@ -70,33 +68,10 @@ ext.getReleaseSigningInfo = {
             keyPassword = props['keyPassword']
 
         } else if (System.console() == null) {
-            new SwingBuilder().edt {
-                dialog(modal: true,
-                        title: 'Enter signing configuration',
-                        alwaysOnTop: true,
-                        resizable: true,
-                        locationRelativeTo: null,
-                        pack: true,
-                        show: true) {
-                    vbox { // Put everything below each other
-                        label(text: "Please select keystore file:")
-                        final javax.swing.JFileChooser fileInput = fileChooser()
-                        label(text: "Please enter store password:")
-                        final javax.swing.JPasswordField storePasswordInput = passwordField()
-                        label(text: "Please enter key alias:")
-                        final javax.swing.JTextField keyAliasInput = textField()
-                        label(text: "Please enter key password:")
-                        final javax.swing.JPasswordField keyPasswordInput = passwordField()
-                        button(defaultButton: true, text: 'OK', actionPerformed: {
-                            storeFile = fileInput.selectedFile
-                            storePassword = storePasswordInput.password
-                            keyAlias = keyAliasInput.text
-                            keyPassword = keyPasswordInput.password
-                            dispose()
-                        })
-                    }
-                }
-            }
+            storeFile = "UNDEFINED"
+            storePassword = "UNDEFINED"
+            keyAlias = "UNDEFINED"
+            keyPassword = "UNDEFINED"
         } else {
             storeFile = System.console().readLine("\nPlease enter path to keystore file: ")
             storeFile = new File(storeFile)
@@ -116,11 +91,6 @@ ext.getReleaseSigningInfo = {
         if (storePassword.size() <= 0 || keyPassword.size() <= 0) {
             throw new InvalidUserDataException("You must enter both the store and key passwords to proceed.")
         }
-
-        // For debugging, friendly print the version output to the Gradle console
-        printf("\n-------- SIGNING CONFIG --------\n" +
-                "- storeFile.absolutePath: [" + storeFile.absolutePath +
-                "]\n----------------------------\n")
 
         return [storeFile, storePassword, keyAlias, keyPassword]
 
