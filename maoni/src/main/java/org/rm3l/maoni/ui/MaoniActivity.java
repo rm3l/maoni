@@ -22,19 +22,12 @@
 package org.rm3l.maoni.ui;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
-import android.location.LocationManager;
-import android.net.ConnectivityManager;
 import android.net.Uri;
-import android.net.wifi.SupplicantState;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -44,7 +37,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,7 +57,6 @@ import org.rm3l.maoni.common.contract.Validator;
 import org.rm3l.maoni.common.model.Feedback;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.UUID;
 
 /**
@@ -98,7 +89,6 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String SCREENSHOT_TOUCH_TO_PREVIEW_HINT = "SCREENSHOT_PREVIEW_HINT";
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
     public static final String EXTRA_LAYOUT = "EXTRA_LAYOUT";
-    public static final String GET_MOBILE_DATA_ENABLED = "getMobileDataEnabled";
 
     protected View mRootView;
 
@@ -121,7 +111,6 @@ public class MaoniActivity extends AppCompatActivity {
 
     private String mFeedbackUniqueId;
     private Feedback.App mAppInfo;
-    private Feedback.Device mDeviceInfo;
 
     private Validator mValidator;
     private Listener mListener;
@@ -352,7 +341,6 @@ public class MaoniActivity extends AppCompatActivity {
         }
 
         setAppRelatedInfo();
-        setPhoneRelatedInfo();
 
         final UiListener uiListener = maoniConfiguration.getUiListener();
         if (uiListener != null) {
@@ -381,56 +369,6 @@ public class MaoniActivity extends AppCompatActivity {
                 intent.getStringExtra(APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE),
                 intent.hasExtra(APPLICATION_INFO_VERSION_NAME) ?
                         intent.getStringExtra(APPLICATION_INFO_VERSION_NAME) : null);
-    }
-
-    private void setPhoneRelatedInfo() {
-
-        SupplicantState supplicantState = null;
-        try {
-            final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-            @SuppressWarnings("MissingPermission")
-            final WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            supplicantState = wifiInfo.getSupplicantState();
-        } catch (Exception e) {
-            //No worries
-        }
-
-        boolean mobileDataEnabled = false;
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        try {
-            final Class cmClass = Class.forName(cm.getClass().getName());
-            @SuppressWarnings("unchecked")
-            final Method method = cmClass.getDeclaredMethod(GET_MOBILE_DATA_ENABLED);
-            method.setAccessible(true);
-            mobileDataEnabled = (Boolean) method.invoke(cm);
-        } catch (Exception e) {
-            // Private API access - no worries
-        }
-        boolean gpsEnabled = false;
-        try {
-            final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            gpsEnabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception e) {
-            //No worries
-        }
-
-        String resolution = null;
-        try {
-            final DisplayMetrics metrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            resolution = (Integer.toString(metrics.widthPixels) + "x" +
-                    Integer.toString(metrics.heightPixels));
-        } catch (Exception e) {
-            //No worries
-        }
-
-        mDeviceInfo = new Feedback.Device(
-                Build.MODEL,
-                Build.VERSION.RELEASE,
-                supplicantState,
-                mobileDataEnabled,
-                gpsEnabled,
-                resolution);
     }
 
     private boolean validateForm(@NonNull View rootView) {
@@ -500,7 +438,7 @@ public class MaoniActivity extends AppCompatActivity {
 
             //Construct the feedback object and call the actual implementation
             final Feedback feedback =
-                    new Feedback(mFeedbackUniqueId, mDeviceInfo, mAppInfo,
+                    new Feedback(mFeedbackUniqueId, this, mAppInfo,
                             contentText, includeScreenshot, screenshotUri, screenshotFile);
             if (mListener != null) {
                 if (mListener.onSendButtonClicked(feedback)) {

@@ -21,8 +21,8 @@
  */
 package org.rm3l.maoni.common.model;
 
+import android.app.Activity;
 import android.net.Uri;
-import android.net.wifi.SupplicantState;
 
 import java.io.File;
 import java.util.Collections;
@@ -47,7 +47,7 @@ public class Feedback {
      * Information about the user device
      */
 
-    public final Device deviceInfo;
+    public final DeviceInfo deviceInfo;
 
     /**
      * Information about your application
@@ -98,14 +98,14 @@ public class Feedback {
      * Construct an immutable feedback
      *
      * @param id                the internal identifier
-     * @param deviceInfo        the device information
+     * @param activity          the origin activity
      * @param appInfo           the application information
      * @param userComment       the user comment
      * @param includeScreenshot whether to include the screenshot into the feedback or not
      * @param screenshotFileUri the screenshot file URI
      */
     public Feedback(CharSequence id,
-                    Device deviceInfo,
+                    Activity activity,
                     App appInfo,
                     CharSequence userComment,
                     boolean includeScreenshot,
@@ -113,7 +113,7 @@ public class Feedback {
                     File screenshotFile) {
 
         this.id = id;
-        this.deviceInfo = deviceInfo;
+        this.deviceInfo = new DeviceInfo(activity);
         this.appInfo = appInfo;
         this.userComment = userComment;
         this.includeScreenshot = includeScreenshot;
@@ -175,71 +175,6 @@ public class Feedback {
             return defaultValue;
         }
         return this.get(key);
-    }
-
-    /**
-     * Information about the current device (at the moment the object was constructed)
-     */
-    public static class Device {
-
-        /**
-         * The device model
-         */
-
-        public final CharSequence model;
-
-        /**
-         * The Android version
-         */
-
-        public final CharSequence androidVersion;
-
-        /**
-         * The Wifi state
-         */
-
-        public final SupplicantState wifiState;
-
-        /**
-         * The mobile data state
-         */
-        public final boolean mobileDataEnabled;
-
-        /**
-         * The GPS state
-         */
-        public final boolean gpsEnabled;
-
-        /**
-         * The screen resolution
-         */
-
-        public final CharSequence screenResolution;
-
-        /**
-         * Construct an immutable Device Info object
-         *
-         * @param model             the device model
-         * @param androidVersion    the Android version
-         * @param wifiState         the WiFi state
-         * @param mobileDataEnabled the mobile data state
-         * @param gpsEnabled        the GPS state
-         * @param screenResolution  the device screen resolution
-         */
-        public Device(final CharSequence model,
-                      final CharSequence androidVersion,
-                      final SupplicantState wifiState,
-                      final boolean mobileDataEnabled,
-                      final boolean gpsEnabled,
-                      final CharSequence screenResolution) {
-            this.model = model;
-            this.androidVersion = androidVersion;
-            this.wifiState = wifiState;
-            this.mobileDataEnabled = mobileDataEnabled;
-            this.gpsEnabled = gpsEnabled;
-            this.screenResolution = screenResolution;
-        }
-
     }
 
     /**

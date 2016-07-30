@@ -138,14 +138,7 @@ public class MaoniEmailListener implements Listener {
 
         body.append("\n------ Device ------\n");
         if (feedback.deviceInfo != null) {
-            body.append("- Android Version: ").append(feedback.deviceInfo.androidVersion).append("\n");
-            body.append("- Model: ").append(feedback.deviceInfo.model).append("\n");
-            body.append("- Screen Resolution: ").append(feedback.deviceInfo.screenResolution).append("\n");
-            body.append("- GPS: ").append(feedback.deviceInfo.gpsEnabled).append("\n");
-            if (feedback.deviceInfo.wifiState != null) {
-                body.append("- Wifi State: ").append(feedback.deviceInfo.wifiState).append("\n");
-            }
-            body.append("- Mobile Data: ").append(feedback.deviceInfo.mobileDataEnabled).append("\n");
+            body.append(feedback.deviceInfo.toString());
         }
         body.append("\n\n");
 
