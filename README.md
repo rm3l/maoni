@@ -5,9 +5,9 @@
 [![Travis branch](https://img.shields.io/travis/rm3l/maoni/master.svg)](https://travis-ci.org/rm3l/maoni) 
 [![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni?branch=master)  
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni.svg?style=social&label=Watch&maxAge=2592000)](https://github.com/rm3l/maoni) 
-[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni.svg?style=social&label=Star&maxAge=2592000)](https://github.com/rm3l/maoni) 
-[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/rm3l/maoni)
+[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni.svg?style=social&label=Watch)](https://github.com/rm3l/maoni) 
+[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni.svg?style=social&label=Star)](https://github.com/rm3l/maoni) 
+[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni.svg?style=social&label=Fork)](https://github.com/rm3l/maoni)
 
 **Maoni** is a lightweight open-source library for integrating 
 a way to collect user feedbacks from within Android applications.
