@@ -9,6 +9,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni.svg?style=social&label=Star)](https://github.com/rm3l/maoni) 
 [![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni.svg?style=social&label=Fork)](https://github.com/rm3l/maoni)
 
+[![Codewake](https://www.codewake.com/badges/ask_question.svg)](https://www.codewake.com/p/maoni)
+
 **Maoni** is a lightweight open-source library for integrating 
 a way to collect user feedbacks from within Android applications.
 
