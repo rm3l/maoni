@@ -21,10 +21,12 @@
  */
 package org.rm3l.maoni.common.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.net.Uri;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -175,6 +177,36 @@ public class Feedback {
             return defaultValue;
         }
         return this.get(key);
+    }
+
+    @SuppressLint("DefaultLocale")
+    public Map<String, Object> getDeviceAndAppInfoAsHumanReadableMap() {
+        final Map<String, Object> output = new HashMap<>();
+        if (this.appInfo != null) {
+            output.put("Application ID", this.appInfo.applicationId);
+            output.put("Version code", this.appInfo.versionCode);
+            output.put("Version name", this.appInfo.versionName);
+        }
+
+        output.put("Android version",
+                String.format("Android %s (SDK %d)",
+                        this.deviceInfo.androidReleaseVersion,
+                        this.deviceInfo.sdkVersion));
+        output.put("Device", this.deviceInfo.model);
+        output.put("Manufacturer", this.deviceInfo.manufacturer);
+
+        output.put("Device Type", this.deviceInfo.isTablet ? "Tablet" : "Phone");
+
+        output.put("Screen density", this.deviceInfo.densityDpi + " dpi");
+        output.put("Screen size", this.deviceInfo.resolution);
+        output.put("Native platform", Arrays.toString(this.deviceInfo.supportedAbis));
+        if (!(this.deviceInfo.openGlVersion == null ||
+                "".equals(this.deviceInfo.openGlVersion.trim()))) {
+            output.put("OpenGL ES version", this.deviceInfo.openGlVersion);
+        }
+        output.put("Device language", this.deviceInfo.language);
+
+        return Collections.unmodifiableMap(output);
     }
 
     /**
