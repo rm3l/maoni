@@ -36,7 +36,7 @@ configurations {
 }
 
 group = 'org.rm3l'
-version = '2.0.0'
+version = '2.0.1'
 
 final homePath = System.properties['user.home']
 
@@ -91,10 +91,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '2.0.0'
+            name = '2.0.1'
             desc = 'Maoni Android Library - Email Handler'
             released = new Date()
-            vcsTag = '2.0.0'
+            vcsTag = '2.0.1'
         }
 
         publicDownloadNumbers = true

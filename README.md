@@ -83,7 +83,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:2.0.0@aar') {
+    compile ('org.rm3l:maoni:2.0.1@aar') {
         transitive = true;
     }
   }
@@ -149,7 +149,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-email:2.0.0'
+    compile 'org.rm3l:maoni-email:2.0.1'
   }
 ```
 
@@ -242,7 +242,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:2.0.0'
+    compile 'org.rm3l:maoni-common:2.0.1'
   }
 ```
 
