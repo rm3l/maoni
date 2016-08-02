@@ -5,11 +5,11 @@
 [![Travis branch](https://img.shields.io/travis/rm3l/maoni/master.svg)](https://travis-ci.org/rm3l/maoni) 
 [![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni?branch=master)  
 
+[![Codewake](https://www.codewake.com/badges/ask_question.svg)](https://www.codewake.com/p/maoni)
+
 [![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni.svg?style=social&label=Watch)](https://github.com/rm3l/maoni) 
 [![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni.svg?style=social&label=Star)](https://github.com/rm3l/maoni) 
 [![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni.svg?style=social&label=Fork)](https://github.com/rm3l/maoni)
-
-[![Codewake](https://www.codewake.com/badges/ask_question.svg)](https://www.codewake.com/p/maoni)
 
 **Maoni** is a lightweight open-source library for integrating 
 a way to collect user feedbacks from within Android applications.
