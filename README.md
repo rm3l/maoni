@@ -123,7 +123,7 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
         .withWindowTitle("Send Feedback") //Set to an empty string to clear it
         .withMessage("Hey! Love or hate this app? We would love to hear from you.")
         .withExtraLayout(R.layout.my_feedback_activity_extra_content)
-        .withHandler(myHandlerForMaoniInstance) //Custom Callback for Maoni
+        .withHandler(handlerForMaoni) //Custom Callback for Maoni
         .withFeedbackContentHint("[Custom hint] Write your feedback here")
         .withIncludeScreenshotText("[Custom text] Include screenshot")
         .withTouchToPreviewScreenshotText("Touch To Preview")
