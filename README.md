@@ -101,12 +101,12 @@ For example, to start with just the defaults:
 ```java
     // MyHandlerForMaoni is a custom implementation of Handler, 
     // which is a shortcut interface for defining both a validator and listeners for Maoni
-    final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(MaoniSampleMainActivity.this);
+    final MyHandlerForMaoni myHandlerForMaoni = new MyHandlerForMaoni(...);
     
     //The optional file provider authority allows you to 
     //share the screenshot capture file to other apps (depending on your callback implementation)
     new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
-        .withHandler(myHandlerForMaoniInstance) //Custom Callback for Maoni
+        .withHandler(myHandlerForMaoni) //Custom Callback for Maoni
         .build()
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
 ```
