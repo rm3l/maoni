@@ -55,6 +55,7 @@ import org.rm3l.maoni.common.contract.Listener;
 import org.rm3l.maoni.common.contract.UiListener;
 import org.rm3l.maoni.common.contract.Validator;
 import org.rm3l.maoni.common.model.Feedback;
+import org.rm3l.maoni.utils.LogcatUtils;
 
 import java.io.File;
 import java.util.UUID;
@@ -73,6 +74,7 @@ public class MaoniActivity extends AppCompatActivity {
             "APPLICATION_INFO_BUILD_CONFIG_FLAVOR";
     public static final String APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE =
             "APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE";
+    public static final String WORKING_DIR = "WORKING_DIR";
     public static final String FILE_PROVIDER_AUTHORITY = "FILE_PROVIDER_AUTHORITY";
     public static final String THEME = "THEME";
     public static final String TOOLBAR_TITLE_TEXT_COLOR = "TOOLBAR_TITLE_TEXT_COLOR";
@@ -87,8 +89,11 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String CONTENT_HINT = "CONTENT_HINT";
     public static final String CONTENT_ERROR_TEXT = "CONTENT_ERROR_TEXT";
     public static final String SCREENSHOT_TOUCH_TO_PREVIEW_HINT = "SCREENSHOT_PREVIEW_HINT";
+    public static final String INCLUDE_LOGS_TEXT = "INCLUDE_LOGS_TEXT";
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
     public static final String EXTRA_LAYOUT = "EXTRA_LAYOUT";
+
+    private static final String MAONI_LOGS_FILENAME = "maoni_logs.txt";
 
     protected View mRootView;
 
@@ -99,6 +104,9 @@ public class MaoniActivity extends AppCompatActivity {
     private EditText mContent;
 
     @Nullable
+    private CheckBox mIncludeLogs;
+
+    @Nullable
     private CheckBox mIncludeScreenshot;
 
     @Nullable
@@ -106,6 +114,8 @@ public class MaoniActivity extends AppCompatActivity {
 
     @Nullable
     private CharSequence mContentErrorText;
+
+    private File mWorkingDir;
 
     private Menu mMenu;
 
@@ -130,6 +140,12 @@ public class MaoniActivity extends AppCompatActivity {
         if (mRootView == null) {
             throw new IllegalStateException(
                     "Layout must contain a root view with the following id: maoni_container");
+        }
+
+        if (intent.hasExtra(WORKING_DIR)) {
+            mWorkingDir = new File(intent.getStringExtra(WORKING_DIR));
+        } else {
+            mWorkingDir =  getCacheDir();
         }
 
         final ImageView headerImageView = (ImageView) findViewById(R.id.maoni_toolbar_header_image);
@@ -215,6 +231,11 @@ public class MaoniActivity extends AppCompatActivity {
             mContentErrorText = intent.getCharSequenceExtra(CONTENT_ERROR_TEXT);
         } else {
             mContentErrorText = getString(R.string.maoni_validate_must_not_be_blank);
+        }
+
+        mIncludeLogs = (CheckBox) findViewById(R.id.maoni_include_logs);
+        if (mIncludeLogs != null && intent.hasExtra(INCLUDE_LOGS_TEXT)) {
+            mIncludeLogs.setText(intent.getCharSequenceExtra(INCLUDE_LOGS_TEXT));
         }
 
         mIncludeScreenshot = (CheckBox) findViewById(R.id.maoni_include_screenshot);
@@ -411,7 +432,7 @@ public class MaoniActivity extends AppCompatActivity {
     private void validateAndSubmitForm() {
         //Validate form
         if (this.validateForm(mRootView)) {
-            //Check that device is actually connected to the internet prior to going any further
+            //TODO Check that device is actually connected to the internet prior to going any further
             boolean includeScreenshot = false;
             if (mIncludeScreenshot != null) {
                 includeScreenshot = mIncludeScreenshot.isChecked();
@@ -425,6 +446,17 @@ public class MaoniActivity extends AppCompatActivity {
 
             Uri screenshotUri = null;
             File screenshotFile = null;
+            Uri logsUri = null;
+            File logsFile = null;
+
+            final boolean includeLogs = mIncludeLogs != null && mIncludeLogs.isChecked();
+            if (includeLogs) {
+                logsFile = new File(
+                        mWorkingDir,
+                        MAONI_LOGS_FILENAME);
+                LogcatUtils.getLogsToFile(logsFile);
+            }
+
             if (intent.hasExtra(FILE_PROVIDER_AUTHORITY)) {
                 final String fileProviderAuthority = intent.getStringExtra(FILE_PROVIDER_AUTHORITY);
                 if (mScreenshotFilePath != null) {
@@ -434,12 +466,26 @@ public class MaoniActivity extends AppCompatActivity {
                     grantUriPermission(intent.getComponent().getPackageName(),
                             screenshotUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 }
+                if (logsFile != null) {
+                    logsUri = FileProvider
+                            .getUriForFile(this, fileProviderAuthority, logsFile);
+                    grantUriPermission(intent.getComponent().getPackageName(),
+                            logsUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                }
             }
 
             //Construct the feedback object and call the actual implementation
             final Feedback feedback =
-                    new Feedback(mFeedbackUniqueId, this, mAppInfo,
-                            contentText, includeScreenshot, screenshotUri, screenshotFile);
+                    new Feedback(mFeedbackUniqueId,
+                            this,
+                            mAppInfo,
+                            contentText,
+                            includeScreenshot,
+                            screenshotUri,
+                            screenshotFile,
+                            includeLogs,
+                            logsUri,
+                            logsFile);
             if (mListener != null) {
                 if (mListener.onSendButtonClicked(feedback)) {
                     finish();

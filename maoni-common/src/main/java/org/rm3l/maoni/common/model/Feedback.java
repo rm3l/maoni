@@ -64,6 +64,31 @@ public class Feedback {
     public final CharSequence userComment;
 
     /**
+     * User choice: whether to take the app logs into account or not.
+     * <p/>
+     * Note that if this is set to {@code false},
+     * the {@link #logsFileUri} (and {@code #logsFile}, subsequently)
+     * returned will be {@code null}
+     */
+    public final boolean includeLogs;
+
+    /**
+     * The logs file URI.
+     * <p/>
+     * It is set to {@code null} if {@link #includeLogs} is {@code null}.
+     */
+
+    public final Uri logsFileUri;
+
+    /**
+     * The logs file object.
+     * <p/>
+     * It is set to {@code null} if {@link #includeLogs} is {@code null}.
+     */
+
+    public final File logsFile;
+
+    /**
      * User choice: whether to take the screenshot into account or not.
      * <p/>
      * Note that if this is set to {@code false},
@@ -112,12 +137,23 @@ public class Feedback {
                     CharSequence userComment,
                     boolean includeScreenshot,
                     Uri screenshotFileUri,
-                    File screenshotFile) {
+                    File screenshotFile,
+                    boolean includeLogs,
+                    Uri logsFileUri,
+                    File logsFile) {
 
         this.id = id;
         this.deviceInfo = new DeviceInfo(activity);
         this.appInfo = appInfo;
         this.userComment = userComment;
+        this.includeLogs = includeLogs;
+        if (this.includeLogs) {
+            this.logsFile = logsFile;
+            this.logsFileUri = logsFileUri;
+        } else {
+            this.logsFile = null;
+            this.logsFileUri = null;
+        }
         this.includeScreenshot = includeScreenshot;
         if (this.includeScreenshot) {
             this.screenshotFile = screenshotFile;
@@ -179,6 +215,7 @@ public class Feedback {
         return this.get(key);
     }
 
+    @SuppressWarnings("unused")
     @SuppressLint("DefaultLocale")
     public Map<String, Object> getDeviceAndAppInfoAsHumanReadableMap() {
         final Map<String, Object> output = new HashMap<>();

@@ -56,6 +56,7 @@ import static org.rm3l.maoni.ui.MaoniActivity.CONTENT_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.EXTRA_LAYOUT;
 import static org.rm3l.maoni.ui.MaoniActivity.FILE_PROVIDER_AUTHORITY;
 import static org.rm3l.maoni.ui.MaoniActivity.HEADER;
+import static org.rm3l.maoni.ui.MaoniActivity.INCLUDE_LOGS_TEXT;
 import static org.rm3l.maoni.ui.MaoniActivity.INCLUDE_SCREENSHOT_TEXT;
 import static org.rm3l.maoni.ui.MaoniActivity.MESSAGE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_FILE;
@@ -66,6 +67,7 @@ import static org.rm3l.maoni.ui.MaoniActivity.TOOLBAR_SUBTITLE_TEXT_COLOR;
 import static org.rm3l.maoni.ui.MaoniActivity.TOOLBAR_TITLE_TEXT_COLOR;
 import static org.rm3l.maoni.ui.MaoniActivity.WINDOW_SUBTITLE;
 import static org.rm3l.maoni.ui.MaoniActivity.WINDOW_TITLE;
+import static org.rm3l.maoni.ui.MaoniActivity.WORKING_DIR;
 
 /**
  * Maoni configuration
@@ -130,6 +132,11 @@ public class Maoni {
     @Nullable
     public final Integer header;
     /**
+     * Text do display next to the "Include logs" checkbox
+     */
+    @Nullable
+    public final CharSequence includeLogsText;
+    /**
      * Text do display next to the "Include screenshot" checkbox
      */
     @Nullable
@@ -172,6 +179,7 @@ public class Maoni {
      * @param feedbackContentHint          the feedback form field hint message
      * @param contentErrorMessage          the feedback form field error message to display to the user
      * @param extraLayout                  the extra layout resource.
+     * @param includeLogsText              the text do display next to the "Include logs" checkbox
      * @param includeScreenshotText        the text do display next to the "Include screenshot" checkbox
      * @param touchToPreviewScreenshotText the "Touch to preview" text
      * @param screenshotHint               the text to display to the user
@@ -189,6 +197,7 @@ public class Maoni {
             @Nullable final CharSequence feedbackContentHint,
             @Nullable final CharSequence contentErrorMessage,
             @LayoutRes @Nullable final Integer extraLayout,
+            @Nullable final CharSequence includeLogsText,
             @Nullable final CharSequence includeScreenshotText,
             @Nullable final CharSequence touchToPreviewScreenshotText,
             @Nullable final CharSequence screenshotHint) {
@@ -204,6 +213,7 @@ public class Maoni {
         this.feedbackContentHint = feedbackContentHint;
         this.screenshotHint = screenshotHint;
         this.header = header;
+        this.includeLogsText = includeLogsText;
         this.includeScreenshotText = includeScreenshotText;
         this.touchToPreviewScreenshotText = touchToPreviewScreenshotText;
         this.extraLayout = extraLayout;
@@ -259,6 +269,10 @@ public class Maoni {
         }
 
         maoniIntent.putExtra(FILE_PROVIDER_AUTHORITY, fileProviderAuthority);
+
+        maoniIntent.putExtra(WORKING_DIR,
+                maoniWorkingDir != null ?
+                        maoniWorkingDir : callerActivity.getCacheDir().getAbsolutePath());
 
         //Create screenshot file
         final File screenshotFile = new File(
@@ -318,6 +332,10 @@ public class Maoni {
             maoniIntent.putExtra(INCLUDE_SCREENSHOT_TEXT, includeScreenshotText);
         }
 
+        if (includeLogsText != null) {
+            maoniIntent.putExtra(INCLUDE_LOGS_TEXT, includeLogsText);
+        }
+
         if (touchToPreviewScreenshotText != null) {
             maoniIntent.putExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT, touchToPreviewScreenshotText);
         }
@@ -360,6 +378,8 @@ public class Maoni {
         private Integer header;
         @Nullable
         private CharSequence includeScreenshotText;
+        @Nullable
+        private CharSequence includeLogsText;
         @Nullable
         private CharSequence touchToPreviewScreenshotText;
         @LayoutRes
@@ -453,6 +473,16 @@ public class Maoni {
 
         public Builder withFeedbackContentHint(@Nullable CharSequence feedbackContentHint) {
             this.feedbackContentHint = feedbackContentHint;
+            return this;
+        }
+
+        @Nullable
+        public CharSequence getIncludeLogText() {
+            return includeLogsText;
+        }
+
+        public Builder withIncludeLogsText(@Nullable CharSequence includeLogsText) {
+            this.includeLogsText = includeLogsText;
             return this;
         }
 
@@ -553,6 +583,7 @@ public class Maoni {
                     feedbackContentHint,
                     contentErrorMessage,
                     extraLayout,
+                    includeLogsText,
                     includeScreenshotText,
                     touchToPreviewScreenshotText,
                     screenshotHint);

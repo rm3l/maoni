@@ -69,6 +69,14 @@ SOFTWARE.
             android:visibility="gone" />
 
         <CheckBox
+            android:id="@+id/maoni_include_logs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
+            android:checked="true"
+            android:text="@string/maoni_feedback_include_logs_title" />
+
+        <CheckBox
             android:id="@+id/maoni_include_screenshot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -30,6 +30,8 @@ import android.os.Build;
 import org.rm3l.maoni.common.contract.Listener;
 import org.rm3l.maoni.common.model.Feedback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -75,7 +77,7 @@ public class MaoniEmailListener implements Listener {
     @Override
     public boolean onSendButtonClicked(final Feedback feedback) {
 
-        final Intent intent = new Intent(Intent.ACTION_SEND);
+        final Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_SUBJECT,
                 mSubject != null ? mSubject : DEFAULT_EMAIL_SUBJECT);
@@ -151,11 +153,24 @@ public class MaoniEmailListener implements Listener {
         final ComponentName componentName = intent.resolveActivity(mContext.getPackageManager());
         if (componentName != null) {
             //Add screenshot as attachment
+            final ArrayList<Uri> attachmentsUris = new ArrayList<>();
             if (feedback.screenshotFileUri != null) {
                 //Grant READ permission to the intent
                 mContext.grantUriPermission(componentName.getPackageName(),
                         feedback.screenshotFileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.putExtra(Intent.EXTRA_STREAM, feedback.screenshotFileUri);
+                attachmentsUris.add(feedback.screenshotFileUri);
+//                intent.putExtra(Intent.EXTRA_STREAM, feedback.screenshotFileUri);
+            }
+            //Add logs file as attachment
+            if (feedback.logsFileUri != null) {
+                //Grant READ permission to the intent
+                mContext.grantUriPermission(componentName.getPackageName(),
+                        feedback.logsFileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                attachmentsUris.add(feedback.logsFileUri);
+//                intent.putExtra(Intent.EXTRA_STREAM, feedback.logsFileUri);
+            }
+            if (!attachmentsUris.isEmpty()) {
+                intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, attachmentsUris);
             }
             mContext.startActivity(intent);
         }
