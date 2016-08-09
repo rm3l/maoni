@@ -23,16 +23,16 @@ SOFTWARE.
 -->
 <resources>
   <string name="maoni_app_name">Maoni Demo</string>
-  <string name="feedback">Commentaire</string>
+  <string name="feedback">Avis</string>
   <string name="title_activity_maoni_sample_main">Maoni Demo</string>
   <string name="main_activity_text"><![CDATA[
 Ceci est l\'application de démonstration des fonctionnalités de Maoni. \n
 Maoni est une bibliothèque qui fournit un formulaire prêt à l\'emploi pour collecter les commentaires et avis des utilisateurs d\'une application Android.
 \n
-Maoni est capable d\'effectuer une capture d\'écran de la fenêtre sur laquelle se trouvait l\'utilisateur, ce qui permet d\'avoir des informations contextuelles utiles.
+Maoni est capable d\'effectuer une capture d\'écran de la fenêtre sur laquelle se trouvait l\'utilisateur, ce qui permet d\'avoir des informations contextuelles utiles pour la compr\'ehension des \'eventuels probl\`emes.
 \n\n
 Appuyez sur l\'icône flottante ci-dessous pour ouvrir le formulaire Maoni.
 \n\n
-Plus d\'infos sur http://rm3l.github.io/maoni ]]></string>
+Plus d\'infos sur http://rm3l.github.io/maoni.    ]]></string>
   <string name="action_about">À propos de Maoni</string>
 </resources>

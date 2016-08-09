@@ -29,7 +29,7 @@ Aimez-vous cette application? Souhaitez-vous suggérer de nouvelles fonctionnali
 Hâte de vous lire.</string>
   <string name="maoni_feedback_content_hint">Ecrivez votre message ici</string>
   <string name="maoni_feedback_include_screenshot_checkbox_title">Joindre la capture d\'écran au rapport</string>
-  <string name="maoni_feedback_include_logs_title">Include logs</string>
+  <string name="maoni_feedback_include_logs_title">Inclure les fichiers journaux</string>
   <string name="maoni_touch_to_preview">Touchez pour aperçu</string>
   <string name="maoni_screenshot_informational_text">La capture d\'écran nous permet d\'avoir plus d\'éléments contextuels relatifs à votre commentaire.</string>
   <string name="maoni_send_feedback">Envoyer un commentaire</string>
