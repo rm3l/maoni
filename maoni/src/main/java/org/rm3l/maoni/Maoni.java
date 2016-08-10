@@ -42,6 +42,7 @@ import org.rm3l.maoni.utils.ContextUtils;
 import org.rm3l.maoni.utils.ViewUtils;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.rm3l.maoni.Maoni.CallbacksConfiguration.getInstance;
 import static org.rm3l.maoni.ui.MaoniActivity.APPLICATION_INFO_BUILD_CONFIG_BUILD_TYPE;
@@ -160,6 +161,8 @@ public class Maoni {
     private final String fileProviderAuthority;
     private File maoniWorkingDir;
 
+    private final AtomicBoolean mUsed = new AtomicBoolean(false);
+
     /**
      * Constructor
      * @param fileProviderAuthority        the file provider authority.
@@ -226,6 +229,14 @@ public class Maoni {
      * @param callerActivity the caller activity
      */
     public void start(@Nullable final Activity callerActivity) {
+
+        if (mUsed.getAndSet(true)) {
+            this.clear();
+            throw new UnsupportedOperationException(
+                    "Maoni instance cannot be reused to start a new activity. " +
+                            "Please build a new Maoni instance.");
+        }
+
         if (callerActivity == null) {
             Log.d(LOG_TAG, "Target activity is undefined");
             return;
@@ -341,6 +352,32 @@ public class Maoni {
         }
 
         callerActivity.startActivity(maoniIntent);
+    }
+
+
+    public Maoni unregisterListener() {
+        getInstance().setListener(null);
+        return this;
+    }
+
+    public Maoni unregisterUiListener() {
+        getInstance().setUiListener(null);
+        return this;
+    }
+
+    public Maoni unregisterValidator() {
+        getInstance().setValidator(null);
+        return this;
+    }
+
+    public Maoni unregisterHandler() {
+        return this.unregisterListener()
+                .unregisterUiListener()
+                .unregisterValidator();
+    }
+
+    public Maoni clear() {
+        return this.unregisterHandler();
     }
 
     /**
@@ -649,6 +686,12 @@ public class Maoni {
         public CallbacksConfiguration setUiListener(@Nullable final UiListener uiListener) {
             this.uiListener = uiListener;
             return this;
+        }
+
+        public CallbacksConfiguration reset() {
+            return this.setUiListener(null)
+                    .setListener(null)
+                    .setValidator(null);
         }
     }
 

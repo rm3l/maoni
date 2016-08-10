@@ -43,6 +43,8 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
     private static final String MY_FILE_PROVIDER_AUTHORITY =
             (BuildConfig.APPLICATION_ID + ".fileprovider");
 
+    private Maoni mMaoni;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,28 +55,40 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
+        final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(this);
+        final Maoni.Builder maoniBuilder = new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
+                .withWindowTitle("Feedback") //Set to an empty string to clear it
+                .withMessage("Hey! Love or hate this app? We would love to hear from you.\n\n" +
+                        "Note: Almost everything in Maoni is customizable.")
+                .withExtraLayout(R.layout.my_feedback_activity_extra_content)
+                .withFeedbackContentHint("[Custom hint] Write your feedback here")
+                .withIncludeLogsText("[Custom text] Include system logs")
+                .withIncludeScreenshotText("[Custom text] Include screenshot")
+                .withTouchToPreviewScreenshotText("Touch To Preview")
+                .withContentErrorMessage("Custom error message")
+                .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...");
+
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
-            final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(this);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
-                            .withWindowTitle("Feedback") //Set to an empty string to clear it
-                            .withMessage("Hey! Love or hate this app? We would love to hear from you.\n\n" +
-                                    "Note: Almost everything in Maoni is customizable.")
-                            .withExtraLayout(R.layout.my_feedback_activity_extra_content)
-                            .withHandler(handlerForMaoni)
-                            .withFeedbackContentHint("[Custom hint] Write your feedback here")
-                            .withIncludeScreenshotText("[Custom text] Include screenshot")
-                            .withTouchToPreviewScreenshotText("Touch To Preview")
-                            .withContentErrorMessage("Custom error message")
-                            .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
-                            .build()
-                            .start(MaoniSampleMainActivity.this);
+                    // MaoniActivity de-registers handlers, listeners and validators upon activity destroy,
+                    // so we need to re-register it again by reconstructing a new Maoni instance.
+                    //Also, Maoni.start(...) cannot be called twice,
+                    // but we are reusing the Builder to construct a new instance along with its handler.
+                    mMaoni = maoniBuilder.withHandler(handlerForMaoni).build();
+                    mMaoni.start(MaoniSampleMainActivity.this);
                 }
             });
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        //Clear strong references used in Maoni, by de-registering any handlers, listeners and validators
+        mMaoni.clear();
+        super.onDestroy();
     }
 
     @Override

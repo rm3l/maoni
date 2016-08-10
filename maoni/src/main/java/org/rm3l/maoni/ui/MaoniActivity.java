@@ -56,6 +56,7 @@ import org.rm3l.maoni.common.contract.UiListener;
 import org.rm3l.maoni.common.contract.Validator;
 import org.rm3l.maoni.common.model.Feedback;
 import org.rm3l.maoni.utils.LogcatUtils;
+import org.rm3l.maoni.utils.ViewUtils;
 
 import java.io.File;
 import java.util.UUID;
@@ -264,9 +265,11 @@ public class MaoniActivity extends AppCompatActivity {
                 if (screenshotContentView != null) {
                     screenshotContentView.setVisibility(View.VISIBLE);
                 }
-                final Bitmap mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                 if (screenshotThumb != null) {
-                    screenshotThumb.setImageBitmap(mBitmap);
+                    //Thumbnail - load with smaller resolution so as to reduce memory footprint
+                    screenshotThumb.setImageBitmap(
+                            ViewUtils.decodeSampledBitmapFromFilePath(
+                                    file.getAbsolutePath(), 100, 100));
                 }
 
                 // Hook up clicks on the thumbnail views.
@@ -299,7 +302,7 @@ public class MaoniActivity extends AppCompatActivity {
 
                             final ImageView imageView = (ImageView)
                                     imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image);
-                            imageView.setImageBitmap(mBitmap);
+                            imageView.setImageURI(Uri.fromFile(file));
                             imageView.setOnClickListener(clickListener);
                             imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_close)
                                     .setOnClickListener(clickListener);
@@ -367,6 +370,12 @@ public class MaoniActivity extends AppCompatActivity {
         if (uiListener != null) {
             uiListener.onCreate(mRootView, savedInstanceState);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        CallbacksConfiguration.getInstance().reset();
+        super.onDestroy();
     }
 
     @Override
