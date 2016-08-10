@@ -125,7 +125,7 @@ I decided to create Maoni as a separate library project.</p>
 
 <div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
     <span class="pl-c">// ...</span>
-    compile (<span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni:2.0.1@aar<span class="pl-pds">'</span></span>) {
+    compile (<span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni:2.2.0@aar<span class="pl-pds">'</span></span>) {
         transitive <span class="pl-k">=</span> <span class="pl-c1">true</span>;
     }
   }</pre></div>
@@ -143,12 +143,12 @@ within your application workflow (for example a button click listener, or a touc
 
 <div class="highlight highlight-source-java"><pre>    <span class="pl-c">// MyHandlerForMaoni is a custom implementation of Handler, </span>
     <span class="pl-c">// which is a shortcut interface for defining both a validator and listeners for Maoni</span>
-    <span class="pl-k">final</span> <span class="pl-smi">MyHandlerForMaoni</span> handlerForMaoni <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MyHandlerForMaoni</span>(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>);
+    <span class="pl-k">final</span> <span class="pl-smi">MyHandlerForMaoni</span> myHandlerForMaoni <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MyHandlerForMaoni</span>(<span class="pl-c1">...</span>);
 
     <span class="pl-c">//The optional file provider authority allows you to </span>
     <span class="pl-c">//share the screenshot capture file to other apps (depending on your callback implementation)</span>
     <span class="pl-k">new</span> <span class="pl-smi">Maoni</span>.<span class="pl-smi">Builder</span>(<span class="pl-c1">MY_FILE_PROVIDER_AUTHORITY</span>)
-        .withHandler(myHandlerForMaoniInstance) <span class="pl-c">//Custom Callback for Maoni</span>
+        .withHandler(myHandlerForMaoni) <span class="pl-c">//Custom Callback for Maoni</span>
         .build()
         .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling context </span></pre></div>
 
@@ -164,7 +164,7 @@ within your application workflow (for example a button click listener, or a touc
         .withWindowTitle(<span class="pl-s"><span class="pl-pds">"</span>Send Feedback<span class="pl-pds">"</span></span>) <span class="pl-c">//Set to an empty string to clear it</span>
         .withMessage(<span class="pl-s"><span class="pl-pds">"</span>Hey! Love or hate this app? We would love to hear from you.<span class="pl-pds">"</span></span>)
         .withExtraLayout(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>my_feedback_activity_extra_content)
-        .withHandler(myHandlerForMaoniInstance) <span class="pl-c">//Custom Callback for Maoni</span>
+        .withHandler(handlerForMaoni) <span class="pl-c">//Custom Callback for Maoni</span>
         .withFeedbackContentHint(<span class="pl-s"><span class="pl-pds">"</span>[Custom hint] Write your feedback here<span class="pl-pds">"</span></span>)
         .withIncludeScreenshotText(<span class="pl-s"><span class="pl-pds">"</span>[Custom text] Include screenshot<span class="pl-pds">"</span></span>)
         .withTouchToPreviewScreenshotText(<span class="pl-s"><span class="pl-pds">"</span>Touch To Preview<span class="pl-pds">"</span></span>)
@@ -191,7 +191,7 @@ and call your callbacks implementations. </p>
 
 <div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
     <span class="pl-c">// ...</span>
-    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni-email:2.0.1<span class="pl-pds">'</span></span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni-email:2.2.0<span class="pl-pds">'</span></span>
   }</pre></div>
 
 <p>And set it as the listener for your Maoni instance:</p>
@@ -279,7 +279,7 @@ so users can use them in their projects.</p>
 
 <div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
     <span class="pl-c">// ...</span>
-    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni-common:2.0.1<span class="pl-pds">'</span></span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni-common:2.2.0<span class="pl-pds">'</span></span>
   }</pre></div>
 
 <h2>
@@ -302,6 +302,7 @@ so users can use them in their projects.</p>
 <li>
 <a href="https://rm3l.org">rm3l.org</a> - &lt;<a href="mailto:apps+maoni@rm3l.org">apps+maoni@rm3l.org</a>&gt;</li>
 <li><a href="https://paypal.me/rm3l">paypal.me/rm3l</a></li>
+<li><a href="https://www.coinbase.com/rm3l">coinbase.com/rm3l</a></li>
 </ul>
 </li>
 </ul>
