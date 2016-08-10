@@ -24,10 +24,10 @@ Maoni will take care of collecting your users' feedbacks and call those implemen
 Below is a quick overview of the features included:
 - **Contextual information**. Device and application information, if available.
     - Device screen resolution, mobile data and GPS states, ...
-- **Screenshot capture**. 
+- **Screenshot and logs capture**. 
     - Because receiving a feedback with contextual information is much much 
-    better for analysis, Maoni allows to take a screenshot of the calling activity. 
-    Note that the inclusion of such screenshot in the feedback object is opt-out, at the user's discretion.
+    better for analysis, Maoni allows to take a screen capture of the calling activity, along with the application logs.
+    Note that the inclusion of such screenshot and logs in the feedback object is opt-out, at the user's discretion.
     - Touch to preview screenshot
 - **Customization**.
     - Besides the default form fields, you are free to include an extra layout 
