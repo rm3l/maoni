@@ -53,6 +53,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
+    compile 'me.panavtec:drawableview:0.6.0'
 }
 
 task generateSourcesJar(type: Jar) {

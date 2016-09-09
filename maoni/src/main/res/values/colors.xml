@@ -44,6 +44,9 @@ SOFTWARE.
     <color name="maoni_opaque_full">#FF000000</color>
     <color name="maoni_transparent_semi">#80000000</color>
 
+
+    <color name="maoni_yellow_transparent_semi">#7FFFFF00</color>
+
     <!-- AboutLibraries DEFAULT colors -->
     <color name="maoni_window_background">#ECECEC</color>
     <color name="maoni_card">#FAFAFA</color>

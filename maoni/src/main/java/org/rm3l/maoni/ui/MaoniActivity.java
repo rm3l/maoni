@@ -26,12 +26,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +64,9 @@ import org.rm3l.maoni.utils.ViewUtils;
 
 import java.io.File;
 import java.util.UUID;
+
+import me.panavtec.drawableview.DrawableView;
+import me.panavtec.drawableview.DrawableViewConfig;
 
 /**
  * Maoni Activity
@@ -126,6 +133,9 @@ public class MaoniActivity extends AppCompatActivity {
     private Validator mValidator;
     private Listener mListener;
 
+    private int mHighlightColor;
+    private int mBlackoutColor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -142,6 +152,9 @@ public class MaoniActivity extends AppCompatActivity {
             throw new IllegalStateException(
                     "Layout must contain a root view with the following id: maoni_container");
         }
+
+        mHighlightColor = ContextCompat.getColor(this, R.color.maoni_yellow_transparent_semi);
+        mBlackoutColor = ContextCompat.getColor(this, R.color.maoni_black);
 
         if (intent.hasExtra(WORKING_DIR)) {
             mWorkingDir = new File(intent.getStringExtra(WORKING_DIR));
@@ -244,92 +257,8 @@ public class MaoniActivity extends AppCompatActivity {
             mIncludeScreenshot.setText(intent.getCharSequenceExtra(INCLUDE_SCREENSHOT_TEXT));
         }
 
-        final ImageButton screenshotThumb = (ImageButton)
-                findViewById(R.id.maoni_screenshot);
-
-        final TextView touchToPreviewTextView =
-                (TextView) findViewById(R.id.maoni_screenshot_touch_to_preview);
-        if (touchToPreviewTextView != null && intent.hasExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT)) {
-            touchToPreviewTextView.setText(
-                    intent.getCharSequenceExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT));
-        }
-
-        final View screenshotContentView = findViewById(R.id.maoni_include_screenshot_content);
         mScreenshotFilePath = intent.getCharSequenceExtra(SCREENSHOT_FILE);
-        if (!TextUtils.isEmpty(mScreenshotFilePath)) {
-            final File file = new File(mScreenshotFilePath.toString());
-            if (file.exists()) {
-                if (mIncludeScreenshot != null) {
-                    mIncludeScreenshot.setVisibility(View.VISIBLE);
-                }
-                if (screenshotContentView != null) {
-                    screenshotContentView.setVisibility(View.VISIBLE);
-                }
-                if (screenshotThumb != null) {
-                    //Thumbnail - load with smaller resolution so as to reduce memory footprint
-                    screenshotThumb.setImageBitmap(
-                            ViewUtils.decodeSampledBitmapFromFilePath(
-                                    file.getAbsolutePath(), 100, 100));
-                }
-
-                // Hook up clicks on the thumbnail views.
-                if (screenshotThumb != null) {
-                    screenshotThumb.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            final Dialog imagePreviewDialog = new Dialog(MaoniActivity.this);
-
-                            imagePreviewDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            imagePreviewDialog.getWindow().setBackgroundDrawable(
-                                    new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                            imagePreviewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                @Override
-                                public void onDismiss(DialogInterface dialogInterface) {
-                                    //nothing;
-                                }
-                            });
-
-                            imagePreviewDialog.setContentView(R.layout.maoni_screenshot_preview);
-
-                            final View.OnClickListener clickListener = new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    imagePreviewDialog.dismiss();
-                                }
-                            };
-
-                            final ImageView imageView = (ImageView)
-                                    imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image);
-                            imageView.setImageURI(Uri.fromFile(file));
-                            imageView.setOnClickListener(clickListener);
-                            imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_close)
-                                    .setOnClickListener(clickListener);
-
-                            imagePreviewDialog.setCancelable(true);
-                            imagePreviewDialog.setCanceledOnTouchOutside(true);
-
-                            imagePreviewDialog.show();
-                        }
-                    });
-                }
-            } else {
-                if (mIncludeScreenshot != null) {
-                    mIncludeScreenshot.setVisibility(View.GONE);
-                }
-                if (screenshotContentView != null) {
-                    screenshotContentView.setVisibility(View.GONE);
-                }
-            }
-        } else {
-            if (mIncludeScreenshot != null) {
-                mIncludeScreenshot.setVisibility(View.GONE);
-            }
-            if (screenshotContentView != null) {
-                screenshotContentView.setVisibility(View.GONE);
-            }
-        }
+        initScreenCaptureView(intent);
 
         mFeedbackUniqueId = UUID.randomUUID().toString();
 
@@ -369,6 +298,142 @@ public class MaoniActivity extends AppCompatActivity {
         final UiListener uiListener = maoniConfiguration.getUiListener();
         if (uiListener != null) {
             uiListener.onCreate(mRootView, savedInstanceState);
+        }
+    }
+
+    private void initScreenCaptureView(@NonNull final Intent intent) {
+        final ImageButton screenshotThumb = (ImageButton)
+                findViewById(R.id.maoni_screenshot);
+
+        final TextView touchToPreviewTextView =
+                (TextView) findViewById(R.id.maoni_screenshot_touch_to_preview);
+        if (touchToPreviewTextView != null && intent.hasExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT)) {
+            touchToPreviewTextView.setText(
+                    intent.getCharSequenceExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT));
+        }
+
+        final View screenshotContentView = findViewById(R.id.maoni_include_screenshot_content);
+        if (!TextUtils.isEmpty(mScreenshotFilePath)) {
+            final File file = new File(mScreenshotFilePath.toString());
+            if (file.exists()) {
+                if (mIncludeScreenshot != null) {
+                    mIncludeScreenshot.setVisibility(View.VISIBLE);
+                }
+                if (screenshotContentView != null) {
+                    screenshotContentView.setVisibility(View.VISIBLE);
+                }
+                if (screenshotThumb != null) {
+                    //Thumbnail - load with smaller resolution so as to reduce memory footprint
+                    screenshotThumb.setImageBitmap(
+                            ViewUtils.decodeSampledBitmapFromFilePath(
+                                    file.getAbsolutePath(), 100, 100));
+                }
+
+                // Hook up clicks on the thumbnail views.
+                if (screenshotThumb != null) {
+                    screenshotThumb.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            final Dialog imagePreviewDialog = new Dialog(MaoniActivity.this);
+
+                            imagePreviewDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            imagePreviewDialog.getWindow().setBackgroundDrawable(
+                                    new ColorDrawable(Color.TRANSPARENT));
+
+                            imagePreviewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    //nothing;
+                                }
+                            });
+
+                            imagePreviewDialog.setContentView(R.layout.maoni_screenshot_preview);
+
+                            final View.OnClickListener clickListener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    imagePreviewDialog.dismiss();
+                                }
+                            };
+
+                            final ImageView imageView = (ImageView)
+                                    imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image);
+                            imageView.setImageURI(Uri.fromFile(file));
+                            final Drawable imageViewDrawable = imageView.getDrawable();
+
+                            final DrawableView drawableView = (DrawableView)
+                                    imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image_drawable_view);
+                            final DrawableViewConfig config = new DrawableViewConfig();
+                            config.setShowCanvasBounds(true); // If the view is bigger than canvas, with this the user will see the bounds (Recommended)
+                            config.setStrokeWidth(40.0f);
+                            config.setMinZoom(1.0f);
+                            config.setMaxZoom(3.0f);
+                            config.setCanvasHeight(imageViewDrawable.getIntrinsicHeight());
+                            config.setCanvasWidth(imageViewDrawable.getIntrinsicWidth());
+                            config.setStrokeColor(mHighlightColor);
+                            drawableView.setConfig(config);
+                            drawableView.bringToFront();
+
+                            imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_pick_highlight_color)
+                                    .setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            config.setStrokeColor(mHighlightColor);
+                                        }
+                                    });
+                            imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_pick_blackout_color)
+                                    .setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            config.setStrokeColor(mBlackoutColor);
+                                        }
+                                    });
+                            imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_close)
+                                    .setOnClickListener(clickListener);
+
+                            imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_undo)
+                                    .setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            drawableView.undo();
+                                        }
+                                    });
+
+                            imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_save)
+                                    .setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            ViewUtils.exportViewToFile(MaoniActivity.this,
+                                                    imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image_view_updated),
+                                                    new File(mScreenshotFilePath.toString()));
+                                            initScreenCaptureView(intent);
+                                            imagePreviewDialog.dismiss();
+                                        }
+                                    });
+
+                            imagePreviewDialog.setCancelable(true);
+                            imagePreviewDialog.setCanceledOnTouchOutside(false);
+
+                            imagePreviewDialog.show();
+                        }
+                    });
+                }
+            } else {
+                if (mIncludeScreenshot != null) {
+                    mIncludeScreenshot.setVisibility(View.GONE);
+                }
+                if (screenshotContentView != null) {
+                    screenshotContentView.setVisibility(View.GONE);
+                }
+            }
+        } else {
+            if (mIncludeScreenshot != null) {
+                mIncludeScreenshot.setVisibility(View.GONE);
+            }
+            if (screenshotContentView != null) {
+                screenshotContentView.setVisibility(View.GONE);
+            }
         }
     }
 
