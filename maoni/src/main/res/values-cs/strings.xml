@@ -36,4 +36,9 @@ SOFTWARE.
   <string name="maoni_header">Header</string>
   <string name="maoni_screenshot_preview_internal_error">Internal Error. Please try again later.</string>
   <string name="maoni_screenshot_preview">Preview</string>
+  <string name="maoni_highlight">Highlight</string>
+  <string name="maoni_blackout">Blackout</string>
+  <string name="maoni_undo">Undo</string>
+  <string name="maoni_save">Save</string>
+  <string name="maoni_close">Close</string>
 </resources>
