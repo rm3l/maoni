@@ -29,6 +29,8 @@ Below is a quick overview of the features included:
     better for analysis, Maoni allows to take a screen capture of the calling activity, along with the application logs.
     Note that the inclusion of such screenshot and logs in the feedback object is opt-out, at the user's discretion.
     - Touch to preview screenshot
+    - Ability for users of your app to highlight or blackout items in the screen capture. They may choose to 
+    highlight relevant items or blackout any sensitive information.
 - **Customization**.
     - Besides the default form fields, you are free to include an extra layout 
     with additional views. And you always have access to the underlying view elements.
@@ -50,11 +52,13 @@ along with some contextual information.
 I experimented with a simple dialog, then tried a bunch of other libraries, 
 but could not find one with screenshot capturing capabilities, not vendor lock-in, 
 and which is almost a no-brainer as to integrating with any remote services.
+I was also looking for screen capture highlight / blackout capability, in use for issue reporting in 
+several apps from Google.
 
 So as a way to give back to the Open Source community, 
 I decided to create Maoni as a separate library project.
 
-As a side note, Maoni is a Swahili word for comments or opinions.
+By the way, as a side note, Maoni is a Swahili word for comments or opinions.
 
 
 ## Sample App
@@ -70,9 +74,9 @@ As a side note, Maoni is a Swahili word for comments or opinions.
 <div align="center">
     <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/1_Maoni_main_activity.png"/>
     <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/2_Maoni_main_activity_with_screenshot_thumbnail.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/2_Maoni_main_activity_with_screenshot_logs_thumbnail.png"/>
     <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview_highlight_blackout.png"/>
 </div>
 
 
@@ -83,7 +87,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:2.2.0@aar') {
+    compile ('org.rm3l:maoni:2.3.0@aar') {
         transitive = true;
     }
   }
@@ -149,7 +153,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-email:2.2.0'
+    compile 'org.rm3l:maoni-email:2.3.0'
   }
 ```
 
@@ -242,7 +246,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:2.2.0'
+    compile 'org.rm3l:maoni-common:2.3.0'
   }
 ```
 
