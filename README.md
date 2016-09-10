@@ -64,7 +64,7 @@ to be able to reproduce the issue.
 
 * Armel Soro
  * [keybase.io/rm3l](https://keybase.io/rm3l)
- * [rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt;
+ * [rm3l.org](https://rm3l.org) - &lt;apps+maoni-email@rm3l.org&gt; - [@rm3l](https://twitter.com/rm3l)
  * [paypal.me/rm3l](https://paypal.me/rm3l)
  * [coinbase.com/rm3l](https://www.coinbase.com/rm3l)
 
