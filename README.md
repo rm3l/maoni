@@ -60,8 +60,7 @@ You can use [GitHub issues](https://github.com/rm3l/maoni-email/issues) to repor
 However, please make sure your description is clear enough and has sufficient instructions 
 to be able to reproduce the issue.
 
-
-## Credits
+## Developed by
 
 * Armel Soro
  * [keybase.io/rm3l](https://keybase.io/rm3l)
