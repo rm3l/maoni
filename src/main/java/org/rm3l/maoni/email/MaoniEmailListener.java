@@ -158,7 +158,6 @@ public class MaoniEmailListener implements Listener {
                 mContext.grantUriPermission(componentName.getPackageName(),
                         feedback.screenshotFileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 attachmentsUris.add(feedback.screenshotFileUri);
-//                intent.putExtra(Intent.EXTRA_STREAM, feedback.screenshotFileUri);
             }
             //Add logs file as attachment
             if (feedback.logsFileUri != null) {
@@ -166,7 +165,6 @@ public class MaoniEmailListener implements Listener {
                 mContext.grantUriPermission(componentName.getPackageName(),
                         feedback.logsFileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 attachmentsUris.add(feedback.logsFileUri);
-//                intent.putExtra(Intent.EXTRA_STREAM, feedback.logsFileUri);
             }
             if (!attachmentsUris.isEmpty()) {
                 intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, attachmentsUris);
