@@ -149,7 +149,7 @@ public class MaoniActivity extends AppCompatActivity {
                     "Layout must contain a root view with the following id: maoni_container");
         }
 
-        mHighlightColor = ContextCompat.getColor(this, R.color.maoni_yellow_transparent_semi);
+        mHighlightColor = ContextCompat.getColor(this, R.color.maoni_highlight_transparent_semi);
         mBlackoutColor = ContextCompat.getColor(this, R.color.maoni_black);
 
         if (intent.hasExtra(WORKING_DIR)) {
