@@ -147,7 +147,7 @@ and call your callbacks implementations.
 #### Available callbacks
 Some common callbacks for Maoni are available as external dependencies to include in your application.
 
-##### maoni-email
+##### [maoni-email](https://github.com/rm3l/maoni-email)
 
 This callback opens up an Intent for sending an email with the feedback collected.
 
@@ -264,8 +264,14 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 
 ## Credits
 
+* [DrawableView](https://github.com/PaNaVTEC/DrawableView), by [Christian Panadero Martinez](https://github.com/PaNaVTEC)
+
+
+## Developed by
+
 * Armel Soro
- * [rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt;
+ * [keybase.io/rm3l](https://keybase.io/rm3l)
+ * [rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt; - [@rm3l](https://twitter.com/rm3l)
  * [paypal.me/rm3l](https://paypal.me/rm3l)
  * [coinbase.com/rm3l](https://www.coinbase.com/rm3l)
 
