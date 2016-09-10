@@ -28,7 +28,7 @@ targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
 
 group = 'org.rm3l'
-version = '2.3.0'
+version = '2.3.1'
 
 final homePath = System.properties['user.home']
 
@@ -92,10 +92,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '2.3.0'
+            name = '2.3.1'
             desc = 'Maoni Common'
             released = new Date()
-            vcsTag = '2.3.0'
+            vcsTag = '2.3.1'
         }
 
         publicDownloadNumbers = true
