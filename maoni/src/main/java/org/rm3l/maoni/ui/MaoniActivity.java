@@ -24,13 +24,9 @@ package org.rm3l.maoni.ui;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -360,18 +356,19 @@ public class MaoniActivity extends AppCompatActivity {
                             final ImageView imageView = (ImageView)
                                     imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image);
                             imageView.setImageURI(Uri.fromFile(file));
-                            final Drawable imageViewDrawable = imageView.getDrawable();
 
                             final DrawableView drawableView = (DrawableView)
                                     imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image_drawable_view);
                             final DrawableViewConfig config = new DrawableViewConfig();
-                            config.setShowCanvasBounds(true); // If the view is bigger than canvas, with this the user will see the bounds (Recommended)
-                            config.setStrokeWidth(40.0f);
+                            // If the view is bigger than canvas, with this the user will see the bounds
+                            config.setShowCanvasBounds(true);
+                            config.setStrokeWidth(57.0f);
                             config.setMinZoom(1.0f);
                             config.setMaxZoom(3.0f);
-                            config.setCanvasHeight(imageViewDrawable.getIntrinsicHeight());
-                            config.setCanvasWidth(imageViewDrawable.getIntrinsicWidth());
                             config.setStrokeColor(mHighlightColor);
+                            final View decorView = getWindow().getDecorView();
+                            config.setCanvasWidth(decorView.getWidth());
+                            config.setCanvasHeight(decorView.getHeight());
                             drawableView.setConfig(config);
                             drawableView.bringToFront();
 
