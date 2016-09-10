@@ -71,6 +71,9 @@ By the way, as a side note, Maoni is a Swahili word for comments or opinions.
 
 ## Screenshots
 
+<img width="40%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/maoni_2.3.1.gif"/>
+    
+<!--
 <div align="center">
     <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/1_Maoni_main_activity.png"/>
     <img height="0" width="8px"/>
@@ -78,7 +81,7 @@ By the way, as a side note, Maoni is a Swahili word for comments or opinions.
     <img height="0" width="8px"/>
     <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview_highlight_blackout.png"/>
 </div>
-
+-->
 
 ## Getting started
 
