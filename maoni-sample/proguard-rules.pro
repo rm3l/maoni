@@ -44,3 +44,21 @@
 -keep class **.R$* {
     <fields>;
 }
+
+# Maoni
+-keep class me.panavtec.drawableview.** { *; }
+-keep class me.panavtec.drawableview.gestures.** { *; }
+-dontwarn me.panavtec.drawableview.internal.**
+
+
+-dontwarn java.awt.**
+-dontwarn javax.swing.**
+-dontwarn javax.jms.**
+-dontwarn javax.naming.**
+-dontwarn javax.mail.**
+-dontwarn java.beans.**
+-dontwarn java.management.**
+
+-dontwarn com.google.vending.licensing.**
+
+-dontwarn org.apache.log4j.**
