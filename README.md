@@ -260,6 +260,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 (or again, fork, modify this file and submit a pull request), so I can list your app(s) here)
 
 * [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt)
+* [DD-WRT Companion Tasker Plugin](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt.tasker)
 
 
 ## Credits
