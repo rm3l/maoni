@@ -1,5 +1,6 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Maoni-blue.svg?style=flat)](http://android-arsenal.com/details/1/3925) 
 [![Website](https://img.shields.io/website-up-down-green-red/http/maoni.rm3l.org.svg)](http://maoni.rm3l.org) 
+[![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni/blob/master/LICENSE) 
 [![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni) 
 [![Travis branch](https://img.shields.io/travis/rm3l/maoni/master.svg)](https://travis-ci.org/rm3l/maoni) 
@@ -45,8 +46,6 @@ for a quick overview.
 
 
 ## Motivations
-
-[![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 While working on a new version of [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt), 
 one my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
