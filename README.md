@@ -46,6 +46,8 @@ for a quick overview.
 
 ## Motivations
 
+[![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 While working on a new version of [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt), 
 one my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
 along with some contextual information.
