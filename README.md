@@ -19,6 +19,8 @@ It aims at opening up an Android email Intent, so users can send their feedback 
 
 ## Getting started
 
+[![Join the chat at https://gitter.im/rm3l/maoni-email](https://badges.gitter.im/rm3l/maoni-email.svg)](https://gitter.im/rm3l/maoni-email?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Grab via Gradle, by adding this to your `build.gradle`:
 
 ```gradle
