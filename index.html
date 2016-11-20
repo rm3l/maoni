@@ -21,6 +21,7 @@
     <section class="main-content">
       <p><a href="http://android-arsenal.com/details/1/3925"><img src="https://img.shields.io/badge/Android%20Arsenal-Maoni-blue.svg?style=flat" alt="Android Arsenal"></a> 
 <a href="http://maoni.rm3l.org"><img src="https://img.shields.io/website-up-down-green-red/http/maoni.rm3l.org.svg" alt="Website"></a> 
+<a href="https://gitter.im/rm3l/maoni?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/rm3l/maoni.svg" alt="Join the chat at https://gitter.im/rm3l/maoni"></a> 
 <a href="https://github.com/rm3l/maoni/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat" alt="License"></a> 
 <a href="https://bintray.com/rm3l/maven/org.rm3l%3Amaoni"><img src="https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni.svg" alt="Bintray"></a> 
 <a href="https://travis-ci.org/rm3l/maoni"><img src="https://img.shields.io/travis/rm3l/maoni/master.svg" alt="Travis branch"></a> 
@@ -90,13 +91,13 @@ for a quick overview.</p>
 <h2>
 <a id="motivations" class="anchor" href="#motivations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivations</h2>
 
-<p>While working on a new version of <a href="https://play.google.com/store/apps/details?id=org.rm3l.ddwrt">DD-WRT Companion</a>, 
-one my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
+<p>While working on a new version of <a href="http://ddwrt-companion.rm3l.org/">DD-WRT Companion</a>, 
+one of my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
 along with some contextual information.
 I experimented with a simple dialog, then tried a bunch of other libraries, 
 but could not find one with screenshot capturing capabilities, not vendor lock-in, 
 and which is almost a no-brainer as to integrating with any remote services.
-I was also looking for screen capture highlight / blackout capability, in use for issue reporting in 
+I was also looking for screen capture highlight / blackout capabilities, as in use for issue reporting in 
 several apps from Google.</p>
 
 <p>So as a way to give back to the Open Source community, 
@@ -150,13 +151,13 @@ within your application workflow (for example a button click listener, or a touc
     <span class="pl-k">new</span> <span class="pl-smi">Maoni</span>.<span class="pl-smi">Builder</span>(<span class="pl-c1">MY_FILE_PROVIDER_AUTHORITY</span>)
         .withHandler(myHandlerForMaoni) <span class="pl-c">//Custom Callback for Maoni</span>
         .build()
-        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling context </span></pre></div>
+        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling activity </span></pre></div>
 
 <p>To customize every aspect of your Maoni activity, call the fluent methods of <code>Maoni.Builder</code>, e.g.:</p>
 
 <div class="highlight highlight-source-java"><pre>    <span class="pl-c">// MyHandlerForMaoni is a custom implementation of Maoni.Handler, </span>
     <span class="pl-c">// which is a shortcut interface for defining both a validator and listeners for Maoni</span>
-    <span class="pl-k">final</span> <span class="pl-smi">MyHandlerForMaoni</span> handlerForMaoni <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MyHandlerForMaoni</span>(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>);
+    <span class="pl-k">final</span> <span class="pl-smi">MyHandlerForMaoni</span> myHandlerForMaoni <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MyHandlerForMaoni</span>(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>);
 
     <span class="pl-c">//The optional file provider authority allows you to </span>
     <span class="pl-c">//share the screenshot capture file to other apps (depending on your callback implementation)</span>
@@ -164,7 +165,7 @@ within your application workflow (for example a button click listener, or a touc
         .withWindowTitle(<span class="pl-s"><span class="pl-pds">"</span>Send Feedback<span class="pl-pds">"</span></span>) <span class="pl-c">//Set to an empty string to clear it</span>
         .withMessage(<span class="pl-s"><span class="pl-pds">"</span>Hey! Love or hate this app? We would love to hear from you.<span class="pl-pds">"</span></span>)
         .withExtraLayout(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>my_feedback_activity_extra_content)
-        .withHandler(handlerForMaoni) <span class="pl-c">//Custom Callback for Maoni</span>
+        .withHandler(myHandlerForMaoni) <span class="pl-c">//Custom Callback for Maoni</span>
         .withFeedbackContentHint(<span class="pl-s"><span class="pl-pds">"</span>[Custom hint] Write your feedback here<span class="pl-pds">"</span></span>)
         .withIncludeScreenshotText(<span class="pl-s"><span class="pl-pds">"</span>[Custom text] Include screenshot<span class="pl-pds">"</span></span>)
         .withTouchToPreviewScreenshotText(<span class="pl-s"><span class="pl-pds">"</span>Touch To Preview<span class="pl-pds">"</span></span>)
@@ -172,7 +173,7 @@ within your application workflow (for example a button click listener, or a touc
         .withScreenshotHint(<span class="pl-s"><span class="pl-pds">"</span>Custom test: Lorem Ipsum Dolor Sit Amet...<span class="pl-pds">"</span></span>)
         <span class="pl-c">//... there are other aspects you can customize</span>
         .build()
-        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling context </span></pre></div>
+        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling activity </span></pre></div>
 
 <p><strong>You're good to go!</strong> Maoni will take care of validating / collecting your users' feedbacks 
 and call your callbacks implementations. </p>
@@ -197,21 +198,21 @@ and call your callbacks implementations. </p>
 
 <p>And set it as the listener for your Maoni instance:</p>
 
-<div class="highlight highlight-source-java"><pre>    <span class="pl-k">final</span> <span class="pl-smi">org.rm3l.maoni.email<span class="pl-k">.</span>MaoniEmailListener</span> listenerForMaoni <span class="pl-k">=</span> 
+<div class="highlight highlight-source-java"><pre>    <span class="pl-k">final</span> <span class="pl-smi">org.rm3l.maoni.email<span class="pl-k">.</span>MaoniEmailListener</span> emailListenerForMaoni <span class="pl-k">=</span> 
             <span class="pl-k">new</span> <span class="pl-smi">org.rm3l.maoni.email<span class="pl-k">.</span>MaoniEmailListener</span>(<span class="pl-c1">...</span>);
 
     <span class="pl-k">new</span> <span class="pl-smi">Maoni</span>.<span class="pl-smi">Builder</span>(<span class="pl-c1">MY_FILE_PROVIDER_AUTHORITY</span>)
-        .withListener(listenerForMaoni) <span class="pl-c">//Callback from maoni-email</span>
+        .withListener(emailListenerForMaoni) <span class="pl-c">//Callback from maoni-email</span>
         <span class="pl-c">//...</span>
         .build()
-        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling context </span></pre></div>
+        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling activity </span></pre></div>
 
 <h4>
 <a id="sharing-the-screenshot-with-other-apps" class="anchor" href="#sharing-the-screenshot-with-other-apps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sharing the screenshot with other apps</h4>
 
-<p>The optional file provider authority specified in the <code>Maoni.Builder</code> constructor allows you to 
-share the screenshot capture file to other apps (depending on your callback implementation).
-By default, Maoni stores the screenshot file in your application cache directory, 
+<p>The file provider authority specified in the <code>Maoni.Builder</code> constructor allows you to 
+share the screenshot capture and logs files to other apps (depending on your callback implementation).
+By default, Maoni stores the files captured in your application cache directory, 
 but this is (again) entirely customizable.</p>
 
 <p>You must declare a file content provider in your <code>AndroidManifest.xml</code> file with an explicit list 
@@ -235,7 +236,7 @@ For example:</p>
 <p>Along with the XML file that specifies the sharable directories (under <code>res/xml/filepaths.xml</code> as specified above):</p>
 
 <div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">paths</span>&gt;
-    <span class="pl-c">&lt;!-- By default, Maoni stores screenshots captures in the application cache directory. </span>
+    <span class="pl-c">&lt;!-- By default, Maoni stores files captured (screenshots and logs) in the application cache directory. </span>
 <span class="pl-c">    So you must declare the path '.' as shareable. Specify something else if you are using a different path --&gt;</span>
     &lt;<span class="pl-ent">cache-path</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>maoni-shares<span class="pl-pds">"</span></span> <span class="pl-e">path</span>=<span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span> /&gt;
     <span class="pl-c">&lt;!-- &lt;files-path path="maoni-working-dir/" name="myCustomWorkingDirForMaoni" /&gt; --&gt;</span>
@@ -290,7 +291,8 @@ so users can use them in their projects.</p>
 (or again, fork, modify this file and submit a pull request), so I can list your app(s) here)</p>
 
 <ul>
-<li><a href="https://play.google.com/store/apps/details?id=org.rm3l.ddwrt">DD-WRT Companion</a></li>
+<li><a href="http://ddwrt-companion.rm3l.org">DD-WRT Companion</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=org.rm3l.ddwrt.tasker">DD-WRT Companion Tasker Plugin</a></li>
 </ul>
 
 <h2>
