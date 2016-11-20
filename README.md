@@ -47,13 +47,13 @@ for a quick overview.
 
 ## Motivations
 
-While working on a new version of [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt), 
-one my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
+While working on a new version of [DD-WRT Companion](http://ddwrt-companion.rm3l.org/), 
+one of my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
 along with some contextual information.
 I experimented with a simple dialog, then tried a bunch of other libraries, 
 but could not find one with screenshot capturing capabilities, not vendor lock-in, 
 and which is almost a no-brainer as to integrating with any remote services.
-I was also looking for screen capture highlight / blackout capability, in use for issue reporting in 
+I was also looking for screen capture highlight / blackout capabilities, as in use for issue reporting in 
 several apps from Google.
 
 So as a way to give back to the Open Source community, 
@@ -116,14 +116,14 @@ For example, to start with just the defaults:
     new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
         .withHandler(myHandlerForMaoni) //Custom Callback for Maoni
         .build()
-        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
 To customize every aspect of your Maoni activity, call the fluent methods of `Maoni.Builder`, e.g.:
 ```java
     // MyHandlerForMaoni is a custom implementation of Maoni.Handler, 
     // which is a shortcut interface for defining both a validator and listeners for Maoni
-    final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(MaoniSampleMainActivity.this);
+    final MyHandlerForMaoni myHandlerForMaoni = new MyHandlerForMaoni(MaoniSampleMainActivity.this);
     
     //The optional file provider authority allows you to 
     //share the screenshot capture file to other apps (depending on your callback implementation)
@@ -131,7 +131,7 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
         .withWindowTitle("Send Feedback") //Set to an empty string to clear it
         .withMessage("Hey! Love or hate this app? We would love to hear from you.")
         .withExtraLayout(R.layout.my_feedback_activity_extra_content)
-        .withHandler(handlerForMaoni) //Custom Callback for Maoni
+        .withHandler(myHandlerForMaoni) //Custom Callback for Maoni
         .withFeedbackContentHint("[Custom hint] Write your feedback here")
         .withIncludeScreenshotText("[Custom text] Include screenshot")
         .withTouchToPreviewScreenshotText("Touch To Preview")
@@ -139,7 +139,7 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
         .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
         //... there are other aspects you can customize
         .build()
-        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
 **You're good to go!** Maoni will take care of validating / collecting your users' feedbacks 
@@ -163,22 +163,22 @@ Add this additional line to your `build.gradle`:
 
 And set it as the listener for your Maoni instance:
 ```java
-    final org.rm3l.maoni.email.MaoniEmailListener listenerForMaoni = 
+    final org.rm3l.maoni.email.MaoniEmailListener emailListenerForMaoni = 
             new org.rm3l.maoni.email.MaoniEmailListener(...);
     
     new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
-        .withListener(listenerForMaoni) //Callback from maoni-email
+        .withListener(emailListenerForMaoni) //Callback from maoni-email
         //...
         .build()
-        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
 
 #### Sharing the screenshot with other apps
 
-The optional file provider authority specified in the `Maoni.Builder` constructor allows you to 
-share the screenshot capture file to other apps (depending on your callback implementation).
-By default, Maoni stores the screenshot file in your application cache directory, 
+The file provider authority specified in the `Maoni.Builder` constructor allows you to 
+share the screenshot capture and logs files to other apps (depending on your callback implementation).
+By default, Maoni stores the files captured in your application cache directory, 
 but this is (again) entirely customizable.
 
 You must declare a file content provider in your `AndroidManifest.xml` file with an explicit list 
@@ -203,7 +203,7 @@ For example:
 Along with the XML file that specifies the sharable directories (under `res/xml/filepaths.xml` as specified above):
 ```xml
 <paths>
-    <!-- By default, Maoni stores screenshots captures in the application cache directory. 
+    <!-- By default, Maoni stores files captured (screenshots and logs) in the application cache directory. 
     So you must declare the path '.' as shareable. Specify something else if you are using a different path -->
     <cache-path name="maoni-shares" path="." />
     <!-- <files-path path="maoni-working-dir/" name="myCustomWorkingDirForMaoni" /> -->
@@ -260,7 +260,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 (If you use Maoni, please drop me a line at &lt;apps+maoni@rm3l.org&gt; 
 (or again, fork, modify this file and submit a pull request), so I can list your app(s) here)
 
-* [DD-WRT Companion](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt)
+* [DD-WRT Companion](http://ddwrt-companion.rm3l.org)
 * [DD-WRT Companion Tasker Plugin](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt.tasker)
 
 
