@@ -173,6 +173,32 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
+##### [maoni-doorbell](https://github.com/rm3l/maoni-doorbell)
+
+This callback sends feedback collected to [Doorbell](https://www.doorbell.io).
+
+To use it, you will need to have an account there, and grab your application ID and secret key.
+
+Add this additional line to your `build.gradle`:
+
+```gradle
+  dependencies {
+    // ...
+    compile 'org.rm3l:maoni-doorbell:<appropriateVersion>'
+  }
+```
+
+And set it as the listener for your Maoni instance:
+```java
+    final org.rm3l.maoni.doorbell.MaoniDoorbellListener doorbellListenerForMaoni = 
+            new org.rm3l.maoni.doorbell.MaoniDoorbellListener(...);
+    
+    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
+        .withListener(doorbellListenerForMaoni) //Callback from maoni-doorbell
+        //...
+        .build()
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
+```
 
 #### Sharing the screenshot with other apps
 
