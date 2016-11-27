@@ -45,6 +45,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import needle.UiRelatedProgressTask;
@@ -76,8 +77,8 @@ public class MaoniDoorbellListener implements Listener {
     private final String mApplicationKey;
     private final boolean mSkipFilesUpload;
 
-    private final String mFeedbackHeaderText;
-    private final String mFeedbackFooterText;
+    private final Callable<CharSequence> mFeedbackHeaderTextProvider;
+    private final Callable<CharSequence> mFeedbackFooterTextProvider;
 
     private final CharSequence mWaitDialogTitle;
     private final CharSequence mWaitDialogMessage;
@@ -87,7 +88,7 @@ public class MaoniDoorbellListener implements Listener {
 
     private final DoorbellService mDoorbellService;
     private final Activity mActivity;
-    private final Map<String, Object> mAdditionalPropertiesToSend;
+    private final Callable<Map<String, Object>> mAdditionalPropertiesProvider;
     private final MaoniDoorbellTransferListener mTransferListener;
 
     /**
@@ -108,14 +109,14 @@ public class MaoniDoorbellListener implements Listener {
         this.mActivity = builder.activity;
         this.mApplicationId = builder.applicationId;
         this.mApplicationKey = builder.applicationKey;
-        this.mFeedbackHeaderText = builder.feedbackHeaderText;
-        this.mFeedbackFooterText = builder.feedbackFooterText;
+        this.mFeedbackHeaderTextProvider = builder.feedbackHeaderTextProvider;
+        this.mFeedbackFooterTextProvider = builder.feedbackFooterTextProvider;
         this.mHttpHeaders = builder.httpHeaders;
         this.mSkipFilesUpload = builder.skipFilesUpload;
         this.mWaitDialogTitle = builder.waitDialogTitle;
         this.mWaitDialogMessage = builder.waitDialogMessage;
         this.mWaitDialogCancelButtonText = builder.waitDialogCancelButtonText;
-        this.mAdditionalPropertiesToSend = builder.additionalPropertiesToSend;
+        this.mAdditionalPropertiesProvider = builder.additionalPropertiesProvider;
         this.mTransferListener = builder.transferListener;
 
         final OkHttpClient.Builder okHttpClientBilder = new OkHttpClient().newBuilder();
@@ -210,8 +211,8 @@ public class MaoniDoorbellListener implements Listener {
         boolean skipFilesUpload;
         Map<String, String> httpHeaders;
 
-        String feedbackHeaderText;
-        String feedbackFooterText;
+        Callable<CharSequence> feedbackHeaderTextProvider;
+        Callable<CharSequence> feedbackFooterTextProvider;
 
         final Activity activity;
         CharSequence waitDialogTitle;
@@ -222,7 +223,7 @@ public class MaoniDoorbellListener implements Listener {
         TimeUnit readTimeoutUnit;
         long connectTimeout;
         TimeUnit connectTimeoutUnit;
-        Map<String, Object> additionalPropertiesToSend;
+        Callable<Map<String, Object>> additionalPropertiesProvider;
         MaoniDoorbellTransferListener transferListener;
 
         public Builder(final Activity activity) {
@@ -234,8 +235,6 @@ public class MaoniDoorbellListener implements Listener {
             this.connectTimeout = CONNECT_TIMEOUT_DEFAULT;
             this.connectTimeoutUnit = CONNECT_TIMEOUT_UNIT_DEFAULT;
 
-            this.feedbackHeaderText = EMPTY_STRING;
-            this.feedbackFooterText = EMPTY_STRING;
             this.waitDialogTitle = "Please hold on...";
             this.waitDialogMessage = "Submitting your feedback...";
             this.waitDialogCancelButtonText = "Cancel";
@@ -244,7 +243,6 @@ public class MaoniDoorbellListener implements Listener {
             this.httpHeaders.put("Content-Type", "application/json");
             this.httpHeaders.put("User-Agent", USER_AGENT);
 
-            this.additionalPropertiesToSend = new HashMap<>();
             this.transferListener = null;
         }
 
@@ -266,13 +264,31 @@ public class MaoniDoorbellListener implements Listener {
             return this;
         }
 
-        public Builder withFeedbackHeaderText(String feedbackHeaderText) {
-            this.feedbackHeaderText = feedbackHeaderText;
+        public Builder withFeedbackHeaderText(final String feedbackHeaderText) {
+            return this.withFeedbackHeaderTextProvider(new Callable<CharSequence>() {
+                @Override
+                public CharSequence call() throws Exception {
+                    return feedbackHeaderText;
+                }
+            });
+        }
+
+        public Builder withFeedbackFooterText(final String feedbackFooterText) {
+            return this.withFeedbackFooterTextProvider(new Callable<CharSequence>() {
+                @Override
+                public CharSequence call() throws Exception {
+                    return feedbackFooterText;
+                }
+            });
+        }
+
+        public Builder withFeedbackHeaderTextProvider(final Callable<CharSequence> feedbackHeaderTextProvider) {
+            this.feedbackHeaderTextProvider = feedbackHeaderTextProvider;
             return this;
         }
 
-        public Builder withFeedbackFooterText(String feedbackFooterText) {
-            this.feedbackFooterText = feedbackFooterText;
+        public Builder withFeedbackFooterTextProvider(final Callable<CharSequence> feedbackFooterTextProvider) {
+            this.feedbackFooterTextProvider = feedbackFooterTextProvider;
             return this;
         }
 
@@ -341,16 +357,17 @@ public class MaoniDoorbellListener implements Listener {
             return this;
         }
 
-        public Builder withAdditionalPropertiesToSend(Map<String, Object> additionalProperties) {
-            this.additionalPropertiesToSend = additionalProperties;
-            return this;
+        public Builder withAdditionalPropertiesToSend(final Map<String, Object> additionalProperties) {
+            return this.withAdditionalPropertiesProvider(new Callable<Map<String, Object>>() {
+                @Override
+                public Map<String, Object> call() throws Exception {
+                    return additionalProperties;
+                }
+            });
         }
 
-        public Builder addPropertyToSend(String key, Object value) {
-            if (this.additionalPropertiesToSend == null) {
-                this.additionalPropertiesToSend = new HashMap<>();
-            }
-            this.additionalPropertiesToSend.put(key, value);
+        public Builder withAdditionalPropertiesProvider(Callable<Map<String, Object>> additionalPropertiesProvider) {
+            this.additionalPropertiesProvider = additionalPropertiesProvider;
             return this;
         }
 
@@ -418,8 +435,11 @@ public class MaoniDoorbellListener implements Listener {
                             openResponse.message());
                 }
 
-                if (mAdditionalPropertiesToSend != null) {
-                    properties.putAll(mAdditionalPropertiesToSend);
+                if (mAdditionalPropertiesProvider != null) {
+                    final Map<String, Object> map = mAdditionalPropertiesProvider.call();
+                    if (map != null) {
+                        properties.putAll(map);
+                    }
                 }
 
                 //Add device info retrieved from the Feedback object
@@ -495,9 +515,11 @@ public class MaoniDoorbellListener implements Listener {
                                 mApplicationKey,
                                 nullToEmpty(userEmail),
                                 String.format("%s\n%s\n%s",
-                                        nullToEmpty(mFeedbackHeaderText),
+                                        nullToEmpty(mFeedbackHeaderTextProvider != null ?
+                                                mFeedbackHeaderTextProvider.call() : null),
                                         nullToEmpty(feedback.userComment),
-                                        nullToEmpty(mFeedbackFooterText)),
+                                        nullToEmpty(mFeedbackFooterTextProvider != null ?
+                                                mFeedbackFooterTextProvider.call() : null)),
                                 nullToEmpty(userName),
                                 GSON_BUILDER.create().toJson(properties),
                                 attachmentsIds.toArray(new String[attachmentsIds.size()]))
