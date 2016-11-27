@@ -207,6 +207,32 @@ and call your callbacks implementations. </p>
         .build()
         .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling activity </span></pre></div>
 
+<h5>
+<a id="maoni-doorbell" class="anchor" href="#maoni-doorbell" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rm3l/maoni-doorbell">maoni-doorbell</a>
+</h5>
+
+<p>This callback sends feedback collected to <a href="https://www.doorbell.io">Doorbell</a>.</p>
+
+<p>To use it, you will need to have an account there, and grab your application ID and secret key.</p>
+
+<p>Add this additional line to your <code>build.gradle</code>:</p>
+
+<div class="highlight highlight-source-groovy-gradle"><pre>  <span class="pl-en">dependencies</span> {
+    <span class="pl-c">// ...</span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>org.rm3l:maoni-doorbell:&lt;appropriateVersion&gt;<span class="pl-pds">'</span></span>
+  }</pre></div>
+
+<p>And set it as the listener for your Maoni instance:</p>
+
+<div class="highlight highlight-source-java"><pre>    <span class="pl-k">final</span> <span class="pl-smi">org.rm3l.maoni.doorbell<span class="pl-k">.</span>MaoniDoorbellListener</span> doorbellListenerForMaoni <span class="pl-k">=</span> 
+            <span class="pl-k">new</span> <span class="pl-smi">org.rm3l.maoni.doorbell<span class="pl-k">.</span>MaoniDoorbellListener</span>(<span class="pl-c1">...</span>);
+
+    <span class="pl-k">new</span> <span class="pl-smi">Maoni</span>.<span class="pl-smi">Builder</span>(<span class="pl-c1">MY_FILE_PROVIDER_AUTHORITY</span>)
+        .withListener(doorbellListenerForMaoni) <span class="pl-c">//Callback from maoni-doorbell</span>
+        <span class="pl-c">//...</span>
+        .build()
+        .start(<span class="pl-smi">MaoniSampleMainActivity</span><span class="pl-k">.</span><span class="pl-v">this</span>); <span class="pl-c">//The screenshot captured is relative to this calling activity </span></pre></div>
+
 <h4>
 <a id="sharing-the-screenshot-with-other-apps" class="anchor" href="#sharing-the-screenshot-with-other-apps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sharing the screenshot with other apps</h4>
 
