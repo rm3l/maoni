@@ -67,7 +67,7 @@ public class MaoniDoorbellListener implements Listener {
 
     private static final GsonBuilder GSON_BUILDER = new GsonBuilder();
 
-    private static final String USER_AGENT = "maoni-doorbell (v0.1.0)";
+    private static final String USER_AGENT = "maoni-doorbell (v0.1.1)";
 
     private static final String FEEDBACK_API_BASE_URL = "https://doorbell.io/api/";
 
