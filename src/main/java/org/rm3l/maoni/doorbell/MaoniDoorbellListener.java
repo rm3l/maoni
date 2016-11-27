@@ -1,0 +1,535 @@
+/*
+ * Copyright (c) 2016 Armel Soro
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package org.rm3l.maoni.doorbell;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.gson.GsonBuilder;
+
+import org.rm3l.maoni.common.contract.Listener;
+import org.rm3l.maoni.common.model.DeviceInfo;
+import org.rm3l.maoni.common.model.Feedback;
+import org.rm3l.maoni.doorbell.api.DoorbellService;
+import org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener;
+import org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import needle.UiRelatedProgressTask;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress.*;
+
+/**
+ * Callback for Maoni that takes care of sending the Feedback to Doorbell.io provider
+ */
+public class MaoniDoorbellListener implements Listener {
+
+    private static final GsonBuilder GSON_BUILDER = new GsonBuilder();
+
+    private static final String USER_AGENT = "maoni-doorbell (v0.1.0)";
+
+    private static final String FEEDBACK_API_BASE_URL = "https://doorbell.io/api/";
+
+    private static final String EMPTY_STRING = "";
+
+    private final int mApplicationId;
+    private final String mApplicationKey;
+    private final boolean mSkipFilesUpload;
+
+    private final String mFeedbackHeaderText;
+    private final String mFeedbackFooterText;
+
+    private final CharSequence mWaitDialogTitle;
+    private final CharSequence mWaitDialogMessage;
+    private final CharSequence mWaitDialogCancelButtonText;
+
+    private final Map<String, String> mHttpHeaders;
+
+    private final DoorbellService mDoorbellService;
+    private final Activity mActivity;
+    private final Map<String, Object> mAdditionalPropertiesToSend;
+    private final MaoniDoorbellTransferListener mTransferListener;
+
+    /**
+     * Constructor, with the defaults.
+     *
+     * @param activity the calling activity
+     */
+    public MaoniDoorbellListener(final Activity activity) {
+        this(new Builder(activity));
+    }
+
+    /**
+     * Constructor, from a Builder instance
+     * @param builder the builder instance
+     */
+    public MaoniDoorbellListener(Builder builder) {
+
+        this.mActivity = builder.activity;
+        this.mApplicationId = builder.applicationId;
+        this.mApplicationKey = builder.applicationKey;
+        this.mFeedbackHeaderText = builder.feedbackHeaderText;
+        this.mFeedbackFooterText = builder.feedbackFooterText;
+        this.mHttpHeaders = builder.httpHeaders;
+        this.mSkipFilesUpload = builder.skipFilesUpload;
+        this.mWaitDialogTitle = builder.waitDialogTitle;
+        this.mWaitDialogMessage = builder.waitDialogMessage;
+        this.mWaitDialogCancelButtonText = builder.waitDialogCancelButtonText;
+        this.mAdditionalPropertiesToSend = builder.additionalPropertiesToSend;
+        this.mTransferListener = builder.transferListener;
+
+        final OkHttpClient.Builder okHttpClientBilder = new OkHttpClient().newBuilder();
+        okHttpClientBilder.readTimeout(builder.readTimeout, builder.readTimeoutUnit);
+        okHttpClientBilder.connectTimeout(builder.connectTimeout, builder.connectTimeoutUnit);
+
+        if (builder.debug) {
+            final HttpLoggingInterceptor interceptor =
+                    new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                        @Override
+                        public void log(String message) {
+                            Log.d(USER_AGENT, message);
+                        }
+                    });
+            interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+            okHttpClientBilder.addInterceptor(interceptor);
+        }
+
+        this.mDoorbellService = new Retrofit.Builder()
+                .baseUrl(FEEDBACK_API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClientBilder.build())
+                .build()
+                .create(DoorbellService.class);
+    }
+
+    /**
+     * Method to override, so as to include the email address of the user sending feedback.
+     *
+     * @return a valid email address, the address of the user sending feedback
+     */
+    @SuppressWarnings("WeakerAccess")
+    protected String getUserEmail() {
+        return null;
+    }
+
+    /**
+     * Method to override, so as to include the name of the user who is sending feedback.
+     *
+     * @return the name of the user who is sending feedback
+     */
+    @SuppressWarnings("WeakerAccess")
+    protected String getUserName() {
+        return null;
+    }
+
+    @Override
+    public void onDismiss() {
+        //Nothing to do
+    }
+
+    @Override
+    public boolean onSendButtonClicked(Feedback feedback) {
+
+        //Check that device is actually connected to the internet prior to going any further
+        final ConnectivityManager connMgr = (ConnectivityManager)
+                mActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isConnected()) {
+            Toast.makeText(mActivity,
+                    "An Internet connection is needed to send feedbacks.", Toast.LENGTH_SHORT)
+                    .show();
+            return false;
+        }
+
+        MultiThreadingManager.getFeedbackExecutor().execute(new FeedbackSenderTask(feedback));
+
+        return true;
+    }
+
+    /**
+     * Construct a new Builder
+     * @param activity the calling activity
+     * @return a builder
+     */
+    public Builder newBuilder(final Activity activity) {
+        return new Builder(activity);
+    }
+
+    /**
+     * Builder for Maoni Doorbell Listener
+     */
+    public static final class Builder {
+
+        static final long READ_TIMEOUT_DEFAULT = 10;
+        static final TimeUnit READ_TIMEOUT_UNIT_DEFAULT = TimeUnit.SECONDS;
+        static final long CONNECT_TIMEOUT_DEFAULT = 10;
+        static final TimeUnit CONNECT_TIMEOUT_UNIT_DEFAULT = TimeUnit.SECONDS;
+
+        int applicationId;
+        String applicationKey;
+        boolean skipFilesUpload;
+        Map<String, String> httpHeaders;
+
+        String feedbackHeaderText;
+        String feedbackFooterText;
+
+        final Activity activity;
+        CharSequence waitDialogTitle;
+        CharSequence waitDialogMessage;
+        CharSequence waitDialogCancelButtonText;
+        boolean debug;
+        long readTimeout;
+        TimeUnit readTimeoutUnit;
+        long connectTimeout;
+        TimeUnit connectTimeoutUnit;
+        Map<String, Object> additionalPropertiesToSend;
+        MaoniDoorbellTransferListener transferListener;
+
+        public Builder(final Activity activity) {
+            this.activity = activity;
+            this.debug = false;
+            this.skipFilesUpload = false;
+            this.readTimeout = READ_TIMEOUT_DEFAULT;
+            this.readTimeoutUnit = READ_TIMEOUT_UNIT_DEFAULT;
+            this.connectTimeout = CONNECT_TIMEOUT_DEFAULT;
+            this.connectTimeoutUnit = CONNECT_TIMEOUT_UNIT_DEFAULT;
+
+            this.feedbackHeaderText = EMPTY_STRING;
+            this.feedbackFooterText = EMPTY_STRING;
+            this.waitDialogTitle = "Please hold on...";
+            this.waitDialogMessage = "Submitting your feedback...";
+            this.waitDialogCancelButtonText = "Cancel";
+
+            this.httpHeaders = new HashMap<>();
+            this.httpHeaders.put("Content-Type", "application/json");
+            this.httpHeaders.put("User-Agent", USER_AGENT);
+
+            this.additionalPropertiesToSend = new HashMap<>();
+            this.transferListener = null;
+        }
+
+        /**
+         * @param applicationId your Doorbell Application ID
+         * @return this builder
+         */
+        public Builder withApplicationId(int applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * @param applicationKey your Doorbell Secret Application Key
+         * @return this builder
+         */
+        public Builder withApplicationKey(String applicationKey) {
+            this.applicationKey = applicationKey;
+            return this;
+        }
+
+        public Builder withFeedbackHeaderText(String feedbackHeaderText) {
+            this.feedbackHeaderText = feedbackHeaderText;
+            return this;
+        }
+
+        public Builder withFeedbackFooterText(String feedbackFooterText) {
+            this.feedbackFooterText = feedbackFooterText;
+            return this;
+        }
+
+        public Builder withWaitDialogCancelButtonText(CharSequence waitDialogCancelButtonText) {
+            this.waitDialogCancelButtonText = waitDialogCancelButtonText;
+            return this;
+        }
+
+        public Builder withWaitDialogMessage(CharSequence waitDialogMessage) {
+            this.waitDialogMessage = waitDialogMessage;
+            return this;
+        }
+
+        public Builder withWaitDialogTitle(CharSequence waitDialogTitle) {
+            this.waitDialogTitle = waitDialogTitle;
+            return this;
+        }
+
+        /**
+         * Set a flag indicating whether or not to skip file uploads to Doorbell.
+         * <p>
+         * This may be useful in cases like:
+         * <ul>
+         *     <li>you know in advance that your Doorbell account does not uploads capabilities</li>
+         *     <li>and/or you wish to explicitly upload files to another remote service</li>
+         * </ul>
+         *
+         * @param skipFilesUpload a flag indicating whether or not to skip file uploads to Doorbell
+         * @return this builder
+         */
+        public Builder withSkipFilesUpload(boolean skipFilesUpload) {
+            this.skipFilesUpload = skipFilesUpload;
+            return this;
+        }
+
+        public Builder withDebug(boolean debug) {
+            this.debug = debug;
+            return this;
+        }
+
+        public Builder withReadTimeout(long readTimeout) {
+            this.readTimeout = readTimeout;
+            return this;
+        }
+
+        public Builder withReadTimeoutUnit(TimeUnit readTimeoutUnit) {
+            this.readTimeoutUnit = readTimeoutUnit;
+            return this;
+        }
+
+        public Builder withConnectTimeout(long connectTimeout) {
+            this.connectTimeout = connectTimeout;
+            return this;
+        }
+
+        public Builder withConnectTimeoutUnit(TimeUnit connectTimeoutUnit) {
+            this.connectTimeoutUnit = connectTimeoutUnit;
+            return this;
+        }
+
+        public Builder addHttpHeader(String headerKey, String headerValue) {
+            if (this.httpHeaders == null) {
+                this.httpHeaders = new HashMap<>();
+            }
+            this.httpHeaders.put(headerKey, headerValue);
+            return this;
+        }
+
+        public Builder withAdditionalPropertiesToSend(Map<String, Object> additionalProperties) {
+            this.additionalPropertiesToSend = additionalProperties;
+            return this;
+        }
+
+        public Builder addPropertyToSend(String key, Object value) {
+            if (this.additionalPropertiesToSend == null) {
+                this.additionalPropertiesToSend = new HashMap<>();
+            }
+            this.additionalPropertiesToSend.put(key, value);
+            return this;
+        }
+
+        public Builder withTransferListener(MaoniDoorbellTransferListener transferListener) {
+            this.transferListener = transferListener;
+            return this;
+        }
+
+        public MaoniDoorbellListener build() {
+            return new MaoniDoorbellListener(this);
+        }
+    }
+
+    private class FeedbackSenderTask
+            extends UiRelatedProgressTask<Throwable, MaoniDoorbellTransferProgress> {
+
+        private final Feedback feedback;
+        private final ProgressDialog alertDialog;
+        private final Map<String, Object> properties;
+
+        FeedbackSenderTask(Feedback feedback) {
+            this.feedback = feedback;
+            alertDialog = new ProgressDialog(mActivity);
+            alertDialog.setTitle(mWaitDialogTitle);
+            alertDialog.setMessage(mWaitDialogMessage);
+            alertDialog.setIndeterminate(false);
+            alertDialog.setCancelable(false);
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, mWaitDialogCancelButtonText,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    FeedbackSenderTask.this.cancel();
+                }
+            });
+            alertDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    alertDialog.show();
+                }
+            });
+            this.properties = new HashMap<>();
+        }
+
+        @Override
+        protected void onProgressUpdate(MaoniDoorbellTransferProgress transferProgress) {
+            if (MaoniDoorbellListener.this.mTransferListener != null) {
+                MaoniDoorbellListener.this.mTransferListener.onProgressUpdate(transferProgress);
+            }
+        }
+
+        @Override
+        protected Throwable doWork() {
+            publishProgress(STARTED);
+            final boolean includeScreenshot = feedback.includeScreenshot;
+            final boolean includeLogs = feedback.includeLogs;
+
+            try {
+                final Response<ResponseBody> openResponse = mDoorbellService
+                        .openApplication(mHttpHeaders, mApplicationId, mApplicationKey)
+                        .execute();
+                if (openResponse.code() != 201) {
+                    throw new IllegalStateException("Cannot open Doorbell application: " +
+                            openResponse.message());
+                }
+
+                if (mAdditionalPropertiesToSend != null) {
+                    properties.putAll(mAdditionalPropertiesToSend);
+                }
+
+                //Add device info retrieved from the Feedback object
+                final DeviceInfo deviceInfo = feedback.deviceInfo;
+                if (deviceInfo != null) {
+                    properties.putAll(feedback.getDeviceAndAppInfoAsHumanReadableMap());
+                }
+
+                final List<String> attachmentsIds = new ArrayList<>();
+                //1. Upload file captures
+                if (!mSkipFilesUpload) {
+                    final Map<String, String> multipartUploadHeaders = new HashMap<>(mHttpHeaders);
+                    multipartUploadHeaders.remove("Content-Type");
+
+                    boolean screenshotUploadProgressPublished = false;
+                    if (includeScreenshot) {
+                        publishProgress(UPLOADING_FILES_CAPTURED);
+                        screenshotUploadProgressPublished = true;
+
+                        final Response<String[]> uploadScreenshotResponse = mDoorbellService
+                                .uploadScreenshot(multipartUploadHeaders, mApplicationId, mApplicationKey,
+                                RequestBody.create(
+                                        MediaType.parse(DoorbellService.MULTIPART_FORM_DATA),
+                                        feedback.screenshotFile)).execute();
+                        switch (uploadScreenshotResponse.code()) {
+                            case 201:
+                                //Great
+                                break;
+                            case 400:
+                                throw new IllegalArgumentException(uploadScreenshotResponse.message());
+                            default:
+                                throw new IllegalStateException(uploadScreenshotResponse.message());
+
+                        }
+                        attachmentsIds.addAll(Arrays.asList(uploadScreenshotResponse.body()));
+                    }
+
+                    if (includeLogs) {
+                        if (!screenshotUploadProgressPublished) {
+                            publishProgress(UPLOADING_FILES_CAPTURED);
+                        }
+                        final Response<String[]> uploadLogsResponse = mDoorbellService
+                                .uploadLogs(multipartUploadHeaders, mApplicationId, mApplicationKey,
+                                        RequestBody.create(
+                                                MediaType.parse(DoorbellService.MULTIPART_FORM_DATA),
+                                                feedback.logsFile))
+                                .execute();
+
+                        switch (uploadLogsResponse.code()) {
+                            case 201:
+                                //Great
+                                break;
+                            case 400:
+                                throw new IllegalArgumentException(uploadLogsResponse.message());
+                            default:
+                                throw new IllegalStateException(uploadLogsResponse.message());
+
+                        }
+                        attachmentsIds.addAll(Arrays.asList(uploadLogsResponse.body()));
+                    }
+                }
+
+                //Now send feedback object
+                publishProgress(UPLOADING_FEEDBACK_CONTENT);
+
+                final String userEmail = getUserEmail();
+                final String userName = getUserName();
+
+                final Response<ResponseBody> response = mDoorbellService
+                        .submitFeedbackForm(
+                                mHttpHeaders,
+                                mApplicationId,
+                                mApplicationKey,
+                                nullToEmpty(userEmail),
+                                String.format("%s\n%s\n%s",
+                                        nullToEmpty(mFeedbackHeaderText),
+                                        nullToEmpty(feedback.userComment),
+                                        nullToEmpty(mFeedbackFooterText)),
+                                nullToEmpty(userName),
+                                GSON_BUILDER.create().toJson(properties),
+                                attachmentsIds.toArray(new String[attachmentsIds.size()]))
+                        .execute();
+
+                if (response.code() != 201) {
+                    throw new IllegalStateException(response.message());
+                }
+
+                publishProgress(COMPLETED);
+                return null;
+
+            } catch (final Exception exception) {
+                exception.printStackTrace();
+                publishProgress(ERROR);
+                if (MaoniDoorbellListener.this.mTransferListener != null) {
+                    MaoniDoorbellListener.this.mTransferListener.onError(exception);
+                }
+                return exception;
+            }
+        }
+
+        @Override
+        protected void thenDoUiRelatedWork(Throwable throwable) {
+            if (throwable == null && MaoniDoorbellListener.this.mTransferListener != null) {
+                MaoniDoorbellListener.this.mTransferListener
+                        .thenDoUiRelatedWorkOnSuccessfulTransfer(this.feedback);
+            }
+        }
+    }
+
+    private static String nullToEmpty(final CharSequence str) {
+        return (TextUtils.isEmpty(str) ? EMPTY_STRING : str.toString());
+    }
+}
