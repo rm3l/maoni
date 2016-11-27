@@ -14,7 +14,7 @@ Maoni takes care of collecting user feedback using a beautiful and customizable 
 And anyone can provide callbacks that will perform the appropriate actions with the feedback collected.
 
 **maoni-doorbell** is an example of such callback for Maoni. 
-It aims at sending your valuable users' feedback (along with the app screen capture and logs, if applicable) to [Doorbell](https://doorbell.io).
+It aims at sending the valuable feedback of your app users (along with app screen capture and logs, if applicable) to [Doorbell](https://doorbell.io).
 
 
 ## Getting started
