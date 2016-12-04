@@ -30,7 +30,7 @@ Hâte de vous lire.</string>
   <string name="maoni_feedback_content_hint">Ecrivez votre message ici</string>
   <string name="maoni_feedback_include_screenshot_checkbox_title">Joindre la capture d\'écran au rapport</string>
   <string name="maoni_feedback_include_logs_title">Inclure les fichiers journaux</string>
-  <string name="maoni_touch_to_preview">Toucher pour prévisualiser et modifier</string>
+  <string name="maoni_touch_to_preview">Toucher pour prévisualiser et annoter</string>
   <string name="maoni_screenshot_informational_text">La capture d\'écran nous permet d\'avoir plus d\'éléments contextuels relatifs à votre commentaire.</string>
   <string name="maoni_send_feedback">Envoyer un commentaire</string>
   <string name="maoni_action_settings">Paramètres</string>
@@ -39,8 +39,8 @@ Hâte de vous lire.</string>
   <string name="maoni_screenshot_preview_internal_error">Erreur interne. Merci de réessayer ultérieurement.</string>
   <string name="maoni_screenshot_preview">Aperçu</string>
   <string name="maoni_highlight">Surligner</string>
-  <string name="maoni_blackout">Blackout</string>
+  <string name="maoni_blackout">Masquer</string>
   <string name="maoni_undo">Annuler</string>
-  <string name="maoni_save">Sauver</string>
+  <string name="maoni_save">Sauvegarder</string>
   <string name="maoni_close">Fermer</string>
 </resources>
