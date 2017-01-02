@@ -80,7 +80,7 @@ ext.getReleaseSigningInfo = {
             keyPassword = System.console().readPassword("\nPlease enter the key password: ")
         }
 
-        if (storeFile == null || !storeFile.exists()) {
+        if (storeFile == null) {
             throw new InvalidUserDataException("Keystore path not specified or file does not exist")
         }
 
