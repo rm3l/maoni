@@ -364,7 +364,7 @@ public class MaoniActivity extends AppCompatActivity {
                             config.setShowCanvasBounds(true);
                             config.setStrokeWidth(57.0f);
                             config.setMinZoom(1.0f);
-                            config.setMaxZoom(3.0f);
+                            config.setMaxZoom(1.0f);
                             config.setStrokeColor(mHighlightColor);
                             final View decorView = getWindow().getDecorView();
                             config.setCanvasWidth(decorView.getWidth());
