@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Copyright (c) 2016 Armel Soro
 #
@@ -21,47 +22,28 @@
 #
 #
 
-language: android
+if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  echo -e "Starting gh-pages update...\n"
 
-jdk:
- - oraclejdk8
+  #go to home and setup git
+  cd $HOME
+  git config --global user.email "travis_ci@rm3l.org"
+  git config --global user.name "Tra Vis"
 
-android:
-  components:
-    - platform-tools
-    - tools
-    - build-tools-25.0.2
-    - android-25
-    - extra-android-support
-    - extra-google-google_play_services
-    - extra-android-m2repository
-    - extra-google-m2repository
-  licenses:
-    - '.+'
+  git clone --branch=gh-pages https://$GITHUB_API_KEY@github.com/rm3l/maoni.git gh-pages > /dev/null
 
-before_script:
-    - mkdir -p ${HOME}/.droid
-    - echo "keystore=${KEYSTORE}" >> ${HOME}/.droid/maoni-keystore.properties
-    - echo "storePassword=${STORE_PASSWORD}" >> ${HOME}/.droid/maoni-keystore.properties
-    - echo "keyAlias=${KEY_ALIAS}" >> ${HOME}/.droid/maoni-keystore.properties
-    - echo "keyPassword=${KEY_PASSWORD}" >> ${HOME}/.droid/maoni-keystore.properties
+  cd gh-pages
+  # Import README.md from master
+  git show origin/master:README.md > index.md
 
-script:
-    - echo "Travis branch is $TRAVIS_BRANCH, and is in pull request $TRAVIS_PULL_REQUEST"
-    - ./gradlew clean assembleDebug --stacktrace
+  git remote rm origin
+  git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
 
-notifications:
-  email:
-    - apps+maoni__builds@rm3l.org
+  #add, commit and push files
+  git add -f index.md
+  git commit -q -m "Automatic README.md => index.md import (build #$TRAVIS_BUILD_NUMBER)." \
+    -m "Commit $TRAVIS_COMMIT"
+  git push -q -f origin gh-pages > /dev/null
 
-sudo: false
-
-cache:
-  directories:
-    - $HOME/.gradle
-
-after_success:
-     - chmod +x ./tools/*.sh
-     - bash <(curl -s https://codecov.io/bash)
-     - ./tools/import-translations-github.sh
-     - ./tools/update-github-pages.sh
+  echo -e "... Done with updating gh-pages\n"
+fi
