@@ -1,0 +1,8 @@
+title: Maoni
+description: In-App Feedback Library for Android
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
