@@ -24,6 +24,8 @@ package org.rm3l.maoni.ui;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -37,6 +39,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,6 +71,8 @@ import me.panavtec.drawableview.DrawableViewConfig;
  * Maoni Activity
  */
 public class MaoniActivity extends AppCompatActivity {
+
+    private static final String TAG = MaoniActivity.class.getSimpleName();
 
     public static final String APPLICATION_INFO_VERSION_CODE = "APPLICATION_INFO_VERSION_CODE";
     public static final String APPLICATION_INFO_VERSION_NAME = "APPLICATION_INFO_VERSION_NAME";
@@ -530,18 +535,25 @@ public class MaoniActivity extends AppCompatActivity {
 
             if (intent.hasExtra(FILE_PROVIDER_AUTHORITY)) {
                 final String fileProviderAuthority = intent.getStringExtra(FILE_PROVIDER_AUTHORITY);
-                if (mScreenshotFilePath != null) {
-                    screenshotFile = new File(mScreenshotFilePath.toString());
-                    screenshotUri = FileProvider
-                            .getUriForFile(this, fileProviderAuthority, screenshotFile);
-                    grantUriPermission(intent.getComponent().getPackageName(),
-                            screenshotUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                }
-                if (logsFile != null) {
-                    logsUri = FileProvider
-                            .getUriForFile(this, fileProviderAuthority, logsFile);
-                    grantUriPermission(intent.getComponent().getPackageName(),
-                            logsUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                //#11 : Potential NPE in Android's FileProvider if Provider Authority couldn't be resolved
+                final ProviderInfo providerAuthorityInfo = this.getPackageManager()
+                    .resolveContentProvider(fileProviderAuthority, PackageManager.GET_META_DATA);
+                if (providerAuthorityInfo == null) {
+                    Log.w(TAG, "Could not resolve file provider authority : "
+                        + fileProviderAuthority + ". Sharing of files captured not supported then. "
+                        + "See http://maoni.rm3l.org/ for setup instructions.");
+                } else {
+                    if (mScreenshotFilePath != null) {
+                        screenshotFile = new File(mScreenshotFilePath.toString());
+                        screenshotUri =
+                            FileProvider.getUriForFile(this, fileProviderAuthority, screenshotFile);
+                        grantUriPermission(intent.getComponent().getPackageName(), screenshotUri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    }
+                    if (logsFile != null) {
+                        logsUri = FileProvider.getUriForFile(this, fileProviderAuthority, logsFile);
+                        grantUriPermission(intent.getComponent().getPackageName(), logsUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    }
                 }
             }
 
