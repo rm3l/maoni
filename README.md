@@ -203,7 +203,7 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-#### Sharing the screenshot with other apps
+#### Sharing the files captured with other apps
 
 The file provider authority specified in the `Maoni.Builder` constructor allows you to 
 share the screenshot capture and logs files to other apps (depending on your callback implementation).
@@ -291,6 +291,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 
 * [DD-WRT Companion](http://ddwrt-companion.rm3l.org)
 * [DD-WRT Companion Tasker Plugin](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt.tasker)
+* [Androcker](https://play.google.com/store/apps/details?id=org.rm3l.container_companion)
 
 
 ## Credits
