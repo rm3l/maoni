@@ -69,7 +69,7 @@ android {
         applicationId "org.rm3l.maoni.sample"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 231
+        versionCode 240
         versionName "2.4.0"
 
         vectorDrawables.useSupportLibrary = true
