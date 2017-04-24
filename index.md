@@ -3,7 +3,6 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Maoni-blue.svg?style=flat)](http://android-arsenal.com/details/1/3925)
 [![Website](https://img.shields.io/website-up-down-green-red/http/maoni.rm3l.org.svg)](http://maoni.rm3l.org)
-[![Codewake](https://www.codewake.com/badges/ask_question.svg)](https://www.codewake.com/p/maoni)
 [![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Travis branch](https://img.shields.io/travis/rm3l/maoni/master.svg)](https://travis-ci.org/rm3l/maoni)
@@ -94,7 +93,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:2.3.1@aar') {
+    compile ('org.rm3l:maoni:2.4.0@aar') {
         transitive = true;
     }
   }
@@ -160,7 +159,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-email:2.3.1'
+    compile 'org.rm3l:maoni-email:2.4.0'
   }
 ```
 
@@ -279,7 +278,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:2.3.1'
+    compile 'org.rm3l:maoni-common:2.4.0'
   }
 ```
 
