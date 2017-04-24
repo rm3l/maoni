@@ -35,7 +35,6 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,6 +49,41 @@ import java.util.TreeMap;
 public class DeviceInfo {
 
     private static final String GET_MOBILE_DATA_ENABLED = "getMobileDataEnabled";
+    private static final String SDK_VERSION = "sdkVersion";
+    private static final String BOARD = "board";
+    private static final String BRAND = "brand";
+    private static final String DEVICE = "device";
+    private static final String MODEL = "model";
+    private static final String PRODUCT = "product";
+    private static final String TAGS = "tags";
+    private static final String LINUX_VERSION = "linuxVersion";
+    private static final String MANUFACTURER = "manufacturer";
+    private static final String HARDWARE = "hardware";
+    private static final String CPU_ABI = "cpuAbi";
+    private static final String CPU_ABI_2 = "cpuAbi2";
+    private static final String SUPPORTED_ABIS = "supportedAbis";
+    private static final String IS_TABLET = "isTablet";
+    private static final String ANDROID_RELEASE_VERSION = "androidReleaseVersion";
+    private static final String BUILD_VERSION = "buildVersion";
+    private static final String BUILD_DISPLAY = "buildDisplay";
+    private static final String BUILD_FINGERPRINT = "buildFingerprint";
+    private static final String BUILD_ID = "buildId";
+    private static final String BUILD_TIME = "buildTime";
+    private static final String BUILD_TYPE = "buildType";
+    private static final String BUILD_USER = "buildUser";
+    private static final String LANGUAGE = "language";
+    private static final String OPEN_GL_VERSION = "openGlVersion";
+    private static final String DENSITY = "density";
+    private static final String DENSITY_DPI = "densityDpi";
+    private static final String SCALED_DENSITY = "scaledDensity";
+    private static final String XDPI = "xdpi";
+    private static final String YDPI = "ydpi";
+    private static final String HEIGHT_PIXELS = "heightPixels";
+    private static final String WIDTH_PIXELS = "widthPixels";
+    private static final String RESOLUTION = "resolution";
+    private static final String GPS_ENABLED = "gpsEnabled";
+    private static final String SUPPLICANT_STATE = "supplicantState";
+    private static final String MOBILE_DATA_ENABLED = "mobileDataEnabled";
 
     /*
      * ---
@@ -124,6 +158,9 @@ public class DeviceInfo {
     public final SupplicantState supplicantState;
     public final Boolean mobileDataEnabled;
 
+    //Immutable view of all the Device Info data
+    private final Map<String, Object> deviceInfoAsMap;
+
     /**
      * Constructor
      *
@@ -186,6 +223,7 @@ public class DeviceInfo {
 
         this.resolution = String.format("%d x %d", this.widthPixels, this.heightPixels);
 
+        this.deviceInfoAsMap = buildImmutableMapView();
     }
 
     @Override
@@ -207,23 +245,68 @@ public class DeviceInfo {
     }
 
     public Map<String, Object> toRawMap() {
-        final SortedMap<String, Object> output = new TreeMap<>();
-        //Introspect to get all fields
-        final Field[] fields = DeviceInfo.class.getFields();
-        for (final Field field : fields) {
-            final Object fieldValue;
-            try {
-                fieldValue = field.get(this);
-            } catch (IllegalAccessException e) {
-                //No worries
-                continue;
-            }
-            if (fieldValue == null) {
-                continue;
-            }
-            output.put(field.getName(), fieldValue);
-        }
+        return this.deviceInfoAsMap;
+    }
+
+    private Map<String, Object> buildImmutableMapView() {
+        final SortedMap<String, Object> output = new DeviceInfoSortedMap();
+
+        output.put(SDK_VERSION, sdkVersion);
+
+        output.put(BOARD, board);
+        output.put(BRAND, brand);
+        output.put(DEVICE, device);
+        output.put(MODEL, model);
+        output.put(PRODUCT, product);
+        output.put(TAGS, tags);
+        output.put(LINUX_VERSION, linuxVersion);
+        output.put(MANUFACTURER, manufacturer);
+        output.put(HARDWARE, hardware);
+        output.put(CPU_ABI, cpuAbi);
+        output.put(CPU_ABI_2, cpuAbi2);
+        output.put(SUPPORTED_ABIS, supportedAbis);
+        output.put(IS_TABLET, isTablet);
+
+        output.put(ANDROID_RELEASE_VERSION, androidReleaseVersion);
+        output.put(BUILD_VERSION, buildVersion);
+        output.put(BUILD_DISPLAY, buildDisplay);
+        output.put(BUILD_FINGERPRINT, buildFingerprint);
+        output.put(BUILD_ID, buildId);
+        output.put(BUILD_TIME, buildTime);
+        output.put(BUILD_TYPE, buildType);
+        output.put(BUILD_USER, buildUser);
+        output.put(LANGUAGE, language);
+
+        output.put(OPEN_GL_VERSION, openGlVersion);
+
+        output.put(DENSITY, density);
+        output.put(DENSITY_DPI, densityDpi);
+        output.put(SCALED_DENSITY, scaledDensity);
+        output.put(XDPI, xdpi);
+        output.put(YDPI, ydpi);
+
+        output.put(HEIGHT_PIXELS, heightPixels);
+        output.put(WIDTH_PIXELS, widthPixels);
+        output.put(RESOLUTION, resolution);
+
+        output.put(GPS_ENABLED, gpsEnabled);
+        output.put(SUPPLICANT_STATE, supplicantState);
+        output.put(MOBILE_DATA_ENABLED, mobileDataEnabled);
+
         return Collections.unmodifiableMap(output);
+    }
+
+    /**
+     * Extension to TreeMap, ignoring null values
+     */
+    private static class DeviceInfoSortedMap extends TreeMap<String, Object> {
+
+        @Override public Object put(String key, Object value) {
+            if (value != null) {
+                return super.put(key, value);
+            }
+            return null;
+        }
     }
 
 }
