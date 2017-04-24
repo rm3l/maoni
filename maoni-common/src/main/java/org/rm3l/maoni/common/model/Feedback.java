@@ -33,7 +33,7 @@ import java.util.Map;
 
 /**
  * A Feedback object.
- * <p/>
+ * <p>
  * This is what is returned in the Maoni Activity callbacks,
  * which you can manipulate later on (e.g, by forwarding to a remote service).
  */
@@ -65,7 +65,7 @@ public class Feedback {
 
     /**
      * User choice: whether to take the app logs into account or not.
-     * <p/>
+     * <p>
      * Note that if this is set to {@code false},
      * the {@link #logsFileUri} (and {@code #logsFile}, subsequently)
      * returned will be {@code null}
@@ -74,7 +74,7 @@ public class Feedback {
 
     /**
      * The logs file URI.
-     * <p/>
+     * <p>
      * It is set to {@code null} if {@link #includeLogs} is {@code null}.
      */
 
@@ -82,7 +82,7 @@ public class Feedback {
 
     /**
      * The logs file object.
-     * <p/>
+     * <p>
      * It is set to {@code null} if {@link #includeLogs} is {@code null}.
      */
 
@@ -90,7 +90,7 @@ public class Feedback {
 
     /**
      * User choice: whether to take the screenshot into account or not.
-     * <p/>
+     * <p>
      * Note that if this is set to {@code false},
      * the {@link #screenshotFileUri} (and {@code #screenshotFile}, subsequently)
      * returned will be {@code null}
@@ -99,7 +99,7 @@ public class Feedback {
 
     /**
      * The screenshot file URI.
-     * <p/>
+     * <p>
      * It is set to {@code null} if {@link #includeScreenshot} is {@code null}.
      */
 
@@ -107,7 +107,7 @@ public class Feedback {
 
     /**
      * The screenshot file object.
-     * <p/>
+     * <p>
      * It is set to {@code null} if {@link #includeScreenshot} is {@code null}.
      */
 
@@ -115,7 +115,7 @@ public class Feedback {
 
     /**
      * Generic metadata to attach to the feedback.
-     * <p/>
+     * <p>
      * This may be useful for storing information coming from your extra layout for example.
      */
 

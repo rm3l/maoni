@@ -25,7 +25,7 @@ import org.rm3l.maoni.common.model.Feedback;
 
 /**
  * Listener for Maoni. Also referred to as Maoni Callback.
- * <p/>
+ * <p>
  * Note that all the methods here are called in the UI thread and in a synchronous manner.
  */
 public interface Listener {
