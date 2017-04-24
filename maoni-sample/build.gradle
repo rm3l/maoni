@@ -70,7 +70,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 231
-        versionName "2.3.1"
+        versionName "2.4.0"
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -97,7 +97,7 @@ android {
 
 dependencies {
     compile project(":maoni")
-    compile ('org.rm3l:maoni-email:2.3.1') {
+    compile ('org.rm3l:maoni-email:2.4.0') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
     }

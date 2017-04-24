@@ -32,7 +32,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 231
-        versionName "2.3.1"
+        versionName "2.4.0"
     }
     buildTypes {
         release {
@@ -43,7 +43,7 @@ android {
 }
 
 group = 'org.rm3l'
-version = '2.3.1'
+version = '2.4.0'
 
 final homePath = System.properties['user.home']
 
@@ -104,10 +104,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '2.3.1'
+            name = '2.4.0'
             desc = 'Maoni Android Library'
             released  = new Date()
-            vcsTag = '2.3.1'
+            vcsTag = '2.4.0'
         }
 
         publicDownloadNumbers = true
