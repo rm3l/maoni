@@ -30,7 +30,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
     //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
     //   transitive = true;
     //}
-    compile 'org.rm3l:maoni-email:2.3.1'
+    compile 'org.rm3l:maoni-email:2.4.0'
   }
 ```
 
