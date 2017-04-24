@@ -9,7 +9,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-email.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-email)
 
 [**Maoni**](http://maoni.rm3l.org) is a lightweight open-source library for integrating 
-a way to collect user feedbacks from within Android applications.
+a way to collect user feedback from within Android applications.
 
 Maoni takes care of collecting user feedback using a beautiful and customizable activity. 
 And anyone can provide callbacks that will perform the appropriate actions with the feedback collected.
@@ -20,7 +20,9 @@ It aims at opening up an Android email Intent, so users can send their feedback 
 
 ## Getting started
 
-Grab via Gradle, by adding this to your `build.gradle`:
+Please include Maoni dependency first, by reading the instructions provided [here](http://maoni.rm3l.org).
+
+Then grab `maoni-email` via Gradle, by adding this to your `build.gradle`:
 
 ```gradle
   dependencies {
