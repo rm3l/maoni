@@ -19,7 +19,9 @@ It aims at sending the valuable feedback of your app users (along with app scree
 
 ## Getting started
 
-Grab via Gradle, by adding this to your `build.gradle`:
+Please include Maoni dependency first, by reading the instructions provided [here](http://maoni.rm3l.org).
+
+Then grab `maoni-doorbell` via Gradle, by adding this to your `build.gradle`:
 
 ```gradle
   dependencies {
