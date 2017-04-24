@@ -137,7 +137,8 @@ public class DeviceInfo {
 
         SupplicantState supplicantState = null;
         try {
-            final WifiManager wifiManager = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
+            final WifiManager wifiManager = (WifiManager)
+                activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             @SuppressWarnings("MissingPermission")
             final WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             supplicantState = wifiInfo.getSupplicantState();
