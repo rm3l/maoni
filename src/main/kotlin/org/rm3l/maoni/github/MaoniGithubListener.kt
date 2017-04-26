@@ -33,18 +33,18 @@ import org.rm3l.maoni.common.model.Feedback
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT: String = "maoni-github (v2.4.0-alpha)"
+const val USER_AGENT: String = "maoni-github (v2.4.0-alpha1)"
 const val APPLICATION_JSON: String = "application/json"
 
-@Suppress("unused")
 class MaoniGithubListener(
         val context: Context,
+        val githubUsername: String,
         val githubPersonalAccessToken: String,
-        val githubOwner: String,
+        val githubRepoOwner: String,
         val githubRepo: String,
         val debug: Boolean = false,
         val waitDialogTitle: String = "Please hold on...",
-        val waitDialogMessage: String = "Submitting your feedback to Github repo: $githubOwner/$githubRepo ...",
+        val waitDialogMessage: String = "Submitting your feedback to Github repo: $githubRepoOwner/$githubRepo ...",
         githubIssueTitlePrefix: String? = "Maoni",
         githubIssueBodyPrefix: String? = null,
         githubIssueBodySuffix: String? = null,
@@ -55,7 +55,7 @@ class MaoniGithubListener(
 ) : Listener {
 
     private val ghIssueUrl: String =
-            "https://api.github.com/repos/%s/%s/issues".format(githubOwner, githubRepo)
+            "https://api.github.com/repos/%s/%s/issues".format(githubRepoOwner, githubRepo)
     private val ghIssueTitlePrefix: String =
             if (githubIssueTitlePrefix != null) "[$githubIssueTitlePrefix] " else ""
     private val ghIssueBodyPrefix: String =
@@ -80,7 +80,7 @@ class MaoniGithubListener(
                             "User-Agent" to USER_AGENT,
                             "Content-Type" to APPLICATION_JSON,
                             "Accept" to APPLICATION_JSON),
-                    auth = BasicAuthorization(githubOwner, githubPersonalAccessToken),
+                    auth = BasicAuthorization(githubUsername, githubPersonalAccessToken),
                     data = mapOf(
                             "title" to "${ghIssueTitlePrefix}New Feedback",
                             "body" to "${ghIssueBodyPrefix}${feedbackMessage}\n${ghIssueBodySuffix}",
