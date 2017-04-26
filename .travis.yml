@@ -36,7 +36,7 @@ cache:
 
 script:
     - echo "Travis branch is $TRAVIS_BRANCH, and is in pull request $TRAVIS_PULL_REQUEST"
-    - ./gradlew clean build --stacktrace
+    - ./gradlew clean check assemble --stacktrace
 
 notifications:
   email:
