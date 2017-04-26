@@ -36,7 +36,7 @@ import org.rm3l.maoni.common.model.Feedback
 const val USER_AGENT: String = "maoni-github (v2.4.0-alpha1)"
 const val APPLICATION_JSON: String = "application/json"
 
-class MaoniGithubListener(
+open class MaoniGithubListener(
         val context: Context,
         val githubUsername: String,
         val githubPersonalAccessToken: String,
