@@ -33,7 +33,7 @@ import org.rm3l.maoni.common.model.Feedback
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT: String = "maoni-github (v2.4.0)"
+const val USER_AGENT: String = "maoni-github (v2.4.0-alpha)"
 const val APPLICATION_JSON: String = "application/json"
 
 @Suppress("unused")
