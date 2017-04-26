@@ -64,8 +64,8 @@ to be able to reproduce the issue.
 
 ## TODO Plate
 
-- [] Attach application screen capture and logs to the Github issue created
-- [] Add tests
+- [ ] Attach application screen capture and logs to the Github issue created
+- [ ] Add tests
 
 ## Developed by
 
