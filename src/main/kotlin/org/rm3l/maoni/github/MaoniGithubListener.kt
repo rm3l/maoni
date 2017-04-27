@@ -33,7 +33,7 @@ import org.rm3l.maoni.github.android.AndroidBasicAuthorization
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT: String = "maoni-github (v2.4.0-alpha3)"
+const val USER_AGENT: String = "maoni-github (v2.4.0-alpha6)"
 const val APPLICATION_JSON: String = "application/json"
 
 open class MaoniGithubListener(
@@ -45,26 +45,29 @@ open class MaoniGithubListener(
         val debug: Boolean = false,
         val waitDialogTitle: String = "Please hold on...",
         val waitDialogMessage: String = "Submitting your feedback to Github repo: $githubRepoOwner/$githubRepo ...",
-        githubIssueTitlePrefix: String? = "Maoni",
-        githubIssueBodyPrefix: String? = null,
-        githubIssueBodySuffix: String? = null,
+        val githubIssueTitlePrefix: String? = "Maoni",
+        val githubIssueBodyPrefix: String? = null,
+        val githubIssueBodySuffix: String? = null,
         val githubIssueLabels: Array<String>? = null,
         val githubIssueAssignees: Array<String>? = null,
         val successToastMessage: String = "Thank you for your feedback!",
         val failureToastMessage: String = "An error happened - please try again later"
 ) : Listener {
 
-    private val ghIssueUrl: String =
-            "https://api.github.com/repos/%s/%s/issues".format(githubRepoOwner, githubRepo)
-    private val ghIssueTitlePrefix: String =
-            if (githubIssueTitlePrefix != null) "[$githubIssueTitlePrefix] " else ""
-    private val ghIssueBodyPrefix: String =
-            if (githubIssueBodyPrefix != null) "$githubIssueBodyPrefix\n" else ""
-    private val ghIssueBodySuffix: String =
-            if (githubIssueBodySuffix != null) "$githubIssueBodySuffix\n" else ""
+    private val logger = AnkoLogger(context)
 
     override fun onSendButtonClicked(feedback: Feedback?): Boolean {
-        AnkoLogger(context).debug("onSendButtonClicked")
+        logger.debug("onSendButtonClicked")
+
+        val ghIssueUrl =
+                "https://api.github.com/repos/%s/%s/issues".format(githubRepoOwner, githubRepo)
+        val ghIssueTitlePrefix =
+                if (githubIssueTitlePrefix != null) "[$githubIssueTitlePrefix] " else ""
+        val ghIssueBodyPrefix =
+                if (githubIssueBodyPrefix != null) "$githubIssueBodyPrefix\n" else ""
+        val ghIssueBodySuffix =
+                if (githubIssueBodySuffix != null) "$githubIssueBodySuffix\n" else ""
+
         val progressDialog = context.indeterminateProgressDialog(title = waitDialogTitle, message = waitDialogMessage)
         progressDialog.show()
         val feedbackMessage = feedback
@@ -81,7 +84,7 @@ open class MaoniGithubListener(
                             "Content-Type" to APPLICATION_JSON,
                             "Accept" to APPLICATION_JSON),
                     auth = AndroidBasicAuthorization(githubUsername, githubPersonalAccessToken),
-                    data = mapOf(
+                    json = mapOf(
                             "title" to "${ghIssueTitlePrefix}New Feedback",
                             "body" to "${ghIssueBodyPrefix}${feedbackMessage}\n${ghIssueBodySuffix}",
                             "labels" to (githubIssueLabels ?: emptyArray<String>()),
@@ -89,14 +92,17 @@ open class MaoniGithubListener(
             val statusCode = response.statusCode
             val responseBody = response.jsonObject
             if (debug) {
-                AnkoLogger(context).debug(">>> POST $ghIssueUrl")
-                AnkoLogger(context).debug("<<< [$statusCode] POST $ghIssueUrl: \n$responseBody")
+                logger.debug(">>> POST $ghIssueUrl")
+                logger.debug("<<< [$statusCode] POST $ghIssueUrl: \n$responseBody")
             }
             uiThread {
                 progressDialog.cancel()
                 when (statusCode) {
                     in 100..399 -> context.longToast(successToastMessage)
-                    else -> context.longToast("[$statusCode] $failureToastMessage")
+                    else -> {
+                        logger.debug("responseBody = $responseBody")
+                        context.longToast("[$statusCode] $failureToastMessage : $responseBody")
+                    }
                 }
             }
         }
@@ -105,7 +111,7 @@ open class MaoniGithubListener(
     }
 
     override fun onDismiss() {
-        AnkoLogger(context).debug("onDismiss")
+        logger.debug("onDismiss")
         context.longToast("Dismissed")
     }
 
