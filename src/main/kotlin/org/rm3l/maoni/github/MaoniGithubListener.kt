@@ -23,10 +23,10 @@ package org.rm3l.maoni.github
 
 import android.content.Context
 import khttp.post
-import khttp.structures.authorization.BasicAuthorization
 import org.jetbrains.anko.*
 import org.rm3l.maoni.common.contract.Listener
 import org.rm3l.maoni.common.model.Feedback
+import org.rm3l.maoni.github.android.AndroidBasicAuthorization
 
 /**
  * Callback for Maoni that takes care of sending the Feedback as a Github issue for the specified repo.
@@ -80,7 +80,7 @@ open class MaoniGithubListener(
                             "User-Agent" to USER_AGENT,
                             "Content-Type" to APPLICATION_JSON,
                             "Accept" to APPLICATION_JSON),
-                    auth = BasicAuthorization(githubUsername, githubPersonalAccessToken),
+                    auth = AndroidBasicAuthorization(githubUsername, githubPersonalAccessToken),
                     data = mapOf(
                             "title" to "${ghIssueTitlePrefix}New Feedback",
                             "body" to "${ghIssueBodyPrefix}${feedbackMessage}\n${ghIssueBodySuffix}",
