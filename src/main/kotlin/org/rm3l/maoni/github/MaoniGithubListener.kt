@@ -33,8 +33,8 @@ import org.rm3l.maoni.github.android.AndroidBasicAuthorization
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT: String = "maoni-github (v2.4.0-alpha6)"
-const val APPLICATION_JSON: String = "application/json"
+const val USER_AGENT = "maoni-github (v2.4.0-alpha6)"
+const val APPLICATION_JSON = "application/json"
 
 open class MaoniGithubListener(
         val context: Context,
@@ -52,12 +52,10 @@ open class MaoniGithubListener(
         val githubIssueAssignees: Array<String>? = null,
         val successToastMessage: String = "Thank you for your feedback!",
         val failureToastMessage: String = "An error happened - please try again later"
-) : Listener {
-
-    private val logger = AnkoLogger(context)
+) : Listener, AnkoLogger {
 
     override fun onSendButtonClicked(feedback: Feedback?): Boolean {
-        logger.debug("onSendButtonClicked")
+        debug {"onSendButtonClicked"}
 
         val ghIssueUrl =
                 "https://api.github.com/repos/%s/%s/issues".format(githubRepoOwner, githubRepo)
@@ -70,12 +68,14 @@ open class MaoniGithubListener(
 
         val progressDialog = context.indeterminateProgressDialog(title = waitDialogTitle, message = waitDialogMessage)
         progressDialog.show()
-        val feedbackMessage = feedback
+
+        val deviceAndAppInfo = feedback
                 ?.deviceAndAppInfoAsHumanReadableMap
                 ?.filter { (_, value) -> value != null }
                 ?.map { (key,value) -> "- $key : $value" }
                 ?.joinToString (separator = "\n")
                 ?: ""
+        val feedbackMessage = feedback ?.userComment ?: ""
         doAsync {
             val response = post(
                     url = ghIssueUrl,
@@ -86,21 +86,25 @@ open class MaoniGithubListener(
                     auth = AndroidBasicAuthorization(githubUsername, githubPersonalAccessToken),
                     json = mapOf(
                             "title" to "${ghIssueTitlePrefix}New Feedback",
-                            "body" to "${ghIssueBodyPrefix}${feedbackMessage}\n${ghIssueBodySuffix}",
+                            "body" to ghIssueBodyPrefix +
+                                    "${feedbackMessage}" +
+                                    "\n${ghIssueBodySuffix}" +
+                                    "\n\n**Context**" +
+                                    "\n${deviceAndAppInfo}",
                             "labels" to (githubIssueLabels ?: emptyArray<String>()),
                             "assignees" to (githubIssueAssignees ?: emptyArray<String>())))
             val statusCode = response.statusCode
             val responseBody = response.jsonObject
             if (debug) {
-                logger.debug(">>> POST $ghIssueUrl")
-                logger.debug("<<< [$statusCode] POST $ghIssueUrl: \n$responseBody")
+                debug {">>> POST $ghIssueUrl"}
+                debug {"<<< [$statusCode] POST $ghIssueUrl: \n$responseBody"}
             }
             uiThread {
                 progressDialog.cancel()
                 when (statusCode) {
                     in 100..399 -> context.longToast(successToastMessage)
                     else -> {
-                        logger.debug("responseBody = $responseBody")
+                        debug {"responseBody = $responseBody"}
                         context.longToast("[$statusCode] $failureToastMessage : $responseBody")
                     }
                 }
@@ -111,7 +115,7 @@ open class MaoniGithubListener(
     }
 
     override fun onDismiss() {
-        logger.debug("onDismiss")
+        debug {"onDismiss"}
         context.longToast("Dismissed")
     }
 
