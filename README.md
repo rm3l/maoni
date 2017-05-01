@@ -31,13 +31,13 @@ Then grab `maoni-github` via Gradle, by adding this to your `build.gradle`:
     //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
     //   transitive = true;
     //}
-    compile 'org.rm3l:maoni-github:2.4.0-alpha6'
+    compile 'org.rm3l:maoni-github:2.4.0-alpha7'
   }
 ```
 
 And set it as the listener for your Maoni instance:
 ```java
-    //Customize the maoni-github listener, with things like your application ID/Key on Doorbell
+    //Customize the maoni-github listener, with things like your user personal Access Token on Github
     final org.rm3l.maoni.github.MaoniGithubListener listenerForMaoni = 
             new org.rm3l.maoni.github.MaoniGithubListener(...);
     
@@ -62,10 +62,18 @@ You can use [GitHub issues](https://github.com/rm3l/maoni-github/issues) to repo
 However, please make sure your description is clear enough and has sufficient instructions 
 to be able to reproduce the issue.
 
-## TODO Plate
 
-- [ ] Attach application screen capture and logs to the Github issue created
-- [ ] Add tests
+## Limitations
+
+At this time, the Github API does not provide any ways to upload images or files to issues created. 
+As such, the capability to attach screen captures and application logs to user feedback is not supported 
+by `maoni-github`.
+Please note however that you can always provide your own callback implementation by extending `MaoniGithubListener` class and 
+overriding its `onSendButtonClicked(Feedback)` method, so as to:
+1. upload the feedback attachments on any remote services of your choice; 
+2. then update the `Feedback` object to include the attachments URLs;
+3. and call `super.onSendButtonClicked(Feedback)` to create the issue on your Github repo.
+
 
 ## Developed by
 
