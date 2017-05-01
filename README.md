@@ -175,6 +175,42 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
+
+##### [maoni-github](https://github.com/rm3l/maoni-github)
+
+This callback sends feedback collected as a Github issue to a specified Github repository.
+
+To use it, you will need to have an account there, and grab your Personal Access Token.
+You may want to create a dedicated `reporter` user for that purpose.
+
+Add this additional line to your `build.gradle`:
+
+```gradle
+  dependencies {
+    // ...
+    //As this will be plugged as a callback for Maoni, it requires Maoni dependency as well.
+    //See http://maoni.rm3l.org for more details.
+    //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
+    //   transitive = true;
+    //}
+    compile 'org.rm3l:maoni-github:<appropriateVersion>'
+  }
+```
+
+And set it as the listener for your Maoni instance:
+```java
+    //Customize the maoni-github listener, with things like your user personal Access Token on Github
+    final org.rm3l.maoni.github.MaoniGithubListener listenerForMaoni = 
+            new org.rm3l.maoni.github.MaoniGithubListener(...);
+    
+    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
+        .withListener(listenerForMaoni) //Callback from maoni-github
+        //...
+        .build()
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
+```
+
+
 ##### [maoni-doorbell](https://github.com/rm3l/maoni-doorbell)
 
 This callback sends feedback collected to [Doorbell](https://www.doorbell.io).
