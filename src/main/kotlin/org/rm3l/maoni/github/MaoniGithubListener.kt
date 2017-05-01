@@ -33,7 +33,7 @@ import org.rm3l.maoni.github.android.AndroidBasicAuthorization
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT = "maoni-github (v2.4.0-alpha6)"
+const val USER_AGENT = "maoni-github (v2.4.0-alpha7)"
 const val APPLICATION_JSON = "application/json"
 
 open class MaoniGithubListener(
