@@ -22,6 +22,8 @@
 package org.rm3l.maoni.github
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import khttp.post
 import org.jetbrains.anko.*
 import org.rm3l.maoni.common.contract.Listener
@@ -56,6 +58,15 @@ open class MaoniGithubListener(
 
     override fun onSendButtonClicked(feedback: Feedback?): Boolean {
         debug {"onSendButtonClicked"}
+
+        val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+        val isConnected = activeNetworkInfo ?.isConnectedOrConnecting ?: false
+        if (!isConnected) {
+            context.longToast("An Internet connection is required to send your feedback")
+            return false
+        }
 
         val ghIssueUrl =
                 "https://api.github.com/repos/%s/%s/issues".format(githubRepoOwner, githubRepo)
