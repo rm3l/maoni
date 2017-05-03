@@ -305,7 +305,7 @@ with the next update from Crowdin.
 
 ### Contributing callbacks for Maoni
 
-You can create separate Java projects that implements any of the Maoni callbacks interfaces 
+You can create separate projects that implement any of the Maoni callbacks interfaces 
 (`Validator`, `Listener`, `UiListener`, `Handler` or any combination), 
 so users can use them in their projects.
 
@@ -318,6 +318,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
   }
 ```
 
+You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
 
 ## In use in the following apps
 
