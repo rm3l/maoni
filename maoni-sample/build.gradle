@@ -21,6 +21,12 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+Properties localProperties = new Properties()
+localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+def ghUsername = localProperties.getProperty('github.username')
+def ghPasswordToken = localProperties.getProperty('github.passwordToken')
 
 android {
     compileSdkVersion 25
@@ -52,6 +58,8 @@ android {
             assets.srcDirs = ['src/main/assets']
         }
 
+        main.java.srcDirs += 'src/main/kotlin'
+
         // Move the tests to tests/java, tests/res, etc...
         instrumentTest.setRoot('src/androidTests')
 
@@ -78,9 +86,16 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
+            buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
             signingConfig signingConfigs.release
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
+            buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
         }
     }
     lintOptions {
@@ -96,8 +111,15 @@ android {
 }
 
 dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'org.jetbrains.anko:anko-sdk15:0.9.1'
+
     compile project(":maoni")
     compile ('org.rm3l:maoni-email:2.4.0') {
+        //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
+        exclude group: 'org.rm3l', module: 'maoni-common'
+    }
+    compile ('org.rm3l:maoni-github:2.4.0-rc1') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
     }

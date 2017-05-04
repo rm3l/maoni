@@ -38,3 +38,5 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn kotlin.**
+-dontwarn khttp.**

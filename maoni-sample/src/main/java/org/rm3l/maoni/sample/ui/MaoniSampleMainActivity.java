@@ -36,7 +36,7 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import org.rm3l.maoni.Maoni;
 import org.rm3l.maoni.sample.BuildConfig;
 import org.rm3l.maoni.sample.R;
-import org.rm3l.maoni.sample.feedback.MyHandlerForMaoni;
+import org.rm3l.maoni.sample.feedback.MaoniSampleCallbackHandler;
 
 public class MaoniSampleMainActivity extends AppCompatActivity {
 
@@ -55,7 +55,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
-        final MyHandlerForMaoni handlerForMaoni = new MyHandlerForMaoni(this);
+        final MaoniSampleCallbackHandler handlerForMaoni = new MaoniSampleCallbackHandler(this);
         final Maoni.Builder maoniBuilder = new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
                 .withWindowTitle("Feedback") //Set to an empty string to clear it
                 .withMessage("Hey! Love or hate this app? We would love to hear from you.\n\n" +

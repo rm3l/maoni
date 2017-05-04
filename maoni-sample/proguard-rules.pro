@@ -62,3 +62,9 @@
 -dontwarn com.google.vending.licensing.**
 
 -dontwarn org.apache.log4j.**
+
+-dontwarn kotlin.**
+-dontwarn khttp.**
+
+-keep class org.rm3l.maoni.common.model.** { *; }
+#-keep class * implements java.io.Serializable { *; }
