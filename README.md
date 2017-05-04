@@ -63,7 +63,7 @@ However, please make sure your description is clear enough and has sufficient in
 to be able to reproduce the issue.
 
 
-## Limitations
+## Caveats
 
 At this time, the Github API does not provide any ways to upload images or files to issues created. 
 As such, the capability to attach screen captures and application logs to user feedback is not supported 
