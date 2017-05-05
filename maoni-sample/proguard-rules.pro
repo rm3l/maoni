@@ -64,8 +64,12 @@
 -dontwarn org.apache.log4j.**
 
 -keep class kotlin.** {*;}
--keep class khttp.** {*;}
+-dontwarn kotlin.reflect.jvm.internal.**
+-dontwarn kotlin.internal.**
 #-dontwarn kotlin.**
+
+-keep class khttp.** {*;}
+-keep class khttp.requests.** {*;}
 #-dontwarn khttp.**
 
 -keep class org.rm3l.maoni.common.model.** { *; }
