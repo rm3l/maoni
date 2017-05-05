@@ -100,13 +100,11 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler {
         }
         1 -> {
           //maoni-github
-          val githubRepoOwner = "rm3l"
-          val githubRepo = "maoni"
           listenerSelected = MaoniGithubListener(context,
               BuildConfig.GITHUB_USERNAME,
               BuildConfig.GITHUB_PASSWORD_TOKEN,
-              githubRepoOwner,
-              githubRepo,
+              "rm3l",
+              "maoni",
               true,
               "Please hold on...",
               "Submitting your feedback to Github repo: $githubRepoOwner/$githubRepo ...",
