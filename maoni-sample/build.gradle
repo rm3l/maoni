@@ -24,9 +24,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 Properties localProperties = new Properties()
-localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
-def ghUsername = localProperties.getProperty('github.username')
-def ghPasswordToken = localProperties.getProperty('github.passwordToken')
+try {
+    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+} catch (java.io.FileNotFoundException fnfe) {
+    //No worries
+    printf(fnfe.getClass().getSimpleName() + " : " + fnfe.getMessage() + " => maoni-github callback will not be available!\n")
+}
+def ghUsername = localProperties.getProperty('github.username', "")
+def ghPasswordToken = localProperties.getProperty('github.passwordToken', "")
 
 android {
     compileSdkVersion 25
