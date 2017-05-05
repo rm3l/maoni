@@ -65,7 +65,6 @@
 
 -keep class kotlin.** {*;}
 -keep class khttp.** {*;}
-
 #-dontwarn kotlin.**
 #-dontwarn khttp.**
 
