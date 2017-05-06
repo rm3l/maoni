@@ -28,4 +28,5 @@ SOFTWARE.
   <string name="main_activity_text"><![CDATA[
 This is a demo application for Maoni, a lightweight library which provides         a ready-to-use Material-ized activity for collecting user feedbacks from within an existing app.         \n         Unlike other similar libraries, Maoni allows to capture a screenshot of the current activity,         which you may manipulate in your callbacks.         \n\n         Touch the Floating Action Button below to open the Maoni activity.         \n\n         Please navigate to http://github.com/rm3l/maoni for further instructions.]]></string>
   <string name="action_about">About</string>
+  <string name="default_email_addr">some.one@somewhe.re</string>
 </resources>

@@ -35,4 +35,5 @@ Appuyez sur l\'icône flottante ci-dessous pour ouvrir le formulaire Maoni.
 \n\n
 Plus d\'infos sur http://rm3l.github.io/maoni.    ]]></string>
   <string name="action_about">À propos de Maoni</string>
+  <string name="default_email_addr">some.one@somewhe.re</string>
 </resources>

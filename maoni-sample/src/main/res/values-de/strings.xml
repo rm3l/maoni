@@ -37,4 +37,5 @@ SOFTWARE.
         Please navigate to http://github.com/rm3l/maoni for further instructions.
     ]]></string>
   <string name="action_about">Über</string>
+  <string name="default_email_addr">some.one@somewhe.re</string>
 </resources>
