@@ -8,10 +8,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.find
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.selector
+import org.jetbrains.anko.warn
 import org.rm3l.maoni.common.contract.Handler
 import org.rm3l.maoni.common.contract.Listener
 import org.rm3l.maoni.common.model.Feedback
@@ -28,7 +30,7 @@ import org.rm3l.maoni.sample.R
  * - maoni-email, for sending feedback via email
  * - maoni-github, for sending feedback as a Github issue (in the specified repo)
  */
-class MaoniSampleCallbackHandler(val context: Context) : Handler {
+class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
   private var mEmailInputLayout: TextInputLayout? = null
   private var mEmail: EditText? = null
@@ -76,6 +78,14 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler {
       else -> null
     }
     feedback?.put("My Extra Radio Group", myExtraRadioGroupChecked ?: "???")
+
+    if (TextUtils.isEmpty(BuildConfig.GITHUB_USERNAME)
+        || TextUtils.isEmpty(BuildConfig.GITHUB_PASSWORD_TOKEN)) {
+      //maoni-github not configured properly
+      warn { "maoni-github not configured properly. " +
+          "Both 'github.username' and 'github.passwordToken' " +
+          "properties missing from local.properties" }
+    }
 
     val listOfListeners = listOf(
         "Send via email (maoni-email)",
