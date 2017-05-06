@@ -102,6 +102,8 @@ android {
             minifyEnabled true
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     lintOptions {
@@ -125,7 +127,7 @@ dependencies {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
     }
-    compile ('org.rm3l:maoni-github:2.4.0-rc1') {
+    compile ('org.rm3l:maoni-github:2.4.0-rc7') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
     }
