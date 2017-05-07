@@ -101,3 +101,11 @@ files:
            uk: uk
            vi: vi
            zu: zu
+
+  -
+   source: '/maoni-sample/src/main/play/en-US/whatsnew'
+   translation: '/maoni-sample/src/main/play/%locale%/%original_file_name%'
+
+  -
+   source: '/maoni-sample/src/main/play/en-US/listing/*'
+   translation: '/maoni-sample/src/main/play/%locale%/listing/%original_file_name%'
