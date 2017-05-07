@@ -199,7 +199,6 @@ open class MaoniJiraListener(
 
     override fun onDismiss() {
         debug {"onDismiss"}
-        context.longToast("Dismissed")
     }
 
 }
