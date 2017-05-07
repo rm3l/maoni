@@ -37,7 +37,7 @@ Then grab `maoni-jira` via Gradle, by adding this to your `build.gradle`:
 
 And set it as the listener for your Maoni instance:
 ```java
-    //Customize the maoni-jira listener, with things like your user personal Access Token on Github
+    //Customize the maoni-jira listener, with things like the JIRA Host REST API Base URL and the credentials to use to connect
     final org.rm3l.maoni.github.MaoniJiraListener listenerForMaoni = 
             new org.rm3l.maoni.github.MaoniJiraListener(...);
     
