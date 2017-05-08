@@ -63,7 +63,7 @@ configurations {
 }
 
 group = 'org.rm3l'
-version = '2.4.2-rc2'
+version = '2.4.2-rc3'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -126,10 +126,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '2.4.2-rc2'
+            name = '2.4.2-rc3'
             desc = 'Maoni Android Library - Github Handler'
             released = new Date()
-            vcsTag = '2.4.2-rc2'
+            vcsTag = '2.4.2-rc3'
         }
 
         publicDownloadNumbers = true
