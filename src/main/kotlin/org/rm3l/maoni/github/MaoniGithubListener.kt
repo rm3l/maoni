@@ -37,6 +37,7 @@ import org.rm3l.maoni.github.android.AndroidBasicAuthorization
  */
 const val USER_AGENT = "maoni-github (v2.4.0-rc7)"
 const val APPLICATION_JSON = "application/json"
+const val TITLE_MAX_LINES = 50
 
 open class MaoniGithubListener(
         val context: Context,
@@ -88,6 +89,14 @@ open class MaoniGithubListener(
                 ?: ""
         val feedbackMessage = feedback ?.userComment ?: ""
         doAsync {
+            val feedbackMessageLines = feedbackMessage.split(System.lineSeparator())
+            val firstLineOfMessage = if (feedbackMessageLines.isEmpty()) "" else feedbackMessageLines[0]
+            val title: String
+            if (firstLineOfMessage.length >= TITLE_MAX_LINES) {
+                title = (firstLineOfMessage.substring(0, TITLE_MAX_LINES) + "...")
+            } else {
+                title = firstLineOfMessage
+            }
             val response = post(
                     url = ghIssueUrl,
                     headers = mapOf(
@@ -96,12 +105,12 @@ open class MaoniGithubListener(
                             "Accept" to APPLICATION_JSON),
                     auth = AndroidBasicAuthorization(githubUsername, githubPersonalAccessToken),
                     json = mapOf(
-                            "title" to "${ghIssueTitlePrefix}New Feedback",
+                            "title" to "$ghIssueTitlePrefix$title",
                             "body" to ghIssueBodyPrefix +
-                                    "${feedbackMessage}" +
-                                    "\n${ghIssueBodySuffix}" +
+                                    "$feedbackMessage" +
+                                    "\n$ghIssueBodySuffix" +
                                     "\n\n**Context**" +
-                                    "\n${deviceAndAppInfo}",
+                                    "\n$deviceAndAppInfo",
                             "labels" to (githubIssueLabels ?: emptyArray<String>()),
                             "assignees" to (githubIssueAssignees ?: emptyArray<String>())))
             val statusCode = response.statusCode
