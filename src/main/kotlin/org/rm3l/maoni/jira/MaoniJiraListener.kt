@@ -55,10 +55,7 @@ open class MaoniJiraListener(
         val jiraIssueSummaryPrefix: String? = "Maoni",
         val jiraIssueDescriptionPrefix: String? = null,
         val jiraIssueDescriptionSuffix: String? = null,
-        val jiraIssueType: String? = null,
-        val jiraIssueAssignee: String? = null,
-        val jiraIssueReporter: String? = null,
-        val jiraIssuePriorityId: String? = null,
+        val jiraIssueType: String,
         val jiraIssueCustomFieldsMap: Map<String, String>? = null,
 
         val waitDialogTitle: String = "Please hold on...",
@@ -115,10 +112,7 @@ open class MaoniJiraListener(
                         "\n$jiraIssueDescriptionSuffix" +
                         "\n\n**Context**" +
                         "\n$deviceAndAppInfo",
-                "issuetype" to mapOf("name" to (jiraIssueType ?: "")),
-                "assignee" to mapOf("name" to (jiraIssueAssignee ?: "")),
-                "reporter" to mapOf("name" to (jiraIssueReporter ?: "")),
-                "priority" to mapOf("id" to (jiraIssuePriorityId ?: "")))
+                "issuetype" to mapOf("name" to jiraIssueType))
         fieldsMap.putAll(jiraIssueCustomFieldsMap?: emptyMap())
 
         val auth = AndroidBasicAuthorization(jiraReporterUsername, jiraReporterPassword)
