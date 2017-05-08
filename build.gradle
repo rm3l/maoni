@@ -67,7 +67,7 @@ version = '2.4.0-rc7'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'org.rm3l:maoni-common:2.4.0'
+    compile 'org.rm3l:maoni-common:2.4.2'
     //We are interacting with Android components for sending emails
     provided 'com.google.android:android:4.1.1.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
