@@ -40,6 +40,7 @@ import org.rm3l.maoni.jira.android.AndroidBasicAuthorization
  */
 const val USER_AGENT = "maoni-jira (v2.4.0-rc1)"
 const val APPLICATION_JSON = "application/json"
+const val TITLE_MAX_LINES = 50
 
 @Suppress("unused")
 open class MaoniJiraListener(
@@ -97,10 +98,18 @@ open class MaoniJiraListener(
                 ?.joinToString (separator = "\n")
                 ?: ""
         val feedbackMessage = feedback ?.userComment ?: ""
+        val feedbackMessageLines = feedbackMessage.split(System.lineSeparator())
+        val firstLineOfMessage = if (feedbackMessageLines.isEmpty()) "" else feedbackMessageLines[0]
+        val summary: String
+        if (firstLineOfMessage.length >= TITLE_MAX_LINES) {
+            summary = (firstLineOfMessage.substring(0, TITLE_MAX_LINES) + "...")
+        } else {
+            summary = firstLineOfMessage
+        }
 
         val fieldsMap = mutableMapOf(
                 "project" to mapOf("key" to jiraProjectKey),
-                "summary" to "${jiraIssueSummaryPrefix}New Feedback",
+                "summary" to "$jiraIssueSummaryPrefix$summary",
                 "description" to jiraIssueDescriptionPrefix +
                         "$feedbackMessage" +
                         "\n$jiraIssueDescriptionSuffix" +
