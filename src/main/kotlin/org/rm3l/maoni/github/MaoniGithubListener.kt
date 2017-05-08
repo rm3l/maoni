@@ -35,7 +35,7 @@ import org.rm3l.maoni.github.android.AndroidBasicAuthorization
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT = "maoni-github (v2.4.0-rc7)"
+const val USER_AGENT = "maoni-github (v2.4.2-rc1)"
 const val APPLICATION_JSON = "application/json"
 const val TITLE_MAX_LINES = 50
 

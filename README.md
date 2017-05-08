@@ -31,7 +31,7 @@ Then grab `maoni-github` via Gradle, by adding this to your `build.gradle`:
     //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
     //   transitive = true;
     //}
-    compile 'org.rm3l:maoni-github:2.4.0-rc7'
+    compile 'org.rm3l:maoni-github:2.4.2-rc1'
   }
 ```
 
