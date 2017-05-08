@@ -19,6 +19,7 @@ import org.rm3l.maoni.common.contract.Listener
 import org.rm3l.maoni.common.model.Feedback
 import org.rm3l.maoni.email.MaoniEmailListener
 import org.rm3l.maoni.github.MaoniGithubListener
+import org.rm3l.maoni.jira.MaoniJiraListener
 import org.rm3l.maoni.sample.BuildConfig
 import org.rm3l.maoni.sample.R
 
@@ -79,17 +80,37 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
     }
     feedback?.put("My Extra Radio Group", myExtraRadioGroupChecked ?: "???")
 
+    var maoniGithubConfigured: Boolean = true
     if (TextUtils.isEmpty(BuildConfig.GITHUB_USERNAME)
         || TextUtils.isEmpty(BuildConfig.GITHUB_PASSWORD_TOKEN)) {
       //maoni-github not configured properly
       warn { "maoni-github not configured properly. " +
           "Both 'github.username' and 'github.passwordToken' " +
           "properties missing from local.properties" }
+      maoniGithubConfigured = false
     }
 
-    val listOfListeners = listOf(
-        "Send via email (maoni-email)",
-        "Send as Github issue (maoni-github)")
+    var maoniJiraConfigured: Boolean = true
+    if (TextUtils.isEmpty(BuildConfig.JIRA_REST_BASE_URL)
+        || TextUtils.isEmpty(BuildConfig.JIRA_USERNAME)
+        || TextUtils.isEmpty(BuildConfig.JIRA_PASSWORD)) {
+      //maoni-jira not configured properly
+      warn { "maoni-jira not configured properly. " +
+          "'jira.rest.baseUrl', 'jira.username' and 'jira.password'" +
+          "properties missing from local.properties" }
+      maoniJiraConfigured = false
+    }
+
+    val listOfListeners = mutableListOf(
+        "Send via email (maoni-email)"
+    )
+    if (maoniGithubConfigured) {
+      listOfListeners.add("Send as Github issue (maoni-github)")
+    }
+    if (maoniJiraConfigured) {
+      listOfListeners.add("Send as JIRA issue (maoni-jira)")
+    }
+
     context.selector("How would you like to send your feedback?", listOfListeners) { position ->
       val progressDialog = context.indeterminateProgressDialog(listOfListeners[position])
       progressDialog.show()
@@ -97,36 +118,17 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
       when (position) {
         0 -> {
           //maoni-email
-          listenerSelected = MaoniEmailListener(
-              context,
-              "text/html",
-              "[Maoni] Feedback from Maoni Sample App " +
-                  "(${feedback?.appInfo?.applicationId}: ${feedback?.appInfo?.versionName})",
-              null,
-              null,
-              arrayOf("apps+maoni@rm3l.org"),
-              null,
-              arrayOf("apps+maoni_sample@rm3l.org"))
+          listenerSelected = buildMaoniEmailListener(feedback)
         }
         1 -> {
-          //maoni-github
-          val githubRepoOwner = "rm3l"
-          val githubRepo = "maoni"
-          listenerSelected = MaoniGithubListener(context,
-              BuildConfig.GITHUB_USERNAME,
-              BuildConfig.GITHUB_PASSWORD_TOKEN,
-              githubRepoOwner,
-              githubRepo,
-              true,
-              "Please hold on...",
-              "Submitting your feedback to Github repo: $githubRepoOwner/$githubRepo ...",
-              "Maoni Sample App",
-              null,
-              null,
-              arrayOf("feedback", "maoni-sample"),
-              arrayOf("rm3l"),
-              "Issue has been created in Github repo. Thank you for your feedback!",
-              "An error happened - please try again later")
+          //maoni-github or maoni-jira
+          listenerSelected =
+              if (maoniGithubConfigured) buildMaoniGithubListener(feedback)
+              else buildMaoniJiraListener(feedback)
+        }
+        2 -> {
+          //maoni-jira
+          listenerSelected = buildMaoniJiraListener(feedback)
         }
         else -> {
           listenerSelected = null
@@ -137,5 +139,55 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
     }
 
     return true
+  }
+
+  private fun buildMaoniEmailListener(feedback: Feedback?): Listener {
+    return MaoniEmailListener(
+        context,
+        "text/html",
+        "[Maoni] Feedback from Maoni Sample App " +
+            "(${feedback?.appInfo?.applicationId}: ${feedback?.appInfo?.versionName})",
+        null,
+        null,
+        arrayOf("apps+maoni@rm3l.org"),
+        null,
+        arrayOf("apps+maoni_sample@rm3l.org"))
+  }
+
+  private fun buildMaoniGithubListener(feedback: Feedback?): Listener {
+    val githubRepoOwner = "rm3l"
+    val githubRepo = "maoni"
+    return MaoniGithubListener(context,
+        BuildConfig.GITHUB_USERNAME,
+        BuildConfig.GITHUB_PASSWORD_TOKEN,
+        githubRepoOwner,
+        githubRepo,
+        BuildConfig.DEBUG,
+        "Please hold on...",
+        "Submitting your feedback to Github repo: $githubRepoOwner/$githubRepo ...",
+        "Maoni Sample App",
+        null,
+        null,
+        arrayOf("feedback", "maoni-sample"),
+        arrayOf("rm3l"),
+        "Issue has been created in Github repo. Thank you for your feedback!",
+        "An error happened - please try again later")
+  }
+
+  private fun buildMaoniJiraListener(feedback: Feedback?): Listener {
+    val jiraProjectKey = "MAONI"
+    return MaoniJiraListener(
+        context,
+        BuildConfig.DEBUG,
+        BuildConfig.JIRA_REST_BASE_URL,
+        BuildConfig.JIRA_USERNAME,
+        BuildConfig.JIRA_PASSWORD,
+        jiraProjectKey,
+        jiraIssueType = "Task",
+        jiraIssueSummaryPrefix = "Maoni Sample App",
+        successToastMessage = "Issue has been created in JIRA Project '$jiraProjectKey'. " +
+            "Thank you for your feedback!",
+        failureToastMessage = "An error happened - please try again later"
+        )
   }
 }
