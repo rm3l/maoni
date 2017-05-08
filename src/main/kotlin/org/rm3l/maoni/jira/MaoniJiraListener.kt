@@ -28,7 +28,7 @@ import khttp.extensions.fileLike
 import khttp.post
 import khttp.structures.files.FileLike
 import org.jetbrains.anko.*
-import org.json.JSONObject
+import org.json.JSONArray
 import org.rm3l.maoni.common.contract.Listener
 import org.rm3l.maoni.common.model.Feedback
 import org.rm3l.maoni.jira.android.AndroidBasicAuthorization
@@ -152,7 +152,7 @@ open class MaoniJiraListener(
                                 }
                             }
                             val attachmentsUploadResponseStatusCode: Int
-                            val attachmentsUploadResponseResponseBody: JSONObject?
+                            val attachmentsUploadResponseResponseBody: JSONArray?
                             if (!listOfFiles.isEmpty()) {
                                 val attachmentsUploadResponse = post(
                                         url = issueAttachmentUrl,
@@ -161,7 +161,7 @@ open class MaoniJiraListener(
                                         files = listOfFiles
                                 )
                                 attachmentsUploadResponseStatusCode = attachmentsUploadResponse.statusCode
-                                attachmentsUploadResponseResponseBody = attachmentsUploadResponse.jsonObject
+                                attachmentsUploadResponseResponseBody = attachmentsUploadResponse.jsonArray
                                 if (debug) {
                                     debug {">>> POST $issueAttachmentUrl"}
                                     debug {"<<< [$attachmentsUploadResponseStatusCode] " +
