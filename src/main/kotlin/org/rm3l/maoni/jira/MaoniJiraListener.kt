@@ -40,7 +40,7 @@ import org.rm3l.maoni.jira.android.AndroidBasicAuthorization
  */
 const val USER_AGENT = "maoni-jira (v2.4.2-rc3)"
 const val APPLICATION_JSON = "application/json"
-const val TITLE_MAX_LINES = 50
+const val ISSUE_SUMMARY_MAX_LINES = 50
 
 @Suppress("unused")
 open class MaoniJiraListener(
@@ -98,8 +98,8 @@ open class MaoniJiraListener(
         val feedbackMessageLines = feedbackMessage.split(System.lineSeparator())
         val firstLineOfMessage = if (feedbackMessageLines.isEmpty()) "" else feedbackMessageLines[0]
         val summary: String
-        if (firstLineOfMessage.length >= TITLE_MAX_LINES) {
-            summary = (firstLineOfMessage.substring(0, TITLE_MAX_LINES) + "...")
+        if (firstLineOfMessage.length >= ISSUE_SUMMARY_MAX_LINES) {
+            summary = (firstLineOfMessage.substring(0, ISSUE_SUMMARY_MAX_LINES) + "...")
         } else {
             summary = firstLineOfMessage
         }
@@ -145,15 +145,16 @@ open class MaoniJiraListener(
                             val listOfFiles = mutableListOf<FileLike>()
                             if (feedback != null) {
                                 if (feedback.includeScreenshot) {
-                                    listOfFiles.add(feedback.screenshotFile.fileLike("screenshot.png"))
+                                    listOfFiles.add(feedback.screenshotFile.fileLike())
                                 }
                                 if (feedback.includeLogs) {
-                                    listOfFiles.add(feedback.logsFile.fileLike("logcat.txt"))
+                                    listOfFiles.add(feedback.logsFile.fileLike())
                                 }
                             }
                             val attachmentsUploadResponseStatusCode: Int
                             val attachmentsUploadResponseResponseBody: JSONArray?
-                            if (!listOfFiles.isEmpty()) {
+                            val doSendAttachmentsRequest = !listOfFiles.isEmpty()
+                            if (doSendAttachmentsRequest) {
                                 val attachmentsUploadResponse = post(
                                         url = issueAttachmentUrl,
                                         headers = mapOf("X-Atlassian-Token" to "nocheck"),
@@ -168,22 +169,26 @@ open class MaoniJiraListener(
                                             "POST $issueAttachmentUrl: \n$attachmentsUploadResponseResponseBody"}
                                 }
                             } else {
-                                attachmentsUploadResponseStatusCode = 201
+                                attachmentsUploadResponseStatusCode = 204
                                 attachmentsUploadResponseResponseBody = null
                             }
 
                             uiThread {
                                 progressDialog.cancel()
-                                when (attachmentsUploadResponseStatusCode) {
-                                    in 100..399 -> {
-                                        context.longToast("$successToastMessage. Issue created: $issueKey")
+                                if (doSendAttachmentsRequest) {
+                                    when (attachmentsUploadResponseStatusCode) {
+                                        in 100..399 -> {
+                                            context.longToast("$successToastMessage. Issue created: $issueKey")
+                                        }
+                                        else -> {
+                                            debug { "responseBody = $attachmentsUploadResponseResponseBody" }
+                                            context.longToast(
+                                                    "$successToastMessage. Issue created: $issueKey, but could not upload attachments: " +
+                                                            "[$attachmentsUploadResponseStatusCode] $attachmentsUploadResponseResponseBody")
+                                        }
                                     }
-                                    else -> {
-                                        debug {"responseBody = $attachmentsUploadResponseResponseBody"}
-                                        context.longToast(
-                                                "$successToastMessage. Issue created: $issueKey, but could not upload attachments: " +
-                                                "[$attachmentsUploadResponseStatusCode] $attachmentsUploadResponseResponseBody")
-                                    }
+                                } else {
+                                    context.longToast("$successToastMessage. Issue created: $issueKey")
                                 }
                             }
                         }
