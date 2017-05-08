@@ -93,7 +93,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:2.4.2@aar') {
+    compile ('org.rm3l:maoni:3.0.0@aar') {
         transitive = true;
     }
   }
@@ -314,7 +314,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:2.4.2'
+    compile 'org.rm3l:maoni-common:3.0.0'
   }
 ```
 
