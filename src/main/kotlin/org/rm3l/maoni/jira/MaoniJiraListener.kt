@@ -38,7 +38,7 @@ import org.rm3l.maoni.jira.android.AndroidBasicAuthorization
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT = "maoni-jira (v2.4.2-rc3)"
+const val USER_AGENT = "maoni-jira (v2.4.2-rc4)"
 const val APPLICATION_JSON = "application/json"
 const val ISSUE_SUMMARY_MAX_LINES = 50
 
