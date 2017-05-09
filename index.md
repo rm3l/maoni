@@ -98,7 +98,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:3.0.0@aar') {
+    compile ('org.rm3l:maoni:3.1.0@aar') {
         transitive = true;
     }
   }
@@ -114,14 +114,10 @@ within your application workflow (for example a button click listener, or a touc
 
 For example, to start with just the defaults:
 ```java
-    // MyHandlerForMaoni is a custom implementation of Handler, 
-    // which is a shortcut interface for defining both a validator and listeners for Maoni
-    final MyHandlerForMaoni myHandlerForMaoni = new MyHandlerForMaoni(...);
-    
     //The optional file provider authority allows you to 
     //share the screenshot capture file to other apps (depending on your callback implementation)
-    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
-        .withHandler(myHandlerForMaoni) //Custom Callback for Maoni
+    new Maoni.Builder(<myContextObject>, MY_FILE_PROVIDER_AUTHORITY)
+        .withDefaultToEmailAddress("feedback@my.company.com")
         .build()
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
@@ -158,6 +154,7 @@ Some common callbacks for Maoni are available as external dependencies to includ
 ##### [maoni-email](https://github.com/rm3l/maoni-email)
 
 This callback opens up an Intent for sending an email with the feedback collected.
+This is the default fallback listener used in case no other listener has been set explicitly.
 
 Add this additional line to your `build.gradle`:
 
@@ -319,7 +316,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:3.0.0'
+    compile 'org.rm3l:maoni-common:3.1.0'
   }
 ```
 
