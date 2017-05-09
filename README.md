@@ -32,11 +32,11 @@ Then grab `maoni-email` via Gradle, by adding this to your `build.gradle`:
     //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
     //   transitive = true;
     //}
-    compile 'org.rm3l:maoni-email:2.4.0'
+    compile 'org.rm3l:maoni-email:3.0.0'
   }
 ```
 
-And set it as the listener for your Maoni instance:
+And set it as the listener for your Maoni instance (at the right place within your application workflow):
 ```java
     //Customize the maoni-email listener, with things like the 'to', 'bcc', 'cc', 'subject', ... fields of the email
     final org.rm3l.maoni.email.MaoniEmailListener listenerForMaoni = 
