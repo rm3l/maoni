@@ -130,6 +130,10 @@ public class Feedback {
      * @param userComment       the user comment
      * @param includeScreenshot whether to include the screenshot into the feedback or not
      * @param screenshotFileUri the screenshot file URI
+     * @param screenshotFile    the screenshot File object
+     * @param includeLogs       whether to include the logs into the feedback or not
+     * @param logsFileUri       the logs file URI
+     * @param logsFile          the logs File object
      */
     public Feedback(CharSequence id,
                     Activity activity,
