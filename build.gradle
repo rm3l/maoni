@@ -60,7 +60,7 @@ group = 'org.rm3l'
 version = '3.0.0-1'
 
 dependencies {
-    compile 'org.rm3l:maoni-common:3.0.0-1'
+    compile 'org.rm3l:maoni-common:3.0.0'
     //We are interacting with Android components for sending emails
     provided 'com.google.android:android:4.1.1.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
