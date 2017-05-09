@@ -21,7 +21,9 @@
  */
 package org.rm3l.maoni;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -33,10 +35,14 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.util.Log;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import org.rm3l.maoni.common.contract.Handler;
 import org.rm3l.maoni.common.contract.Listener;
 import org.rm3l.maoni.common.contract.UiListener;
 import org.rm3l.maoni.common.contract.Validator;
+import org.rm3l.maoni.email.MaoniEmailListener;
 import org.rm3l.maoni.ui.MaoniActivity;
 import org.rm3l.maoni.utils.ContextUtils;
 import org.rm3l.maoni.utils.ViewUtils;
@@ -82,6 +88,7 @@ public class Maoni {
     private static final String DEBUG = "DEBUG";
     private static final String FLAVOR = "FLAVOR";
     private static final String BUILD_TYPE = "BUILD_TYPE";
+    public static final String DEFAULT_LISTENER_EMAIL_TO = "DEFAULT_LISTENER_EMAIL_TO";
 
     /**
      * The feedback window title
@@ -159,6 +166,8 @@ public class Maoni {
     @Nullable
     public final Integer theme;
     private final String fileProviderAuthority;
+    @Nullable
+    private final Context context;
     private File maoniWorkingDir;
 
     private final AtomicBoolean mUsed = new AtomicBoolean(false);
@@ -188,6 +197,7 @@ public class Maoni {
      * @param screenshotHint               the text to display to the user
      */
     public Maoni(
+            @Nullable final Context context,
             @Nullable String fileProviderAuthority,
             @Nullable final File maoniWorkingDir,
             @Nullable final CharSequence windowTitle,
@@ -205,6 +215,7 @@ public class Maoni {
             @Nullable final CharSequence touchToPreviewScreenshotText,
             @Nullable final CharSequence screenshotHint) {
 
+        this.context = context;
         this.fileProviderAuthority = fileProviderAuthority;
         this.windowSubTitle = windowSubTitle;
         this.windowTitleTextColor = windowTitleTextColor;
@@ -356,17 +367,17 @@ public class Maoni {
 
 
     public Maoni unregisterListener() {
-        getInstance().setListener(null);
+        getInstance(context).setListener(null);
         return this;
     }
 
     public Maoni unregisterUiListener() {
-        getInstance().setUiListener(null);
+        getInstance(context).setUiListener(null);
         return this;
     }
 
     public Maoni unregisterValidator() {
-        getInstance().setValidator(null);
+        getInstance(context).setValidator(null);
         return this;
     }
 
@@ -384,6 +395,9 @@ public class Maoni {
      * Maoni Builder
      */
     public static class Builder {
+
+        @Nullable
+        private final Context context;
 
         @Nullable
         private final String fileProviderAuthority;
@@ -430,7 +444,19 @@ public class Maoni {
          *                              If {@literal null}, screenshot file sharing will not be available
          */
         public Builder(@Nullable final String fileProviderAuthority) {
+            this(null, fileProviderAuthority);
+        }
+
+        /**
+         * Constructor
+         *
+         * @param context the context
+         * @param fileProviderAuthority the file provider authority.
+         *                              If {@literal null}, screenshot file sharing will not be available
+         */
+        public Builder(@Nullable final Context context, @Nullable final String fileProviderAuthority) {
             this.fileProviderAuthority = fileProviderAuthority;
+            this.context = context;
         }
 
         @Nullable
@@ -585,17 +611,17 @@ public class Maoni {
         }
 
         public Builder withValidator(@Nullable final Validator validator) {
-            getInstance().setValidator(validator);
+            getInstance(context).setValidator(validator);
             return this;
         }
 
         public Builder withListener(@Nullable final Listener listener) {
-            getInstance().setListener(listener);
+            getInstance(context).setListener(listener);
             return this;
         }
 
         public Builder withUiListener(@Nullable final UiListener uiListener) {
-            getInstance().setUiListener(uiListener);
+            getInstance(context).setUiListener(uiListener);
             return this;
         }
 
@@ -606,8 +632,33 @@ public class Maoni {
                     .withUiListener(handler);
         }
 
+        /**
+         * If no listener is set (i.e no call to {@link #withListener(Listener)}),
+         * {@link MaoniEmailListener} is used by default (provided {@link #context} is non-null).
+         * <p>
+         * This allows to configure the 'to' email addresses to use for the default listener.
+         * If {@link #withListener(Listener)} is called explicitly, then this
+         * method will have no effect at all.
+         * @param toAddresses the 'to' addresses
+         * @return this Builder
+         */
+        @SuppressLint("ApplySharedPref")
+        public Builder withDefaultToEmailAddress(@Nullable final String... toAddresses) {
+            if (context != null && toAddresses != null) {
+                context.getSharedPreferences(
+                    Maoni.class.getPackage().getName(),
+                    Context.MODE_PRIVATE)
+                    .edit()
+                    .putStringSet(DEFAULT_LISTENER_EMAIL_TO,
+                        new HashSet<>(Arrays.asList(toAddresses)))
+                    .commit();
+            }
+            return this;
+        }
+
         public Maoni build() {
             return new Maoni(
+                    context,
                     fileProviderAuthority,
                     maoniWorkingDir,
                     windowTitle,
@@ -644,13 +695,25 @@ public class Maoni {
         @Nullable
         private UiListener uiListener;
 
-        private CallbacksConfiguration() {
+        private CallbacksConfiguration(@Nullable final Context context) {
+            //Default listener comes from maoni-email
+            if (context != null) {
+                final Set<String> defaultToAddresses =
+                    context.getSharedPreferences(Maoni.class.getPackage().getName(),
+                        Context.MODE_PRIVATE)
+                        .getStringSet(DEFAULT_LISTENER_EMAIL_TO, new HashSet<String>());
+                this.listener =
+                    new MaoniEmailListener(context,
+                        defaultToAddresses.toArray(new String[defaultToAddresses.size()]));
+            } else {
+                Log.d(LOG_TAG, "context is NULL => no default listener configured");
+            }
         }
 
         @NonNull
-        public static CallbacksConfiguration getInstance() {
+        public static CallbacksConfiguration getInstance(@Nullable final Context context) {
             if (SINGLETON == null) {
-                SINGLETON = new CallbacksConfiguration();
+                SINGLETON = new CallbacksConfiguration(context);
             }
             return SINGLETON;
         }

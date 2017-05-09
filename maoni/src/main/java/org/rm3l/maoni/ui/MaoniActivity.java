@@ -184,8 +184,7 @@ public class MaoniActivity extends AppCompatActivity {
             }
         }
 
-        final CallbacksConfiguration maoniConfiguration = CallbacksConfiguration.getInstance();
-
+        final CallbacksConfiguration maoniConfiguration = CallbacksConfiguration.getInstance(this);
         mListener = maoniConfiguration.getListener();
         mValidator = maoniConfiguration.getValidator();
 
@@ -441,7 +440,7 @@ public class MaoniActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        CallbacksConfiguration.getInstance().reset();
+        CallbacksConfiguration.getInstance(this).reset();
         super.onDestroy();
     }
 

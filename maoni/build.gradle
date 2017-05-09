@@ -54,6 +54,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'me.panavtec:drawableview:0.6.0'
+
+    //Include maoni-email as the default listener
+    compile 'org.rm3l:maoni-email:3.0.0-1'
 }
 
 task generateSourcesJar(type: Jar) {

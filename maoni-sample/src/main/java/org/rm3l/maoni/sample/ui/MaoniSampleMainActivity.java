@@ -56,7 +56,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
         }
 
         final MaoniSampleCallbackHandler handlerForMaoni = new MaoniSampleCallbackHandler(this);
-        final Maoni.Builder maoniBuilder = new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
+        final Maoni.Builder maoniBuilder = new Maoni.Builder(this, MY_FILE_PROVIDER_AUTHORITY)
                 .withWindowTitle("Feedback") //Set to an empty string to clear it
                 .withMessage("Hey! Love or hate this app? We would love to hear from you.\n\n" +
                         "Note: Almost everything in Maoni is customizable.")
@@ -66,6 +66,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                 .withIncludeScreenshotText("[Custom text] Include screenshot")
                 .withTouchToPreviewScreenshotText("Touch To Preview")
                 .withContentErrorMessage("Custom error message")
+                .withDefaultToEmailAddress("apps+maoni_sample@rm3l.org")
                 .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...");
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -77,6 +78,10 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                     // so we need to re-register it again by reconstructing a new Maoni instance.
                     //Also, Maoni.start(...) cannot be called twice,
                     // but we are reusing the Builder to construct a new instance along with its handler.
+                    //
+                    //Note that if no handler/listener is specified,
+                    //Maoni will fall back to opening an Email Intent, so your users can send
+                    //their feedback via email
                     mMaoni = maoniBuilder.withHandler(handlerForMaoni).build();
                     mMaoni.start(MaoniSampleMainActivity.this);
                 }
