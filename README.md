@@ -32,7 +32,7 @@ Then grab `maoni-email` via Gradle, by adding this to your `build.gradle`:
     //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
     //   transitive = true;
     //}
-    compile 'org.rm3l:maoni-email:3.0.0'
+    compile 'org.rm3l:maoni-email:3.0.0-1'
   }
 ```
 
