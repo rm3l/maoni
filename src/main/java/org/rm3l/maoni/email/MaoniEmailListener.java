@@ -50,11 +50,11 @@ public class MaoniEmailListener implements Listener {
     private final String[] mBccAddresses;
 
     public MaoniEmailListener(final Context context, final String... toAddresses) {
-        this(context, null, toAddresses);
+        this(context, DEFAULT_EMAIL_SUBJECT, toAddresses);
     }
 
     public MaoniEmailListener(final Context context, final String subject,
-        final String... toAddresses) {
+        final String[] toAddresses) {
         this(context, subject, toAddresses, null, null);
     }
 
