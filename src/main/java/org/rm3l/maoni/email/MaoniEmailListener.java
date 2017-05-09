@@ -49,6 +49,20 @@ public class MaoniEmailListener implements Listener {
     private final String[] mCcAddresses;
     private final String[] mBccAddresses;
 
+    public MaoniEmailListener(final Context context, final String... toAddresses) {
+        this(context, null, toAddresses);
+    }
+
+    public MaoniEmailListener(final Context context, final String subject,
+        final String... toAddresses) {
+        this(context, subject, toAddresses, null, null);
+    }
+
+    public MaoniEmailListener(final Context context, final String subject,
+        final String[] toAddresses, final String[] ccAddresses, final String[] bccAddresses) {
+        this(context, "text/html", subject, null, null, toAddresses, ccAddresses, bccAddresses);
+    }
+
     public MaoniEmailListener(
             final Context context,
             final String mimeType,
