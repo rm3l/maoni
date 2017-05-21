@@ -99,7 +99,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
   dependencies {
     // ...
     compile ('org.rm3l:maoni:3.1.0@aar') {
-        transitive = true;
+        transitive = true
     }
   }
 ```
