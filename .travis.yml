@@ -63,5 +63,9 @@ cache:
 after_success:
      - chmod +x ./tools/*.sh
      - bash <(curl -s https://codecov.io/bash)
-     - ./tools/import-translations-github.sh
      - ./tools/update-github-pages.sh
+
+after_script:
+     - chmod +x ./tools/*.sh
+     - ./tools/import-translations-github.sh
+
