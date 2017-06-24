@@ -1,6 +1,6 @@
-Maoni is a lightweight Open-Source library for integrating a way to collect user feedback from within Android applications, and increase your customer satisfaction.
+Maoni est une bibliothèque Open-Source légère permettant de recueillir les commentaires des utilisateurs dans les applications Android et d'accroître ainsi votre satisfaction client.
 
-Built from the ground up with the Material Design principles in mind, it allows to capture a screenshot of the activity the user is currently viewing and attach it to the feedback.
+Construit de zéro avec le pattern Material Design à l’esprit, il permet de capturer une capture d’écran de l’activité que l’utilisateur visualise et de la joindre au feedback.
 
 Just provide callbacks implementations and you're good to go.
 Maoni will take care of collecting your users' feedback and call those implementations.
