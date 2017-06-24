@@ -2,25 +2,25 @@ Maoni est une bibliothèque Open-Source légère permettant de recueillir les co
 
 Construit de zéro avec le pattern Material Design à l’esprit, il permet de capturer une capture d’écran de l’activité que l’utilisateur visualise et de la joindre au feedback.
 
-Just provide callbacks implementations and you're good to go.
-Maoni will take care of collecting your users' feedback and call those implementations.
+Vous n'avez juste qu'à fournir une implémentation de callback à attacher à Maoni.
+Maoni s'occupe alors d'appeler cette implémentaion aprés avoir collecté les feedbacks de vos utilisateurs, en y incluant si nécessaire captures d'écran et logs.
 
-Below is a quick overview of the features included:
+Ci-dessous un apercu des fonctionnalités offertes par Maoni:
 
-- Contextual information. Device and application information, if available.
- -- Device screen resolution, mobile data and GPS states, ...
+- Informations contextuelles. Informations à propos de l'application, ainsi que de l'appareil utilisé
+ -- Résolution d'écran, état des données mobiles, du capteur GPS, ...
 
-- Screenshot and logs capture.
- -- Because receiving a feedback with contextual information is much much better for analysis, Maoni allows to take a screen capture of the calling activity, along with the application logs. Note that the inclusion of such screenshot and logs in the feedback object is opt-out, at the user's discretion.
- -- Touch to preview screenshot
- -- Ability for users of your app to highlight or blackout items in the screen capture. They may choose to highlight relevant items or blackout any sensitive information.
+- Capture d'écran et journaux (logs) de l'application.
+ -- Parce que recevoir un feedback avec des informations contextuelles est très utile à des fins d'analyse, Maoni permet de prendre une capture d’écran de votre application (au moment où l'utilisateur soumet une demande de feedback), ainsi que les journaux (logs) des applications. Pour votre information, l'utilisateur a le choix d'inclure ou non ces infos (capture écran et journaux) dans son feedback.
+ -- Apercu des captures d'écran
+ -- Les utilisateurs peuvent éditer la capture décran, afin de surligner les infos utiles ou masquer les éléments qu'ils jugeraient sensibles.  
 
-- Customization.
- -- Besides the default form fields, you are free to include an extra layout with additional views. And you always have access to the underlying view elements.
- -- Theme elements and styles can be adjusted.
+- Personnalisation.
+ -- Outre les champs de formulaire par défaut, vous êtes libre d'adapter le formulaire de collecte de feedback avec des vues supplémentaires.  Et vous avez toujours accès à tous les éléments sous-jacents du formulaire de collecte de feedback.
+ -- Style et thème peuvent être ajustés.
 
 - Callbacks.
- -- Form validation. You can provide your own if needed for example for your extra fields.
- -- Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier. So you just have limitless possibilities for an integration with any other systems.
+ -- Validation de formulaire. Vous pouvez fournir vos propres validateurs de formulaire si besoin.
+ -- Listeners. Lors de la validation, Maoni appelle les implémentations de Listeners que vous fournies. So you just have limitless possibilities for an integration with any other systems.
 
 Source Code: http://maoni.rm3l.org
