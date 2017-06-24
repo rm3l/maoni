@@ -21,6 +21,12 @@ Ci-dessous un apercu des fonctionnalités offertes par Maoni:
 
 - Callbacks.
  -- Validation de formulaire. Vous pouvez fournir vos propres validateurs de formulaire si besoin.
- -- Listeners. Lors de la validation, Maoni appelle les implémentations de Listeners que vous fournies. So you just have limitless possibilities for an integration with any other systems.
+ -- Listeners. Lors de la validation, Maoni appelle les implémentations de Listeners que vous fournies. De cette manière, vous avez des possibilités illimitées pour vous interfacer avec d'autres systèmes externes.
 
-Source Code: http://maoni.rm3l.org
+Par exemple, des implémentations sont fournies:
+- maoni-email, pour l'envoi des feedbacks via email
+- maoni-jira, pour l'envoi des feedbacks sous forme de tickets JIRA
+- maoni-github, pour l'envoi des feedbacks sous forme de tickets Github
+- maoni-doorbell, pour l'envoi des feedbacks à Doorbell.io
+
+Code source : http://maoni.rm3l.org
