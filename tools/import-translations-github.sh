@@ -43,8 +43,9 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
 
   # import listing graphics
   for playLangPath in ./maoni-sample/src/main/play/*-*; do
-    mkdir -p ${playLangPath}/listing
-    cp -r ./maoni-sample/src/main/play/en-US/listing/* ${playLangPath}/listing/
+    for d in featureGraphic icon phoneScreenshots promoGraphic sevenInchScreenshots tenInchScreenshots tvBanner tvScreenshots; do
+      cp -r ./maoni-sample/src/main/play/en-US/listing/${d} ${playLangPath}/listing/ || true
+    done
   done
 
   #add, commit and push files
