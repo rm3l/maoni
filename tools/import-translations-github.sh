@@ -53,6 +53,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   git add -f .
   git commit -m "Automatic translation import (build #$TRAVIS_BUILD_NUMBER)." \
     -m "Commit $TRAVIS_COMMIT"
+  git pull --rebase
   git push -f origin master 2>&1
 
   echo -e "... Done with importing translations from Crowdin\n"
