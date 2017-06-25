@@ -36,14 +36,14 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   # Import README.md from master
   git show origin/master:README.md > index.md
 
-  git remote rm origin
-  git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
+  # git remote rm origin
+  # git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
 
   #add, commit and push files
-  git add -f index.md
+  git add index.md
   git commit -q -m "Automatic README.md => index.md import (build #$CIRCLE_BUILD_NUM)." \
     -m "Commit $CIRCLE_SHA1"
-  git push -q -f origin gh-pages > /dev/null
+  git push -q origin gh-pages > /dev/null
 
   echo -e "... Done with updating gh-pages\n"
 fi
