@@ -10,10 +10,10 @@ jobs:
       - checkout
       - run:
           name: Prepare keystore
-          command: mkdir -p ~/.droid && \
-            echo "keystore=${KEYSTORE}" > ~/.droid/maoni-keystore.properties && \
-            echo "storePassword=${STORE_PASSWORD}" >> ~/.droid/maoni-keystore.properties && \
-            echo "keyAlias=${KEY_ALIAS}" >> ~/.droid/maoni-keystore.properties && \
+          command: mkdir -p ~/.droid && 
+            echo "keystore=${KEYSTORE}" > ~/.droid/maoni-keystore.properties && 
+            echo "storePassword=${STORE_PASSWORD}" >> ~/.droid/maoni-keystore.properties && 
+            echo "keyAlias=${KEY_ALIAS}" >> ~/.droid/maoni-keystore.properties && 
             echo "keyPassword=${KEY_PASSWORD}" >> ~/.droid/maoni-keystore.properties
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "maoni-sample/build.gradle" }}
