@@ -22,13 +22,13 @@
 #
 #
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   echo -e "Starting gh-pages update...\n"
 
   #go to home and setup git
   cd $HOME
-  git config --global user.email "travis_ci@rm3l.org"
-  git config --global user.name "Tra Vis"
+  git config --global user.email "circle_ci@rm3l.org"
+  git config --global user.name "Cir Cle"
 
   git clone --branch=gh-pages https://$GITHUB_API_KEY@github.com/rm3l/maoni.git gh-pages > /dev/null
 
@@ -41,8 +41,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
   #add, commit and push files
   git add -f index.md
-  git commit -q -m "Automatic README.md => index.md import (build #$TRAVIS_BUILD_NUMBER)." \
-    -m "Commit $TRAVIS_COMMIT"
+  git commit -q -m "Automatic README.md => index.md import (build #$CIRCLE_BUILD_NUM)." \
+    -m "Commit $CIRCLE_SHA1"
   git push -q -f origin gh-pages > /dev/null
 
   echo -e "... Done with updating gh-pages\n"

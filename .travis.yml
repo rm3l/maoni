@@ -66,12 +66,13 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-after_success:
-     - chmod +x ./tools/*.sh
-     - bash <(curl -s https://codecov.io/bash)
-     - ./tools/update-github-pages.sh
+# This is now done with CircleCI, which is faster
+# after_success:
+#      - chmod +x ./tools/*.sh
+#      - bash <(curl -s https://codecov.io/bash)
+#      - ./tools/update-github-pages.sh
 
-after_script:
-     - chmod +x ./tools/*.sh
-     - ./tools/import-translations-github.sh
+# after_script:
+#      - chmod +x ./tools/*.sh
+#      - ./tools/import-translations-github.sh
 

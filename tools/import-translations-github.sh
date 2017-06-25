@@ -22,13 +22,13 @@
 #
 #
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   echo -e "Starting translation import...\n"
 
   #go to home and setup git
   cd $HOME
-  git config --global user.email "travis_ci@rm3l.org"
-  git config --global user.name "Tra Vis"
+  git config --global user.email "circle_ci@rm3l.org"
+  git config --global user.name "Cir Cle"
 
   git clone --branch=master https://$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
 
@@ -51,8 +51,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   git remote rm origin
   git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
   git add -f .
-  git commit -m "Automatic translation import (build #$TRAVIS_BUILD_NUMBER)." \
-    -m "Commit $TRAVIS_COMMIT"
+  git commit -m "Automatic translation import (build #$CIRCLE_BUILD_NUM)." \
+    -m "Commit $CIRCLE_SHA1"
   git pull --rebase
   git push -f origin master 2>&1
 
