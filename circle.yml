@@ -13,9 +13,9 @@ jobs:
           command: chmod +x ./tools/*.sh
       - run:
           name: Output relevant env. variables
-          command: echo "CIRCLE_PULL_REQUEST: $CIRCLE_PULL_REQUEST" && 
-            echo "CIRCLE_BUILD_NUM: $CIRCLE_BUILD_NUM" && 
-            echo "CIRCLE_SHA1: $CIRCLE_SHA1"
+          command: echo "CIRCLE_PULL_REQUEST=$CIRCLE_PULL_REQUEST" && 
+            echo "CIRCLE_BUILD_NUM=$CIRCLE_BUILD_NUM" && 
+            echo "CIRCLE_SHA1=$CIRCLE_SHA1"
       - run:
           name: Prepare local.properties
           command: echo "github.username=${MAONI_GITHUB_USERNAME}" > local.properties && 
