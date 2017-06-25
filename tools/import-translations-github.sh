@@ -40,14 +40,20 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   java -jar crowdin-cli.jar download
   rm crowdin-cli.jar
 
+  # import listing graphics
+  for playLangPath in ./maoni-sample/src/main/play/*-*; do
+    mkdir -p ${playLangPath}/listing
+    cp -vr ./maoni-sample/src/main/play/en-US/listing/* ${playLangPath}/listing/
+  done
+
   #add, commit and push files
   git add -f .
   git remote rm origin
   git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
   git add -f .
-  git commit -q -m "Automatic translation import (build #$TRAVIS_BUILD_NUMBER)." \
+  git commit -m "Automatic translation import (build #$TRAVIS_BUILD_NUMBER)." \
     -m "Commit $TRAVIS_COMMIT"
-  git push -q -f origin master > /dev/null
+  git push -f origin master 2>&1
 
   echo -e "... Done with importing translations from Crowdin\n"
 fi
