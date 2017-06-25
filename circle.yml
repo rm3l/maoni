@@ -8,6 +8,9 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+      - run:
+          name: Prepare keystore
+          command: mkdir -p ~/.droid && echo "keystore=${KEYSTORE}\nstorePassword=${STORE_PASSWORD}\nkeyAlias=${KEY_ALIAS}\nkeyPassword=${KEY_PASSWORD}" >> ~/.droid/maoni-keystore.properties
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "maoni-sample/build.gradle" }}
       - run:

@@ -43,7 +43,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # import listing graphics
   for playLangPath in ./maoni-sample/src/main/play/*-*; do
     mkdir -p ${playLangPath}/listing
-    cp -vr ./maoni-sample/src/main/play/en-US/listing/* ${playLangPath}/listing/
+    cp -r ./maoni-sample/src/main/play/en-US/listing/* ${playLangPath}/listing/
   done
 
   #add, commit and push files
