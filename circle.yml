@@ -10,7 +10,11 @@ jobs:
       - checkout
       - run:
           name: Prepare keystore
-          command: mkdir -p ~/.droid && echo "keystore=${KEYSTORE}\nstorePassword=${STORE_PASSWORD}\nkeyAlias=${KEY_ALIAS}\nkeyPassword=${KEY_PASSWORD}" >> ~/.droid/maoni-keystore.properties
+          command: mkdir -p ~/.droid && \
+            echo "keystore=${KEYSTORE}" > ~/.droid/maoni-keystore.properties && \
+            echo "storePassword=${STORE_PASSWORD}" >> ~/.droid/maoni-keystore.properties && \
+            echo "keyAlias=${KEY_ALIAS}" >> ~/.droid/maoni-keystore.properties && \
+            echo "keyPassword=${KEY_PASSWORD}" >> ~/.droid/maoni-keystore.properties
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "maoni-sample/build.gradle" }}
       - run:
@@ -23,6 +27,9 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
+      - run:
+          name: Assemble package
+          command: ./gradlew clean assembleDebug --stacktrace
       - store_artifacts:
           path: maoni-sample/build/reports
           destination: reports
