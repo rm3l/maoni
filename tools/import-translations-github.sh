@@ -43,6 +43,10 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
 
   # import listing graphics
   for playLangPath in ./maoni-sample/src/main/play/*-*; do
+    # Crowdin reformats the 'title' file, which makes it unusable by the Play Publisher Gradle plugin
+    awk 'BEGIN{f=1} /#X-Generator/{f=0} f{print} $0{f=1}' ${playLangPath}/listing/title > ${playLangPath}/listing/title.tmp
+    mv ${playLangPath}/listing/title.tmp ${playLangPath}/listing/title
+    sed -i 's/Maoni=//g' ${playLangPath}/listing/title
     for d in featureGraphic icon phoneScreenshots promoGraphic sevenInchScreenshots tenInchScreenshots tvBanner tvScreenshots; do
       cp -r ./maoni-sample/src/main/play/en-US/listing/${d} ${playLangPath}/listing/ || true
     done
