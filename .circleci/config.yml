@@ -17,7 +17,7 @@ jobs:
       
       - run:
           name: Prepare tools scripts
-          command: chmod +x ./tools/*.sh
+          command: chmod +x ../tools/*.sh
       
       - run:
           name: Prepare local.properties
@@ -36,7 +36,7 @@ jobs:
       
       - run:
           name: Import Translations if needed
-          command: ./tools/import-translations-github.sh
+          command: ../tools/import-translations-github.sh
 
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "maoni-sample/build.gradle" }}
@@ -58,11 +58,11 @@ jobs:
       
       - run:
           name: Code coverage
-          command: ./tools/codecov.io.sh || true
+          command: ../tools/codecov.io.sh || true
           
       - run:
           name: Update Github Pages branch
-          command: ./tools/update-github-pages.sh
+          command: ../tools/update-github-pages.sh
 
       - store_artifacts:
           path: maoni-sample/build/outputs
