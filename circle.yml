@@ -58,7 +58,8 @@ jobs:
       
       - run:
           name: Code coverage
-          command: bash <(curl -s https://codecov.io/bash)
+          command: bash <(curl -s https://codecov.io/bash) || true
+          
       - run:
           name: Update Github Pages branch
           command: ./tools/update-github-pages.sh
