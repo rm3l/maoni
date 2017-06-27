@@ -50,7 +50,7 @@ jobs:
       
       - run:
           name: Run Tests
-          command: ./gradlew clean lint test --stacktrace
+          command: ./gradlew clean lint test jacocoTestReport --stacktrace
       
       - run:
           name: Assemble package
@@ -58,7 +58,7 @@ jobs:
       
       - run:
           name: Code coverage
-          command: ./tools/codecov.io.sh || true
+          command: ( echo "TODO Run ./gradlew connectedCheck on an emulator" & > /dev/null & ./tools/codecov.io.sh ) || true
           
       - run:
           name: Update Github Pages branch

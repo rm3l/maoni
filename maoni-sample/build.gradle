@@ -22,6 +22,7 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'jacoco-android'
 apply plugin: 'com.github.triplet.play'
 
 Properties localProperties = new Properties()
@@ -117,6 +118,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+            testCoverageEnabled true
             minifyEnabled true
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
