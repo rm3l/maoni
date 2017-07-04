@@ -156,7 +156,7 @@ open class MaoniSlackListener(
                 debug {">>> POST $webhookUrl"}
                 debug {"<<< [$statusCode] POST $webhookUrl: \n$responseBody"}
             }
-            uiThread {
+            uiThread { 
                 progressDialog.cancel()
                 when (statusCode) {
                     in 100..399 -> context.longToast(successToastMessage)
