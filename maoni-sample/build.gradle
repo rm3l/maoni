@@ -42,6 +42,13 @@ def jiraRestBaseUrl = localProperties.getProperty('jira.rest.baseUrl', "")
 def jiraUsername = localProperties.getProperty('jira.username', "")
 def jiraPassword = localProperties.getProperty('jira.password', "")
 
+//maoni-slack creds
+def slackWebhookUrl = localProperties.getProperty('slack.webhook.url', "")
+def slackChannel = localProperties.getProperty('slack.channel', "")
+def slackUsername = localProperties.getProperty('slack.username', "")
+def slackIconUrl = localProperties.getProperty('slack.icon.url', "")
+def slackEmojiIcon = localProperties.getProperty('slack.emoji.icon', "")
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -108,11 +115,20 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
+
             buildConfigField "String", "JIRA_REST_BASE_URL", "\"${jiraRestBaseUrl}\""
             buildConfigField "String", "JIRA_USERNAME", "\"${jiraUsername}\""
             buildConfigField "String", "JIRA_PASSWORD", "\"${jiraPassword}\""
+
+            buildConfigField "String", "SLACK_WEBHOOK_URL", "\"${slackWebhookUrl}\""
+            buildConfigField "String", "SLACK_CHANNEL", "\"${slackChannel}\""
+            buildConfigField "String", "SLACK_USERNAME", "\"${slackUsername}\""
+            buildConfigField "String", "SLACK_ICON_URL", "\"${slackIconUrl}\""
+            buildConfigField "String", "SLACK_EMOJI_ICON", "\"${slackEmojiIcon}\""
+
             signingConfig signingConfigs.release
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -120,11 +136,20 @@ android {
         debug {
             testCoverageEnabled true
             minifyEnabled true
+
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
+
             buildConfigField "String", "JIRA_REST_BASE_URL", "\"${jiraRestBaseUrl}\""
             buildConfigField "String", "JIRA_USERNAME", "\"${jiraUsername}\""
             buildConfigField "String", "JIRA_PASSWORD", "\"${jiraPassword}\""
+
+            buildConfigField "String", "SLACK_WEBHOOK_URL", "\"${slackWebhookUrl}\""
+            buildConfigField "String", "SLACK_CHANNEL", "\"${slackChannel}\""
+            buildConfigField "String", "SLACK_USERNAME", "\"${slackUsername}\""
+            buildConfigField "String", "SLACK_ICON_URL", "\"${slackIconUrl}\""
+            buildConfigField "String", "SLACK_EMOJI_ICON", "\"${slackEmojiIcon}\""
+
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -156,6 +181,9 @@ dependencies {
     }
     compile ('org.rm3l:maoni-jira:2.4.2-rc4') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
+        exclude group: 'org.rm3l', module: 'maoni-common'
+    }
+    compile ('org.rm3l:maoni-slack:0.1.3') {
         exclude group: 'org.rm3l', module: 'maoni-common'
     }
     compile fileTree(dir: 'libs', include: ['*.jar'])

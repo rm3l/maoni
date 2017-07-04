@@ -22,6 +22,7 @@ import org.rm3l.maoni.github.MaoniGithubListener
 import org.rm3l.maoni.jira.MaoniJiraListener
 import org.rm3l.maoni.sample.BuildConfig
 import org.rm3l.maoni.sample.R
+import org.rm3l.maoni.slack.MaoniSlackListener
 
 /**
  * Example of Callback for Maoni, written in a different JVM language:
@@ -101,6 +102,13 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
       maoniJiraConfigured = false
     }
 
+    var maoniSlackConfigured: Boolean = true
+    if (TextUtils.isEmpty(BuildConfig.SLACK_WEBHOOK_URL)) {
+      warn { "maoni-slack not configured properly. " +
+          "'slack.webhook.url' property missing from local.properties" }
+      maoniSlackConfigured = false
+    }
+
     val listOfListeners = mutableListOf(
         "Send via email (maoni-email)"
     )
@@ -109,6 +117,9 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
     }
     if (maoniJiraConfigured) {
       listOfListeners.add("Send as JIRA issue (maoni-jira)")
+    }
+    if (maoniSlackConfigured) {
+      listOfListeners.add("Send to Slack (maoni-slack)")
     }
 
     context.selector("How would you like to send your feedback?", listOfListeners) { position ->
@@ -121,14 +132,19 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
           listenerSelected = buildMaoniEmailListener(feedback)
         }
         1 -> {
-          //maoni-github or maoni-jira
+          //maoni-github or maoni-jira or maoni-slack
           listenerSelected =
               if (maoniGithubConfigured) buildMaoniGithubListener(feedback)
-              else buildMaoniJiraListener(feedback)
+              else if (maoniJiraConfigured) buildMaoniJiraListener(feedback)
+              else buildMaoniSlackListener(feedback)
         }
         2 -> {
           //maoni-jira
           listenerSelected = buildMaoniJiraListener(feedback)
+        }
+        3 -> {
+          //maoni-slack
+          listenerSelected = buildMaoniSlackListener(feedback)
         }
         else -> {
           listenerSelected = null
@@ -186,6 +202,21 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
         jiraIssueType = "Task",
         jiraIssueSummaryPrefix = "Maoni Sample App",
         successToastMessage = "Issue has been created in JIRA Project '$jiraProjectKey'. " +
+            "Thank you for your feedback!",
+        failureToastMessage = "An error happened - please try again later"
+        )
+  }
+
+  private fun buildMaoniSlackListener(feedback: Feedback?): Listener {
+    return MaoniSlackListener(
+        context = context,
+        webhookUrl = BuildConfig.SLACK_WEBHOOK_URL,
+        debug = BuildConfig.DEBUG,
+        channel = if (BuildConfig.SLACK_CHANNEL.isNullOrBlank()) null else BuildConfig.SLACK_CHANNEL,
+        username = if (BuildConfig.SLACK_USERNAME.isNullOrBlank()) null else BuildConfig.SLACK_USERNAME,
+        iconUrl = if (BuildConfig.SLACK_ICON_URL.isNullOrBlank()) null else BuildConfig.SLACK_ICON_URL,
+        emojiIcon = if (BuildConfig.SLACK_EMOJI_ICON.isNullOrBlank()) null else BuildConfig.SLACK_EMOJI_ICON,
+        successToastMessage = "Feedback sent to Slack Webhook URL '${BuildConfig.SLACK_WEBHOOK_URL}'. " +
             "Thank you for your feedback!",
         failureToastMessage = "An error happened - please try again later"
         )
