@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/maoni-slack.iml" filepath="$PROJECT_DIR$/maoni-slack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-slack_main.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-slack_main.iml" group="maoni-slack" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-slack_test.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-slack_test.iml" group="maoni-slack" />
+    </modules>
+  </component>
+</project>
