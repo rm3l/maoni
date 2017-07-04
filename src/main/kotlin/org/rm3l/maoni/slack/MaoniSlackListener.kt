@@ -35,6 +35,7 @@ import java.nio.charset.Charset
  * <p>
  * Written in Kotlin for conciseness
  */
+const val LOG_TAG = "MaoniSlackListener"
 const val USER_AGENT = "maoni-slack (v0.1.2)"
 const val APPLICATION_JSON = "application/json"
 
@@ -136,10 +137,11 @@ open class MaoniSlackListener(
             //TODO Caveat: App Screenshot cannot be uploaded for now
 
             attachment.put("fields", attachmentFields)
+            attachments.add(attachment)
             bodyMap.put("attachments", attachments)
 
             if (debug) {
-                Log.d("MaoniSlackListener", "bodyMap: $bodyMap")
+                Log.d(LOG_TAG, "bodyMap: $bodyMap")
             }
 
             val response = post(
