@@ -23,6 +23,7 @@ package org.rm3l.maoni.slack
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.Log
 import khttp.post
 import org.jetbrains.anko.*
 import org.rm3l.maoni.common.contract.Listener
@@ -138,7 +139,7 @@ open class MaoniSlackListener(
             bodyMap.put("attachments", attachments)
 
             if (debug) {
-                debug { "bodyMap: $bodyMap" }
+                Log.d("MaoniSlackListener", "bodyMap: $bodyMap")
             }
 
             val response = post(
