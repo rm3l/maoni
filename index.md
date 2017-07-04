@@ -42,6 +42,7 @@ Below is a quick overview of the features included:
     - Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier.
     So you just have limitless possibilities for an integration with any remote feedback services. For reference, the following implementations are provided as external dependencies:
         - [maoni-email](https://github.com/rm3l/maoni-email), so your users can send their feedback via email
+        - [maoni-slack](https://github.com/rm3l/maoni-slack), so your users can send their feedback to Slack
         - [maoni-jira](https://github.com/rm3l/maoni-jira), to send your users' feedbacks as JIRA issues (to the JIRA host of your choice)
         - [maoni-github](https://github.com/rm3l/maoni-github), to send your users' feedbacks as Github issues (to the Github repository of your choice)
         - [maoni-doorbell](https://github.com/rm3l/maoni-doorbell), to send your users' feedbacks to [Doorbell.io](https://doorbell.io/home)
