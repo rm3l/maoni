@@ -35,7 +35,7 @@ import java.nio.charset.Charset
  * <p>
  * Written in Kotlin for conciseness
  */
-const val USER_AGENT = "maoni-slack (v0.1.1)"
+const val USER_AGENT = "maoni-slack (v0.1.2)"
 const val APPLICATION_JSON = "application/json"
 
 /**
