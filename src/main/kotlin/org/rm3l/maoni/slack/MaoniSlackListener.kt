@@ -96,8 +96,7 @@ open class MaoniSlackListener(
 
         doAsync {
             val text = "New Feedback on ${feedback?.appInfo?.applicationId?:"Unknown"}" +
-                    "\n\n$feedbackMessage" +
-                    "\n\n*** Context ***\n$deviceAndAppInfo"
+                    "\n\n$feedbackMessage"
 
             val bodyMap : MutableMap<String, Any> = mutableMapOf(
                     "text" to text
@@ -109,8 +108,8 @@ open class MaoniSlackListener(
 
             val attachments : MutableList<Map<String, Any>> = mutableListOf()
             val attachment: MutableMap<String, Any> = mutableMapOf(
-                    "fallback" to "New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
-                    "pretext" to "New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
+                    "fallback" to deviceAndAppInfo,
+                    "pretext" to deviceAndAppInfo,
                     "color" to "#D00000"
             )
             val attachmentFields : MutableList<Map<String, Any>> = mutableListOf()
@@ -138,6 +137,10 @@ open class MaoniSlackListener(
             attachment.put("fields", attachmentFields)
             bodyMap.put("attachments", attachments)
 
+            if (debug) {
+                debug { "bodyMap: $bodyMap" }
+            }
+
             val response = post(
                     url = webhookUrl,
                     headers = mapOf(
@@ -145,7 +148,7 @@ open class MaoniSlackListener(
                             "Content-Type" to APPLICATION_JSON),
                     json = bodyMap)
             val statusCode = response.statusCode
-            val responseBody = response.jsonObject
+            val responseBody = response.text
             if (debug) {
                 debug {">>> POST $webhookUrl"}
                 debug {"<<< [$statusCode] POST $webhookUrl: \n$responseBody"}
