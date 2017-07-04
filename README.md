@@ -33,7 +33,7 @@ Then grab `maoni-slack` via Gradle, by adding this to your `build.gradle`:
     //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
     //   transitive = true;
     //}
-    compile 'org.rm3l:maoni-slack:0.1.2'
+    compile 'org.rm3l:maoni-slack:0.1.3'
   }
 ```
 

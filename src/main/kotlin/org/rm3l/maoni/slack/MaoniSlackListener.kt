@@ -36,7 +36,7 @@ import java.nio.charset.Charset
  * Written in Kotlin for conciseness
  */
 const val LOG_TAG = "MaoniSlackListener"
-const val USER_AGENT = "maoni-slack (v0.1.2)"
+const val USER_AGENT = "maoni-slack (v0.1.3)"
 const val APPLICATION_JSON = "application/json"
 
 /**
