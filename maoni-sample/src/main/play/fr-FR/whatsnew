@@ -1,7 +1,7 @@
 - Nouvelles fonctionnalités
--- Application de démonstration: inclusion de maoni-github et affichage d'une fenêtre permettant de sélectionner n'importe quelle implémentation de callback pour l'envoi de feedbacks
+-- Included 'maoni-slack' as an additional callback project. It allows to send feedback to Slack.
+See https://github.com/rm3l/maoni-slack for more details
 
 - Correction de bugs
 -- Problème avec Proguard, qui peut masquer en anonymiser certaines infos collectées
--- Crash potential de l'application si le Provider Authority fourni par l'application utilisatrice de maoni ne peut être résolu par Android
 -- Réduction de l'utilisation mémoire de la librairie
