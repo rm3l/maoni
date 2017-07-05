@@ -123,33 +123,26 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
     }
 
     context.selector("How would you like to send your feedback?", listOfListeners) { position ->
-      val progressDialog = context.indeterminateProgressDialog(listOfListeners[position])
+      val textAtPosition = listOfListeners[position]
+      val progressDialog = context.indeterminateProgressDialog(textAtPosition)
       progressDialog.show()
       val listenerSelected: Listener?
-      when (position) {
-        0 -> {
-          //maoni-email
-          listenerSelected = buildMaoniEmailListener(feedback)
-        }
-        1 -> {
-          //maoni-github or maoni-jira or maoni-slack
-          listenerSelected =
-              if (maoniGithubConfigured) buildMaoniGithubListener(feedback)
-              else if (maoniJiraConfigured) buildMaoniJiraListener(feedback)
-              else buildMaoniSlackListener(feedback)
-        }
-        2 -> {
-          //maoni-jira
-          listenerSelected = buildMaoniJiraListener(feedback)
-        }
-        3 -> {
-          //maoni-slack
-          listenerSelected = buildMaoniSlackListener(feedback)
-        }
-        else -> {
-          listenerSelected = null
-        }
+
+      if (textAtPosition.contains("maoni-email", true)) {
+        listenerSelected = buildMaoniEmailListener(feedback)
+      } else if (maoniGithubConfigured &&
+          textAtPosition.contains("maoni-github", ignoreCase = true)) {
+        listenerSelected = buildMaoniGithubListener(feedback)
+      } else if (maoniJiraConfigured &&
+          textAtPosition.contains("maoni-jira", ignoreCase = true)) {
+        listenerSelected = buildMaoniJiraListener(feedback)
+      } else if (maoniSlackConfigured &&
+          textAtPosition.contains("maoni-slack", ignoreCase = true)) {
+        listenerSelected = buildMaoniSlackListener(feedback)
+      } else {
+        listenerSelected = null
       }
+
       listenerSelected?.onSendButtonClicked(feedback)
       progressDialog.cancel()
     }
