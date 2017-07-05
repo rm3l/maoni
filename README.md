@@ -177,6 +177,37 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
+Visit the dedicated [repository](https://github.com/rm3l/maoni-email) for further details.
+
+
+##### [maoni-slack](https://github.com/rm3l/maoni-slack)
+
+This callback sends feedback collected to Slack via an [an incoming WebHook integration](https://my.slack.com/services/new/incoming-webhook).
+ 
+ To use it, you must first [set up an incoming WebHook integration](https://my.slack.com/services/new/incoming-webhook), and grab the Webhook URL.
+
+Add this additional line to your `build.gradle`:
+
+```gradle
+  dependencies {
+    // ...
+    compile 'org.rm3l:maoni-slack:<appropriateVersion>'
+  }
+```
+
+And set it as the listener for your Maoni instance
+```java
+    final org.rm3l.maoni.slack.MaoniSlackListener slackListenerForMaoni = 
+            new org.rm3l.maoni.slack.MaoniSlackListener(...); //Pass the Slack WebHook URL, channel, ...
+    
+    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
+        .withListener(slackListenerForMaoni) //Callback from maoni-slack
+        //...
+        .build()
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
+```
+
+Visit the dedicated [repository](https://github.com/rm3l/maoni-slack) for further details.
 
 ##### [maoni-github](https://github.com/rm3l/maoni-github)
 
@@ -212,6 +243,44 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
 ```
 
+Visit the dedicated [repository](https://github.com/rm3l/maoni-github) for further details.
+
+
+##### [maoni-jira](https://github.com/rm3l/maoni-jira)
+
+This callback sends feedback collected as a JIRA issue to a specified JIRA project.
+
+You may want to create a dedicated `reporter` user on your JIRA Host for that purpose.
+
+Add this additional line to your `build.gradle`:
+
+```gradle
+  dependencies {
+    // ...
+    //As this will be plugged as a callback for Maoni, it requires Maoni dependency as well.
+    //See http://maoni.rm3l.org for more details.
+    //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
+    //   transitive = true;
+    //}
+    compile 'org.rm3l:maoni-jira:<appropriateVersion>'
+  }
+```
+
+And set it as the listener for your Maoni instance:
+```java
+    //Customize the maoni-jira listener, with things like your REST URL, username, password
+    final org.rm3l.maoni.jira.MaoniJiraListener listenerForMaoni = 
+            new org.rm3l.maoni.jira.MaoniJiraListener(...);
+    
+    new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
+        .withListener(listenerForMaoni) //Callback from maoni-jira
+        //...
+        .build()
+        .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
+```
+
+Visit the dedicated [repository](https://github.com/rm3l/maoni-jira) for further details.
+
 
 ##### [maoni-doorbell](https://github.com/rm3l/maoni-doorbell)
 
@@ -239,6 +308,9 @@ And set it as the listener for your Maoni instance:
         .build()
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
+
+Visit the dedicated [repository](https://github.com/rm3l/maoni-doorbell) for further details.
+
 
 #### Sharing the files captured with other apps
 
