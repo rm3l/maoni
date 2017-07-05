@@ -204,5 +204,5 @@ play {
     untrackOld = true // will untrack 'alpha' while upload to 'beta'
 
     uploadImages = false
-    errorOnSizeLimit = true
+    errorOnSizeLimit = false
 }
