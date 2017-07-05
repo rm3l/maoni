@@ -1,7 +1,0 @@
-- New features
--- Included 'maoni-slack' as an additional callback project. It allows to send feedback to Slack.
-See https://github.com/rm3l/maoni-slack for more details
-
-- Bug fixes
--- Proguard may obfuscate certain device information data
--- Memory leaks fixes and memory footprint reduced.

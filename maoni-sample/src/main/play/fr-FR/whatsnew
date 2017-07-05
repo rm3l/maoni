@@ -1,7 +1,0 @@
-- Nouvelles fonctionnalités
--- Inclusion de 'maoni-slack', qui permet d'envoyer les feedbacks à Slack.  
-Voir https://github.com/rm3l/maoni-slack pour plus d'informations.
-
-- Correction de bugs
--- Problème avec Proguard, qui peut masquer en anonymiser certaines infos collectées
--- Réduction de l'utilisation mémoire de la librairie
