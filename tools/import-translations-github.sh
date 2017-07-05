@@ -52,6 +52,16 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
     done
   done
 
+  #Sanitize, so it compiles with what we have in Google Play Store
+  mv ./maoni-sample/src/main/play/af-ZA ./maoni-sample/src/main/play/af
+  mv ./maoni-sample/src/main/play/ar-SA ./maoni-sample/src/main/play/ar
+  mv ./maoni-sample/src/main/play/ca-ES ./maoni-sample/src/main/play/ca
+  mv ./maoni-sample/src/main/play/ro-RO ./maoni-sample/src/main/play/ro
+  mv ./maoni-sample/src/main/play/sr-SP ./maoni-sample/src/main/play/sr
+  mv ./maoni-sample/src/main/play/uk-UA ./maoni-sample/src/main/play/uk
+  mv ./maoni-sample/src/main/play/vi-VN ./maoni-sample/src/main/play/vi
+  rm -rf ./maoni-sample/src/main/play/he-IL
+
   #add, commit and push files
   # git add .
   # git remote rm origin
