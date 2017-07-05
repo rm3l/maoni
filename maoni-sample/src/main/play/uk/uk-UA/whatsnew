@@ -1,7 +1,0 @@
-- New features
--- Sample App: include maoni-github, and display a popup allowing to pick any callback implementation for sending the feedback
-
-- Bug fixes
--- Proguard may obfuscate certain device information data
--- Potential crash if the file provider authority supplied by the app could not be resolved by Android System
--- Memory leaks fixes and memory footprint reduced.
