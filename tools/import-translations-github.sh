@@ -53,13 +53,13 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   done
 
   #Sanitize, so it compiles with what we have in Google Play Store
-  mv ./maoni-sample/src/main/play/af-ZA ./maoni-sample/src/main/play/af || true
-  mv ./maoni-sample/src/main/play/ar-SA ./maoni-sample/src/main/play/ar || true
-  mv ./maoni-sample/src/main/play/ca-ES ./maoni-sample/src/main/play/ca || true
-  mv ./maoni-sample/src/main/play/ro-RO ./maoni-sample/src/main/play/ro || true
-  mv ./maoni-sample/src/main/play/sr-SP ./maoni-sample/src/main/play/sr || true
-  mv ./maoni-sample/src/main/play/uk-UA ./maoni-sample/src/main/play/uk || true
-  mv ./maoni-sample/src/main/play/vi-VN ./maoni-sample/src/main/play/vi || true
+  rm -rf ./maoni-sample/src/main/play/af && mv ./maoni-sample/src/main/play/af-ZA ./maoni-sample/src/main/play/af
+  rm -rf ./maoni-sample/src/main/play/ar && mv ./maoni-sample/src/main/play/ar-SA ./maoni-sample/src/main/play/ar
+  rm -rf ./maoni-sample/src/main/play/ca && mv ./maoni-sample/src/main/play/ca-ES ./maoni-sample/src/main/play/ca
+  rm -rf ./maoni-sample/src/main/play/ro && mv ./maoni-sample/src/main/play/ro-RO ./maoni-sample/src/main/play/ro
+  rm -rf ./maoni-sample/src/main/play/sr && mv ./maoni-sample/src/main/play/sr-SP ./maoni-sample/src/main/play/sr
+  rm -rf ./maoni-sample/src/main/play/uk && mv ./maoni-sample/src/main/play/uk-UA ./maoni-sample/src/main/play/uk
+  rm -rf ./maoni-sample/src/main/play/vi && mv ./maoni-sample/src/main/play/vi-VN ./maoni-sample/src/main/play/vi
   rm -rf ./maoni-sample/src/main/play/he-IL \
          ./maoni-sample/src/main/play/af-ZA \
          ./maoni-sample/src/main/play/ar-SA \
