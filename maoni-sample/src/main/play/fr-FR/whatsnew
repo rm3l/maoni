@@ -1,6 +1,6 @@
 - Nouvelles fonctionnalités
--- Included 'maoni-slack' as an additional callback project. It allows to send feedback to Slack.
-See https://github.com/rm3l/maoni-slack for more details
+-- Inclusion de 'maoni-slack', qui permet d'envoyer les feedbacks à Slack.  
+Voir https://github.com/rm3l/maoni-slack pour plus d'informations.
 
 - Correction de bugs
 -- Problème avec Proguard, qui peut masquer en anonymiser certaines infos collectées
