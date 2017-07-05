@@ -61,7 +61,7 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   rm -rf ./maoni-sample/src/main/play/uk && mv ./maoni-sample/src/main/play/uk-UA ./maoni-sample/src/main/play/uk
   rm -rf ./maoni-sample/src/main/play/vi && mv ./maoni-sample/src/main/play/vi-VN ./maoni-sample/src/main/play/vi
   rm -rf ./maoni-sample/src/main/play/{he-IL,af-ZA,ar-SA,ca-ES,ro-RO,sr-SP,uk-UA,vi-VN}
-   rm -rf ./maoni-sample/src/main/play/{ar,el-GR,fi-FI,nl-NL,ca,pt-PT,sr,it-IT,fr-FR,ja-JP,ru-RU,no-NO,da-DK,uksv-SE,de-DE,pl-PL,cs-CZ,zh-CN,es-ES,vi,zh-TW,hu-HU,tr-TR,pt-BR,af,ro,ko-KR,ar}/whatsnew
+   rm -rf ./maoni-sample/src/main/play/{ar,el-GR,fi-FI,nl-NL,ca,pt-PT,sr,it-IT,fr-FR,ja-JP,ru-RU,no-NO,da-DK,uk,sv-SE,de-DE,pl-PL,cs-CZ,zh-CN,es-ES,vi,zh-TW,hu-HU,tr-TR,pt-BR,af,ro,ko-KR,ar}/whatsnew
 
   #add, commit and push files
   # git add .
