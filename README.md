@@ -392,7 +392,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
   }
 ```
 
-You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
+You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/rm3l/maoni-slack) and [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
 
 ## In use in the following apps
 
