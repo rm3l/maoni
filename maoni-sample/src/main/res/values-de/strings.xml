@@ -54,9 +54,9 @@ SOFTWARE.
   <string name="an_extra_text_area">An extra text area</string>
   <string name="edittext_hint_write_something_here">EditText hint. Write something here.</string>
   <string name="an_extra_radiogroup">An extra RadioGroup</string>
-  <string name="rg_1">RG 1</string>
-  <string name="rg_2">RG 2</string>
-  <string name="rg_3">RG 3</string>
+  <string name="rg_1">Wahl 1</string>
+  <string name="rg_2">Wahl 2</string>
+  <string name="rg_3">Wahl 3</string>
   <string name="send_maoni_email">Send via email (maoni-email)</string>
   <string name="send_maoni_github">Send as Github issue (maoni-github)</string>
   <string name="send_maoni_jira">Send as JIRA issue (maoni-jira)</string>

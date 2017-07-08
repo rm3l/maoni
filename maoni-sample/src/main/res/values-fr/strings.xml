@@ -36,28 +36,28 @@ Appuyez sur l\'icône flottante ci-dessous pour ouvrir le formulaire Maoni.
 Plus d\'infos sur http://rm3l.github.io/maoni.    ]]></string>
   <string name="action_about">À propos de Maoni</string>
   <string name="default_email_addr">some.one@somewhe.re</string>
-  <string name="send_feedback_activity_title">Send Feedback</string>
+  <string name="send_feedback_activity_title">Votre commentaire</string>
   <string name="send_feedback_activity_intro"><![CDATA[
-        Hey! Love or hate this app? We would love to hear from you.
+        Bonjour! Votre avis compte énormément pour nous! Merci de nous en faire part.
         \n\n
-        Note: Almost everything in Maoni is customizable.
+        Note: Quasiment tous les éléments fournis par Maoni sont personnalisables et adaptables aux spécificités de vos applications.
     ]]></string>
-  <string name="feedback_content_hint">Please write your valuable feedback here.</string>
-  <string name="include_app_logs">Attach application logs</string>
-  <string name="include_app_screenshot">Attach screen capture</string>
-  <string name="touch_edit_screenshot">Touch to preview and annotate</string>
-  <string name="content_error_message">This is a custom error message, which you can have displayed to your users</string>
-  <string name="screenshot_hint">This is a custom message, which you can have displayed next to the screen capture to explain why it might be of great help.</string>
-  <string name="email_address">Email address</string>
-  <string name="an_extra_text_area">An extra text area</string>
-  <string name="edittext_hint_write_something_here">EditText hint. Write something here.</string>
-  <string name="an_extra_radiogroup">An extra RadioGroup</string>
-  <string name="rg_1">RG 1</string>
-  <string name="rg_2">RG 2</string>
-  <string name="rg_3">RG 3</string>
-  <string name="send_maoni_email">Send via email (maoni-email)</string>
-  <string name="send_maoni_github">Send as Github issue (maoni-github)</string>
-  <string name="send_maoni_jira">Send as JIRA issue (maoni-jira)</string>
-  <string name="send_maoni_slack">"Send to Slack (maoni-slack)"</string>
-  <string name="how_to_send_feedback">How would you like to send your feedback?</string>
+  <string name="feedback_content_hint">Merci d\'écrire votre commentaire ici.</string>
+  <string name="include_app_logs">Joindre les journaux de l\'application</string>
+  <string name="include_app_screenshot">Joindre la capture d\'écran ci-dessous</string>
+  <string name="touch_edit_screenshot">Touchez pour prévisualiser et annoter</string>
+  <string name="content_error_message">Ceci est un exemple de message d\'erreur, que vous pouvez personnaliser dans vos applications</string>
+  <string name="screenshot_hint">Ceci est un exemple de message que vous pouvez afficher pour expliquer à vos utilisateurs en quoi la capture d\'écran vous sera utile.</string>
+  <string name="email_address">Adresse e-mail</string>
+  <string name="an_extra_text_area">Une zone de texte supplémentaire</string>
+  <string name="edittext_hint_write_something_here">Zone de texte. Merci de rajouter quelque chose ici si vous le souhaitez.</string>
+  <string name="an_extra_radiogroup">Une zone de sélection supplémentaire</string>
+  <string name="rg_1">Choix 1</string>
+  <string name="rg_2">Choix 2</string>
+  <string name="rg_3">Choix 3</string>
+  <string name="send_maoni_email">Envoyer par e-mail (via \'maoni-email\')</string>
+  <string name="send_maoni_github">Envoyer en tant que ticket Github (via \'maoni-github\')</string>
+  <string name="send_maoni_jira">Envoyer en tant que ticket JIRA (via \'maoni-jira\')</string>
+  <string name="send_maoni_slack">"Envoyer sur Slack (via 'maoni-slack')"</string>
+  <string name="how_to_send_feedback">De quelle manière souhaitez-vous envoyer vos commentaires ?</string>
 </resources>
