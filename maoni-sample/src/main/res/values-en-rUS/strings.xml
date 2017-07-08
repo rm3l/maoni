@@ -34,8 +34,7 @@ This is a demo application for Maoni, a lightweight library which provides      
         Hey! Love or hate this app? We would love to hear from you.
         \n\n
         Note: Almost everything in Maoni is customizable.
-    ]]>
-    </string>
+    ]]></string>
   <string name="feedback_content_hint">Please write your valuable feedback here.</string>
   <string name="include_app_logs">Attach application logs</string>
   <string name="include_app_screenshot">Attach screen capture</string>
@@ -45,13 +44,13 @@ This is a demo application for Maoni, a lightweight library which provides      
   <string name="email_address">Email address</string>
   <string name="an_extra_text_area">An extra text area</string>
   <string name="edittext_hint_write_something_here">EditText hint. Write something here.</string>
-  <string name="an_extra_radiogroup">An extra RadioGroup</string>
-  <string name="rg_1">RG 1</string>
-  <string name="rg_2">RG 2</string>
-  <string name="rg_3">RG 3</string>
-  <string name="send_maoni_email">Send via email (maoni-email)</string>
-  <string name="send_maoni_github">Send as Github issue (maoni-github)</string>
-  <string name="send_maoni_jira">Send as JIRA issue (maoni-jira)</string>
-  <string name="send_maoni_slack">"Send to Slack (maoni-slack)"</string>
+  <string name="an_extra_radiogroup">One more question</string>
+  <string name="rg_1">Choice 1</string>
+  <string name="rg_2">Choice 2</string>
+  <string name="rg_3">Choice 3</string>
+  <string name="send_maoni_email">Send via Email (via \'maoni-email\')</string>
+  <string name="send_maoni_github">Send as Github issue (via \'maoni-github\')</string>
+  <string name="send_maoni_jira">Send as JIRA issue (via \'maoni-jira\')</string>
+  <string name="send_maoni_slack">"Send to Slack (via 'maoni-slack')"</string>
   <string name="how_to_send_feedback">How would you like to send your feedback?</string>
 </resources>

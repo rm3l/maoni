@@ -43,8 +43,7 @@ SOFTWARE.
         Hey! Love or hate this app? We would love to hear from you.
         \n\n
         Note: Almost everything in Maoni is customizable.
-    ]]>
-    </string>
+    ]]></string>
   <string name="feedback_content_hint">Please write your valuable feedback here.</string>
   <string name="include_app_logs">Attach application logs</string>
   <string name="include_app_screenshot">Attach screen capture</string>
