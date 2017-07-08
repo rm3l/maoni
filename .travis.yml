@@ -31,7 +31,7 @@ android:
     - platform-tools
     - tools
     - build-tools-25.0.3
-    - android-26
+    - android-25
     - extra-android-support
     - extra-google-google_play_services
     - extra-android-m2repository
