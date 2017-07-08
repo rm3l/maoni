@@ -33,7 +33,7 @@ SOFTWARE.
             android:id="@+id/extra_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email address"
+            android:hint="@string/email_address"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textEmailAddress"
             android:maxLines="1" />
@@ -42,13 +42,13 @@ SOFTWARE.
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="An extra text area"/>
+        android:text="@string/an_extra_text_area"/>
     <EditText
         android:id="@+id/extra_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
-        android:hint="EditText hint. Write something here."
+        android:hint="@string/edittext_hint_write_something_here"
         android:inputType="textCapSentences|textMultiLine"
         android:isScrollContainer="true"
         android:maxLines="2" />
@@ -56,7 +56,7 @@ SOFTWARE.
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="An extra RadioGroup"/>
+        android:text="@string/an_extra_radiogroup"/>
     <RadioGroup
         android:id="@+id/extra_radiogroup"
         android:layout_width="match_parent"
@@ -67,19 +67,19 @@ SOFTWARE.
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
             android:checked="true"
-            android:text="RG 1"/>
+            android:text="@string/rg_1"/>
         <RadioButton
             android:id="@+id/extra_rg2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="RG 2"/>
+            android:text="@string/rg_2"/>
         <RadioButton
             android:id="@+id/extra_rg3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="RG 3"/>
+            android:text="@string/rg_3"/>
     </RadioGroup>
     
 </LinearLayout>

@@ -55,19 +55,18 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
-        final MaoniSampleCallbackHandler handlerForMaoni = new MaoniSampleCallbackHandler(this);
+        final MaoniSampleCallbackHandler handlerForMaoni = new MaoniSampleCallbackHandler(this); //Custom handler for Maoni, which does nothing more than calling any of the maoni-* available callbacks
         final Maoni.Builder maoniBuilder = new Maoni.Builder(this, MY_FILE_PROVIDER_AUTHORITY)
-                .withWindowTitle("Feedback") //Set to an empty string to clear it
-                .withMessage("Hey! Love or hate this app? We would love to hear from you.\n\n" +
-                        "Note: Almost everything in Maoni is customizable.")
+                .withWindowTitle(getString(R.string.send_feedback_activity_title)) //Set to an empty string to clear it
+                .withMessage(getString(R.string.send_feedback_activity_intro))
                 .withExtraLayout(R.layout.my_feedback_activity_extra_content)
-                .withFeedbackContentHint("[Custom hint] Write your feedback here")
-                .withIncludeLogsText("[Custom text] Include system logs")
-                .withIncludeScreenshotText("[Custom text] Include screenshot")
-                .withTouchToPreviewScreenshotText("Touch to preview and annotate")
-                .withContentErrorMessage("Custom error message")
+                .withFeedbackContentHint(getString(R.string.feedback_content_hint))
+                .withIncludeLogsText(getString(R.string.include_app_logs))
+                .withIncludeScreenshotText(getString(R.string.include_app_screenshot))
+                .withTouchToPreviewScreenshotText(getString(R.string.touch_edit_screenshot))
+                .withContentErrorMessage(getString(R.string.content_error_message))
                 .withDefaultToEmailAddress("apps+maoni_sample@rm3l.org")
-                .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...");
+                .withScreenshotHint(getString(R.string.screenshot_hint));
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {

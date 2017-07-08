@@ -28,9 +28,7 @@ import org.rm3l.maoni.slack.MaoniSlackListener
  * Example of Callback for Maoni, written in a different JVM language:
  * Kotlin here, for conciseness and productivity.
  * <p>
- * This is a demo callback, that lets the users pick one of the common listeners available:
- * - maoni-email, for sending feedback via email
- * - maoni-github, for sending feedback as a Github issue (in the specified repo)
+ * This is a demo callback, that lets the users pick one of the common listeners available
  */
 class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
@@ -110,19 +108,19 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
     }
 
     val listOfListeners = mutableListOf(
-        "Send via email (maoni-email)"
+        context.getString(R.string.send_maoni_email)
     )
     if (maoniGithubConfigured) {
-      listOfListeners.add("Send as Github issue (maoni-github)")
+      listOfListeners.add(context.getString(R.string.send_maoni_github))
     }
     if (maoniJiraConfigured) {
-      listOfListeners.add("Send as JIRA issue (maoni-jira)")
+      listOfListeners.add(context.getString(R.string.send_maoni_jira))
     }
     if (maoniSlackConfigured) {
-      listOfListeners.add("Send to Slack (maoni-slack)")
+      listOfListeners.add(context.getString(R.string.send_maoni_slack))
     }
 
-    context.selector("How would you like to send your feedback?", listOfListeners) { position ->
+    context.selector(context.getString(R.string.how_to_send_feedback), listOfListeners) { position ->
       val textAtPosition = listOfListeners[position]
       val progressDialog = context.indeterminateProgressDialog(textAtPosition)
       progressDialog.show()
@@ -132,13 +130,13 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
         listenerSelected = buildMaoniEmailListener(feedback)
       } else if (maoniGithubConfigured &&
           textAtPosition.contains("maoni-github", ignoreCase = true)) {
-        listenerSelected = buildMaoniGithubListener(feedback)
+        listenerSelected = buildMaoniGithubListener()
       } else if (maoniJiraConfigured &&
           textAtPosition.contains("maoni-jira", ignoreCase = true)) {
-        listenerSelected = buildMaoniJiraListener(feedback)
+        listenerSelected = buildMaoniJiraListener()
       } else if (maoniSlackConfigured &&
           textAtPosition.contains("maoni-slack", ignoreCase = true)) {
-        listenerSelected = buildMaoniSlackListener(feedback)
+        listenerSelected = buildMaoniSlackListener()
       } else {
         listenerSelected = null
       }
@@ -155,7 +153,8 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
         context,
         "text/html",
         "[Maoni] Feedback from Maoni Sample App " +
-            "(${feedback?.appInfo?.applicationId}: ${feedback?.appInfo?.versionName})",
+            "(${feedback?.appInfo?.applicationId ?: "UNKNOWN_APPLICATION_ID"}: " +
+            "${feedback?.appInfo?.versionName ?: "UNKNOWN_VERSION_NAME"})",
         null,
         null,
         arrayOf("apps+maoni@rm3l.org"),
@@ -163,7 +162,7 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
         arrayOf("apps+maoni_sample@rm3l.org"))
   }
 
-  private fun buildMaoniGithubListener(feedback: Feedback?): Listener {
+  private fun buildMaoniGithubListener(): Listener {
     val githubRepoOwner = "rm3l"
     val githubRepo = "maoni"
     return MaoniGithubListener(context,
@@ -183,7 +182,7 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
         "An error happened - please try again later")
   }
 
-  private fun buildMaoniJiraListener(feedback: Feedback?): Listener {
+  private fun buildMaoniJiraListener(): Listener {
     val jiraProjectKey = "MAONI"
     return MaoniJiraListener(
         context,
@@ -200,7 +199,7 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
         )
   }
 
-  private fun buildMaoniSlackListener(feedback: Feedback?): Listener {
+  private fun buildMaoniSlackListener(): Listener {
     return MaoniSlackListener(
         context = context,
         webhookUrl = BuildConfig.SLACK_WEBHOOK_URL,
