@@ -137,7 +137,7 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
         .withHandler(myHandlerForMaoni) //Custom Callback for Maoni
         .withFeedbackContentHint("[Custom hint] Write your feedback here")
         .withIncludeScreenshotText("[Custom text] Include screenshot")
-        .withTouchToPreviewScreenshotText("Touch To Preview")
+        .withTouchToPreviewScreenshotText("Touch To Preview and Edit")
         .withContentErrorMessage("Custom error message")
         .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...")
         //... there are other aspects you can customize

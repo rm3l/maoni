@@ -64,7 +64,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                 .withFeedbackContentHint("[Custom hint] Write your feedback here")
                 .withIncludeLogsText("[Custom text] Include system logs")
                 .withIncludeScreenshotText("[Custom text] Include screenshot")
-                .withTouchToPreviewScreenshotText("Touch To Preview")
+                .withTouchToPreviewScreenshotText("Touch to preview and annotate")
                 .withContentErrorMessage("Custom error message")
                 .withDefaultToEmailAddress("apps+maoni_sample@rm3l.org")
                 .withScreenshotHint("Custom test: Lorem Ipsum Dolor Sit Amet...");
