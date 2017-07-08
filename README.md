@@ -348,7 +348,7 @@ Along with the XML file that specifies the sharable directories (under `res/xml/
 </paths>
 ```
 
-See https://goo.gl/31nStZ for further instructions on how to setup file sharing.
+See [https://goo.gl/31nStZ](https://goo.gl/31nStZ) for further instructions on how to setup file sharing.
 
 
 ## Contribute and Improve Maoni!
