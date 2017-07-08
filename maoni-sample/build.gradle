@@ -50,8 +50,8 @@ def slackIconUrl = localProperties.getProperty('slack.icon.url', "")
 def slackEmojiIcon = localProperties.getProperty('slack.emoji.icon', "")
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "25.0.3"
 
     playAccountConfigs {
         defaultAccountConfig {
@@ -103,9 +103,9 @@ android {
     defaultConfig {
         applicationId "org.rm3l.maoni.sample"
         minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 311
-        versionName "3.1.1"
+        targetSdkVersion 26
+        versionCode 400
+        versionName "4.0.0"
 
         vectorDrawables.useSupportLibrary = true
 
@@ -171,7 +171,7 @@ dependencies {
     compile 'org.jetbrains.anko:anko-sdk15:0.9.1'
 
     compile project(":maoni")
-    compile ('org.rm3l:maoni-email:2.4.0') {
+    compile ('org.rm3l:maoni-email:3.0.0-1') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
     }
@@ -183,7 +183,7 @@ dependencies {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
     }
-    compile ('org.rm3l:maoni-slack:0.1.3') {
+    compile ('org.rm3l:maoni-slack:0.1.4') {
         exclude group: 'org.rm3l', module: 'maoni-common'
     }
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -193,7 +193,7 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-    compile('com.mikepenz:aboutlibraries:5.7.1@aar') {
+    compile('com.mikepenz:aboutlibraries:5.9.6@aar') {
         transitive = true
     }
 }
