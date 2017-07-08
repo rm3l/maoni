@@ -50,6 +50,8 @@ const val APPLICATION_JSON = "application/json"
  * @property username the displayed name
  * @property iconUrl the icon to display
  * @property emojiIcon the emoji icon to display
+ * @property showWaitDialog whether or not to display a wait dialog. If false,
+ *  the waitDialogTitle  and waitDialogMessage properties will be useless.
  * @property waitDialogTitle the message to display in the waiting dialog
  * @property successToastMessage the message to toast if the operation succeeded
  * @property failureToastMessage the message to toast in case of failure
@@ -62,10 +64,15 @@ open class MaoniSlackListener(
         val username: String? = null,
         val iconUrl: String? = null,
         val emojiIcon: String? = null,
-        val waitDialogTitle: String = "Please hold on...",
-        val waitDialogMessage: String = "Submitting your feedback to Slack: $webhookUrl ...",
-        val successToastMessage: String = "Thank you for your feedback!",
-        val failureToastMessage: String = "An error happened - please try again later"
+        val showWaitDialog: Boolean = true,
+        val waitDialogTitle: String =
+            "Please hold on...",
+        val waitDialogMessage: String =
+            "Submitting your feedback to Slack: ${channel?:username?:webhookUrl} ...",
+        val successToastMessage: String =
+            "Thank you for your feedback! We will get back to you as soon as possible.",
+        val failureToastMessage: String =
+            "An error happened - please try again later"
 ): Listener, AnkoLogger {
 
     override fun onDismiss() {
@@ -85,8 +92,13 @@ open class MaoniSlackListener(
             return false
         }
 
-        val progressDialog = context.indeterminateProgressDialog(title = waitDialogTitle, message = waitDialogMessage)
-        progressDialog.show()
+        val progressDialog =
+                if (showWaitDialog)
+                    context.indeterminateProgressDialog(
+                            title = waitDialogTitle,
+                            message = waitDialogMessage)
+                else null
+        progressDialog?.show()
 
         val deviceAndAppInfo = feedback
                 ?.deviceAndAppInfoAsHumanReadableMap
@@ -157,7 +169,7 @@ open class MaoniSlackListener(
                 debug {"<<< [$statusCode] POST $webhookUrl: \n$responseBody"}
             }
             uiThread { 
-                progressDialog.cancel()
+                progressDialog?.cancel()
                 when (statusCode) {
                     in 100..399 -> context.longToast(successToastMessage)
                     else -> {
