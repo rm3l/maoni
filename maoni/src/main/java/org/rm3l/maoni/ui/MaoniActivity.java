@@ -46,6 +46,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -102,6 +103,7 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String INCLUDE_LOGS_TEXT = "INCLUDE_LOGS_TEXT";
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
     public static final String EXTRA_LAYOUT = "EXTRA_LAYOUT";
+    public static final String SHOW_KEYBOARD_ON_START = "SHOW_KEYBOARD_ON_START";
 
     private static final String MAONI_LOGS_FILENAME = "maoni_logs.txt";
 
@@ -137,6 +139,7 @@ public class MaoniActivity extends AppCompatActivity {
 
     private int mHighlightColor;
     private int mBlackoutColor;
+    private boolean mShowKeyboardOnStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -259,6 +262,9 @@ public class MaoniActivity extends AppCompatActivity {
         }
 
         mScreenshotFilePath = intent.getCharSequenceExtra(SCREENSHOT_FILE);
+
+        mShowKeyboardOnStart = intent.getBooleanExtra(SHOW_KEYBOARD_ON_START, false);
+
         initScreenCaptureView(intent);
 
         mFeedbackUniqueId = UUID.randomUUID().toString();
@@ -278,6 +284,13 @@ public class MaoniActivity extends AppCompatActivity {
         final UiListener uiListener = maoniConfiguration.getUiListener();
         if (uiListener != null) {
             uiListener.onCreate(mRootView, savedInstanceState);
+        }
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        if (!mShowKeyboardOnStart) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
     }
 

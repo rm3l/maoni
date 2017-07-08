@@ -69,6 +69,7 @@ import static org.rm3l.maoni.ui.MaoniActivity.MESSAGE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_FILE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_TOUCH_TO_PREVIEW_HINT;
+import static org.rm3l.maoni.ui.MaoniActivity.SHOW_KEYBOARD_ON_START;
 import static org.rm3l.maoni.ui.MaoniActivity.THEME;
 import static org.rm3l.maoni.ui.MaoniActivity.TOOLBAR_SUBTITLE_TEXT_COLOR;
 import static org.rm3l.maoni.ui.MaoniActivity.TOOLBAR_TITLE_TEXT_COLOR;
@@ -169,6 +170,7 @@ public class Maoni {
     @Nullable
     private final Context context;
     private File maoniWorkingDir;
+    private boolean showKeyboardOnStart;
 
     private final AtomicBoolean mUsed = new AtomicBoolean(false);
 
@@ -197,6 +199,56 @@ public class Maoni {
      * @param screenshotHint               the text to display to the user
      */
     public Maoni(
+        @Nullable final Context context,
+        @Nullable String fileProviderAuthority,
+        @Nullable final File maoniWorkingDir,
+        @Nullable final CharSequence windowTitle,
+        @Nullable final CharSequence windowSubTitle,
+        @ColorRes @Nullable final Integer windowTitleTextColor,
+        @ColorRes @Nullable final Integer windowSubTitleTextColor,
+        @StyleRes @Nullable final Integer theme,
+        @DrawableRes @Nullable final Integer header,
+        @Nullable final CharSequence message,
+        @Nullable final CharSequence feedbackContentHint,
+        @Nullable final CharSequence contentErrorMessage,
+        @LayoutRes @Nullable final Integer extraLayout,
+        @Nullable final CharSequence includeLogsText,
+        @Nullable final CharSequence includeScreenshotText,
+        @Nullable final CharSequence touchToPreviewScreenshotText,
+        @Nullable final CharSequence screenshotHint) {
+        this(context, fileProviderAuthority, maoniWorkingDir, windowTitle,
+            windowSubTitle, windowTitleTextColor, windowSubTitleTextColor,
+            theme, header, message, feedbackContentHint, contentErrorMessage,
+            extraLayout, includeLogsText, includeScreenshotText, touchToPreviewScreenshotText,
+            screenshotHint, false);
+    }
+
+    /**
+     * Constructor
+     * @param fileProviderAuthority        the file provider authority.
+     *                                     If {@literal null}, file sharing will not be available
+     * @param maoniWorkingDir                the working directory for Maoni.
+     *                                       Will default to the caller activity cache directory if none was specified.
+     *                                       This is where screenshots are typically stored.
+     * @param windowTitle                  the feedback window title
+     * @param windowSubTitle                the feedback window sub-title
+     * @param windowTitleTextColor          the feedback window title text color
+     *                                      (use {@literal null} for the default)
+     * @param windowSubTitleTextColor       the feedback window sub-title text color
+     *                                      (use {@literal null} for the default)
+     * @param theme                        the theme to apply
+     * @param header                       the header image
+     * @param message                      the feedback form field error message to display to the user
+     * @param feedbackContentHint          the feedback form field hint message
+     * @param contentErrorMessage          the feedback form field error message to display to the user
+     * @param extraLayout                  the extra layout resource.
+     * @param includeLogsText              the text do display next to the "Include logs" checkbox
+     * @param includeScreenshotText        the text do display next to the "Include screenshot" checkbox
+     * @param touchToPreviewScreenshotText the "Touch to preview" text
+     * @param screenshotHint               the text to display to the user
+     * @param showKeyboardOnStart          whether to show the keyboard on start or not. Default is {@code false}
+     */
+    public Maoni(
             @Nullable final Context context,
             @Nullable String fileProviderAuthority,
             @Nullable final File maoniWorkingDir,
@@ -213,7 +265,8 @@ public class Maoni {
             @Nullable final CharSequence includeLogsText,
             @Nullable final CharSequence includeScreenshotText,
             @Nullable final CharSequence touchToPreviewScreenshotText,
-            @Nullable final CharSequence screenshotHint) {
+            @Nullable final CharSequence screenshotHint,
+            final boolean showKeyboardOnStart) {
 
         this.context = context;
         this.fileProviderAuthority = fileProviderAuthority;
@@ -232,6 +285,7 @@ public class Maoni {
         this.touchToPreviewScreenshotText = touchToPreviewScreenshotText;
         this.extraLayout = extraLayout;
         this.maoniWorkingDir = maoniWorkingDir;
+        this.showKeyboardOnStart = showKeyboardOnStart;
     }
 
     /**
@@ -291,6 +345,8 @@ public class Maoni {
         }
 
         maoniIntent.putExtra(FILE_PROVIDER_AUTHORITY, fileProviderAuthority);
+
+        maoniIntent.putExtra(SHOW_KEYBOARD_ON_START, showKeyboardOnStart);
 
         maoniIntent.putExtra(WORKING_DIR,
                 maoniWorkingDir != null ?
@@ -436,6 +492,8 @@ public class Maoni {
         @LayoutRes
         @Nullable
         private Integer extraLayout;
+
+        private boolean showKeyboardOnStart;
 
         /**
          * Constructor
@@ -600,6 +658,23 @@ public class Maoni {
             return this;
         }
 
+        public boolean isShowKeyboardOnStart() {
+            return showKeyboardOnStart;
+        }
+
+        public Builder showKeyboardOnStart(final boolean showKeyboardOnStart) {
+            this.showKeyboardOnStart = showKeyboardOnStart;
+            return this;
+        }
+
+        public Builder showKeyboardOnStart() {
+            return this.showKeyboardOnStart(true);
+        }
+
+        public Builder hideKeyboardOnStart() {
+            return this.showKeyboardOnStart(false);
+        }
+
         @Nullable
         public CharSequence getScreenshotHint() {
             return screenshotHint;
@@ -656,6 +731,8 @@ public class Maoni {
             return this;
         }
 
+
+
         public Maoni build() {
             return new Maoni(
                     context,
@@ -674,7 +751,8 @@ public class Maoni {
                     includeLogsText,
                     includeScreenshotText,
                     touchToPreviewScreenshotText,
-                    screenshotHint);
+                    screenshotHint,
+                    showKeyboardOnStart);
         }
     }
 
