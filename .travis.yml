@@ -36,11 +36,11 @@ cache:
 
 script:
     - echo "Travis branch is $TRAVIS_BRANCH, and is in pull request $TRAVIS_PULL_REQUEST"
-    - ./gradlew clean build javadoc --stacktrace
+    - ./gradlew clean check assemble --stacktrace
 
 notifications:
   email:
-    - apps+now4j__builds@rm3l.org
+    - apps+maoni-slack__builds@rm3l.org
 
 sudo: false
 
