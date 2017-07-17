@@ -412,10 +412,10 @@ You can write your project in any JVM language of your choice (e.g., [Kotlin](ht
 ## Developed by
 
 * Armel Soro
- * [keybase.io/rm3l](https://keybase.io/rm3l)
- * [rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt; - [@rm3l](https://twitter.com/rm3l)
- * [paypal.me/rm3l](https://paypal.me/rm3l)
- * [coinbase.com/rm3l](https://www.coinbase.com/rm3l)
+  * [keybase.io/rm3l](https://keybase.io/rm3l)
+  * [rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt; - [@rm3l](https://twitter.com/rm3l)
+  * [paypal.me/rm3l](https://paypal.me/rm3l)
+  * [coinbase.com/rm3l](https://www.coinbase.com/rm3l)
 
 
 ## License
