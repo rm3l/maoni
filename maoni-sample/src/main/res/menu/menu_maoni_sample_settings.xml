@@ -22,16 +22,10 @@ SOFTWARE.
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.MaoniSampleMainActivity">
+    tools:context=".ui.MaoniSampleSettingsActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="1"
-        android:title="@string/action_settings"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_maoni_sample_settings_white_24dp"/>
-    <item
-        android:id="@+id/action_about"
+        android:id="@+id/action_feedback"
         android:orderInCategory="100"
-        android:title="@string/action_about"
+        android:title="@string/maoni_send_feedback"
         app:showAsAction="never" />
 </menu>

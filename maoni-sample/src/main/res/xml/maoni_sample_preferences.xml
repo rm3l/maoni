@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- General -->
+  <PreferenceCategory
+      android:key="general"
+      android:title="General"
+      android:summary="General Options">
+  </PreferenceCategory>
+
+  <!-- Callbacks -->
+  <PreferenceCategory
+      android:key="available_callbacks"
+      android:title="Available Callbacks"
+      android:summary="Feedback Callbacks implemented as external dependencies"/>
+
+  <!-- maoni-email -->
+  <PreferenceCategory
+      android:key="maoni_email"
+      android:title="maoni-email"
+      android:summary="Sends user feedback via email">
+
+    <EditTextPreference
+        android:key="maoni_email_subject"
+        android:title="Email subject"/>
+    <EditTextPreference
+        android:key="maoni_email_to"
+        android:defaultValue="apps+maoni@rm3l.org"
+        android:title="TO addresses."
+        android:summary="Comma-separated list of 'to' addresses"/>
+    <EditTextPreference
+        android:key="maoni_email_cc"
+        android:title="CC addresses."
+        android:summary="Comma-separated list of 'cc' addresses"/>
+    <EditTextPreference
+        android:key="maoni_email_bcc"
+        android:title="BCC addresses."
+        android:summary="Comma-separated list of 'bcc' addresses"/>
+  </PreferenceCategory>
+
+  <!-- maoni-github -->
+  <PreferenceCategory
+      android:key="maoni_github"
+      android:title="maoni-github"
+      android:summary="Sends user feedback as Github issues">
+    <SwitchPreference
+        android:key="maoni_github_enabled"
+        android:defaultValue="true"
+        android:title="Enable" >
+    </SwitchPreference>
+    <EditTextPreference
+        android:key="maoni_github_repo"
+        android:dependency="maoni_github_enabled"
+        android:defaultValue="rm3l/maoni"
+        android:title="Github Repo" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_github_username"
+        android:dependency="maoni_github_enabled"
+        android:title="Github Username. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_github_token"
+        android:dependency="maoni_github_enabled"
+        android:inputType="textPassword"
+        android:title="Github User Token. Leave empty to use the defaults" >
+    </EditTextPreference>
+  </PreferenceCategory>
+
+  <!-- maoni-jira -->
+  <PreferenceCategory
+      android:key="maoni_jira"
+      android:title="maoni-jira"
+      android:summary="Sends user feedback as JIRA issues">
+    <SwitchPreference
+        android:key="maoni_jira_enabled"
+        android:defaultValue="true"
+        android:title="Enable" >
+    </SwitchPreference>
+    <EditTextPreference
+        android:key="maoni_jira_rest_base_url"
+        android:dependency="maoni_jira_enabled"
+        android:title="REST API Base URL. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_jira_username"
+        android:dependency="maoni_jira_enabled"
+        android:title="JIRA Username. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_jira_password"
+        android:dependency="maoni_jira_enabled"
+        android:inputType="textPassword"
+        android:title="JIRA User Password. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_jira_project_key"
+        android:dependency="maoni_jira_enabled"
+        android:title="Project Key" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_jira_issue_type"
+        android:dependency="maoni_jira_enabled"
+        android:defaultValue="Task"
+        android:title="Issue Type" >
+    </EditTextPreference>
+  </PreferenceCategory>
+
+  <!-- maoni-slack -->
+  <PreferenceCategory
+      android:key="maoni_slack"
+      android:title="maoni-slack"
+      android:summary="Sends user feedback to Slack Webhook">
+    <SwitchPreference
+        android:key="maoni_slack_enabled"
+        android:defaultValue="true"
+        android:title="Enable" >
+    </SwitchPreference>
+    <EditTextPreference
+        android:key="maoni_slack_webhook_url"
+        android:dependency="maoni_slack_enabled"
+        android:title="Webhook URL. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_slack_channel"
+        android:dependency="maoni_slack_enabled"
+        android:title="Channel. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_slack_username"
+        android:dependency="maoni_slack_enabled"
+        android:title="Username. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_slack_icon_url"
+        android:dependency="maoni_slack_enabled"
+        android:title="Icon URL. Leave empty to use the defaults" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:key="maoni_slack_emoji_icon"
+        android:dependency="maoni_slack_enabled"
+        android:title="Emoji Icon. Leave empty to use the defaults" >
+    </EditTextPreference>
+  </PreferenceCategory>
+</PreferenceScreen>
