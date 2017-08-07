@@ -62,6 +62,16 @@ SOFTWARE.
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.MaoniSampleSettingsActivity"
+            android:label="@string/maoni_settings_activity_name"
+            android:parentActivityName="org.rm3l.maoni.sample.ui.MaoniSampleMainActivity"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.rm3l.maoni.sample.ui.MaoniSampleMainActivity"/>
+        </activity>
+
     </application>
 
 </manifest>

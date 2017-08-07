@@ -22,7 +22,9 @@
 
 package org.rm3l.maoni.sample.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,20 +36,18 @@ import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import org.rm3l.maoni.Maoni;
-import org.rm3l.maoni.sample.BuildConfig;
+import org.rm3l.maoni.common.contract.Handler;
 import org.rm3l.maoni.sample.R;
-import org.rm3l.maoni.sample.feedback.MaoniSampleCallbackHandler;
+import org.rm3l.maoni.sample.extensions.ContextUtils;
 
 public class MaoniSampleMainActivity extends AppCompatActivity {
-
-    private static final String MY_FILE_PROVIDER_AUTHORITY =
-            (BuildConfig.APPLICATION_ID + ".fileprovider");
 
     private Maoni mMaoni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PreferenceManager.setDefaultValues(this, R.xml.maoni_sample_preferences, false);
         setContentView(R.layout.activity_maoni_sample_main);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -55,19 +55,8 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
-        final MaoniSampleCallbackHandler handlerForMaoni = new MaoniSampleCallbackHandler(this); //Custom handler for Maoni, which does nothing more than calling any of the maoni-* available callbacks
-        final Maoni.Builder maoniBuilder = new Maoni.Builder(this, MY_FILE_PROVIDER_AUTHORITY)
-                .withWindowTitle(getString(R.string.send_feedback_activity_title)) //Set to an empty string to clear it
-                .withMessage(getString(R.string.send_feedback_activity_intro))
-                .withExtraLayout(R.layout.my_feedback_activity_extra_content)
-                .withFeedbackContentHint(getString(R.string.feedback_content_hint))
-                .withIncludeLogsText(getString(R.string.include_app_logs))
-                .withIncludeScreenshotText(getString(R.string.include_app_screenshot))
-                .withTouchToPreviewScreenshotText(getString(R.string.touch_edit_screenshot))
-                .withContentErrorMessage(getString(R.string.content_error_message))
-                .withDefaultToEmailAddress("apps+maoni_sample@rm3l.org")
-                .withScreenshotHint(getString(R.string.screenshot_hint));
-
+        final Handler handlerForMaoni = ContextUtils.getMaoniFeedbackHandler(this); //Custom handler for Maoni, which does nothing more than calling any of the maoni-* available callbacks
+        final Maoni.Builder maoniBuilder = ContextUtils.getMaoniFeedbackBuilder(this);
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
             fab.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +95,9 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                break;
+            case R.id.action_settings:
+                startActivity(new Intent(this, MaoniSampleSettingsActivity.class));
                 break;
             case R.id.action_about:
                 new LibsBuilder()
