@@ -23,7 +23,7 @@ SOFTWARE.
 -->
 <resources>
   <string name="maoni_app_name">Maoni Demo</string>
-  <string name="maoni_settings_activity_name">Maoni Demo Settings</string>
+  <string name="maoni_settings_activity_name">Paramètres</string>
   <string name="feedback">Avis</string>
   <string name="title_activity_maoni_sample_main">Maoni Demo</string>
   <string name="main_activity_text"><![CDATA[
@@ -61,5 +61,5 @@ Plus d\'infos sur http://rm3l.github.io/maoni.    ]]></string>
   <string name="send_maoni_jira">Envoyer en tant que ticket JIRA (via \'maoni-jira\')</string>
   <string name="send_maoni_slack">"Envoyer sur Slack (via 'maoni-slack')"</string>
   <string name="how_to_send_feedback">De quelle manière souhaitez-vous envoyer vos commentaires ?</string>
-  <string name="action_settings">Settings</string>
+  <string name="action_settings">Paramètres</string>
 </resources>
