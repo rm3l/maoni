@@ -6,6 +6,17 @@
       android:key="general"
       android:title="General"
       android:summary="General Options">
+    <SwitchPreference
+        android:key="maoni_screen_capturing_enabled"
+        android:defaultValue="true"
+        android:title="Enable Screen Capturing" >
+    </SwitchPreference>
+    <SwitchPreference
+        android:key="maoni_logs_capturing_enabled"
+        android:defaultValue="true"
+        android:title="Enable Logs Capturing" >
+    </SwitchPreference>
+
   </PreferenceCategory>
 
   <!-- Callbacks -->
