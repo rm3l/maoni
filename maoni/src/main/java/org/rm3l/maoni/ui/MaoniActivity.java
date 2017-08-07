@@ -104,6 +104,8 @@ public class MaoniActivity extends AppCompatActivity {
     public static final String INCLUDE_SCREENSHOT_TEXT = "INCLUDE_SCREENSHOT_TEXT";
     public static final String EXTRA_LAYOUT = "EXTRA_LAYOUT";
     public static final String SHOW_KEYBOARD_ON_START = "SHOW_KEYBOARD_ON_START";
+    public static final String SCREEN_CAPTURING_FEATURE_ENABLED = "SCREEN_CAPTURING_FEATURE_ENABLED";
+    public static final String LOGS_CAPTURING_FEATURE_ENABLED = "LOGS_CAPTURING_FEATURE_ENABLED";
 
     private static final String MAONI_LOGS_FILENAME = "maoni_logs.txt";
 
@@ -140,6 +142,8 @@ public class MaoniActivity extends AppCompatActivity {
     private int mHighlightColor;
     private int mBlackoutColor;
     private boolean mShowKeyboardOnStart;
+    private boolean mScreenCapturingFeatureEnabled;
+    private boolean mLogsCapturingFeatureEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,7 +269,37 @@ public class MaoniActivity extends AppCompatActivity {
 
         mShowKeyboardOnStart = intent.getBooleanExtra(SHOW_KEYBOARD_ON_START, false);
 
-        initScreenCaptureView(intent);
+        mScreenCapturingFeatureEnabled = intent.getBooleanExtra(SCREEN_CAPTURING_FEATURE_ENABLED, true);
+        final Integer[] screenCapturingRelatedFields = new Integer[] {
+            R.id.maoni_include_screenshot,
+            R.id.maoni_include_screenshot_content
+        };
+        if (mScreenCapturingFeatureEnabled) {
+            initScreenCaptureView(intent);
+        }
+        final int visibilityForScreenCapturingRelatedFields = (mScreenCapturingFeatureEnabled ?
+            View.VISIBLE : View.GONE);
+        for (final Integer screenCapturingRelatedField : screenCapturingRelatedFields) {
+            final View view = findViewById(screenCapturingRelatedField);
+            if (view == null) {
+                continue;
+            }
+            view.setVisibility(visibilityForScreenCapturingRelatedFields);
+        }
+
+        mLogsCapturingFeatureEnabled = intent.getBooleanExtra(LOGS_CAPTURING_FEATURE_ENABLED, true);
+        final Integer[] logsCapturingRelatedFields = new Integer[] {
+            R.id.maoni_include_logs
+        };
+        final int visibilityForLogsCapturingRelatedFields = (mLogsCapturingFeatureEnabled ?
+            View.VISIBLE : View.GONE);
+        for (final Integer logsCapturingRelatedField : logsCapturingRelatedFields) {
+            final View view = findViewById(logsCapturingRelatedField);
+            if (view == null) {
+                continue;
+            }
+            view.setVisibility(visibilityForLogsCapturingRelatedFields);
+        }
 
         mFeedbackUniqueId = UUID.randomUUID().toString();
 
@@ -512,7 +546,7 @@ public class MaoniActivity extends AppCompatActivity {
         if (this.validateForm(mRootView)) {
             //TODO Check that device is actually connected to the internet prior to going any further
             boolean includeScreenshot = false;
-            if (mIncludeScreenshot != null) {
+            if (mScreenCapturingFeatureEnabled && mIncludeScreenshot != null) {
                 includeScreenshot = mIncludeScreenshot.isChecked();
             }
             String contentText = "";
@@ -527,7 +561,8 @@ public class MaoniActivity extends AppCompatActivity {
             Uri logsUri = null;
             File logsFile = null;
 
-            final boolean includeLogs = mIncludeLogs != null && mIncludeLogs.isChecked();
+            final boolean includeLogs = mLogsCapturingFeatureEnabled &&
+                mIncludeLogs != null && mIncludeLogs.isChecked();
             if (includeLogs) {
                 logsFile = new File(
                         mWorkingDir,
