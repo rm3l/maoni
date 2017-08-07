@@ -2,6 +2,7 @@
 package org.rm3l.maoni.sample.extensions
 
 import android.content.Context
+import org.jetbrains.anko.defaultSharedPreferences
 import org.rm3l.maoni.Maoni
 import org.rm3l.maoni.common.contract.Handler
 import org.rm3l.maoni.sample.BuildConfig
@@ -15,8 +16,7 @@ fun Context.getMaoniFeedbackHandler(): Handler = MaoniSampleCallbackHandler(this
 
 fun Context.getMaoniFeedbackBuilder() =
   Maoni.Builder(this, MY_FILE_PROVIDER_AUTHORITY)
-      .withWindowTitle(
-          getString(R.string.send_feedback_activity_title)) //Set to an empty string to clear it
+      .withWindowTitle(getString(R.string.send_feedback_activity_title)) //Set to an empty string to clear it
       .withMessage(getString(R.string.send_feedback_activity_intro))
       .withExtraLayout(R.layout.my_feedback_activity_extra_content)
       .withFeedbackContentHint(getString(R.string.feedback_content_hint))

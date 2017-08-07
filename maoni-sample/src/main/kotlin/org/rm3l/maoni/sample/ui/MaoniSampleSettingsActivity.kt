@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.find
 import org.rm3l.maoni.Maoni
 import org.rm3l.maoni.common.contract.Handler
@@ -60,7 +61,10 @@ class MaoniSampleSettingsActivity: AppCompatActivity() {
         //Note that if no handler/listener is specified,
         //Maoni will fall back to opening an Email Intent, so your users can send
         //their feedback via email
-        mMaoni = mMaoniBuilder.withHandler(mHandlerForMaoni).build()
+        mMaoni = mMaoniBuilder
+            .withScreenCapturingFeature(this.defaultSharedPreferences.getBoolean("maoni_screen_capturing_enabled", true))
+            .withLogsCapturingFeature(this.defaultSharedPreferences.getBoolean("maoni_logs_capturing_enabled", true))
+            .withHandler(mHandlerForMaoni).build()
         mMaoni?.start(this@MaoniSampleSettingsActivity)
         return true
       }

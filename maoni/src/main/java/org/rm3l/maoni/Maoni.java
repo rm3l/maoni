@@ -753,6 +753,15 @@ public class Maoni {
             return this;
         }
 
+        public Builder withScreenCapturingFeature(final boolean screenCapturingFeature) {
+            if (screenCapturingFeature) {
+                this.enableScreenCapturingFeature();
+            } else {
+                this.disableScreenCapturingFeature();
+            }
+            return this;
+        }
+
         public Builder disableLogsCapturingFeature() {
             this.logsCapturingFeatureEnabled = false;
             return this;
@@ -760,6 +769,15 @@ public class Maoni {
 
         public Builder enableLogsCapturingFeature() {
             this.logsCapturingFeatureEnabled = true;
+            return this;
+        }
+
+        public Builder withLogsCapturingFeature(final boolean logsCapturingFeature) {
+            if (logsCapturingFeature) {
+                this.enableLogsCapturingFeature();
+            } else {
+                this.disableLogsCapturingFeature();
+            }
             return this;
         }
 

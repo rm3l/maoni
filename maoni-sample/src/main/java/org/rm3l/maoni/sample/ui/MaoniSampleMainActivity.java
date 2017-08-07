@@ -23,6 +23,7 @@
 package org.rm3l.maoni.sample.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -70,7 +71,14 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                     //Note that if no handler/listener is specified,
                     //Maoni will fall back to opening an Email Intent, so your users can send
                     //their feedback via email
-                    mMaoni = maoniBuilder.withHandler(handlerForMaoni).build();
+                  final SharedPreferences defaultSharedPreferences =
+                      PreferenceManager.getDefaultSharedPreferences(MaoniSampleMainActivity.this);
+                  mMaoni = maoniBuilder
+                        .withScreenCapturingFeature(defaultSharedPreferences
+                            .getBoolean("maoni_screen_capturing_enabled", true))
+                        .withLogsCapturingFeature(defaultSharedPreferences
+                            .getBoolean("maoni_logs_capturing_enabled", true))
+                        .withHandler(handlerForMaoni).build();
                     mMaoni.start(MaoniSampleMainActivity.this);
                 }
             });
