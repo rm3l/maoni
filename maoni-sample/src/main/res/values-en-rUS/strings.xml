@@ -23,6 +23,7 @@ SOFTWARE.
 -->
 <resources>
   <string name="maoni_app_name">Maoni Demo</string>
+  <string name="maoni_settings_activity_name">Maoni Demo Settings</string>
   <string name="feedback">Feedback</string>
   <string name="title_activity_maoni_sample_main">Maoni Demo</string>
   <string name="main_activity_text"><![CDATA[
@@ -53,4 +54,5 @@ This is a demo application for Maoni, a lightweight library which provides      
   <string name="send_maoni_jira">Send as JIRA issue (via \'maoni-jira\')</string>
   <string name="send_maoni_slack">"Send to Slack (via 'maoni-slack')"</string>
   <string name="how_to_send_feedback">How would you like to send your feedback?</string>
+  <string name="action_settings">Settings</string>
 </resources>
