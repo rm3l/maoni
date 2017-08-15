@@ -62,13 +62,20 @@ android {
     signingConfigs {
         release {
 
-            (storeFile, storePassword, keyAlias, keyPassword) = rootProject.getReleaseSigningInfo(android)
+            def (store_file, store_password, key_alias, key_password) = rootProject.getReleaseSigningInfo(android)
 
-            //User will be prompted for the parameters below, for 'assemble*Release' tasks
-            keyAlias keyAlias
-            keyPassword keyPassword
-            storeFile storeFile
-            storePassword storePassword
+            if (key_alias != null) {
+                keyAlias keyAlias
+            }
+            if (key_password != null) {
+                keyPassword keyPassword
+            }
+            if (store_file != null) {
+                storeFile store_file
+            }
+            if (store_password != null) {
+                storePassword storePassword
+            }
         }
     }
 

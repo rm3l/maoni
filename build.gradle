@@ -62,10 +62,10 @@ ext.getPlayStoreConfig = {
 
 ext.getReleaseSigningInfo = {
     android ->
-        def storeFile = ""
-        def storePassword = ""
-        def keyAlias = ""
-        def keyPassword = ""
+        def storeFile = null
+        def storePassword = null
+        def keyAlias = null
+        def keyPassword = null
 
         //Attempt to read keystore.properties file, if any first
         final propsFile = new File(homePath.toString() + "/.droid/", "maoni-keystore.properties")
@@ -80,29 +80,12 @@ ext.getReleaseSigningInfo = {
             keyAlias = props['keyAlias']
             keyPassword = props['keyPassword']
 
-        } else if (System.console() == null) {
-            storeFile = "UNDEFINED"
-            storePassword = "UNDEFINED"
-            keyAlias = "UNDEFINED"
-            keyPassword = "UNDEFINED"
-        } else {
+        } else if (System.console() != null) {
             storeFile = System.console().readLine("\nPlease enter path to keystore file: ")
             storeFile = new File(storeFile)
             storePassword = System.console().readPassword("\nPlease enter the store password: ")
             keyAlias = System.console().readLine("\nPlease enter the key alias: ")
             keyPassword = System.console().readPassword("\nPlease enter the key password: ")
-        }
-
-        if (storeFile == null) {
-            throw new InvalidUserDataException("Keystore path not specified or file does not exist")
-        }
-
-        if (keyAlias.size() <= 0) {
-            throw new InvalidUserDataException("You must enter the key alias to proceed.")
-        }
-
-        if (storePassword.size() <= 0 || keyPassword.size() <= 0) {
-            throw new InvalidUserDataException("You must enter both the store and key passwords to proceed.")
         }
 
         return [storeFile, storePassword, keyAlias, keyPassword]
