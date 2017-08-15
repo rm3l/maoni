@@ -364,6 +364,24 @@ to be able to reproduce the issue.
 You can also use the [sample app](https://play.google.com/store/apps/details?id=org.rm3l.maoni.sample) 
 to send your feedback with Maoni. ;-)
 
+### Building from source
+
+Make sure you have the Android SDK installed.
+
+Also make sure you have the appropriate Build Tools installed. You can install them via the Android's `sdkmanager`:
+```bash
+sdkmanager "build-tools;25.0.2"
+```
+
+Now you can build the project with the `Gradle Wrapper`:
+```bash
+./gradlew assembleDebug
+```
+
+You will then find the artifacts under the following folders:
+- `maoni/build/outputs/aar/`
+- `maoni-common/build/libs/`
+- `maoni-sample/build/outputs/apk/`
 
 ### Translations
  
