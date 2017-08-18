@@ -23,7 +23,7 @@ SOFTWARE.
 -->
 <resources>
   <string name="maoni_app_name">Maoni biblioteca</string>
-  <string name="maoni_screenshot">Screenshot</string>
+  <string name="maoni_screenshot">Captura de pantalla</string>
   <string name="maoni_feedback_message">Hey! Love or hate this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
   <string name="maoni_feedback_content_hint">Escriba sus comentarios aquí</string>
   <string name="maoni_feedback_include_screenshot_checkbox_title">Include screenshot</string>
@@ -35,7 +35,7 @@ SOFTWARE.
   <string name="maoni_validate_must_not_be_blank">Must not be blank</string>
   <string name="maoni_header">Header</string>
   <string name="maoni_screenshot_preview_internal_error">Error interno. Por favor Inténtalo más tarde.</string>
-  <string name="maoni_screenshot_preview">Preview</string>
+  <string name="maoni_screenshot_preview">Vista previa</string>
   <string name="maoni_highlight">Highlight</string>
   <string name="maoni_blackout">Blackout</string>
   <string name="maoni_undo">Deshacer</string>

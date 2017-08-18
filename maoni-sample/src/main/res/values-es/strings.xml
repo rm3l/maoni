@@ -63,5 +63,5 @@ SOFTWARE.
   <string name="send_maoni_jira">Send as JIRA issue (maoni-jira)</string>
   <string name="send_maoni_slack">"Send to Slack (maoni-slack)"</string>
   <string name="how_to_send_feedback">How would you like to send your feedback?</string>
-  <string name="action_settings">Settings</string>
+  <string name="action_settings">Ajustes</string>
 </resources>
