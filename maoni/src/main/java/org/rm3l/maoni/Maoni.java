@@ -411,7 +411,7 @@ public class Maoni {
 
         maoniIntent.putExtra(WORKING_DIR,
                 maoniWorkingDir != null ?
-                        maoniWorkingDir : callerActivity.getCacheDir().getAbsolutePath());
+                        maoniWorkingDir.getAbsolutePath() : callerActivity.getCacheDir().getAbsolutePath());
 
         maoniIntent.putExtra(SCREEN_CAPTURING_FEATURE_ENABLED, screenCapturingFeatureEnabled);
         if (this.screenCapturingFeatureEnabled) {
