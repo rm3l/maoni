@@ -1,2 +1,2 @@
 - Nouvelles fonctionnalités
--- Ability to disable screenshot and/or log capturing features (see https://github.com/rm3l/maoni/issues/42)
+-- Possibilité de désactiver les fonctionnalités de capture d'écran et de collecte de logs. Dans ce cas, ces fonctionnalités ne seront pas affichées à l'utilisateur (cf. https://github.com/rm3l/maoni/issues/42)
