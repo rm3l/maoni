@@ -8,6 +8,10 @@
 [![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-email.svg?style=social&label=Star)](https://github.com/rm3l/maoni-email) 
 [![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-email.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-email)
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni-email'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni-email.svg' />
+</a>
+
 [**Maoni**](http://maoni.rm3l.org) is a lightweight open-source library for integrating 
 a way to collect user feedback from within Android applications.
 
