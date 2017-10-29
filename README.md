@@ -13,6 +13,10 @@
 [![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni.svg?style=social&label=Star)](https://github.com/rm3l/maoni)
 [![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni.svg?style=social&label=Fork)](https://github.com/rm3l/maoni)
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni.svg' />
+</a>
+
 **Maoni** is a lightweight open-source library for integrating 
 a way to collect user feedbacks from within Android applications.
 
@@ -352,6 +356,10 @@ See [https://goo.gl/31nStZ](https://goo.gl/31nStZ) for further instructions on h
 
 
 ## Contribute and Improve Maoni!
+
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni.svg' />
+</a>
 
 Contributions and issue reporting are more than welcome. 
 So to help out, do feel free to fork this repo and open up a pull request. 
