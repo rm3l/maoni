@@ -6,7 +6,6 @@
 [![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![CircleCI](https://circleci.com/gh/rm3l/maoni/tree/master.svg?style=svg)](https://circleci.com/gh/rm3l/maoni/tree/master)
-[![Codecov](https://img.shields.io/codecov/c/github/rm3l/maoni.svg)](https://codecov.io/gh/rm3l/maoni)
 [![Issue Count](https://codeclimate.com/github/rm3l/maoni/badges/issue_count.svg)](https://codeclimate.com/github/rm3l/maoni)
 
 [![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni.svg?style=social&label=Watch)](https://github.com/rm3l/maoni)
@@ -129,7 +128,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:4.0.1@aar') {
+    compile ('org.rm3l:maoni:4.0.2@aar') {
         transitive = true
     }
   }
@@ -437,7 +436,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:4.0.1'
+    compile 'org.rm3l:maoni-common:4.0.2'
   }
 ```
 
