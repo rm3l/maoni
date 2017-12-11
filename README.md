@@ -17,6 +17,33 @@
   <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni.svg' />
 </a>
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Motivations](#motivations)
+- [Sample App](#sample-app)
+- [Screenshots](#screenshots)
+- [Getting started](#getting-started)
+  - [Putting it together](#putting-it-together)
+    - [Available callbacks](#available-callbacks)
+      - [maoni-email](#maoni-email)
+      - [maoni-slack](#maoni-slack)
+      - [maoni-github](#maoni-github)
+      - [maoni-jira](#maoni-jira)
+      - [maoni-doorbell](#maoni-doorbell)
+    - [Sharing the files captured with other apps](#sharing-the-files-captured-with-other-apps)
+- [Contribute and Improve Maoni!](#contribute-and-improve-maoni)
+  - [Building from source](#building-from-source)
+  - [Translations](#translations)
+  - [Contributing callbacks for Maoni](#contributing-callbacks-for-maoni)
+- [In use in the following apps](#in-use-in-the-following-apps)
+- [Credits](#credits)
+- [Developed by](#developed-by)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 **Maoni** is a lightweight open-source library for integrating 
 a way to collect user feedbacks from within Android applications.
 
