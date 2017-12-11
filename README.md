@@ -7,6 +7,19 @@
 [![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-github.svg?style=social&label=Star)](https://github.com/rm3l/maoni-github) 
 [![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-github.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-github)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Getting started](#getting-started)
+- [Contribute and Improve maoni-github!](#contribute-and-improve-maoni-github)
+- [Caveats](#caveats)
+- [Developed by](#developed-by)
+- [Credits](#credits)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [**Maoni**](http://maoni.rm3l.org) is a lightweight open-source library for integrating 
 a way to collect user feedbacks from within Android applications.
 
