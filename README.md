@@ -12,6 +12,17 @@
   <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni-email.svg' />
 </a>
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Getting started](#getting-started)
+- [Contribute and Improve maoni-email!](#contribute-and-improve-maoni-email)
+- [Developed by](#developed-by)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [**Maoni**](http://maoni.rm3l.org) is a lightweight open-source library for integrating 
 a way to collect user feedback from within Android applications.
 
