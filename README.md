@@ -8,10 +8,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-email.svg?style=social&label=Star)](https://github.com/rm3l/maoni-email) 
 [![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-email.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-email)
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni-email'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/xM7yWTP2kbLGf7ftibWqAcD5/rm3l/maoni-email.svg' />
-</a>
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
