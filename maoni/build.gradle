@@ -32,7 +32,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 410
-        versionName "4.1.0"
+        versionName "4.1.1"
     }
     buildTypes {
         release {
@@ -43,7 +43,7 @@ android {
 }
 
 group = 'org.rm3l'
-version = '4.1.0'
+version = '4.1.1'
 
 final homePath = System.properties['user.home']
 
@@ -107,10 +107,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '4.1.0'
+            name = '4.1.1'
             desc = 'Maoni Android Library'
             released  = new Date()
-            vcsTag = '4.1.0'
+            vcsTag = '4.1.1'
         }
 
         publicDownloadNumbers = true
