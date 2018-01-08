@@ -36,7 +36,10 @@ import android.support.annotation.StyleRes;
 import android.util.Log;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import org.rm3l.maoni.common.contract.Handler;
 import org.rm3l.maoni.common.contract.Listener;
@@ -71,6 +74,7 @@ import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_FILE;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREENSHOT_TOUCH_TO_PREVIEW_HINT;
 import static org.rm3l.maoni.ui.MaoniActivity.SCREEN_CAPTURING_FEATURE_ENABLED;
+import static org.rm3l.maoni.ui.MaoniActivity.SHARED_PREFERENCES;
 import static org.rm3l.maoni.ui.MaoniActivity.SHOW_KEYBOARD_ON_START;
 import static org.rm3l.maoni.ui.MaoniActivity.THEME;
 import static org.rm3l.maoni.ui.MaoniActivity.TOOLBAR_SUBTITLE_TEXT_COLOR;
@@ -82,6 +86,7 @@ import static org.rm3l.maoni.ui.MaoniActivity.WORKING_DIR;
 /**
  * Maoni configuration
  */
+@SuppressWarnings("WeakerAccess")
 public class Maoni {
 
     private static final String LOG_TAG = Maoni.class.getSimpleName();
@@ -172,6 +177,9 @@ public class Maoni {
     @Nullable
     private final Context context;
     private File maoniWorkingDir;
+
+    private final HashMap<String, Object> sharedPreferencesContentMap;
+
     private boolean showKeyboardOnStart;
     private boolean screenCapturingFeatureEnabled = true;
     private boolean logsCapturingFeatureEnabled = true;
@@ -327,7 +335,67 @@ public class Maoni {
         final boolean screenCapturingFeatureEnabled,
         final boolean logsCapturingFeatureEnabled) {
 
+        this(context, fileProviderAuthority, maoniWorkingDir, windowTitle,
+                windowSubTitle, windowTitleTextColor, windowSubTitleTextColor,
+                theme, header, message, feedbackContentHint, contentErrorMessage,
+                extraLayout, includeLogsText, includeScreenshotText, touchToPreviewScreenshotText,
+                screenshotHint, showKeyboardOnStart,
+                true, true, null);
+    }
+
+    /**
+     * Constructor
+     * @param fileProviderAuthority        the file provider authority.
+     *                                     If {@literal null}, file sharing will not be available
+     * @param maoniWorkingDir                the working directory for Maoni.
+     *                                       Will default to the caller activity cache directory if none was specified.
+     *                                       This is where screenshots are typically stored.
+     * @param windowTitle                  the feedback window title
+     * @param windowSubTitle                the feedback window sub-title
+     * @param windowTitleTextColor          the feedback window title text color
+     *                                      (use {@literal null} for the default)
+     * @param windowSubTitleTextColor       the feedback window sub-title text color
+     *                                      (use {@literal null} for the default)
+     * @param theme                        the theme to apply
+     * @param header                       the header image
+     * @param message                      the feedback form field error message to display to the user
+     * @param feedbackContentHint          the feedback form field hint message
+     * @param contentErrorMessage          the feedback form field error message to display to the user
+     * @param extraLayout                  the extra layout resource.
+     * @param includeLogsText              the text do display next to the "Include logs" checkbox
+     * @param includeScreenshotText        the text do display next to the "Include screenshot" checkbox
+     * @param touchToPreviewScreenshotText the "Touch to preview" text
+     * @param screenshotHint               the text to display to the user
+     * @param showKeyboardOnStart          whether to show the keyboard on start or not. Default is {@code false}
+     * @param screenCapturingFeatureEnabled whether to enable screen capturing or not. Default is {@code true}
+     * @param logsCapturingFeatureEnabled whether to enable logs capturing or not. Default is {@code true}
+     * @param sharedPreferencesContentMap the shared preferences loaded as a map
+     */
+    public Maoni(
+            @Nullable final Context context,
+            @Nullable String fileProviderAuthority,
+            @Nullable final File maoniWorkingDir,
+            @Nullable final CharSequence windowTitle,
+            @Nullable final CharSequence windowSubTitle,
+            @ColorRes @Nullable final Integer windowTitleTextColor,
+            @ColorRes @Nullable final Integer windowSubTitleTextColor,
+            @StyleRes @Nullable final Integer theme,
+            @DrawableRes @Nullable final Integer header,
+            @Nullable final CharSequence message,
+            @Nullable final CharSequence feedbackContentHint,
+            @Nullable final CharSequence contentErrorMessage,
+            @LayoutRes @Nullable final Integer extraLayout,
+            @Nullable final CharSequence includeLogsText,
+            @Nullable final CharSequence includeScreenshotText,
+            @Nullable final CharSequence touchToPreviewScreenshotText,
+            @Nullable final CharSequence screenshotHint,
+            final boolean showKeyboardOnStart,
+            final boolean screenCapturingFeatureEnabled,
+            final boolean logsCapturingFeatureEnabled,
+            @Nullable final HashMap<String, Object> sharedPreferencesContentMap) {
+
         this.context = context;
+        this.sharedPreferencesContentMap = sharedPreferencesContentMap;
         this.fileProviderAuthority = fileProviderAuthority;
         this.windowSubTitle = windowSubTitle;
         this.windowTitleTextColor = windowTitleTextColor;
@@ -484,6 +552,8 @@ public class Maoni {
             }
         }
 
+        maoniIntent.putExtra(SHARED_PREFERENCES, sharedPreferencesContentMap);
+
         callerActivity.startActivity(maoniIntent);
     }
 
@@ -562,6 +632,9 @@ public class Maoni {
         private boolean showKeyboardOnStart;
         private boolean screenCapturingFeatureEnabled = true;
         private boolean logsCapturingFeatureEnabled = true;
+
+        @NonNull
+        private HashMap<String, Object> sharedPreferences = new HashMap<>();
 
         /**
          * Constructor
@@ -858,7 +931,62 @@ public class Maoni {
             return this;
         }
 
+        /**
+         * Include SharedPreferences value map.
+         * <p>
+         * SharedPreferences files are opened with the default operating mode.
+         * @param sharedPreferences the names of each {@link android.content.SharedPreferences} file
+         * @return this Builder
+         */
+        public Builder withSharedPreferences(@Nullable final String... sharedPreferences) {
+            return this.withSharedPreferences(Context.MODE_PRIVATE, sharedPreferences);
+        }
 
+
+        /**
+         * Include SharedPreferences value map.
+         * @param mode Operating mode.  Use 0 or {@link Context#MODE_PRIVATE} for the
+         * default operation.
+         * @param sharedPreferences the names of each {@link android.content.SharedPreferences} file
+         * @return this Builder
+         */
+        public Builder withSharedPreferences(final int mode, @Nullable final String... sharedPreferences) {
+            if (sharedPreferences == null) {
+                return this;
+            }
+            final Map<String, Integer> sharedPreferencesModeMap = new HashMap<>();
+            for (final String sharedPreference : sharedPreferences) {
+                if (sharedPreference == null) {
+                    continue;
+                }
+                sharedPreferencesModeMap.put(sharedPreference, mode);
+            }
+            return this.withSharedPreferences(sharedPreferencesModeMap);
+        }
+
+        /**
+         * Include SharedPreferences value map.
+         * @param sharedPreferencesModeMap the map of {@link android.content.SharedPreferences} and their operating mode
+         * @return this builder
+         */
+        public Builder withSharedPreferences(@Nullable final Map<String, Integer> sharedPreferencesModeMap) {
+            if (sharedPreferencesModeMap == null || sharedPreferencesModeMap.isEmpty()) {
+                return this;
+            }
+            if (this.context == null) {
+                throw new IllegalArgumentException("A context is needed to load the shared preferences");
+            }
+            for (final Entry<String, Integer> entry : sharedPreferencesModeMap.entrySet()) {
+                final String sharedPreference = entry.getKey();
+                final Integer sharedPreferenceMode = entry.getValue();
+                if (sharedPreference == null || sharedPreferenceMode == null) {
+                    continue;
+                }
+                this.sharedPreferences.putAll(
+                        this.context.getSharedPreferences(sharedPreference, sharedPreferenceMode).getAll());
+            }
+            return this;
+        }
 
         public Maoni build() {
             return new Maoni(
@@ -881,7 +1009,8 @@ public class Maoni {
                     screenshotHint,
                     showKeyboardOnStart,
                     screenCapturingFeatureEnabled,
-                    logsCapturingFeatureEnabled);
+                    logsCapturingFeatureEnabled,
+                    sharedPreferences);
         }
     }
 
