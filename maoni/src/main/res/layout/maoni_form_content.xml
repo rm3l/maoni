@@ -105,7 +105,7 @@ SOFTWARE.
                 <ImageButton
                     android:id="@+id/maoni_screenshot"
                     android:layout_width="100dp"
-                    android:layout_height="165dp"
+                    android:layout_height="145dp"
                     android:contentDescription="@string/maoni_screenshot"
                     android:scaleType="centerCrop" />
 
@@ -113,6 +113,7 @@ SOFTWARE.
                     android:id="@+id/maoni_screenshot_touch_to_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:gravity="center"
                     android:text="@string/maoni_touch_to_preview" />
             </LinearLayout>
