@@ -65,16 +65,16 @@ android {
             def (store_file, store_password, key_alias, key_password) = rootProject.getReleaseSigningInfo(android)
 
             if (key_alias != null) {
-                keyAlias keyAlias
+                keyAlias key_alias
             }
             if (key_password != null) {
-                keyPassword keyPassword
+                keyPassword key_password
             }
             if (store_file != null) {
                 storeFile store_file
             }
             if (store_password != null) {
-                storePassword storePassword
+                storePassword store_password
             }
         }
     }
