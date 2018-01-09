@@ -25,12 +25,12 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 412
         versionName "4.1.2"
     }
@@ -51,8 +51,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(":maoni-common")
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:design:27.0.2'
     compile 'me.panavtec:drawableview:0.6.0'
 
     //Include maoni-email as the default listener

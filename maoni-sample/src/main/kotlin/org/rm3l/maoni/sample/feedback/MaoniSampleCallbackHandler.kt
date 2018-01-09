@@ -1,5 +1,6 @@
 package org.rm3l.maoni.sample.feedback
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
@@ -134,25 +135,25 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
       buildMaoniEmailListener(feedback).onSendButtonClicked(feedback)
     } else {
       context.selector(context.getString(R.string.how_to_send_feedback),
-          listOfListeners) { position ->
+          listOfListeners) { _,position ->
         val textAtPosition = listOfListeners[position]
-        val progressDialog = context.indeterminateProgressDialog(textAtPosition)
-        progressDialog.show()
+        val progressDialog = ProgressDialog.show(context, textAtPosition,
+                "Please wait...", true)
         val listenerSelected: Listener?
 
-        if (textAtPosition.contains("maoni-email", true)) {
-          listenerSelected = buildMaoniEmailListener(feedback)
+        listenerSelected = if (textAtPosition.contains("maoni-email", true)) {
+          buildMaoniEmailListener(feedback)
         } else if (maoniGithubConfigured &&
-            textAtPosition.contains("maoni-github", ignoreCase = true)) {
-          listenerSelected = buildMaoniGithubListener()
+                textAtPosition.contains("maoni-github", ignoreCase = true)) {
+          buildMaoniGithubListener()
         } else if (maoniJiraConfigured &&
-            textAtPosition.contains("maoni-jira", ignoreCase = true)) {
-          listenerSelected = buildMaoniJiraListener()
+                textAtPosition.contains("maoni-jira", ignoreCase = true)) {
+          buildMaoniJiraListener()
         } else if (maoniSlackConfigured &&
-            textAtPosition.contains("maoni-slack", ignoreCase = true)) {
-          listenerSelected = buildMaoniSlackListener()
+                textAtPosition.contains("maoni-slack", ignoreCase = true)) {
+          buildMaoniSlackListener()
         } else {
-          listenerSelected = null
+          null
         }
 
         listenerSelected?.onSendButtonClicked(feedback)

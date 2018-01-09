@@ -25,17 +25,18 @@
 final homePath = System.properties['user.home']
 
 buildscript {
-    ext.kotlin_version = '1.1.2-3'
+    ext.kotlin_version = '1.2.10'
     repositories {
         jcenter()
         mavenCentral()
+        google()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -47,6 +48,9 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://maven.google.com'
+        }
         //To activate temporarily, when waiting for Bintray to approve packages to be approved in JCenter
 //        maven { url 'https://dl.bintray.com/rm3l/maven'}
     }
