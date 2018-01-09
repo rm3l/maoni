@@ -942,7 +942,6 @@ public class Maoni {
             return this.withSharedPreferences(Context.MODE_PRIVATE, sharedPreferences);
         }
 
-
         /**
          * Include SharedPreferences value map.
          * @param mode Operating mode.  Use 0 or {@link Context#MODE_PRIVATE} for the
@@ -982,8 +981,13 @@ public class Maoni {
                 if (sharedPreference == null || sharedPreferenceMode == null) {
                     continue;
                 }
-                this.sharedPreferences.putAll(
-                        this.context.getSharedPreferences(sharedPreference, sharedPreferenceMode).getAll());
+                final Map<String, Object> sharedPreferencesContent = 
+                    this.context.getSharedPreferences(sharedPreference, sharedPreferenceMode).getAll();
+                for (final Entry<String, Object> sharedPreferencesContentEntry : sharedPreferencesContent.entrySet()) {
+                    this.sharedPreferences.put(
+                        "SharedPreferences/" + sharedPreference + "/" + sharedPreferencesContentEntry.getKey(),
+                        sharedPreferencesContentEntry.getValue());
+                }
             }
             return this;
         }
