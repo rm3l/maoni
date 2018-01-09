@@ -981,9 +981,9 @@ public class Maoni {
                 if (sharedPreference == null || sharedPreferenceMode == null) {
                     continue;
                 }
-                final Map<String, Object> sharedPreferencesContent = 
+                final Map<String, ?> sharedPreferencesContent = 
                     this.context.getSharedPreferences(sharedPreference, sharedPreferenceMode).getAll();
-                for (final Entry<String, Object> sharedPreferencesContentEntry : sharedPreferencesContent.entrySet()) {
+                for (final Entry<String, ?> sharedPreferencesContentEntry : sharedPreferencesContent.entrySet()) {
                     this.sharedPreferences.put(
                         "SharedPreferences/" + sharedPreference + "/" + sharedPreferencesContentEntry.getKey(),
                         sharedPreferencesContentEntry.getValue());
