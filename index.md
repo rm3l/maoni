@@ -103,7 +103,7 @@ By the way, as a side note, Maoni is a Swahili word for comments or opinions.
 </a>
 
 
-## Screenshots
+## Preview
 
 <img width="40%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/maoni_2.3.1.gif"/>
     
