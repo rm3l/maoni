@@ -23,45 +23,45 @@ SOFTWARE.
 -->
 <resources>
   <string name="maoni_app_name">Maoni Demo</string>
-  <string name="maoni_settings_activity_name">Maoni Demo Settings</string>
+  <string name="maoni_settings_activity_name">Maoni Demo Einstellungen</string>
   <string name="feedback">Feedback</string>
   <string name="title_activity_maoni_sample_main">Maoni Demo</string>
   <string name="main_activity_text"><![CDATA[
-        This is a demo application for Maoni, a lightweight library which provides
-        a ready-to-use Material-ized activity for collecting user feedbacks from within an existing app.
+        Dies ist eine demo Anwendung für Maoni, eine leichtgewichtige Bibliothek, welches eine einsatzbare 
+        materialisierte Aktivität bietet für das Sammeln von Benutzer feedbacks innerhalb einer vorhandenen App.
         \n
-        Unlike other similar libraries, Maoni allows to capture a screenshot of the current activity,
-        which you may manipulate in your callbacks.
+        Im Gegensatz zu anderen ähnlichen Bibliotheken, Maoni erlaubt es einen Screenshot der aktuellen Aktivität
+        zu erfassen, welche Sie in Ihren Rückrufen manipulieren können.
         \n\n
-        Touch the Floating Action Button below to open the Maoni activity.
+        Tippen Sie auf den Floating Action Button unten, um die Maoni Aktivität zu öffnen.
         \n\n
-        Please navigate to http://github.com/rm3l/maoni for further instructions.
+        Bitte navigieren Sie zu http://github.com/rm3l/maoni für weitere Anweisungen.
     ]]></string>
   <string name="action_about">Über</string>
   <string name="default_email_addr">some.one@somewhe.re</string>
-  <string name="send_feedback_activity_title">Send Feedback</string>
+  <string name="send_feedback_activity_title">Feedback senden</string>
   <string name="send_feedback_activity_intro"><![CDATA[
-        Hey! Love or hate this app? We would love to hear from you.
+        Hey! Haben Sie die Anwendung geliebt oder nicht? Wir würden gerne geliebt von Ihnen hören.
         \n\n
-        Note: Almost everything in Maoni is customizable.
+        Hinweis: Fast alles in Maoni ist anpassbar.
     ]]></string>
-  <string name="feedback_content_hint">Please write your valuable feedback here.</string>
-  <string name="include_app_logs">Attach application logs</string>
-  <string name="include_app_screenshot">Attach screen capture</string>
-  <string name="touch_edit_screenshot">Touch to preview and annotate</string>
-  <string name="content_error_message">This is a custom error message, which you can have displayed to your users</string>
-  <string name="screenshot_hint">This is a custom message, which you can have displayed next to the screen capture to explain why it might be of great help.</string>
-  <string name="email_address">Email address</string>
-  <string name="an_extra_text_area">An extra text area</string>
-  <string name="edittext_hint_write_something_here">EditText hint. Write something here.</string>
-  <string name="an_extra_radiogroup">An extra RadioGroup</string>
+  <string name="feedback_content_hint">Bitte schreiben Sie Ihr wertvolles Feedback hier hin.</string>
+  <string name="include_app_logs">Anwendungslogs befestigen</string>
+  <string name="include_app_screenshot">Bildschirmaufnahme befestigen</string>
+  <string name="touch_edit_screenshot">Für Vorschau und Kommentar berühren</string>
+  <string name="content_error_message">Dies ist eine benutzerdefinierte Fehlernachricht, die Sie Ihren Benutzern anzeigen können</string>
+  <string name="screenshot_hint">Dies ist eine benutzerdefinierte Nachricht, die Sie neben der Bildschirmaufnahme angezeigt haben können, um zu erklären, warum dies eine große Hilfe sein könnte.</string>
+  <string name="email_address">E-Mail adresse</string>
+  <string name="an_extra_text_area">Ein extra Text Bereich</string>
+  <string name="edittext_hint_write_something_here">Texthinweis bearbeiten. Schreiben Sie etwas hier.</string>
+  <string name="an_extra_radiogroup">Eine extra Radiogruppe</string>
   <string name="rg_1">Wahl 1</string>
   <string name="rg_2">Wahl 2</string>
   <string name="rg_3">Wahl 3</string>
-  <string name="send_maoni_email">Send via email (maoni-email)</string>
-  <string name="send_maoni_github">Send as Github issue (maoni-github)</string>
-  <string name="send_maoni_jira">Send as JIRA issue (maoni-jira)</string>
-  <string name="send_maoni_slack">"Send to Slack (maoni-slack)"</string>
-  <string name="how_to_send_feedback">How would you like to send your feedback?</string>
-  <string name="action_settings">Settings</string>
+  <string name="send_maoni_email">Per E-Mail senden (manoi-email)</string>
+  <string name="send_maoni_github">Als Github ausgabe senden (maoni-github)</string>
+  <string name="send_maoni_jira">Als JIRA ausgabe senden (maoni-jira)</string>
+  <string name="send_maoni_slack">"Zu Slack senden (maoni-slack)"</string>
+  <string name="how_to_send_feedback">Wie würden Sie gerne Ihr feedback senden?</string>
+  <string name="action_settings">Einstellungen</string>
 </resources>

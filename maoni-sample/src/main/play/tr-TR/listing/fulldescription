@@ -1,26 +1,26 @@
-Maoni is a lightweight Open-Source library for integrating a way to collect user feedback from within Android applications, and increase your customer satisfaction.
+Maoni, Android uygulamalarından kullanıcı geri bildirimi toplayan ve müşteri memnuniyetini artırmak için bir yol sağlayan entegre bir Açık Kaynak kütüphanesidir.
 
-Built from the ground up with the Material Design principles in mind, it allows to capture a screenshot of the activity the user is currently viewing and attach it to the feedback.
+Material Design ilkeleri düşünülerek her yönüyle geliştirilmesi, kullanıcının görüntülediği aktivitenin bir ekran görüntüsünü yakalamasına ve geribildirimine eklemesine olanak tanır.
 
-Just provide callbacks implementations and you're good to go.
-Maoni will take care of collecting your users' feedback and call those implementations.
+Sadece geri arama uygulamalarını sağlayın ve başlayabilirsiniz.
+Maoni, kullanıcılarınızın geri bildirimlerini toplayacak ve bu uygulamaları arayacak.
 
-Below is a quick overview of the features included:
+Aşağıda bulunan özelliklerin hızlı bir özetini bulabilirsiniz:
 
-- Contextual information. Device and application information, if available.
- -- Device screen resolution, mobile data and GPS states, ...
+- Bağlamsal bilgi. Varsa, cihaz ve uygulama bilgisi.
+ - Cihaz ekranı çözünürlüğü, mobil veri ve GPS durumları ...
 
-- Screenshot and logs capture.
- -- Because receiving a feedback with contextual information is much much better for analysis, Maoni allows to take a screen capture of the calling activity, along with the application logs. Note that the inclusion of such screenshot and logs in the feedback object is opt-out, at the user's discretion.
- -- Touch to preview screenshot
- -- Ability for users of your app to highlight or blackout items in the screen capture. They may choose to highlight relevant items or blackout any sensitive information.
+- Ekran görüntüsü ve günlük yakalama.
+ - İçeriğe dayalı bilgilerle geribildirim almak analiz için çok daha iyi olduğundan Maoni, uygulama günlükleri ile birlikte çağrılan etkinliğin ekran görüntüsünü almaya izin verir. Bu tür ekran görüntüsünün ve günlüklerin geribildirim nesnesine dahil edilmesinin, kullanıcının takdirine bağlı olarak devre dışı bırakıldığına dikkat edin.
+ - Ekran görüntüsünü önizlemek için dokunun
+ - Uygulamanızın kullanıcıları için vurgulama veya yakalanmış ekran öğesini karartma sağlar. İlgili öğeleri vurgulamayı veya hassas bilgileri karartmayı seçebilirler.
 
-- Customization.
- -- Besides the default form fields, you are free to include an extra layout with additional views. And you always have access to the underlying view elements.
- -- Theme elements and styles can be adjusted.
+Özelleştirme.
+ - Varsayılan form alanlarının yanı sıra ek görünümler içeren ek bir düzen de dahil etmekte özgürsünüz. Ve öncelikli görünen elemanlara daima erişebilirsiniz.
+ - Tema öğeleri ve stilleri ayarlanabilir.
 
-- Callbacks.
- -- Form validation. You can provide your own if needed for example for your extra fields.
- -- Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier. So you just have limitless possibilities for an integration with any other systems.
+- Geri aramalar.
+ -- Form doğrulama. Fazladan alana ihtiyacınız olursa kendi alanınızı sağlayabilirsiniz.
+ -- Dinleyenler. Onaylandıktan sonra, Maoni daha önce sağladığınız geri çağrı uygulamalarını çağırır. Böylece başka sistemlerle entegrasyon için limitsiz olanaklara sahip olursunuz.
 
-Source Code: http://maoni.rm3l.org
+Kaynak Kodu: http://maoni.rm3l.org
