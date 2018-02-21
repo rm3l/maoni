@@ -34,12 +34,13 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   git clone --branch=master https://$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
 
   cd master
-  wget https://crowdin.com/downloads/crowdin-cli.jar
+  wget -q https://downloads.crowdin.com/cli/v2/crowdin-cli.zip
+  unzip -qj crowdin-cli.zip
   # Update sources
   java -jar crowdin-cli.jar upload sources
   # Download translations
   java -jar crowdin-cli.jar download
-  rm crowdin-cli.jar
+  rm crowdin* setup_crowdin.bat
 
   # import listing graphics
   for playLangPath in ./maoni-sample/src/main/play/*-*; do
