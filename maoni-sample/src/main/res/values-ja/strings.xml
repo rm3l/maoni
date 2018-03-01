@@ -22,46 +22,42 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Demo</string>
-  <string name="maoni_settings_activity_name">Maoni Demo Settings</string>
-  <string name="feedback">Feedback</string>
-  <string name="title_activity_maoni_sample_main">Maoni Demo</string>
+  <string name="maoni_app_name">Maoni デモ</string>
+  <string name="maoni_settings_activity_name">Maoni デモ設定</string>
+  <string name="feedback">フィードバック</string>
+  <string name="title_activity_maoni_sample_main">Maoni デモ</string>
   <string name="main_activity_text"><![CDATA[
-        This is a demo application for Maoni, a lightweight library which provides
-        a ready-to-use Material-ized activity for collecting user feedbacks from within an existing app.
-        \n
-        Unlike other similar libraries, Maoni allows to capture a screenshot of the current activity,
-        which you may manipulate in your callbacks.
-        \n\n
-        Touch the Floating Action Button below to open the Maoni activity.
-        \n\n
-        Please navigate to http://github.com/rm3l/maoni for further instructions.
-    ]]></string>
-  <string name="action_about">About</string>
+これは、既存アプリ内からユーザーのフィードバックを収集するために使用することができる、すぐに使えるマテリアルデザインのアクティビティを提供する軽量ライブラリ、Maoni のデモアプリケーションです。
+\n
+他の類似のライブラリとは異なり、Maoni は、現在のアクティビティのスクリーンショットをキャプチャすることが、コールバックで操作することができます。
+\n\n
+下のフローティング アクション ボタンをタッチすると、Maoni のアクティビティを開きます。
+\n\n
+詳細については http://github.com/rm3l/maoni をご覧ください。    ]]></string>
+  <string name="action_about">アプリついて</string>
   <string name="default_email_addr">some.one@somewhe.re</string>
-  <string name="send_feedback_activity_title">Send Feedback</string>
+  <string name="send_feedback_activity_title">フィードバックを送信</string>
   <string name="send_feedback_activity_intro"><![CDATA[
-        Hey! Love or hate this app? We would love to hear from you.
-        \n\n
-        Note: Almost everything in Maoni is customizable.
-    ]]></string>
-  <string name="feedback_content_hint">Please write your valuable feedback here.</string>
-  <string name="include_app_logs">Attach application logs</string>
-  <string name="include_app_screenshot">Attach screen capture</string>
-  <string name="touch_edit_screenshot">Touch to preview and annotate</string>
-  <string name="content_error_message">This is a custom error message, which you can have displayed to your users</string>
-  <string name="screenshot_hint">This is a custom message, which you can have displayed next to the screen capture to explain why it might be of great help.</string>
-  <string name="email_address">Email address</string>
-  <string name="an_extra_text_area">An extra text area</string>
-  <string name="edittext_hint_write_something_here">EditText hint. Write something here.</string>
-  <string name="an_extra_radiogroup">An extra RadioGroup</string>
+ねえ! このアプリは好き、嫌い? ぜひお聞かせください。
+\n\n
+注: Maoni は、ほぼすべてカスタマイズ可能です。    ]]></string>
+  <string name="feedback_content_hint">貴重なご意見をお聞かせください。</string>
+  <string name="include_app_logs">アプリケーションログを添付</string>
+  <string name="include_app_screenshot">画面のキャプチャを添付</string>
+  <string name="touch_edit_screenshot">タップすると、プレビューして、注釈を記入します</string>
+  <string name="content_error_message">これはユーザーに表示する、カスタム エラー メッセージです</string>
+  <string name="screenshot_hint">これは、画面キャプチャの横に表示して、理由を説明するために役立つと思われるカスタム メッセージです。</string>
+  <string name="email_address">メールアドレス</string>
+  <string name="an_extra_text_area">追加のテキストエリア</string>
+  <string name="edittext_hint_write_something_here">テキスト編集のヒント。ここに何かを書きます。</string>
+  <string name="an_extra_radiogroup">追加のラジオ グループ</string>
   <string name="rg_1">RG 1</string>
   <string name="rg_2">RG 2</string>
   <string name="rg_3">RG 3</string>
-  <string name="send_maoni_email">Send via email (maoni-email)</string>
-  <string name="send_maoni_github">Send as Github issue (maoni-github)</string>
-  <string name="send_maoni_jira">Send as JIRA issue (maoni-jira)</string>
-  <string name="send_maoni_slack">"Send to Slack (maoni-slack)"</string>
-  <string name="how_to_send_feedback">How would you like to send your feedback?</string>
-  <string name="action_settings">Settings</string>
+  <string name="send_maoni_email">メールで送信 (maoni メール)</string>
+  <string name="send_maoni_github">Github イシューとして送信 (maoni github)</string>
+  <string name="send_maoni_jira">JIRA イシューとして送信 (maoni jira)</string>
+  <string name="send_maoni_slack">"Slack に送信 (maoni slack)"</string>
+  <string name="how_to_send_feedback">あなたのフィードバックを送信しますか?</string>
+  <string name="action_settings">設定</string>
 </resources>
