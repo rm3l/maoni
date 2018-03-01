@@ -121,7 +121,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
 
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
@@ -142,7 +142,7 @@ android {
         }
         debug {
             testCoverageEnabled true
-            minifyEnabled false
+            minifyEnabled true
 
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
