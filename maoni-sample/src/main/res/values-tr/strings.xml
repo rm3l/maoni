@@ -24,7 +24,7 @@ SOFTWARE.
 <resources>
   <string name="maoni_app_name">Maoni Demo</string>
   <string name="maoni_settings_activity_name">Maoni Demo Ayarları</string>
-  <string name="feedback">Geri Bildirim</string>
+  <string name="feedback">Geri bildirim</string>
   <string name="title_activity_maoni_sample_main">Maoni Demo</string>
   <string name="main_activity_text"><![CDATA[
         Bu, mevcut bir uygulama içinden kullanıcı geri bildirimlerini toplamak için hazır kullanımlı
@@ -43,7 +43,7 @@ SOFTWARE.
   <string name="send_feedback_activity_intro"><![CDATA[
         Hey! Bu uygulamayı sevip sevmediğinizi sizden duymak isteriz.
         \n\n
-        Not: Maoni'deki neredeyse her şey özelleştirilebilir.    ]]></string>
+        Not: Maoni\'deki neredeyse her şey özelleştirilebilir.    ]]></string>
   <string name="feedback_content_hint">Lütfen değerli görüşlerinizi buraya yazın.</string>
   <string name="include_app_logs">Uygulama günlüklerini ekle</string>
   <string name="include_app_screenshot">Ekran yakalama ekle</string>

@@ -34,7 +34,7 @@ SOFTWARE.
   <string name="maoni_action_settings">Ayarlar</string>
   <string name="maoni_validate_must_not_be_blank">Boş bırakılamaz</string>
   <string name="maoni_header">Başlık</string>
-  <string name="maoni_screenshot_preview_internal_error">Internal Error. Lütfen daha sonra tekrar deneyiniz.</string>
+  <string name="maoni_screenshot_preview_internal_error">Dahili sunucu hatası. Lütfen daha sonra tekrar deneyiniz.</string>
   <string name="maoni_screenshot_preview">Önizleme</string>
   <string name="maoni_highlight">Vurgula</string>
   <string name="maoni_blackout">Karart</string>
