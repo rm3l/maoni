@@ -397,7 +397,7 @@ Make sure you have the Android SDK installed.
 
 Also make sure you have the appropriate Build Tools installed. You can install them via the Android's `sdkmanager`:
 ```bash
-sdkmanager "build-tools;25.0.2"
+sdkmanager "build-tools;27.0.3"
 ```
 
 Now you can build the project with the `Gradle Wrapper`:
