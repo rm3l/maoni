@@ -24,7 +24,7 @@ SOFTWARE.
 <resources>
   <string name="maoni_app_name">Demo de Maoni</string>
   <string name="maoni_settings_activity_name">Configuraciones del demo de Maoni</string>
-  <string name="feedback">Comentarios de retroalimentación</string>
+  <string name="feedback">Comentarios</string>
   <string name="title_activity_maoni_sample_main">Demo de Maoni</string>
   <string name="main_activity_text"><![CDATA[
 Esta es una aplicación demo para Maoni, una biblioteca liviana que proporciona 
