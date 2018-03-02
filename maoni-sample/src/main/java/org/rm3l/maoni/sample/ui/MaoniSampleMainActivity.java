@@ -100,25 +100,23 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
-            case R.id.action_settings:
-                startActivity(new Intent(this, MaoniSampleSettingsActivity.class));
-                break;
-            case R.id.action_about:
-                new LibsBuilder()
-                        //Pass the fields of your application to the lib so it can find all external lib information
-                        .withFields(R.string.class.getFields())
-                        .withActivityTitle(getString(R.string.action_about))
-                        //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
-                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                        //start the activity
-                        .start(this);
-                break;
-            default:
-                break;
+        final int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            onBackPressed();
+
+        } else if (itemId == R.id.action_settings) {
+            startActivity(new Intent(this, MaoniSampleSettingsActivity.class));
+
+        } else if (itemId == R.id.action_about) {
+            new LibsBuilder()
+                    //Pass the fields of your application to the lib so it can find all external lib information
+                    .withFields(R.string.class.getFields())
+                    .withActivityTitle(getString(R.string.action_about))
+                    //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                    //start the activity
+                    .start(this);
+
         }
         return super.onOptionsItemSelected(item);
     }

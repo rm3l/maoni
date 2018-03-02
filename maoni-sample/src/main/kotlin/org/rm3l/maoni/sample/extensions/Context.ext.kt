@@ -10,13 +10,11 @@ import org.rm3l.maoni.sample.BuildConfig
 import org.rm3l.maoni.sample.R
 import org.rm3l.maoni.sample.feedback.MaoniSampleCallbackHandler
 
-const val MY_FILE_PROVIDER_AUTHORITY = "${BuildConfig.APPLICATION_ID}.fileprovider"
-
 //Custom handler for Maoni, which does nothing more than calling any of the maoni-* available callbacks
 fun Context.getMaoniFeedbackHandler(): Handler = MaoniSampleCallbackHandler(this)
 
 fun Context.getMaoniFeedbackBuilder() =
-  Maoni.Builder(this, MY_FILE_PROVIDER_AUTHORITY)
+  Maoni.Builder(this, "${BuildConfig.APPLICATION_ID}.fileprovider")
       .withSharedPreferences("${this.packageName}_preferences")
       .withWindowTitle(getString(R.string.send_feedback_activity_title)) //Set to an empty string to clear it
       .withMessage(getString(R.string.send_feedback_activity_intro))
