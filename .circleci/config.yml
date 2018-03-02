@@ -50,7 +50,7 @@ jobs:
       
       - run:
           name: Run Tests
-          command: ./gradlew clean lint test jacocoTestReport --stacktrace
+          command: ./gradlew clean lint test --stacktrace
       
       - run:
           name: Assemble package
