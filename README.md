@@ -470,9 +470,9 @@ either by suggesting translations or by reporting an issue and/or submitting pul
 
 In no particular order:
 
-* @gitter-badger
-* @MariusVolkhart
-* @Kalabasa
+* [gitter-badger](https://github.com/gitter-badger)
+* [MariusVolkhart](https://github.com/MariusVolkhart)
+* [Kalabasa](https://github.com/Kalabasa)
 * [isacastillor](https://crowdin.com/profile/isacastillor)
 * [bobsthinking](https://crowdin.com/profile/bobsthinking)
 * [omersurer](https://crowdin.com/profile/omersurer)
