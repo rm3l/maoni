@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 

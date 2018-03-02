@@ -87,3 +87,11 @@ proguard/
 
 # Android Studio captures folder
 captures/
+
+infer-out
+/.gradletasknamecache
+/buck-out/
+/.buckd/
+.okbuck
+.buckconfig.local
+**/BUCK

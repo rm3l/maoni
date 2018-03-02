@@ -38,10 +38,13 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
+        classpath 'com.uber:okbuck:0.34.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+
+apply plugin: 'com.uber.okbuck'
 
 allprojects {
     repositories {
@@ -96,3 +99,32 @@ ext.getReleaseSigningInfo = {
 
 }
 
+subprojects { project ->
+    afterEvaluate {
+        if (project.plugins.hasPlugin("java")) {
+            addCommonConfigurationForJavaModules(project)
+        }
+//        else if (project.plugins.hasPlugin("com.android.application")
+//                || project.plugins.hasPlugin("com.android.library")) {
+//            addCommonConfigurationForAndroidModules(project)
+//        }
+
+        project.tasks.withType(Test) { Test task ->
+            task.jvmArgs << "-Djava.awt.headless=true"
+        }
+    }
+}
+
+static def addCommonConfigurationForJavaModules(Project project) {
+    project.sourceCompatibility = JavaVersion.VERSION_1_7
+    project.targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+okbuck {
+    lint {
+        disabled = true
+    }
+    buildToolVersion = "27.0.3"
+    target = "android-27"
+    buckProjects = project.subprojects
+}
