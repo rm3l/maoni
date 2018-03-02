@@ -187,234 +187,39 @@ public class Maoni {
     private final AtomicBoolean mUsed = new AtomicBoolean(false);
 
     /**
-     * Constructor
-     * @param fileProviderAuthority        the file provider authority.
-     *                                     If {@literal null}, file sharing will not be available
-     * @param maoniWorkingDir                the working directory for Maoni.
-     *                                       Will default to the caller activity cache directory if none was specified.
-     *                                       This is where screenshots are typically stored.
-     * @param windowTitle                  the feedback window title
-     * @param windowSubTitle                the feedback window sub-title
-     * @param windowTitleTextColor          the feedback window title text color
-     *                                      (use {@literal null} for the default)
-     * @param windowSubTitleTextColor       the feedback window sub-title text color
-     *                                      (use {@literal null} for the default)
-     * @param theme                        the theme to apply
-     * @param header                       the header image
-     * @param message                      the feedback form field error message to display to the user
-     * @param feedbackContentHint          the feedback form field hint message
-     * @param contentErrorMessage          the feedback form field error message to display to the user
-     * @param extraLayout                  the extra layout resource.
-     * @param includeLogsText              the text do display next to the "Include logs" checkbox
-     * @param includeScreenshotText        the text do display next to the "Include screenshot" checkbox
-     * @param touchToPreviewScreenshotText the "Touch to preview" text
-     * @param screenshotHint               the text to display to the user
+     * Default constructor: non-instantiable
      */
-    public Maoni(
-        @Nullable final Context context,
-        @Nullable String fileProviderAuthority,
-        @Nullable final File maoniWorkingDir,
-        @Nullable final CharSequence windowTitle,
-        @Nullable final CharSequence windowSubTitle,
-        @ColorRes @Nullable final Integer windowTitleTextColor,
-        @ColorRes @Nullable final Integer windowSubTitleTextColor,
-        @StyleRes @Nullable final Integer theme,
-        @DrawableRes @Nullable final Integer header,
-        @Nullable final CharSequence message,
-        @Nullable final CharSequence feedbackContentHint,
-        @Nullable final CharSequence contentErrorMessage,
-        @LayoutRes @Nullable final Integer extraLayout,
-        @Nullable final CharSequence includeLogsText,
-        @Nullable final CharSequence includeScreenshotText,
-        @Nullable final CharSequence touchToPreviewScreenshotText,
-        @Nullable final CharSequence screenshotHint) {
-        this(context, fileProviderAuthority, maoniWorkingDir, windowTitle,
-            windowSubTitle, windowTitleTextColor, windowSubTitleTextColor,
-            theme, header, message, feedbackContentHint, contentErrorMessage,
-            extraLayout, includeLogsText, includeScreenshotText, touchToPreviewScreenshotText,
-            screenshotHint, false);
+    @SuppressWarnings("unused")
+    private Maoni() {
+        throw new UnsupportedOperationException("Non instantiable this way. Use Maoni.Builder builder class instead.");
     }
 
     /**
      * Constructor
-     * @param fileProviderAuthority        the file provider authority.
-     *                                     If {@literal null}, file sharing will not be available
-     * @param maoniWorkingDir                the working directory for Maoni.
-     *                                       Will default to the caller activity cache directory if none was specified.
-     *                                       This is where screenshots are typically stored.
-     * @param windowTitle                  the feedback window title
-     * @param windowSubTitle                the feedback window sub-title
-     * @param windowTitleTextColor          the feedback window title text color
-     *                                      (use {@literal null} for the default)
-     * @param windowSubTitleTextColor       the feedback window sub-title text color
-     *                                      (use {@literal null} for the default)
-     * @param theme                        the theme to apply
-     * @param header                       the header image
-     * @param message                      the feedback form field error message to display to the user
-     * @param feedbackContentHint          the feedback form field hint message
-     * @param contentErrorMessage          the feedback form field error message to display to the user
-     * @param extraLayout                  the extra layout resource.
-     * @param includeLogsText              the text do display next to the "Include logs" checkbox
-     * @param includeScreenshotText        the text do display next to the "Include screenshot" checkbox
-     * @param touchToPreviewScreenshotText the "Touch to preview" text
-     * @param screenshotHint               the text to display to the user
-     * @param showKeyboardOnStart          whether to show the keyboard on start or not. Default is {@code false}
+     * @param builder the builder instance to use for instantiated a Maoni instance
      */
-    public Maoni(
-            @Nullable final Context context,
-            @Nullable String fileProviderAuthority,
-            @Nullable final File maoniWorkingDir,
-            @Nullable final CharSequence windowTitle,
-            @Nullable final CharSequence windowSubTitle,
-            @ColorRes @Nullable final Integer windowTitleTextColor,
-            @ColorRes @Nullable final Integer windowSubTitleTextColor,
-            @StyleRes @Nullable final Integer theme,
-            @DrawableRes @Nullable final Integer header,
-            @Nullable final CharSequence message,
-            @Nullable final CharSequence feedbackContentHint,
-            @Nullable final CharSequence contentErrorMessage,
-            @LayoutRes @Nullable final Integer extraLayout,
-            @Nullable final CharSequence includeLogsText,
-            @Nullable final CharSequence includeScreenshotText,
-            @Nullable final CharSequence touchToPreviewScreenshotText,
-            @Nullable final CharSequence screenshotHint,
-            final boolean showKeyboardOnStart) {
-        this(context, fileProviderAuthority, maoniWorkingDir, windowTitle,
-            windowSubTitle, windowTitleTextColor, windowSubTitleTextColor,
-            theme, header, message, feedbackContentHint, contentErrorMessage,
-            extraLayout, includeLogsText, includeScreenshotText, touchToPreviewScreenshotText,
-            screenshotHint, showKeyboardOnStart, true, true);
-    }
-
-    /**
-     * Constructor
-     * @param fileProviderAuthority        the file provider authority.
-     *                                     If {@literal null}, file sharing will not be available
-     * @param maoniWorkingDir                the working directory for Maoni.
-     *                                       Will default to the caller activity cache directory if none was specified.
-     *                                       This is where screenshots are typically stored.
-     * @param windowTitle                  the feedback window title
-     * @param windowSubTitle                the feedback window sub-title
-     * @param windowTitleTextColor          the feedback window title text color
-     *                                      (use {@literal null} for the default)
-     * @param windowSubTitleTextColor       the feedback window sub-title text color
-     *                                      (use {@literal null} for the default)
-     * @param theme                        the theme to apply
-     * @param header                       the header image
-     * @param message                      the feedback form field error message to display to the user
-     * @param feedbackContentHint          the feedback form field hint message
-     * @param contentErrorMessage          the feedback form field error message to display to the user
-     * @param extraLayout                  the extra layout resource.
-     * @param includeLogsText              the text do display next to the "Include logs" checkbox
-     * @param includeScreenshotText        the text do display next to the "Include screenshot" checkbox
-     * @param touchToPreviewScreenshotText the "Touch to preview" text
-     * @param screenshotHint               the text to display to the user
-     * @param showKeyboardOnStart          whether to show the keyboard on start or not. Default is {@code false}
-     * @param screenCapturingFeatureEnabled whether to enable screen capturing or not. Default is {@code true}
-     * @param logsCapturingFeatureEnabled whether to enable logs capturing or not. Default is {@code true}
-     */
-    public Maoni(
-        @Nullable final Context context,
-        @Nullable String fileProviderAuthority,
-        @Nullable final File maoniWorkingDir,
-        @Nullable final CharSequence windowTitle,
-        @Nullable final CharSequence windowSubTitle,
-        @ColorRes @Nullable final Integer windowTitleTextColor,
-        @ColorRes @Nullable final Integer windowSubTitleTextColor,
-        @StyleRes @Nullable final Integer theme,
-        @DrawableRes @Nullable final Integer header,
-        @Nullable final CharSequence message,
-        @Nullable final CharSequence feedbackContentHint,
-        @Nullable final CharSequence contentErrorMessage,
-        @LayoutRes @Nullable final Integer extraLayout,
-        @Nullable final CharSequence includeLogsText,
-        @Nullable final CharSequence includeScreenshotText,
-        @Nullable final CharSequence touchToPreviewScreenshotText,
-        @Nullable final CharSequence screenshotHint,
-        final boolean showKeyboardOnStart,
-        final boolean screenCapturingFeatureEnabled,
-        final boolean logsCapturingFeatureEnabled) {
-
-        this(context, fileProviderAuthority, maoniWorkingDir, windowTitle,
-                windowSubTitle, windowTitleTextColor, windowSubTitleTextColor,
-                theme, header, message, feedbackContentHint, contentErrorMessage,
-                extraLayout, includeLogsText, includeScreenshotText, touchToPreviewScreenshotText,
-                screenshotHint, showKeyboardOnStart,
-                true, true, null);
-    }
-
-    /**
-     * Constructor
-     * @param fileProviderAuthority        the file provider authority.
-     *                                     If {@literal null}, file sharing will not be available
-     * @param maoniWorkingDir                the working directory for Maoni.
-     *                                       Will default to the caller activity cache directory if none was specified.
-     *                                       This is where screenshots are typically stored.
-     * @param windowTitle                  the feedback window title
-     * @param windowSubTitle                the feedback window sub-title
-     * @param windowTitleTextColor          the feedback window title text color
-     *                                      (use {@literal null} for the default)
-     * @param windowSubTitleTextColor       the feedback window sub-title text color
-     *                                      (use {@literal null} for the default)
-     * @param theme                        the theme to apply
-     * @param header                       the header image
-     * @param message                      the feedback form field error message to display to the user
-     * @param feedbackContentHint          the feedback form field hint message
-     * @param contentErrorMessage          the feedback form field error message to display to the user
-     * @param extraLayout                  the extra layout resource.
-     * @param includeLogsText              the text do display next to the "Include logs" checkbox
-     * @param includeScreenshotText        the text do display next to the "Include screenshot" checkbox
-     * @param touchToPreviewScreenshotText the "Touch to preview" text
-     * @param screenshotHint               the text to display to the user
-     * @param showKeyboardOnStart          whether to show the keyboard on start or not. Default is {@code false}
-     * @param screenCapturingFeatureEnabled whether to enable screen capturing or not. Default is {@code true}
-     * @param logsCapturingFeatureEnabled whether to enable logs capturing or not. Default is {@code true}
-     * @param sharedPreferencesContentMap the shared preferences loaded as a map
-     */
-    public Maoni(
-            @Nullable final Context context,
-            @Nullable String fileProviderAuthority,
-            @Nullable final File maoniWorkingDir,
-            @Nullable final CharSequence windowTitle,
-            @Nullable final CharSequence windowSubTitle,
-            @ColorRes @Nullable final Integer windowTitleTextColor,
-            @ColorRes @Nullable final Integer windowSubTitleTextColor,
-            @StyleRes @Nullable final Integer theme,
-            @DrawableRes @Nullable final Integer header,
-            @Nullable final CharSequence message,
-            @Nullable final CharSequence feedbackContentHint,
-            @Nullable final CharSequence contentErrorMessage,
-            @LayoutRes @Nullable final Integer extraLayout,
-            @Nullable final CharSequence includeLogsText,
-            @Nullable final CharSequence includeScreenshotText,
-            @Nullable final CharSequence touchToPreviewScreenshotText,
-            @Nullable final CharSequence screenshotHint,
-            final boolean showKeyboardOnStart,
-            final boolean screenCapturingFeatureEnabled,
-            final boolean logsCapturingFeatureEnabled,
-            @Nullable final HashMap<String, Object> sharedPreferencesContentMap) {
-
-        this.context = context;
-        this.sharedPreferencesContentMap = sharedPreferencesContentMap;
-        this.fileProviderAuthority = fileProviderAuthority;
-        this.windowSubTitle = windowSubTitle;
-        this.windowTitleTextColor = windowTitleTextColor;
-        this.windowSubTitleTextColor = windowSubTitleTextColor;
-        this.theme = theme;
-        this.windowTitle = windowTitle;
-        this.message = message;
-        this.contentErrorMessage = contentErrorMessage;
-        this.feedbackContentHint = feedbackContentHint;
-        this.screenshotHint = screenshotHint;
-        this.header = header;
-        this.includeLogsText = includeLogsText;
-        this.includeScreenshotText = includeScreenshotText;
-        this.touchToPreviewScreenshotText = touchToPreviewScreenshotText;
-        this.extraLayout = extraLayout;
-        this.maoniWorkingDir = maoniWorkingDir;
-        this.showKeyboardOnStart = showKeyboardOnStart;
-        this.screenCapturingFeatureEnabled = screenCapturingFeatureEnabled;
-        this.logsCapturingFeatureEnabled = logsCapturingFeatureEnabled;
+    private Maoni(final Builder builder) {
+        this.context = builder.context;
+        this.sharedPreferencesContentMap = builder.sharedPreferences;
+        this.fileProviderAuthority = builder.fileProviderAuthority;
+        this.windowSubTitle = builder.windowSubTitle;
+        this.windowTitleTextColor = builder.windowTitleTextColor;
+        this.windowSubTitleTextColor = builder.windowSubTitleTextColor;
+        this.theme = builder.theme;
+        this.windowTitle = builder.windowTitle;
+        this.message = builder.message;
+        this.contentErrorMessage = builder.contentErrorMessage;
+        this.feedbackContentHint = builder.feedbackContentHint;
+        this.screenshotHint = builder.screenshotHint;
+        this.header = builder.header;
+        this.includeLogsText = builder.includeLogsText;
+        this.includeScreenshotText = builder.includeScreenshotText;
+        this.touchToPreviewScreenshotText = builder.touchToPreviewScreenshotText;
+        this.extraLayout = builder.extraLayout;
+        this.maoniWorkingDir = builder.maoniWorkingDir;
+        this.showKeyboardOnStart = builder.showKeyboardOnStart;
+        this.screenCapturingFeatureEnabled = builder.screenCapturingFeatureEnabled;
+        this.logsCapturingFeatureEnabled = builder.logsCapturingFeatureEnabled;
     }
 
     /**
@@ -658,19 +463,9 @@ public class Maoni {
             this.context = context;
         }
 
-        @Nullable
-        public File getMaoniWorkingDir() {
-            return maoniWorkingDir;
-        }
-
         public Builder withMaoniWorkingDir(@Nullable File maoniWorkingDir) {
             this.maoniWorkingDir = maoniWorkingDir;
             return this;
-        }
-
-        @Nullable
-        public Integer getTheme() {
-            return theme;
         }
 
         public Builder withTheme(@StyleRes @Nullable Integer theme) {
@@ -678,19 +473,9 @@ public class Maoni {
             return this;
         }
 
-        @Nullable
-        public CharSequence getWindowTitle() {
-            return windowTitle;
-        }
-
         public Builder withWindowTitle(@Nullable CharSequence windowTitle) {
             this.windowTitle = windowTitle;
             return this;
-        }
-
-        @Nullable
-        public CharSequence getWindowSubTitle() {
-            return windowSubTitle;
         }
 
         public Builder withWindowSubTitle(@Nullable CharSequence windowSubTitle) {
@@ -698,19 +483,9 @@ public class Maoni {
             return this;
         }
 
-        @Nullable
-        public Integer getWindowTitleTextColor() {
-            return windowTitleTextColor;
-        }
-
         public Builder withWindowTitleTextColor(@ColorRes @Nullable Integer windowTitleTextColor) {
             this.windowTitleTextColor = windowTitleTextColor;
             return this;
-        }
-
-        @Nullable
-        public Integer getWindowSubTitleTextColor() {
-            return windowSubTitleTextColor;
         }
 
         public Builder withWindowSubTitleTextColor(@ColorRes @Nullable Integer windowSubTitleTextColor) {
@@ -718,19 +493,9 @@ public class Maoni {
             return this;
         }
 
-        @Nullable
-        public Integer getExtraLayout() {
-            return extraLayout;
-        }
-
         public Builder withExtraLayout(@LayoutRes @Nullable Integer extraLayout) {
             this.extraLayout = extraLayout;
             return this;
-        }
-
-        @Nullable
-        public CharSequence getFeedbackContentHint() {
-            return feedbackContentHint;
         }
 
         public Builder withFeedbackContentHint(@Nullable CharSequence feedbackContentHint) {
@@ -738,19 +503,9 @@ public class Maoni {
             return this;
         }
 
-        @Nullable
-        public CharSequence getIncludeLogText() {
-            return includeLogsText;
-        }
-
         public Builder withIncludeLogsText(@Nullable CharSequence includeLogsText) {
             this.includeLogsText = includeLogsText;
             return this;
-        }
-
-        @Nullable
-        public CharSequence getIncludeScreenshotText() {
-            return includeScreenshotText;
         }
 
         public Builder withIncludeScreenshotText(@Nullable CharSequence includeScreenshotText) {
@@ -758,7 +513,6 @@ public class Maoni {
             return this;
         }
 
-        @Nullable
         public CharSequence getTouchToPreviewScreenshotText() {
             return touchToPreviewScreenshotText;
         }
@@ -768,19 +522,9 @@ public class Maoni {
             return this;
         }
 
-        @Nullable
-        public CharSequence getMessage() {
-            return message;
-        }
-
         public Builder withMessage(@Nullable CharSequence message) {
             this.message = message;
             return this;
-        }
-
-        @Nullable
-        public CharSequence getContentErrorMessage() {
-            return contentErrorMessage;
         }
 
         public Builder withContentErrorMessage(@Nullable CharSequence contentErrorMessage) {
@@ -788,19 +532,9 @@ public class Maoni {
             return this;
         }
 
-        @DrawableRes
-        @Nullable
-        public Integer getHeader() {
-            return header;
-        }
-
         public Builder withHeader(@Nullable Integer header) {
             this.header = header;
             return this;
-        }
-
-        public boolean isShowKeyboardOnStart() {
-            return showKeyboardOnStart;
         }
 
         public Builder showKeyboardOnStart(final boolean showKeyboardOnStart) {
@@ -873,11 +607,6 @@ public class Maoni {
                 this.disableCapturingFeature();
             }
             return this;
-        }
-
-        @Nullable
-        public CharSequence getScreenshotHint() {
-            return screenshotHint;
         }
 
         public Builder withScreenshotHint(@Nullable CharSequence screenshotHint) {
@@ -993,28 +722,7 @@ public class Maoni {
         }
 
         public Maoni build() {
-            return new Maoni(
-                    context,
-                    fileProviderAuthority,
-                    maoniWorkingDir,
-                    windowTitle,
-                    windowSubTitle,
-                    windowTitleTextColor,
-                    windowSubTitleTextColor,
-                    theme,
-                    header,
-                    message,
-                    feedbackContentHint,
-                    contentErrorMessage,
-                    extraLayout,
-                    includeLogsText,
-                    includeScreenshotText,
-                    touchToPreviewScreenshotText,
-                    screenshotHint,
-                    showKeyboardOnStart,
-                    screenCapturingFeatureEnabled,
-                    logsCapturingFeatureEnabled,
-                    sharedPreferences);
+            return new Maoni(this);
         }
     }
 
@@ -1091,6 +799,7 @@ public class Maoni {
             return this;
         }
 
+        @SuppressWarnings("UnusedReturnValue")
         public CallbacksConfiguration reset() {
             return this.setUiListener(null)
                     .setListener(null)
