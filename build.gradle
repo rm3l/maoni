@@ -34,7 +34,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.android.tools.build:gradle:3.2.0-alpha04'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
+//        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'

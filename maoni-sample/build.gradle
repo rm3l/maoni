@@ -22,7 +22,7 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'jacoco-android'
+//apply plugin: 'jacoco-android'
 apply plugin: 'com.github.triplet.play'
 
 Properties localProperties = new Properties()
@@ -121,7 +121,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
 
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
@@ -142,7 +142,7 @@ android {
         }
         debug {
             testCoverageEnabled true
-            minifyEnabled true
+            minifyEnabled false
 
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
@@ -180,6 +180,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko:0.10.4"
 
     implementation project(":maoni")
+    implementation project(":maoni-common")
     implementation ('org.rm3l:maoni-email:3.0.0-1') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
@@ -201,6 +202,7 @@ dependencies {
     }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:cardview-v7:27.1.0'
     implementation 'com.facebook.stetho:stetho:1.5.0'
