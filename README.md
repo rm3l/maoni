@@ -18,7 +18,7 @@
 
 - [Motivations](#motivations)
 - [Sample App](#sample-app)
-- [Screenshots](#screenshots)
+- [Preview](#preview)
 - [Getting started](#getting-started)
   - [Putting it together](#putting-it-together)
     - [Available callbacks](#available-callbacks)
@@ -35,6 +35,7 @@
 - [In use in the following apps](#in-use-in-the-following-apps)
 - [Credits](#credits)
 - [Developed by](#developed-by)
+- [Contributors](#contributors)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -460,6 +461,25 @@ You can write your project in any JVM language of your choice (e.g., [Kotlin](ht
   * [rm3l.org](https://rm3l.org) - &lt;apps+maoni@rm3l.org&gt; - [@rm3l](https://twitter.com/rm3l)
   * [paypal.me/rm3l](https://paypal.me/rm3l)
   * [coinbase.com/rm3l](https://www.coinbase.com/rm3l)
+
+
+## Contributors
+
+Thanks to the following people who help(ed) improve Maoni, 
+either by suggesting translations or by reporting an issue and/or submitting pull requests.
+
+In no particular order:
+
+* @gitter-badger
+* @MariusVolkhart
+* @Kalabasa
+* [isacastillor](https://crowdin.com/profile/isacastillor)
+* [bobsthinking](https://crowdin.com/profile/bobsthinking)
+* [omersurer](https://crowdin.com/profile/omersurer)
+* [ihtiht](https://crowdin.com/profile/ihtiht)
+* [naofum](https://crowdin.com/profile/naofum)
+* [fuzeh](https://crowdin.com/profile/sebastianbacia)
+* [utopian.io/@kedi](https://crowdin.com/profile/Apsimati)
 
 
 ## License
