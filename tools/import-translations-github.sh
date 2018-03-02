@@ -40,7 +40,7 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   java -jar crowdin-cli.jar upload sources
   # Download translations
   java -jar crowdin-cli.jar download
-  rm crowdin* setup_crowdin.bat
+  rm -rf crowdin.bat crowdin-cli.jar crowdin-cli.zip crowdin.sh setup_crowdin.bat
 
   # import listing graphics
   for playLangPath in ./maoni-sample/src/main/play/*-*; do
