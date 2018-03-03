@@ -50,7 +50,7 @@ targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
 
 group = 'org.rm3l'
-version = '3.0.0-1'
+version = '3.1.0-maoni_6.0.0'
 
 dependencies {
     implementation 'org.rm3l:maoni-common:6.0.0'
@@ -107,10 +107,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '3.0.0-1'
+            name = '3.1.0-maoni_6.0.0'
             desc = 'Maoni Android Library - Email Handler'
             released = new Date()
-            vcsTag = '3.0.0-1'
+            vcsTag = '3.1.0-maoni_6.0.0'
         }
 
         publicDownloadNumbers = true
