@@ -46,7 +46,7 @@ before_script:
 
 script:
     - echo "Travis branch is $TRAVIS_BRANCH, and is in pull request $TRAVIS_PULL_REQUEST"
-    - ./gradlew clean assembleDebug --stacktrace
+    - ./buckw build maoni-sampleDebug
 
 notifications:
   email:
@@ -63,3 +63,5 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
+    - buck-out
+    - .okbuck
