@@ -46,7 +46,7 @@ before_script:
 
 script:
     - echo "Travis branch is $TRAVIS_BRANCH, and is in pull request $TRAVIS_PULL_REQUEST"
-    - ./gradlew :buckWrapper
+#    - ./gradlew :buckWrapper
     - bash ./buckw build maoni-sampleDebug
 
 notifications:
