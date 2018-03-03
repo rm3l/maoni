@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/maoni-github.iml" filepath="$PROJECT_DIR$/maoni-github.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-github_main.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-github_main.iml" group="maoni-github" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-github_test.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-github_test.iml" group="maoni-github" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-github.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-github.iml" />
     </modules>
   </component>
 </project>
