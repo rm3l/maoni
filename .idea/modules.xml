@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-jira.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-jira.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-jira_main.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-jira_main.iml" group="maoni-jira" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maoni-jira_test.iml" filepath="$PROJECT_DIR$/.idea/modules/maoni-jira_test.iml" group="maoni-jira" />
     </modules>
   </component>
 </project>
