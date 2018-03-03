@@ -36,21 +36,8 @@ android:
    - tools
    - tools
 
-     #android:
-     #components:
-     #- platform-tools
-     #- tools
-     #- build-tools-25.0.3
-     #- android-25
-     #- extra-android-support
-     #- extra-google-google_play_services
-     #- extra-android-m2repository
-     #- extra-google-m2repository
-     #licenses:
-     #- '.+'
-
 before_script:
-    - ${ANDROID_HOME}tools/bin/sdkmanager --channel=3 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "extras;google;m2repository"
+    - yes | ${ANDROID_HOME}tools/bin/sdkmanager --channel=3 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "extras;google;m2repository"
     - mkdir -p ${HOME}/.droid
     - echo "keystore=${KEYSTORE}" >> ${HOME}/.droid/maoni-keystore.properties
     - echo "storePassword=${STORE_PASSWORD}" >> ${HOME}/.droid/maoni-keystore.properties
@@ -76,14 +63,3 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
-
-# This is now done with CircleCI, which is faster
-# after_success:
-#      - chmod +x ./tools/*.sh
-#      - bash <(curl -s https://codecov.io/bash)
-#      - ./tools/update-github-pages.sh
-
-# after_script:
-#      - chmod +x ./tools/*.sh
-#      - ./tools/import-translations-github.sh
-
