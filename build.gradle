@@ -67,6 +67,10 @@ ext.getPlayStoreConfig = {
   return file(homePath.toString() + "/.droid/PlayStore.keys.json")
 }
 
+ext.getDebugSigningConfig = {
+    return ['androiddebugkey', new File("${rootDir}/debug.keystore"), 'android', 'android']
+}
+
 ext.getReleaseSigningInfo = {
     android ->
         def storeFile = null

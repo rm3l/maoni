@@ -60,6 +60,9 @@ android {
     }
 
     signingConfigs {
+        debug {
+            (keyAlias, storeFile, storePassword, keyPassword) = rootProject.getDebugSigningConfig()
+        }
         release {
 
             def (store_file, store_password, key_alias, key_password) = rootProject.getReleaseSigningInfo(android)
