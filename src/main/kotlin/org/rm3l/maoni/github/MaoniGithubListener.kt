@@ -39,7 +39,7 @@ const val USER_AGENT = "maoni-github (v2.4.2-rc1)"
 const val APPLICATION_JSON = "application/json"
 const val TITLE_MAX_LINES = 50
 
-open class MaoniGithubListener(
+open class MaoniGithubListener @JvmOverloads constructor(
         val context: Context,
         val githubUsername: String,
         val githubPersonalAccessToken: String,
