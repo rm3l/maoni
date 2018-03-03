@@ -161,6 +161,7 @@ android {
             buildConfigField "String", "SLACK_EMOJI_ICON", "\"${slackEmojiIcon}\""
 
             zipAlignEnabled true
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -209,10 +210,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:cardview-v7:27.1.0'
     implementation 'com.facebook.stetho:stetho:1.5.0'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    implementation('com.mikepenz:aboutlibraries:6.0.2@aar') {
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    implementation('com.mikepenz:aboutlibraries:6.0.6@aar') {
         transitive = true
     }
 }
@@ -220,7 +220,7 @@ dependencies {
 play {
     // ...
     track = 'beta'
-    untrackOld = true // will untrack 'alpha' while upload to 'beta'
+    untrackOld = true // will un-track 'alpha' while upload to 'beta'
 
     uploadImages = false
     errorOnSizeLimit = false

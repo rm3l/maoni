@@ -32,16 +32,6 @@ version = '5.0.0'
 
 final homePath = System.properties['user.home']
 
-///*
-// * This is to mark some artifacts (such as Android's) as provided
-// * so that we don't get dependency conflicts
-// */
-//configurations {
-//    provided
-//    compile.extendsFrom provided
-//    implementation.extendsFrom provided
-//}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly ('com.google.android:android:4.1.1.4') {
