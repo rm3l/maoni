@@ -56,7 +56,7 @@ targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
 
 group = 'org.rm3l'
-version = '0.1.4'
+version = '1.0.1-maoni_6.0.0'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -117,10 +117,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '0.1.4'
+            name = '1.0.1-maoni_6.0.0'
             desc = 'Maoni Android Library - Slack Handler'
             released = new Date()
-            vcsTag = '0.1.4'
+            vcsTag = '1.0.1-maoni_6.0.0'
         }
 
         publicDownloadNumbers = true
