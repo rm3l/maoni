@@ -43,7 +43,7 @@ const val APPLICATION_JSON = "application/json"
 const val ISSUE_SUMMARY_MAX_LINES = 50
 
 @Suppress("unused")
-open class MaoniJiraListener(
+open class MaoniJiraListener @JvmOverloads constructor(
         val context: Context,
         val debug: Boolean = false,
 
