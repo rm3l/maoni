@@ -56,7 +56,7 @@ const val APPLICATION_JSON = "application/json"
  * @property successToastMessage the message to toast if the operation succeeded
  * @property failureToastMessage the message to toast in case of failure
  */
-open class MaoniSlackListener(
+open class MaoniSlackListener @JvmOverloads constructor(
         val context: Context,
         val webhookUrl: String,
         val debug: Boolean = false,
