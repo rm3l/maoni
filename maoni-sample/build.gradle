@@ -185,7 +185,7 @@ dependencies {
 
     implementation project(":maoni")
     implementation project(":maoni-common")
-    implementation ('org.rm3l:maoni-email:3.0.0-1') {
+    implementation ('org.rm3l:maoni-email:3.1.0-maoni_6.0.0') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
         exclude group: 'org.jetbrains.anko'
