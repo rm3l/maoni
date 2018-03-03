@@ -62,7 +62,7 @@ dependencies {
     implementation 'me.panavtec:drawableview:0.6.0'
 
     //Include maoni-email as the default listener
-    implementation 'org.rm3l:maoni-email:3.0.0-1'
+    implementation 'org.rm3l:maoni-email:3.1.0-maoni_6.0.0'
 }
 
 task generateSourcesJar(type: Jar) {
