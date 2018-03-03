@@ -190,17 +190,17 @@ dependencies {
         exclude group: 'org.rm3l', module: 'maoni-common'
         exclude group: 'org.jetbrains.anko'
     }
-    implementation ('org.rm3l:maoni-github:2.4.2-rc1') {
+    implementation ('org.rm3l:maoni-github:2.5.0-maoni_6.0.0') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
         exclude group: 'org.jetbrains.anko'
     }
-    implementation ('org.rm3l:maoni-jira:2.4.2-rc4') {
+    implementation ('org.rm3l:maoni-jira:2.5.0-maoni_6.0.0') {
         //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
         exclude group: 'org.rm3l', module: 'maoni-common'
         exclude group: 'org.jetbrains.anko'
     }
-    implementation ('org.rm3l:maoni-slack:0.1.4') {
+    implementation ('org.rm3l:maoni-slack:1.0.1-maoni_6.0.0') {
         exclude group: 'org.rm3l', module: 'maoni-common'
         exclude group: 'org.jetbrains.anko'
     }
