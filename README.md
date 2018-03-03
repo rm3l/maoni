@@ -44,7 +44,7 @@ Then grab `maoni-doorbell` via Gradle, by adding this to your `build.gradle`:
     //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
     //   transitive = true;
     //}
-    compile 'org.rm3l:maoni-doorbell:2.4.0'
+    compile 'org.rm3l:maoni-doorbell:2.5.0-maoni_6.0.0'
   }
 ```
 
