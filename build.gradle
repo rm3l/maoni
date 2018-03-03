@@ -73,7 +73,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    compile 'com.github.jkcclemens:khttp:0.1.0'
+    compile 'khttp:khttp:0.1.0'
     compile 'org.jetbrains.anko:anko-sdk15:0.9.1'
 }
 
