@@ -127,7 +127,7 @@ public class DeviceInfo {
 
     public final String language = Locale.getDefault().getDisplayName();
 
-    public final String openGlVersion = GLES10.glGetString(GLES10.GL_VERSION);
+    public final String openGlVersion;
 
     /*
      * ---
@@ -173,27 +173,28 @@ public class DeviceInfo {
                 Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE);
 
         SupplicantState supplicantState = null;
+        String openGlVersion = null;
         try {
-            final WifiManager wifiManager = (WifiManager)
-                activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            @SuppressWarnings("MissingPermission")
-            final WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            final WifiManager wifiManager =
+                    (WifiManager) activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            @SuppressWarnings("MissingPermission") final WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             supplicantState = wifiInfo.getSupplicantState();
-        } catch (Exception e) {
+            openGlVersion = GLES10.glGetString(GLES10.GL_VERSION);
+        } catch (Throwable t) {
             //No worries
         }
         this.supplicantState = supplicantState;
+        this.openGlVersion = openGlVersion;
 
         final ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         Boolean mobileDataEnabled = null;
         try {
             final Class cmClass = Class.forName(cm.getClass().getName());
-            @SuppressWarnings("unchecked")
-            final Method method = cmClass.getDeclaredMethod(GET_MOBILE_DATA_ENABLED);
+            @SuppressWarnings("unchecked") final Method method = cmClass.getDeclaredMethod(GET_MOBILE_DATA_ENABLED);
             method.setAccessible(true);
             mobileDataEnabled = (Boolean) method.invoke(cm);
-        } catch (Exception e) {
+        } catch (Throwable t) {
             // Private API access - no worries
         }
         this.mobileDataEnabled = mobileDataEnabled;
@@ -203,7 +204,7 @@ public class DeviceInfo {
             final LocationManager manager =
                     (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
             gpsEnabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception e) {
+        } catch (Throwable t) {
             //No worries
         }
         this.gpsEnabled = gpsEnabled;
@@ -301,7 +302,8 @@ public class DeviceInfo {
      */
     private static class DeviceInfoSortedMap extends TreeMap<String, Object> {
 
-        @Override public Object put(String key, Object value) {
+        @Override
+        public Object put(String key, Object value) {
             if (value != null) {
                 return super.put(key, value);
             }

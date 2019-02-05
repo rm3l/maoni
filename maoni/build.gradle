@@ -56,12 +56,12 @@ version = VERSION_NAME
 final homePath = System.properties['user.home']
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":maoni-common")
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(":maoni-common")
     testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'me.panavtec:drawableview:0.6.0'
+    api 'androidx.appcompat:appcompat:1.0.2'
+    api 'com.google.android.material:material:1.0.0'
+    api 'me.panavtec:drawableview:0.6.0'
 
     // Include maoni-email as the default listener
     implementation 'org.rm3l:maoni-email:3.1.0-maoni_6.0.0'
@@ -107,7 +107,7 @@ bintray {
     }
 
     publish = true //If version should be auto published after an upload
-    
+
     pkg {
         repo = 'maven'
         name = 'org.rm3l:maoni'
@@ -118,7 +118,7 @@ bintray {
             name = VERSION_NAME
             vcsTag = VERSION_NAME
             desc = 'Maoni Android Library'
-            released  = new Date()
+            released = new Date()
         }
 
         publicDownloadNumbers = true
