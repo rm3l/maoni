@@ -45,8 +45,8 @@ apply plugin: 'java'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-targetCompatibility = '1.7'
-sourceCompatibility = '1.7'
+targetCompatibility = '1.8'
+sourceCompatibility = '1.8'
 
 group = 'org.rm3l'
 version = '2.5.0-maoni_6.0.0'
