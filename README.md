@@ -12,8 +12,9 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Getting started](#getting-started)
-- [Contribute and Improve maoni-github!](#contribute-and-improve-maoni-github)
 - [Caveats](#caveats)
+- [Contribute and Improve maoni-github!](#contribute-and-improve-maoni-github)
+  - [Publishing a new release](#publishing-a-new-release)
 - [Developed by](#developed-by)
 - [Credits](#credits)
 - [License](#license)
@@ -64,18 +65,6 @@ And set it as the listener for your Maoni instance:
 **You're good to go!** Maoni will take care of validating / collecting your users' feedbacks 
 and call maoni-github as needed. 
 
-
-## Contribute and Improve maoni-github!
-
-Contributions and issue reporting are more than welcome. 
-So to help out, do feel free to fork this repo and open up a pull request. 
-I'll review and merge your changes as quickly as possible.
-
-You can use [GitHub issues](https://github.com/rm3l/maoni-github/issues) to report bugs. 
-However, please make sure your description is clear enough and has sufficient instructions 
-to be able to reproduce the issue.
-
-
 ## Caveats
 
 At this time, the Github API does not provide any ways to upload images or files to issues created. 
@@ -87,6 +76,32 @@ overriding its `onSendButtonClicked(Feedback)` method, so as to:
 2. then update the `Feedback` object to include the attachments URLs;
 3. and call `super.onSendButtonClicked(Feedback)` to create the issue on your Github repo.
 
+## Contribute and Improve maoni-github!
+
+Contributions and issue reporting are more than welcome. 
+So to help out, do feel free to fork this repo and open up a pull request. 
+I'll review and merge your changes as quickly as possible.
+
+You can use [GitHub issues](https://github.com/rm3l/maoni-github/issues) to report bugs. 
+However, please make sure your description is clear enough and has sufficient instructions 
+to be able to reproduce the issue.
+
+### Publishing a new release
+
+All releases (Git tags) are published to [Bintray](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-github).
+
+To publish to Bintray, you need to have the appropriate rights. 
+Additionally, your Bintray credentials are expected to be put on your local machine 
+in `${HOME}/.droid/maoni.bintray.properties`, which should at least contain 
+the following properties:
+- `user` : the username used for publishing
+- `key` : your Bintray API Key, which you can retrieve from your Bintray account
+
+The following command can then be run to publish a new version:
+
+```bash
+./gradlew build javadoc bintrayUpload
+```
 
 ## Developed by
 
