@@ -13,6 +13,7 @@
 
 - [Getting started](#getting-started)
 - [Contribute and Improve maoni-jira!](#contribute-and-improve-maoni-jira)
+  - [Publishing a new release](#publishing-a-new-release)
 - [Developed by](#developed-by)
 - [Credits](#credits)
 - [License](#license)
@@ -74,6 +75,22 @@ You can use [GitHub issues](https://github.com/rm3l/maoni-jira/issues) to report
 However, please make sure your description is clear enough and has sufficient instructions 
 to be able to reproduce the issue.
 
+### Publishing a new release
+
+All releases (Git tags) are published to [Bintray](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-jira).
+
+To publish to Bintray, you need to have the appropriate rights. 
+Additionally, your Bintray credentials are expected to be put on your local machine 
+in `${HOME}/.droid/maoni.bintray.properties`, which should at least contain 
+the following properties:
+- `user` : the username used for publishing
+- `key` : your Bintray API Key, which you can retrieve from your Bintray account
+
+The following command can then be run to publish a new version:
+
+```bash
+./gradlew build javadoc bintrayUpload
+```
 
 ## Developed by
 
