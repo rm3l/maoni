@@ -37,6 +37,7 @@ import org.rm3l.maoni.common.contract.Listener;
 import org.rm3l.maoni.common.model.DeviceInfo;
 import org.rm3l.maoni.common.model.Feedback;
 import org.rm3l.maoni.doorbell.api.DoorbellService;
+import org.rm3l.maoni.doorbell.api.DoorbellSubmitRequest;
 import org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener;
 import org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress;
 
@@ -508,21 +509,30 @@ public class MaoniDoorbellListener implements Listener {
                 final String userEmail = getUserEmail();
                 final String userName = getUserName();
 
+                final List<Long> attachments = new ArrayList<>();
+                for (final String attachmentsId : attachmentsIds) {
+                    if (attachmentsId != null) {
+                        attachments.add(Long.valueOf(attachmentsId));
+                    }
+                }
+
+                final DoorbellSubmitRequest doorbellSubmitRequest = new DoorbellSubmitRequest()
+                    .setEmail(userEmail)
+                    .setName(userName)
+                    .setMessage(String.format("%s\n%s\n%s",
+                        nullToEmpty(mFeedbackHeaderTextProvider != null ?
+                            mFeedbackHeaderTextProvider.call() : null),
+                        nullToEmpty(feedback.userComment),
+                        nullToEmpty(mFeedbackFooterTextProvider != null ?
+                            mFeedbackFooterTextProvider.call() : null)))
+                    .setAttachments(attachments);
+
                 final Response<ResponseBody> response = mDoorbellService
                         .submitFeedbackForm(
                                 mHttpHeaders,
                                 mApplicationId,
                                 mApplicationKey,
-                                nullToEmpty(userEmail),
-                                String.format("%s\n%s\n%s",
-                                        nullToEmpty(mFeedbackHeaderTextProvider != null ?
-                                                mFeedbackHeaderTextProvider.call() : null),
-                                        nullToEmpty(feedback.userComment),
-                                        nullToEmpty(mFeedbackFooterTextProvider != null ?
-                                                mFeedbackFooterTextProvider.call() : null)),
-                                nullToEmpty(userName),
-                                GSON_BUILDER.create().toJson(properties),
-                                attachmentsIds.toArray(new String[attachmentsIds.size()]))
+                                doorbellSubmitRequest)
                         .execute();
 
                 if (response.code() != 201) {

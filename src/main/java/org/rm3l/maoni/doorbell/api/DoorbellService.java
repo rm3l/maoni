@@ -26,6 +26,7 @@ import java.util.Map;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -43,18 +44,12 @@ public interface DoorbellService {
             @Path("id") final int applicationId,
             @Query("key") final String key);
 
-
     @POST("applications/{id}/submit")
     Call<ResponseBody> submitFeedbackForm(
             @HeaderMap final Map<String, String> httpHeaders,
             @Path("id") final int applicationId,
             @Query("key") final String key,
-            @Query("email") final String email,
-            @Query("message") final String message,
-            @Query("name") final String userName,
-            @Query("properties") final String propertiesJson,
-            @Query("attachments[]") final String[] attachments);
-
+            @Body final DoorbellSubmitRequest request);
 
     @Multipart
     @POST("applications/{id}/upload")
