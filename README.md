@@ -32,6 +32,7 @@
   - [Building from source](#building-from-source)
   - [Translations](#translations)
   - [Contributing callbacks for Maoni](#contributing-callbacks-for-maoni)
+    - [Publishing a new release](#publishing-a-new-release)
 - [In use in the following apps](#in-use-in-the-following-apps)
 - [Credits](#credits)
 - [Developed by](#developed-by)
@@ -421,7 +422,6 @@ If your language is not listed there, just drop me an e-mail at &lt;apps+maoni@r
 Please do **not** submit GitHub pull requests with translation fixes as any changes will be overwritten 
 with the next update from Crowdin.
 
-
 ### Contributing callbacks for Maoni
 
 You can create separate projects that implement any of the Maoni callbacks interfaces 
@@ -436,8 +436,24 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
     compile 'org.rm3l:maoni-common:6.0.0'
   }
 ```
-
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/rm3l/maoni-slack) and [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
+
+#### Publishing a new release
+
+All releases (Git tags) are published to [Bintray](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni).
+
+To publish to Bintray, you need to have the appropriate rights. 
+Additionally, your Bintray credentials are expected to be put on your local machine 
+in `${HOME}/.droid/maoni.bintray.properties`, which should at least contain 
+the following properties:
+- `user` : the username used for publishing
+- `key` : your Bintray API Key, which you can retrieve from your Bintray account
+
+The following command can then be run to publish a new version:
+
+```bash
+./gradlew build javadoc bintrayUpload
+```
 
 ## In use in the following apps
 
