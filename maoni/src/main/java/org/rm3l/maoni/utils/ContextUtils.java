@@ -22,8 +22,9 @@
 package org.rm3l.maoni.utils;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Utilities for manipulating {@code Context}.

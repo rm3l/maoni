@@ -1,9 +1,8 @@
 @file:JvmName("ContextUtils")
+
 package org.rm3l.maoni.sample.extensions
 
 import android.content.Context
-import android.preference.PreferenceManager
-import org.jetbrains.anko.defaultSharedPreferences
 import org.rm3l.maoni.Maoni
 import org.rm3l.maoni.common.contract.Handler
 import org.rm3l.maoni.sample.BuildConfig

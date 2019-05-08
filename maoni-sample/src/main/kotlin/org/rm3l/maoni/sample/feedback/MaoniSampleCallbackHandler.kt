@@ -3,16 +3,15 @@ package org.rm3l.maoni.sample.feedback
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
 import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
+import com.google.android.material.textfield.TextInputLayout
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.find
-import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.selector
 import org.jetbrains.anko.warn

@@ -27,13 +27,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
 import android.util.Log;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -261,7 +262,7 @@ public class Maoni {
         }
         final Object buildConfigDebugValue = ContextUtils.getBuildConfigValue(callerActivity,
                 DEBUG);
-        if (buildConfigDebugValue != null && buildConfigDebugValue instanceof Boolean) {
+        if (buildConfigDebugValue instanceof Boolean) {
             maoniIntent.putExtra(APPLICATION_INFO_BUILD_CONFIG_DEBUG,
                     (Boolean) buildConfigDebugValue);
         }
