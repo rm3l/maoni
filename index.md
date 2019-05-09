@@ -6,7 +6,7 @@
 [![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![CircleCI](https://circleci.com/gh/maoni-app/maoni/tree/master.svg?style=svg)](https://circleci.com/gh/maoni-app/maoni/tree/master)
-[![Issue Count](https://codeclimate.com/github/rm3l/maoni/badges/issue_count.svg)](https://codeclimate.com/github/rm3l/maoni)
+[![Issue Count](https://codeclimate.com/github/maoni-app/maoni/badges/issue_count.svg)](https://codeclimate.com/github/maoni-app/maoni)
 
 [![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni.svg?style=social&label=Watch)](https://github.com/maoni-app/maoni)
 [![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni.svg?style=social&label=Star)](https://github.com/maoni-app/maoni)
