@@ -1,16 +1,16 @@
 [![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni)
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/maoni-app/maoni/blob/master/LICENSE)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Maoni-blue.svg?style=flat)](http://android-arsenal.com/details/1/3925)
 [![Website](https://img.shields.io/website-up-down-green-red/http/maoni.rm3l.org.svg)](http://maoni.rm3l.org)
 [![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![CircleCI](https://circleci.com/gh/rm3l/maoni/tree/master.svg?style=svg)](https://circleci.com/gh/rm3l/maoni/tree/master)
+[![CircleCI](https://circleci.com/gh/maoni-app/maoni/tree/master.svg?style=svg)](https://circleci.com/gh/maoni-app/maoni/tree/master)
 [![Issue Count](https://codeclimate.com/github/rm3l/maoni/badges/issue_count.svg)](https://codeclimate.com/github/rm3l/maoni)
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni.svg?style=social&label=Watch)](https://github.com/rm3l/maoni)
-[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni.svg?style=social&label=Star)](https://github.com/rm3l/maoni)
-[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni.svg?style=social&label=Fork)](https://github.com/rm3l/maoni)
+[![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni.svg?style=social&label=Watch)](https://github.com/maoni-app/maoni)
+[![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni.svg?style=social&label=Star)](https://github.com/maoni-app/maoni)
+[![GitHub forks](https://img.shields.io/github/forks/maoni-app/maoni.svg?style=social&label=Fork)](https://github.com/maoni-app/maoni)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -69,11 +69,11 @@ Below is a quick overview of the features included:
     - Form validation. You can provide your own if needed for example for your extra fields.
     - Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier.
     So you just have limitless possibilities for an integration with any remote feedback services. For reference, the following implementations are provided as external dependencies:
-        - [maoni-email](https://github.com/rm3l/maoni-email), so your users can send their feedback via email
-        - [maoni-slack](https://github.com/rm3l/maoni-slack), so your users can send their feedback to Slack
-        - [maoni-jira](https://github.com/rm3l/maoni-jira), to send your users' feedbacks as JIRA issues (to the JIRA host of your choice)
-        - [maoni-github](https://github.com/rm3l/maoni-github), to send your users' feedbacks as Github issues (to the Github repository of your choice)
-        - [maoni-doorbell](https://github.com/rm3l/maoni-doorbell), to send your users' feedbacks to [Doorbell.io](https://doorbell.io/home)
+        - [maoni-email](https://github.com/maoni-app/maoni-email), so your users can send their feedback via email
+        - [maoni-slack](https://github.com/maoni-app/maoni-slack), so your users can send their feedback to Slack
+        - [maoni-jira](https://github.com/maoni-app/maoni-jira), to send your users' feedbacks as JIRA issues (to the JIRA host of your choice)
+        - [maoni-github](https://github.com/maoni-app/maoni-github), to send your users' feedbacks as Github issues (to the Github repository of your choice)
+        - [maoni-doorbell](https://github.com/maoni-app/maoni-doorbell), to send your users' feedbacks to [Doorbell.io](https://doorbell.io/home)
        
 
 Take a look at the [sample application](https://play.google.com/store/apps/details?id=org.rm3l.maoni.sample) 
@@ -82,7 +82,7 @@ for a quick overview.
 
 ## Motivations
 
-While working on a new version of [DD-WRT Companion](http://ddwrt-companion.rm3l.org/), 
+While working on a new version of [DD-WRT Companion](https://ddwrt-companion.app/), 
 one of my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
 along with some contextual information.
 I experimented with a simple dialog, then tried a bunch of other libraries, 
@@ -107,15 +107,15 @@ By the way, as a side note, Maoni is a Swahili word for comments or opinions.
 
 ## Preview
 
-<img width="40%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/maoni_2.3.1.gif"/>
+<img width="40%" src="https://raw.githubusercontent.com/maoni-app/maoni/master/doc/screenshots/raw/maoni_2.3.1.gif"/>
     
 <!--
 <div align="center">
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/1_Maoni_main_activity.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/maoni-app/maoni/master/doc/screenshots/raw/1_Maoni_main_activity.png"/>
     <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/2_Maoni_main_activity_with_screenshot_logs_thumbnail.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/maoni-app/maoni/master/doc/screenshots/raw/2_Maoni_main_activity_with_screenshot_logs_thumbnail.png"/>
     <img height="0" width="8px"/>
-    <img width="30%" src="https://raw.githubusercontent.com/rm3l/maoni/master/doc/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview_highlight_blackout.png"/>
+    <img width="30%" src="https://raw.githubusercontent.com/maoni-app/maoni/master/doc/screenshots/raw/3_Maoni_main_activity_with_screenshot_touch_to_preview_highlight_blackout.png"/>
 </div>
 -->
 
@@ -179,7 +179,7 @@ and call your callbacks implementations.
 #### Available callbacks
 Some common callbacks for Maoni are available as external dependencies to include in your application.
 
-##### [maoni-email](https://github.com/rm3l/maoni-email)
+##### [maoni-email](https://github.com/maoni-app/maoni-email)
 
 This callback opens up an Intent for sending an email with the feedback collected.
 This is the default fallback listener used in case no other listener has been set explicitly.
@@ -205,10 +205,10 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-Visit the dedicated [repository](https://github.com/rm3l/maoni-email) for further details.
+Visit the dedicated [repository](https://github.com/maoni-app/maoni-email) for further details.
 
 
-##### [maoni-slack](https://github.com/rm3l/maoni-slack)
+##### [maoni-slack](https://github.com/maoni-app/maoni-slack)
 
 This callback sends feedback collected to Slack via an [an incoming WebHook integration](https://my.slack.com/services/new/incoming-webhook).
  
@@ -235,9 +235,9 @@ And set it as the listener for your Maoni instance
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-Visit the dedicated [repository](https://github.com/rm3l/maoni-slack) for further details.
+Visit the dedicated [repository](https://github.com/maoni-app/maoni-slack) for further details.
 
-##### [maoni-github](https://github.com/rm3l/maoni-github)
+##### [maoni-github](https://github.com/maoni-app/maoni-github)
 
 This callback sends feedback collected as a Github issue to a specified Github repository.
 
@@ -271,10 +271,10 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
 ```
 
-Visit the dedicated [repository](https://github.com/rm3l/maoni-github) for further details.
+Visit the dedicated [repository](https://github.com/maoni-app/maoni-github) for further details.
 
 
-##### [maoni-jira](https://github.com/rm3l/maoni-jira)
+##### [maoni-jira](https://github.com/maoni-app/maoni-jira)
 
 This callback sends feedback collected as a JIRA issue to a specified JIRA project.
 
@@ -307,10 +307,10 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
 ```
 
-Visit the dedicated [repository](https://github.com/rm3l/maoni-jira) for further details.
+Visit the dedicated [repository](https://github.com/maoni-app/maoni-jira) for further details.
 
 
-##### [maoni-doorbell](https://github.com/rm3l/maoni-doorbell)
+##### [maoni-doorbell](https://github.com/maoni-app/maoni-doorbell)
 
 This callback sends feedback collected to [Doorbell](https://www.doorbell.io).
 
@@ -337,7 +337,7 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-Visit the dedicated [repository](https://github.com/rm3l/maoni-doorbell) for further details.
+Visit the dedicated [repository](https://github.com/maoni-app/maoni-doorbell) for further details.
 
 
 #### Sharing the files captured with other apps
@@ -385,7 +385,7 @@ Contributions and issue reporting are more than welcome.
 So to help out, do feel free to fork this repo and open up a pull request. 
 I'll review and merge your changes as quickly as possible.
 
-You can use [GitHub issues](https://github.com/rm3l/maoni/issues) to report bugs. 
+You can use [GitHub issues](https://github.com/maoni-app/maoni/issues) to report bugs. 
 However, please make sure your description is clear enough and has sufficient instructions 
 to be able to reproduce the issue.
 
@@ -436,7 +436,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
     compile 'org.rm3l:maoni-common:6.0.0'
   }
 ```
-You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/rm3l/maoni-slack) and [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
+You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/maoni-app/maoni-slack) and [maoni-github](https://github.com/maoni-app/maoni-github)), as long as the callback implementation can be called from Maoni.
 
 #### Publishing a new release
 
@@ -460,7 +460,7 @@ The following command can then be run to publish a new version:
 (If you use Maoni, please drop me a line at &lt;apps+maoni@rm3l.org&gt; 
 (or again, fork, modify this file and submit a pull request), so I can list your app(s) here)
 
-* [DD-WRT Companion](http://ddwrt-companion.rm3l.org)
+* [DD-WRT Companion](https://ddwrt-companion.app)
 * [DD-WRT Companion Tasker Plugin](https://play.google.com/store/apps/details?id=org.rm3l.ddwrt.tasker)
 * [Androcker](https://play.google.com/store/apps/details?id=org.rm3l.container_companion)
 
