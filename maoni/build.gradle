@@ -24,7 +24,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-final VERSION_NAME = "6.0.1"
+final VERSION_NAME = "7.0.0"
 final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
 
 android {

@@ -28,7 +28,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 sourceCompatibility = JavaVersion.VERSION_1_8
 
 group = 'org.rm3l'
-version = '6.0.0'
+version = '7.0.0'
 
 final homePath = System.properties['user.home']
 
@@ -85,10 +85,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '6.0.0'
+            name = '7.0.0'
             desc = 'Maoni Common'
             released = new Date()
-            vcsTag = '6.0.0'
+            vcsTag = '7.0.0'
         }
 
         publicDownloadNumbers = true

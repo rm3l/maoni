@@ -19,7 +19,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/maoni_container"
@@ -28,14 +29,14 @@ SOFTWARE.
     android:fitsSystemWindows="true"
     tools:context=".ui.MaoniActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/maoni_app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/maoni_activity_app_bar_height"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/maoni_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -57,7 +58,7 @@ SOFTWARE.
                 app:layout_collapseParallaxMultiplier="0.7"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed" />
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/maoni_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -69,12 +70,12 @@ SOFTWARE.
                 app:titleTextAppearance="@style/MaoniTheme.ToolbarTitle"
                 app:titleTextColor="@color/maoni_white" />
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/maoni_form_content" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/maoni_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,4 +84,4 @@ SOFTWARE.
         app:layout_anchor="@id/maoni_app_bar"
         app:layout_anchorGravity="bottom|end" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
