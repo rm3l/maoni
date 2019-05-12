@@ -56,6 +56,7 @@ const val APPLICATION_JSON = "application/json"
  * @property successToastMessage the message to toast if the operation succeeded
  * @property failureToastMessage the message to toast in case of failure
  */
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 open class MaoniSlackListener @JvmOverloads constructor(
         val context: Context,
         val webhookUrl: String,
@@ -115,10 +116,10 @@ open class MaoniSlackListener @JvmOverloads constructor(
             val bodyMap : MutableMap<String, Any> = mutableMapOf(
                     "text" to text
             )
-            channel?.let { bodyMap.put("channel", it) }
-            username?.let { bodyMap.put("username", it) }
-            iconUrl?.let { bodyMap.put("icon_url", it) }
-            emojiIcon?.let { bodyMap.put("emoji_icon", it) }
+            channel?.let { bodyMap["channel"] = it }
+            username?.let { bodyMap["username"] = it }
+            iconUrl?.let { bodyMap["icon_url"] = it }
+            emojiIcon?.let { bodyMap["emoji_icon"] = it }
 
             val attachments : MutableList<Map<String, Any>> = mutableListOf()
             val attachment: MutableMap<String, Any> = mutableMapOf(
@@ -137,10 +138,10 @@ open class MaoniSlackListener @JvmOverloads constructor(
             attachmentFields.add(appExecutionContext)
 
             //App logs
-            if (feedback?.includeLogs?:false) {
+            if (feedback?.includeLogs == true) {
                 val appLogs = mapOf(
                         "title" to "Application Logs",
-                        "value" to feedback!!.logsFile!!.readText(Charset.defaultCharset()),
+                        "value" to feedback.logsFile!!.readText(Charset.defaultCharset()),
                         "short" to true
                 )
                 attachmentFields.add(appLogs)
@@ -148,9 +149,9 @@ open class MaoniSlackListener @JvmOverloads constructor(
 
             //TODO Caveat: App Screenshot cannot be uploaded for now
 
-            attachment.put("fields", attachmentFields)
+            attachment["fields"] = attachmentFields
             attachments.add(attachment)
-            bodyMap.put("attachments", attachments)
+            bodyMap["attachments"] = attachments
 
             if (debug) {
                 Log.d(LOG_TAG, "bodyMap: $bodyMap")
