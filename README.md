@@ -1,11 +1,11 @@
 [![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni-slack.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-slack) 
-[![Travis branch](https://img.shields.io/travis/rm3l/maoni-slack/master.svg)](https://travis-ci.org/rm3l/maoni-slack) 
-[![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni-slack/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni-slack?branch=master)  
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni-slack/blob/master/LICENSE) 
+[![Travis branch](https://img.shields.io/travis/maoni-app/maoni-slack/master.svg)](https://travis-ci.org/maoni-app/maoni-slack) 
+[![Coverage Status](https://coveralls.io/repos/github/maoni-app/maoni-slack/badge.svg?branch=master)](https://coveralls.io/github/maoni-app/maoni-slack?branch=master)  
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/maoni-app/maoni-slack/blob/master/LICENSE) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni-slack.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-slack) 
-[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-slack.svg?style=social&label=Star)](https://github.com/rm3l/maoni-slack) 
-[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-slack.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-slack)
+[![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni-slack.svg?style=social&label=Watch)](https://github.com/maoni-app/maoni-slack) 
+[![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni-slack.svg?style=social&label=Star)](https://github.com/maoni-app/maoni-slack) 
+[![GitHub forks](https://img.shields.io/github/forks/maoni-app/maoni-slack.svg?style=social&label=Fork)](https://github.com/maoni-app/maoni-slack)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -85,7 +85,7 @@ Contributions and issue reporting are more than welcome.
 So to help out, do feel free to fork this repo and open up a pull request. 
 I'll review and merge your changes as quickly as possible.
 
-You can use [GitHub issues](https://github.com/rm3l/maoni-slack/issues) to report bugs. 
+You can use [GitHub issues](https://github.com/maoni-app/maoni-slack/issues) to report bugs. 
 However, please make sure your description is clear enough and has sufficient instructions 
 to be able to reproduce the issue.
 

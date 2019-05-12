@@ -129,9 +129,9 @@ bintray {
         publicDownloadNumbers = true
 
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/rm3l/maoni-slack.git'
-        websiteUrl = 'https://github.com/rm3l/maoni-slack'
-        issueTrackerUrl = 'https://github.com/rm3l/maoni-slack/issues'
+        vcsUrl = 'https://github.com/maoni-app/maoni-slack.git'
+        websiteUrl = 'https://github.com/maoni-app/maoni-slack'
+        issueTrackerUrl = 'https://github.com/maoni-app/maoni-slack/issues'
 
     }
     configurations = ['archives']
