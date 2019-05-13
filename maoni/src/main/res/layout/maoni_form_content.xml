@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,21 +44,21 @@ SOFTWARE.
             android:layout_marginTop="@dimen/maoni_activity_vertical_margin"
             android:text="@string/maoni_feedback_message" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/maoni_content_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/maoni_activity_vertical_margin"
             android:hint="@string/maoni_feedback_content_hint">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/maoni_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapSentences|textMultiLine"
                 android:isScrollContainer="true"
                 android:minLines="5" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/maoni_content_extra"
@@ -130,4 +130,4 @@ SOFTWARE.
         </LinearLayout>
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

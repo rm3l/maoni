@@ -24,7 +24,7 @@ SOFTWARE.
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/extra_email_inputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@ SOFTWARE.
             android:imeOptions="flagNoExtractUi"
             android:inputType="textEmailAddress"
             android:maxLines="1" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:layout_width="match_parent"

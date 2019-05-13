@@ -26,13 +26,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
@@ -58,7 +58,7 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
 
         final Handler handlerForMaoni = ContextUtils.getMaoniFeedbackHandler(this); //Custom handler for Maoni, which does nothing more than calling any of the maoni-* available callbacks
         final Maoni.Builder maoniBuilder = ContextUtils.getMaoniFeedbackBuilder(this);
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         if (fab != null) {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
