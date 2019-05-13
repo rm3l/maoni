@@ -350,13 +350,32 @@ but this is (again) entirely customizable.
 You must declare a file content provider in your `AndroidManifest.xml` file with an explicit list 
 of sharable directories for other apps to be able to read the screenshot file. 
 For example:
-```xml
+
+- If you use AndroidX:
+
 <application>
     <!-- ... -->
     <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
     <provider
         android:name="android.support.v4.content.FileProvider"
-        android:authorities="org.rm3l.maoni.sample.fileprovider"
+        android:authorities="com.mydomain.fileprovider"
+        android:grantUriPermissions="true"
+        android:exported="false">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/filepaths" />
+    </provider>
+</application>
+
+- Otherwise:
+
+```xml
+<application>
+    <!-- ... -->
+    <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="com.mydomain.fileprovider"
         android:grantUriPermissions="true"
         android:exported="false">
         <meta-data
