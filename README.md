@@ -505,9 +505,8 @@ either by suggesting translations or by reporting an issue and/or submitting pul
 
 In no particular order:
 
-* [gitter-badger](https://github.com/gitter-badger)
-* [MariusVolkhart](https://github.com/MariusVolkhart)
-* [Kalabasa](https://github.com/Kalabasa)
+* [Marius Volkhart](https://github.com/MariusVolkhart)
+* [Lean Rada](https://github.com/Kalabasa)
 * [isacastillor](https://crowdin.com/profile/isacastillor)
 * [bobsthinking](https://crowdin.com/profile/bobsthinking)
 * [omersurer](https://crowdin.com/profile/omersurer)
@@ -515,6 +514,8 @@ In no particular order:
 * [naofum](https://crowdin.com/profile/naofum)
 * [fuzeh](https://crowdin.com/profile/sebastianbacia)
 * [utopian.io/@kedi](https://crowdin.com/profile/Apsimati)
+* [Dimitar Dinchev](https://github.com/ddinchev)
+* [vlad-roid](https://github.com/vlad-roid)
 
 
 ## License
