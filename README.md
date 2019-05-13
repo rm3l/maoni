@@ -358,7 +358,7 @@ For example:
     <!-- ... -->
     <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
     <provider
-        android:name="android.support.v4.content.FileProvider"
+        android:name="androidx.core.content.FileProvider"
         android:authorities="com.mydomain.fileprovider"
         android:grantUriPermissions="true"
         android:exported="false">
@@ -376,7 +376,7 @@ For example:
     <!-- ... -->
     <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
     <provider
-        android:name="androidx.core.content.FileProvider"
+        android:name="android.support.v4.content.FileProvider"
         android:authorities="com.mydomain.fileprovider"
         android:grantUriPermissions="true"
         android:exported="false">
