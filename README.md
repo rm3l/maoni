@@ -353,6 +353,7 @@ For example:
 
 - If you use AndroidX:
 
+```xml
 <application>
     <!-- ... -->
     <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
@@ -366,6 +367,7 @@ For example:
             android:resource="@xml/filepaths" />
     </provider>
 </application>
+```
 
 - Otherwise:
 
