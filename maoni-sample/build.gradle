@@ -199,7 +199,7 @@ dependencies {
         exclude group: 'org.rm3l', module: 'maoni-common'
         exclude group: 'org.jetbrains.anko'
     }
-    implementation ('org.rm3l:maoni-slack:1.0.1-maoni_6.0.0') {
+    implementation ('org.rm3l:maoni-slack:1.1.0-maoni_6.0.0') {
         exclude group: 'org.rm3l', module: 'maoni-common'
         exclude group: 'org.jetbrains.anko'
     }
