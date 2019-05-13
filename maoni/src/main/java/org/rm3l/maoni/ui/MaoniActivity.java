@@ -30,15 +30,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -52,8 +51,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.File;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.UUID;
 import me.panavtec.drawableview.DrawableView;
@@ -210,7 +212,7 @@ public class MaoniActivity extends AppCompatActivity {
             mSharedPreferences = (HashMap<String, Object>) intent.getSerializableExtra(SHARED_PREFERENCES);
         }
 
-        final ImageView headerImageView = (ImageView) findViewById(R.id.maoni_toolbar_header_image);
+        final ImageView headerImageView = findViewById(R.id.maoni_toolbar_header_image);
         if (headerImageView != null && intent.hasExtra(HEADER)) {
             final int headerLayoutId = intent.getIntExtra(HEADER, -1);
             if (headerLayoutId != -1) {
@@ -235,7 +237,7 @@ public class MaoniActivity extends AppCompatActivity {
         mListener = maoniConfiguration.getListener();
         mValidator = maoniConfiguration.getValidator();
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.maoni_toolbar);
+        final Toolbar toolbar = findViewById(R.id.maoni_toolbar);
         if (toolbar != null) {
             toolbar.setTitle(intent.hasExtra(WINDOW_TITLE) ?
                     intent.getCharSequenceExtra(WINDOW_TITLE) :
@@ -263,7 +265,7 @@ public class MaoniActivity extends AppCompatActivity {
 
         if (intent.hasExtra(MESSAGE)) {
             final CharSequence message = intent.getCharSequenceExtra(MESSAGE);
-            final TextView activityMessageTv = (TextView) findViewById(R.id.maoni_feedback_message);
+            final TextView activityMessageTv = findViewById(R.id.maoni_feedback_message);
             if (activityMessageTv != null) {
                 activityMessageTv.setText(message);
             }
@@ -271,15 +273,14 @@ public class MaoniActivity extends AppCompatActivity {
 
         if (intent.hasExtra(SCREENSHOT_HINT)) {
             final CharSequence screenshotInformationalHint = intent.getCharSequenceExtra(SCREENSHOT_HINT);
-            final TextView screenshotInformationalHintTv =
-                    (TextView) findViewById(R.id.maoni_screenshot_informational_text);
+            final TextView screenshotInformationalHintTv = findViewById(R.id.maoni_screenshot_informational_text);
             if (screenshotInformationalHintTv != null) {
                 screenshotInformationalHintTv.setText(screenshotInformationalHint);
             }
         }
 
-        mContentInputLayout = (TextInputLayout) findViewById(R.id.maoni_content_input_layout);
-        mContent = (EditText) findViewById(R.id.maoni_content);
+        mContentInputLayout = findViewById(R.id.maoni_content_input_layout);
+        mContent = findViewById(R.id.maoni_content);
 
         if (intent.hasExtra(CONTENT_HINT)) {
             final CharSequence contentHint = intent.getCharSequenceExtra(CONTENT_HINT);
@@ -294,12 +295,12 @@ public class MaoniActivity extends AppCompatActivity {
             mContentErrorText = getString(R.string.maoni_validate_must_not_be_blank);
         }
 
-        mIncludeLogs = (CheckBox) findViewById(R.id.maoni_include_logs);
+        mIncludeLogs = findViewById(R.id.maoni_include_logs);
         if (mIncludeLogs != null && intent.hasExtra(INCLUDE_LOGS_TEXT)) {
             mIncludeLogs.setText(intent.getCharSequenceExtra(INCLUDE_LOGS_TEXT));
         }
 
-        mIncludeScreenshot = (CheckBox) findViewById(R.id.maoni_include_screenshot);
+        mIncludeScreenshot = findViewById(R.id.maoni_include_screenshot);
         if (mIncludeScreenshot != null && intent.hasExtra(INCLUDE_SCREENSHOT_TEXT)) {
             mIncludeScreenshot.setText(intent.getCharSequenceExtra(INCLUDE_SCREENSHOT_TEXT));
         }
@@ -386,7 +387,7 @@ public class MaoniActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.maoni_activity_menu, menu);
         this.mMenu = menu;
-        final AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.maoni_app_bar);
+        final AppBarLayout appBarLayout = findViewById(R.id.maoni_app_bar);
         appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
@@ -411,11 +412,9 @@ public class MaoniActivity extends AppCompatActivity {
     }
 
     private void initScreenCaptureView(@NonNull final Intent intent) {
-        final ImageButton screenshotThumb = (ImageButton)
-                findViewById(R.id.maoni_screenshot);
+        final ImageButton screenshotThumb = findViewById(R.id.maoni_screenshot);
 
-        final TextView touchToPreviewTextView =
-                (TextView) findViewById(R.id.maoni_screenshot_touch_to_preview);
+        final TextView touchToPreviewTextView = findViewById(R.id.maoni_screenshot_touch_to_preview);
         if (touchToPreviewTextView != null && intent.hasExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT)) {
             touchToPreviewTextView.setText(
                     intent.getCharSequenceExtra(SCREENSHOT_TOUCH_TO_PREVIEW_HINT));
@@ -466,13 +465,12 @@ public class MaoniActivity extends AppCompatActivity {
                                 }
                             };
 
-                            final ImageView imageView = (ImageView)
+                            final ImageView imageView =
                                     imagePreviewDialog.findViewById(R.id.maoni_screenshot_preview_image);
                             imageView.setImageURI(Uri.fromFile(file));
 
-                            final DrawableView drawableView = (DrawableView)
-                                    imagePreviewDialog
-                                            .findViewById(R.id.maoni_screenshot_preview_image_drawable_view);
+                            final DrawableView drawableView = imagePreviewDialog
+                                    .findViewById(R.id.maoni_screenshot_preview_image_drawable_view);
                             final DrawableViewConfig config = new DrawableViewConfig();
                             // If the view is bigger than canvas, with this the user will see the bounds
                             config.setShowCanvasBounds(true);

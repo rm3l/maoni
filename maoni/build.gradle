@@ -24,15 +24,17 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
+final VERSION_NAME = "7.0.0"
+final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
+
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 600
-        versionName "6.0.0"
+        targetSdkVersion 28
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
     }
     buildTypes {
         release {
@@ -49,19 +51,19 @@ android {
 }
 
 group = 'org.rm3l'
-version = '6.0.0'
+version = VERSION_NAME
 
 final homePath = System.properties['user.home']
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":maoni-common")
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(":maoni-common")
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
-    implementation 'me.panavtec:drawableview:0.6.0'
+    api 'androidx.appcompat:appcompat:1.0.2'
+    api 'com.google.android.material:material:1.0.0'
+    api 'me.panavtec:drawableview:0.6.0'
 
-    //Include maoni-email as the default listener
+    // Include maoni-email as the default listener
     implementation 'org.rm3l:maoni-email:3.1.0-maoni_6.0.0'
 }
 
@@ -105,7 +107,7 @@ bintray {
     }
 
     publish = true //If version should be auto published after an upload
-    
+
     pkg {
         repo = 'maven'
         name = 'org.rm3l:maoni'
@@ -113,10 +115,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '6.0.0'
+            name = VERSION_NAME
+            vcsTag = VERSION_NAME
             desc = 'Maoni Android Library'
-            released  = new Date()
-            vcsTag = '6.0.0'
+            released = new Date()
         }
 
         publicDownloadNumbers = true

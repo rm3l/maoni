@@ -37,7 +37,7 @@ SOFTWARE.
 
         <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="org.rm3l.maoni.sample.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
