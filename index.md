@@ -126,7 +126,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:6.0.0@aar') {
+    compile ('org.rm3l:maoni:7.0.0@aar') {
         transitive = true
     }
   }
@@ -350,13 +350,32 @@ but this is (again) entirely customizable.
 You must declare a file content provider in your `AndroidManifest.xml` file with an explicit list 
 of sharable directories for other apps to be able to read the screenshot file. 
 For example:
-```xml
+
+- If you use AndroidX:
+
 <application>
     <!-- ... -->
     <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
     <provider
         android:name="android.support.v4.content.FileProvider"
-        android:authorities="org.rm3l.maoni.sample.fileprovider"
+        android:authorities="com.mydomain.fileprovider"
+        android:grantUriPermissions="true"
+        android:exported="false">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/filepaths" />
+    </provider>
+</application>
+
+- Otherwise:
+
+```xml
+<application>
+    <!-- ... -->
+    <!-- If not defined yet, declare a file provider to be able to share screenshots captured by Maoni -->
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="com.mydomain.fileprovider"
         android:grantUriPermissions="true"
         android:exported="false">
         <meta-data
@@ -433,7 +452,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:6.0.0'
+    compile 'org.rm3l:maoni-common:7.0.0'
   }
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/maoni-app/maoni-slack) and [maoni-github](https://github.com/maoni-app/maoni-github)), as long as the callback implementation can be called from Maoni.
