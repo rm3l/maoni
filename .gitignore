@@ -41,7 +41,6 @@ build
 
 **/*.apk
 
-
 samples
 #DEPLOYMENT
 
@@ -51,7 +50,6 @@ samples
 actionbarsherlock
 **/*.iml
 local.properties
-
 
 .DS_Store
 
