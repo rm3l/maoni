@@ -1,12 +1,12 @@
 [![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni-email.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-email) 
 [![Join the chat at https://gitter.im/rm3l/maoni-email](https://badges.gitter.im/rm3l/maoni-email.svg)](https://gitter.im/rm3l/maoni-email?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
-[![Travis branch](https://img.shields.io/travis/rm3l/maoni-email/master.svg)](https://travis-ci.org/rm3l/maoni-email) 
-[![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni-email/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni-email?branch=master)  
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni-email/blob/master/LICENSE) 
+[![Travis branch](https://img.shields.io/travis/maoni-app/maoni-email/master.svg)](https://travis-ci.org/maoni-app/maoni-email) 
+[![Coverage Status](https://coveralls.io/repos/github/maoni-app/maoni-email/badge.svg?branch=master)](https://coveralls.io/github/maoni-app/maoni-email?branch=master)  
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/maoni-app/maoni-email/blob/master/LICENSE) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni-email.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-email) 
-[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-email.svg?style=social&label=Star)](https://github.com/rm3l/maoni-email) 
-[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-email.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-email)
+[![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni-email.svg?style=social&label=Watch)](https://github.com/maoni-app/maoni-email) 
+[![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni-email.svg?style=social&label=Star)](https://github.com/maoni-app/maoni-email) 
+[![GitHub forks](https://img.shields.io/github/forks/maoni-app/maoni-email.svg?style=social&label=Fork)](https://github.com/maoni-app/maoni-email)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
