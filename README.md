@@ -1,11 +1,11 @@
 [![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni-jira.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-jira) 
-[![Travis branch](https://img.shields.io/travis/rm3l/maoni-jira/master.svg)](https://travis-ci.org/rm3l/maoni-jira) 
-[![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni-jira/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni-jira?branch=master)  
+[![Travis branch](https://img.shields.io/travis/maoni-app/maoni-jira/master.svg)](https://travis-ci.org/maoni-app/maoni-jira) 
+[![Coverage Status](https://coveralls.io/repos/github/maoni-app/maoni-jira/badge.svg?branch=master)](https://coveralls.io/github/maoni-app/maoni-jira?branch=master)  
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni-jira/blob/master/LICENSE) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni-jira.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-jira) 
-[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-jira.svg?style=social&label=Star)](https://github.com/rm3l/maoni-jira) 
-[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-jira.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-jira)
+[![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni-jira.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-jira) 
+[![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni-jira.svg?style=social&label=Star)](https://github.com/rm3l/maoni-jira) 
+[![GitHub forks](https://img.shields.io/github/forks/maoni-app/maoni-jira.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-jira)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
