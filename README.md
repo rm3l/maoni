@@ -1,11 +1,11 @@
 [![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni-github.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-github) 
-[![Travis branch](https://img.shields.io/travis/rm3l/maoni-github/master.svg)](https://travis-ci.org/rm3l/maoni-github) 
-[![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni-github/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni-github?branch=master)  
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni-github/blob/master/LICENSE) 
+[![Travis branch](https://img.shields.io/travis/maoni-app/maoni-github/master.svg)](https://travis-ci.org/maoni-app/maoni-github) 
+[![Coverage Status](https://coveralls.io/repos/github/maoni-app/maoni-github/badge.svg?branch=master)](https://coveralls.io/github/maoni-app/maoni-github?branch=master)  
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/maoni-app/maoni-github/blob/master/LICENSE) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni-github.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-github) 
-[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-github.svg?style=social&label=Star)](https://github.com/rm3l/maoni-github) 
-[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-github.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-github)
+[![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni-github.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-github) 
+[![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni-github.svg?style=social&label=Star)](https://github.com/rm3l/maoni-github) 
+[![GitHub forks](https://img.shields.io/github/forks/maoni-app/maoni-github.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-github)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
