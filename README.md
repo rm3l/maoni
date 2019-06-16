@@ -1,11 +1,11 @@
 [![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni-doorbell.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-doorbell) 
-[![Travis branch](https://img.shields.io/travis/rm3l/maoni-doorbell/master.svg)](https://travis-ci.org/rm3l/maoni-doorbell) 
-[![Coverage Status](https://coveralls.io/repos/github/rm3l/maoni-doorbell/badge.svg?branch=master)](https://coveralls.io/github/rm3l/maoni-doorbell?branch=master)  
+[![Travis branch](https://img.shields.io/travis/maoni-app/maoni-doorbell/master.svg)](https://travis-ci.org/maoni-app/maoni-doorbell) 
+[![Coverage Status](https://coveralls.io/repos/github/maoni-app/maoni-doorbell/badge.svg?branch=master)](https://coveralls.io/github/maoni-app/maoni-doorbell?branch=master)  
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni-doorbell/blob/master/LICENSE) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni-doorbell.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-doorbell) 
-[![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni-doorbell.svg?style=social&label=Star)](https://github.com/rm3l/maoni-doorbell) 
-[![GitHub forks](https://img.shields.io/github/forks/rm3l/maoni-doorbell.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-doorbell)
+[![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni-doorbell.svg?style=social&label=Watch)](https://github.com/rm3l/maoni-doorbell) 
+[![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni-doorbell.svg?style=social&label=Star)](https://github.com/rm3l/maoni-doorbell) 
+[![GitHub forks](https://img.shields.io/github/forks/maoni-app/maoni-doorbell.svg?style=social&label=Fork)](https://github.com/rm3l/maoni-doorbell)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
