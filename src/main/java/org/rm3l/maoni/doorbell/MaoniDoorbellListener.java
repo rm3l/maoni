@@ -90,6 +90,7 @@ public class MaoniDoorbellListener implements Listener {
     private final DoorbellService mDoorbellService;
     private final Activity mActivity;
     private final Callable<Map<String, Object>> mAdditionalPropertiesProvider;
+    private final Callable<List<String>> mAdditionalTagsProvider;
     private final MaoniDoorbellTransferListener mTransferListener;
 
     /**
@@ -118,6 +119,7 @@ public class MaoniDoorbellListener implements Listener {
         this.mWaitDialogMessage = builder.waitDialogMessage;
         this.mWaitDialogCancelButtonText = builder.waitDialogCancelButtonText;
         this.mAdditionalPropertiesProvider = builder.additionalPropertiesProvider;
+        this.mAdditionalTagsProvider = builder.additionalTagsProvider;
         this.mTransferListener = builder.transferListener;
 
         final OkHttpClient.Builder okHttpClientBilder = new OkHttpClient().newBuilder();
@@ -225,6 +227,7 @@ public class MaoniDoorbellListener implements Listener {
         long connectTimeout;
         TimeUnit connectTimeoutUnit;
         Callable<Map<String, Object>> additionalPropertiesProvider;
+        Callable<List<String>> additionalTagsProvider;
         MaoniDoorbellTransferListener transferListener;
 
         public Builder(final Activity activity) {
@@ -372,6 +375,20 @@ public class MaoniDoorbellListener implements Listener {
             return this;
         }
 
+        public Builder withAdditionalTagsToSend(final List<String> additionalTags) {
+            return this.withAdditionalTagsProvider(new Callable<List<String>>() {
+                @Override
+                public List<String> call() throws Exception {
+                    return additionalTags;
+                }
+            });
+        }
+
+        public Builder withAdditionalTagsProvider(Callable<List<String>> additionalTagsProvider) {
+            this.additionalTagsProvider = additionalTagsProvider;
+            return this;
+        }
+
         public Builder withTransferListener(MaoniDoorbellTransferListener transferListener) {
             this.transferListener = transferListener;
             return this;
@@ -388,6 +405,7 @@ public class MaoniDoorbellListener implements Listener {
         private final Feedback feedback;
         private final ProgressDialog alertDialog;
         private final Map<String, Object> properties;
+        private final List<String> tags;
 
         FeedbackSenderTask(Feedback feedback) {
             this.feedback = feedback;
@@ -413,6 +431,7 @@ public class MaoniDoorbellListener implements Listener {
                 }
             });
             this.properties = new HashMap<>();
+            this.tags = new ArrayList<>();
         }
 
         @Override
@@ -452,6 +471,13 @@ public class MaoniDoorbellListener implements Listener {
                     final Map<String, Object> map = mAdditionalPropertiesProvider.call();
                     if (map != null) {
                         properties.putAll(map);
+                    }
+                }
+
+                if (mAdditionalTagsProvider != null) {
+                    List<String> list = mAdditionalTagsProvider.call();
+                    if (list != null) {
+                        tags.addAll(list);
                     }
                 }
 
@@ -537,7 +563,8 @@ public class MaoniDoorbellListener implements Listener {
                         nullToEmpty(feedback.userComment),
                         nullToEmpty(mFeedbackFooterTextProvider != null ?
                             mFeedbackFooterTextProvider.call() : null)))
-                    .setAttachments(attachments);
+                    .setAttachments(attachments)
+                    .setTags(tags);
 
                 final Response<ResponseBody> response = mDoorbellService
                         .submitFeedbackForm(
