@@ -564,6 +564,7 @@ public class MaoniDoorbellListener implements Listener {
                         nullToEmpty(mFeedbackFooterTextProvider != null ?
                             mFeedbackFooterTextProvider.call() : null)))
                     .setAttachments(attachments)
+                    .setProperties(properties)
                     .setTags(tags);
 
                 final Response<ResponseBody> response = mDoorbellService
