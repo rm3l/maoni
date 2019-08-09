@@ -134,7 +134,7 @@ public class MaoniDoorbellListener implements Listener {
                             Log.d(USER_AGENT, message);
                         }
                     });
-            interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClientBilder.addInterceptor(interceptor);
         }
 
