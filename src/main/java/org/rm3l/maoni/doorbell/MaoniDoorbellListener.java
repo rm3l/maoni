@@ -31,8 +31,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.GsonBuilder;
-
 import org.rm3l.maoni.common.contract.Listener;
 import org.rm3l.maoni.common.model.DeviceInfo;
 import org.rm3l.maoni.common.model.Feedback;
@@ -59,14 +57,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress.*;
+import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress.COMPLETED;
+import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress.ERROR;
+import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress.STARTED;
+import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress.UPLOADING_FEEDBACK_CONTENT;
+import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoorbellTransferProgress.UPLOADING_FILES_CAPTURED;
 
 /**
  * Callback for Maoni that takes care of sending the Feedback to Doorbell.io provider
  */
 public class MaoniDoorbellListener implements Listener {
-
-    private static final GsonBuilder GSON_BUILDER = new GsonBuilder();
 
     private static final String USER_AGENT = "maoni-doorbell (v2.6.0-maoni_6.0.0)";
 
@@ -90,6 +90,7 @@ public class MaoniDoorbellListener implements Listener {
     private final DoorbellService mDoorbellService;
     private final Activity mActivity;
     private final Callable<Map<String, Object>> mAdditionalPropertiesProvider;
+    private final Callable<List<String>> mAdditionalTagsProvider;
     private final MaoniDoorbellTransferListener mTransferListener;
 
     /**
@@ -118,6 +119,7 @@ public class MaoniDoorbellListener implements Listener {
         this.mWaitDialogMessage = builder.waitDialogMessage;
         this.mWaitDialogCancelButtonText = builder.waitDialogCancelButtonText;
         this.mAdditionalPropertiesProvider = builder.additionalPropertiesProvider;
+        this.mAdditionalTagsProvider = builder.additionalTagsProvider;
         this.mTransferListener = builder.transferListener;
 
         final OkHttpClient.Builder okHttpClientBilder = new OkHttpClient().newBuilder();
@@ -132,7 +134,7 @@ public class MaoniDoorbellListener implements Listener {
                             Log.d(USER_AGENT, message);
                         }
                     });
-            interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClientBilder.addInterceptor(interceptor);
         }
 
@@ -178,7 +180,7 @@ public class MaoniDoorbellListener implements Listener {
         final NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo == null || !networkInfo.isConnected()) {
             Toast.makeText(mActivity,
-                    "An Internet connection is needed to send feedbacks.", Toast.LENGTH_SHORT)
+                    "An Internet connection is needed to send feedback.", Toast.LENGTH_SHORT)
                     .show();
             return false;
         }
@@ -225,6 +227,7 @@ public class MaoniDoorbellListener implements Listener {
         long connectTimeout;
         TimeUnit connectTimeoutUnit;
         Callable<Map<String, Object>> additionalPropertiesProvider;
+        Callable<List<String>> additionalTagsProvider;
         MaoniDoorbellTransferListener transferListener;
 
         public Builder(final Activity activity) {
@@ -372,6 +375,20 @@ public class MaoniDoorbellListener implements Listener {
             return this;
         }
 
+        public Builder withAdditionalTagsToSend(final List<String> additionalTags) {
+            return this.withAdditionalTagsProvider(new Callable<List<String>>() {
+                @Override
+                public List<String> call() throws Exception {
+                    return additionalTags;
+                }
+            });
+        }
+
+        public Builder withAdditionalTagsProvider(Callable<List<String>> additionalTagsProvider) {
+            this.additionalTagsProvider = additionalTagsProvider;
+            return this;
+        }
+
         public Builder withTransferListener(MaoniDoorbellTransferListener transferListener) {
             this.transferListener = transferListener;
             return this;
@@ -388,6 +405,7 @@ public class MaoniDoorbellListener implements Listener {
         private final Feedback feedback;
         private final ProgressDialog alertDialog;
         private final Map<String, Object> properties;
+        private final List<String> tags;
 
         FeedbackSenderTask(Feedback feedback) {
             this.feedback = feedback;
@@ -397,6 +415,7 @@ public class MaoniDoorbellListener implements Listener {
             alertDialog.setIndeterminate(false);
             alertDialog.setCancelable(false);
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.setMax(100);
             alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, mWaitDialogCancelButtonText,
                     new DialogInterface.OnClickListener() {
                 @Override
@@ -412,12 +431,24 @@ public class MaoniDoorbellListener implements Listener {
                 }
             });
             this.properties = new HashMap<>();
+            this.tags = new ArrayList<>();
         }
 
         @Override
         protected void onProgressUpdate(MaoniDoorbellTransferProgress transferProgress) {
             if (MaoniDoorbellListener.this.mTransferListener != null) {
                 MaoniDoorbellListener.this.mTransferListener.onProgressUpdate(transferProgress);
+            }
+
+            switch (transferProgress) {
+                case UPLOADING_FEEDBACK_CONTENT:
+                    alertDialog.setProgress(50);
+                    break;
+                case COMPLETED:
+                case ERROR:
+                    alertDialog.setProgress(100);
+                    sUiHandler.postDelayed(alertDialog::cancel, 1000);
+                    break;
             }
         }
 
@@ -440,6 +471,13 @@ public class MaoniDoorbellListener implements Listener {
                     final Map<String, Object> map = mAdditionalPropertiesProvider.call();
                     if (map != null) {
                         properties.putAll(map);
+                    }
+                }
+
+                if (mAdditionalTagsProvider != null) {
+                    List<String> list = mAdditionalTagsProvider.call();
+                    if (list != null) {
+                        tags.addAll(list);
                     }
                 }
 
@@ -525,7 +563,9 @@ public class MaoniDoorbellListener implements Listener {
                         nullToEmpty(feedback.userComment),
                         nullToEmpty(mFeedbackFooterTextProvider != null ?
                             mFeedbackFooterTextProvider.call() : null)))
-                    .setAttachments(attachments);
+                    .setAttachments(attachments)
+                    .setProperties(properties)
+                    .setTags(tags);
 
                 final Response<ResponseBody> response = mDoorbellService
                         .submitFeedbackForm(
