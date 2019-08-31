@@ -111,10 +111,10 @@ android {
 
     defaultConfig {
         applicationId "org.rm3l.maoni.sample"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
-        versionCode 700
-        versionName "7.0.0"
+        versionCode maoni_version.replace('.', '').toInteger()
+        versionName "${maoni_version}"
 
         vectorDrawables.useSupportLibrary = true
 
@@ -123,7 +123,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
 
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
@@ -140,11 +140,11 @@ android {
 
             signingConfig signingConfigs.release
             zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules-r8.pro'
         }
         debug {
             testCoverageEnabled true
-            minifyEnabled false
+            minifyEnabled true
 
             buildConfigField "String", "GITHUB_USERNAME", "\"${ghUsername}\""
             buildConfigField "String", "GITHUB_PASSWORD_TOKEN", "\"${ghPasswordToken}\""
@@ -161,7 +161,7 @@ android {
 
             zipAlignEnabled true
             signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules-r8.pro'
         }
     }
     lintOptions {
@@ -174,35 +174,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation "org.jetbrains.anko:anko-sdk27:$anko_version"
     implementation "org.jetbrains.anko:anko-sdk27:$anko_version"
     implementation "org.jetbrains.anko:anko-sdk27-listeners:$anko_version"
 
     implementation project(":maoni")
     implementation project(":maoni-common")
-    implementation ('org.rm3l:maoni-email:3.1.0-maoni_6.0.0') {
-        //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
-        exclude group: 'org.rm3l', module: 'maoni-common'
-        exclude group: 'org.jetbrains.anko'
-    }
-    implementation ('org.rm3l:maoni-github:2.5.0-maoni_6.0.0') {
-        //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
-        exclude group: 'org.rm3l', module: 'maoni-common'
-        exclude group: 'org.jetbrains.anko'
-    }
-    implementation ('org.rm3l:maoni-jira:2.5.0-maoni_6.0.0') {
-        //Exclude transitive dependency to 'maoni-common', as we are already using the version we have in this project
-        exclude group: 'org.rm3l', module: 'maoni-common'
-        exclude group: 'org.jetbrains.anko'
-    }
-    implementation ('org.rm3l:maoni-slack:1.1.0-maoni_6.0.0') {
-        exclude group: 'org.rm3l', module: 'maoni-common'
-        exclude group: 'org.jetbrains.anko'
-    }
+    implementation project(":callbacks:maoni-email")
+    implementation project(":callbacks:maoni-github")
+    implementation project(":callbacks:maoni-jira")
+    implementation project(":callbacks:maoni-slack")
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.0.0'

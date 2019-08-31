@@ -24,14 +24,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-final VERSION_NAME = "7.0.0"
+final VERSION_NAME = maoni_version
 final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
 
 android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode VERSION_CODE
         versionName VERSION_NAME
@@ -48,12 +48,14 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
-group = 'org.rm3l'
+group = maoni_group
 version = VERSION_NAME
-
-final homePath = System.properties['user.home']
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
@@ -64,7 +66,7 @@ dependencies {
     api 'me.panavtec:drawableview:0.6.0'
 
     // Include maoni-email as the default listener
-    implementation 'org.rm3l:maoni-email:3.1.0-maoni_6.0.0'
+    implementation project(":callbacks:maoni-email")
 }
 
 task generateSourcesJar(type: Jar) {
@@ -94,7 +96,7 @@ artifacts {
 bintray {
 
     //Attempt to read keystore.properties file, if any first
-    final propsFile = new File(homePath.toString() + "/.droid/", "maoni.bintray.properties")
+    final propsFile = new File("${System.properties['user.home']}/.droid/", "maoni.bintray.properties")
 
     if (propsFile.exists()) {
         final props = new Properties()

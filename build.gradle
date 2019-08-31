@@ -25,7 +25,10 @@
 final homePath = System.properties['user.home']
 
 buildscript {
-    ext.kotlin_version = '1.3.31'
+    ext.maoni_group = 'org.rm3l'
+    ext.maoni_version = '7.0.0'
+
+    ext.kotlin_version = '1.3.50'
     ext.anko_version = '0.10.8'
 
     repositories {
@@ -35,9 +38,9 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:3.4.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -48,13 +51,8 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
-        maven {
-            url 'https://maven.google.com'
-        }
         google()
-        //To activate temporarily, when waiting for Bintray to approve packages submitted to JCenter
-//        maven { url 'https://dl.bintray.com/rm3l/maven'}
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -105,12 +103,9 @@ ext.getReleaseSigningInfo = {
 subprojects { project ->
     afterEvaluate {
         if (project.plugins.hasPlugin("java")) {
-            addCommonConfigurationForJavaModules(project)
+            project.sourceCompatibility = JavaVersion.VERSION_1_8
+            project.targetCompatibility = JavaVersion.VERSION_1_8
         }
-//        else if (project.plugins.hasPlugin("com.android.application")
-//                || project.plugins.hasPlugin("com.android.library")) {
-//            addCommonConfigurationForAndroidModules(project)
-//        }
 
         project.tasks.withType(Test) { Test task ->
             task.jvmArgs << "-Djava.awt.headless=true"
@@ -118,7 +113,3 @@ subprojects { project ->
     }
 }
 
-static def addCommonConfigurationForJavaModules(Project project) {
-    project.sourceCompatibility = JavaVersion.VERSION_1_7
-    project.targetCompatibility = JavaVersion.VERSION_1_7
-}

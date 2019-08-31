@@ -19,44 +19,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-final homePath = System.properties['user.home']
-
-buildscript {
-    repositories {
-        jcenter()
-        google()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha04'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
-
-apply plugin: 'java'
+apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-targetCompatibility = '1.8'
-sourceCompatibility = '1.8'
+final VERSION_NAME = maoni_version
+final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
 
-group = 'org.rm3l'
-version = '2.6.0-maoni_6.0.0'
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+//        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 
 dependencies {
-    implementation 'org.rm3l:maoni-common:6.0.0'
-    //We are interacting with Android components for sending emails
-    compileOnly ('com.google.android:android:4.1.1.4') {
-        exclude group: 'org.json', module: 'json'
-    }
+    implementation project(':maoni-common')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
@@ -92,7 +91,7 @@ artifacts {
 bintray {
 
     //Attempt to read keystore.properties file, if any first
-    final propsFile = new File(homePath.toString() + "/.droid/", "maoni.bintray.properties")
+    final propsFile = new File("${System.properties['user.home']}/.droid/", "maoni.bintray.properties")
 
     if (propsFile.exists()) {
         printf("[Bintray] Using properties file located at " + propsFile.absolutePath)
@@ -114,10 +113,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '2.6.0-maoni_6.0.0'
+            name = maoni_version
             desc = 'Handler for Maoni that sends feedbacks to Doorbell.io'
             released = new Date()
-            vcsTag = '2.6.0-maoni_6.0.0'
+            vcsTag = maoni_version
         }
 
         publicDownloadNumbers = true
