@@ -39,13 +39,10 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
-        classpath 'com.uber:okbuck:0.47.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
-apply plugin: 'com.uber.okbuck'
 
 allprojects {
     repositories {
@@ -124,13 +121,4 @@ subprojects { project ->
 static def addCommonConfigurationForJavaModules(Project project) {
     project.sourceCompatibility = JavaVersion.VERSION_1_7
     project.targetCompatibility = JavaVersion.VERSION_1_7
-}
-
-okbuck {
-    lint {
-        disabled = true
-    }
-    buildToolVersion = "28.0.3"
-    target = "android-28"
-    buckProjects = project.subprojects
 }

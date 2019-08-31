@@ -72,10 +72,6 @@ jobs:
           command: ./tools/update-github-pages.sh
 
       - store_artifacts:
-          path: buck-out/gen
-          destination: buck-out
-
-      - store_artifacts:
           path: maoni-sample/build/outputs
           destination: outputs
 
