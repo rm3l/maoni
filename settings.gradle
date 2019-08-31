@@ -21,3 +21,16 @@
  */
 
 include ':maoni-sample', ':maoni', ':maoni-common'
+include ':callbacks'
+include ':callbacks:maoni-doorbell'
+include ':callbacks:maoni-email'
+include ':callbacks:maoni-github'
+include ':callbacks:maoni-jira'
+include ':callbacks:maoni-slack'
+
+project(':callbacks').projectDir = "$rootDir/callbacks" as File
+project(':callbacks:maoni-doorbell').projectDir = "$rootDir/callbacks/maoni-doorbell" as File
+project(':callbacks:maoni-email').projectDir = "$rootDir/callbacks/maoni-email" as File
+project(':callbacks:maoni-github').projectDir = "$rootDir/callbacks/maoni-github" as File
+project(':callbacks:maoni-jira').projectDir = "$rootDir/callbacks/maoni-jira" as File
+project(':callbacks:maoni-slack').projectDir = "$rootDir/callbacks/maoni-slack" as File
