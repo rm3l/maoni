@@ -23,7 +23,7 @@
 -printconfiguration config.txt
 
 ## please KEEP ALL THE NAMES
-#-keepnames class ** { *; }
+-keepnames class ** { *; }
 
 #Repackage all class files that are renamed, by moving them into the single given package.
 -repackageclasses ''
