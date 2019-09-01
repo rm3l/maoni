@@ -506,6 +506,7 @@ In no particular order:
 * [utopian.io/@kedi](https://crowdin.com/profile/Apsimati)
 * [Dimitar Dinchev](https://github.com/ddinchev)
 * [vlad-roid](https://github.com/vlad-roid)
+* [gmiklos-inst](https://github.com/gmiklos-inst)
 
 
 ## License
