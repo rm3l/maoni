@@ -68,7 +68,7 @@ import static org.rm3l.maoni.doorbell.api.MaoniDoorbellTransferListener.MaoniDoo
  */
 public class MaoniDoorbellListener implements Listener {
 
-    private static final String USER_AGENT = "maoni-doorbell (v7.0.0)";
+    private static final String USER_AGENT = "maoni-doorbell (v8.0.0)";
 
     private static final String FEEDBACK_API_BASE_URL = "https://doorbell.io/api/";
 

@@ -103,10 +103,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = '7.0.0'
+            name = maoni_version
             desc = 'Maoni Common'
             released = new Date()
-            vcsTag = '7.0.0'
+            vcsTag = maoni_version
         }
 
         publicDownloadNumbers = true
