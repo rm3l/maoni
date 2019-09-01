@@ -42,14 +42,14 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 **Maoni** is a lightweight open-source library for integrating 
-a way to collect user feedbacks from within Android applications.
+a way to collect user feedback from within Android applications.
 
 Built from the ground up with the [Material Design](https://www.google.com/design/spec/material-design) 
 principles in mind, it allows to capture a screenshot of the activity the user is currently viewing 
 and attach it to the feedback.
 
 Just provide callbacks implementations and you're good to go. 
-Maoni will take care of collecting your users' feedbacks and call those implementations.
+Maoni will take care of collecting feedback and call those implementations.
 
 Below is a quick overview of the features included:
 - **Contextual information**. Device and application information, if available.
@@ -71,9 +71,9 @@ Below is a quick overview of the features included:
     So you just have limitless possibilities for an integration with any remote feedback services. For reference, the following implementations are provided as external dependencies:
         - [maoni-email](https://github.com/maoni-app/maoni-email), so your users can send their feedback via email
         - [maoni-slack](https://github.com/maoni-app/maoni-slack), so your users can send their feedback to Slack
-        - [maoni-jira](https://github.com/maoni-app/maoni-jira), to send your users' feedbacks as JIRA issues (to the JIRA host of your choice)
-        - [maoni-github](https://github.com/maoni-app/maoni-github), to send your users' feedbacks as Github issues (to the Github repository of your choice)
-        - [maoni-doorbell](https://github.com/maoni-app/maoni-doorbell), to send your users' feedbacks to [Doorbell.io](https://doorbell.io/home)
+        - [maoni-jira](https://github.com/maoni-app/maoni-jira), to send user feedback as JIRA issues (to the JIRA host of your choice)
+        - [maoni-github](https://github.com/maoni-app/maoni-github), to send user feedback as Github issues (to the Github repository of your choice)
+        - [maoni-doorbell](https://github.com/maoni-app/maoni-doorbell), to send user feedback to [Doorbell.io](https://doorbell.io/home)
        
 
 Take a look at the [sample application](https://play.google.com/store/apps/details?id=org.rm3l.maoni.sample) 
@@ -83,7 +83,7 @@ for a quick overview.
 ## Motivations
 
 While working on a new version of [DD-WRT Companion](https://ddwrt-companion.app/), 
-one of my Android apps, I needed a simple yet pleasant way to collect users' feedbacks, 
+one of my Android apps, I needed a simple yet pleasant way to collect user feedback, 
 along with some contextual information.
 I experimented with a simple dialog, then tried a bunch of other libraries, 
 but could not find one with screenshot capturing capabilities, not vendor lock-in, 
@@ -126,7 +126,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:7.0.0@aar') {
+    compile ('org.rm3l:maoni:8.0.2@aar') {
         transitive = true
     }
   }
@@ -173,13 +173,13 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-**You're good to go!** Maoni will take care of validating / collecting your users' feedbacks 
+**You're good to go!** Maoni will take care of validating / collecting user feedback 
 and call your callbacks implementations. 
 
 #### Available callbacks
 Some common callbacks for Maoni are available as external dependencies to include in your application.
 
-##### [maoni-email](https://github.com/maoni-app/maoni-email)
+##### [maoni-email](callbacks/maoni-email/README.md)
 
 This callback opens up an Intent for sending an email with the feedback collected.
 This is the default fallback listener used in case no other listener has been set explicitly.
@@ -189,7 +189,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-email:<appropriateVersion>'
+    compile 'org.rm3l:maoni-email:8.0.2'
   }
 ```
 
@@ -205,10 +205,10 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-Visit the dedicated [repository](https://github.com/maoni-app/maoni-email) for further details.
+Visit the dedicated [README](callbacks/maoni-email/README.md) for further details.
 
 
-##### [maoni-slack](https://github.com/maoni-app/maoni-slack)
+##### [maoni-slack](callbacks/maoni-slack/README.md)
 
 This callback sends feedback collected to Slack via an [an incoming WebHook integration](https://my.slack.com/services/new/incoming-webhook).
  
@@ -219,7 +219,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-slack:<appropriateVersion>'
+    compile 'org.rm3l:maoni-slack:8.0.2'
   }
 ```
 
@@ -235,9 +235,9 @@ And set it as the listener for your Maoni instance
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-Visit the dedicated [repository](https://github.com/maoni-app/maoni-slack) for further details.
+Visit the dedicated [README](callbacks/maoni-slack/README.md) for further details.
 
-##### [maoni-github](https://github.com/maoni-app/maoni-github)
+##### [maoni-github](callbacks/maoni-github/README.md)
 
 This callback sends feedback collected as a Github issue to a specified Github repository.
 
@@ -248,13 +248,7 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    // ...
-    //As this will be plugged as a callback for Maoni, it requires Maoni dependency as well.
-    //See http://maoni.rm3l.org for more details.
-    //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
-    //   transitive = true;
-    //}
-    compile 'org.rm3l:maoni-github:<appropriateVersion>'
+    compile 'org.rm3l:maoni-github:8.0.2'
   }
 ```
 
@@ -271,10 +265,10 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
 ```
 
-Visit the dedicated [repository](https://github.com/maoni-app/maoni-github) for further details.
+Visit the dedicated [README](callbacks/maoni-github/README.md) for further details.
 
 
-##### [maoni-jira](https://github.com/maoni-app/maoni-jira)
+##### [maoni-jira](callbacks/maoni-jira/README.md)
 
 This callback sends feedback collected as a JIRA issue to a specified JIRA project.
 
@@ -284,13 +278,7 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    // ...
-    //As this will be plugged as a callback for Maoni, it requires Maoni dependency as well.
-    //See http://maoni.rm3l.org for more details.
-    //compile ('org.rm3l:maoni:<appropriate_version>@aar') {
-    //   transitive = true;
-    //}
-    compile 'org.rm3l:maoni-jira:<appropriateVersion>'
+    compile 'org.rm3l:maoni-jira:8.0.2'
   }
 ```
 
@@ -307,10 +295,10 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling context 
 ```
 
-Visit the dedicated [repository](https://github.com/maoni-app/maoni-jira) for further details.
+Visit the dedicated [README](callbacks/maoni-jira/README.md) for further details.
 
 
-##### [maoni-doorbell](https://github.com/maoni-app/maoni-doorbell)
+##### [maoni-doorbell](callbacks/maoni-doorbell/README.md)
 
 This callback sends feedback collected to [Doorbell](https://www.doorbell.io).
 
@@ -321,7 +309,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-doorbell:<appropriateVersion>'
+    compile 'org.rm3l:maoni-doorbell:8.0.2'
   }
 ```
 
@@ -337,7 +325,7 @@ And set it as the listener for your Maoni instance:
         .start(MaoniSampleMainActivity.this); //The screenshot captured is relative to this calling activity 
 ```
 
-Visit the dedicated [repository](https://github.com/maoni-app/maoni-doorbell) for further details.
+Visit the dedicated [README](callbacks/maoni-doorbell/README.md) for further details.
 
 
 #### Sharing the files captured with other apps
@@ -445,7 +433,7 @@ with the next update from Crowdin.
 
 ### Contributing callbacks for Maoni
 
-You can create separate projects that implement any of the Maoni callbacks interfaces 
+You can create separate Android Library Projects that implement any of the Maoni callbacks interfaces 
 (`Validator`, `Listener`, `UiListener`, `Handler` or any combination), 
 so users can use them in their projects.
 
@@ -454,7 +442,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-common:7.0.0'
+    api 'org.rm3l:maoni-common:8.0.2'
   }
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/maoni-app/maoni-slack) and [maoni-github](https://github.com/maoni-app/maoni-github)), as long as the callback implementation can be called from Maoni.
@@ -524,7 +512,7 @@ In no particular order:
 
     The MIT License (MIT)
     
-    Copyright (c) 2016 Armel Soro
+    Copyright (c) 2016-2019 Armel Soro
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
