@@ -113,10 +113,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = maoni_version
+            name = VERSION_NAME
             desc = 'Handler for Maoni that sends feedbacks to Doorbell.io'
             released = new Date()
-            vcsTag = maoni_version
+            vcsTag = VERSION_NAME
         }
 
         publicDownloadNumbers = true

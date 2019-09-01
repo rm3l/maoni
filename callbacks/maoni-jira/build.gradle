@@ -111,10 +111,10 @@ bintray {
 
         //noinspection GroovyAssignabilityCheck
         version {
-            name = maoni_version
+            name = VERSION_NAME
             desc = 'Maoni Android Library - Github Handler'
             released = new Date()
-            vcsTag = maoni_version
+            vcsTag = VERSION_NAME
         }
 
         publicDownloadNumbers = true
