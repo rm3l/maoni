@@ -27,6 +27,9 @@ apply plugin: 'com.github.dcendents.android-maven'
 final VERSION_NAME = maoni_version
 final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
 
+group = maoni_group
+version = VERSION_NAME
+
 android {
     compileSdkVersion 28
 
