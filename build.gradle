@@ -60,6 +60,10 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+task javadoc {
+    printf("Fake Javadoc task from root project")
+}
+
 ext.getPlayStoreConfig = {
   return file(homePath.toString() + "/.droid/PlayStore.keys.json")
 }
