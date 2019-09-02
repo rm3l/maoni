@@ -1,3 +1,5 @@
+[![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni-github.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni-github)
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
