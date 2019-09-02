@@ -69,11 +69,11 @@ Below is a quick overview of the features included:
     - Form validation. You can provide your own if needed for example for your extra fields.
     - Listeners. Upon validation, Maoni calls the callbacks implementations you provided earlier.
     So you just have limitless possibilities for an integration with any remote feedback services. For reference, the following implementations are provided as external dependencies:
-        - [maoni-email](https://github.com/maoni-app/maoni-email), so your users can send their feedback via email
-        - [maoni-slack](https://github.com/maoni-app/maoni-slack), so your users can send their feedback to Slack
-        - [maoni-jira](https://github.com/maoni-app/maoni-jira), to send user feedback as JIRA issues (to the JIRA host of your choice)
-        - [maoni-github](https://github.com/maoni-app/maoni-github), to send user feedback as Github issues (to the Github repository of your choice)
-        - [maoni-doorbell](https://github.com/maoni-app/maoni-doorbell), to send user feedback to [Doorbell.io](https://doorbell.io/home)
+        - [maoni-email](callbacks/maoni-email/), so your users can send their feedback via email
+        - [maoni-slack](callbacks/maoni-slack/), so your users can send their feedback to Slack
+        - [maoni-jira](callbacks/maoni-jira/), to send user feedback as JIRA issues (to the JIRA host of your choice)
+        - [maoni-github](callbacks/maoni-github/), to send user feedback as Github issues (to the Github repository of your choice)
+        - [maoni-doorbell](callbacks/maoni-doorbell), to send user feedback to [Doorbell.io](https://doorbell.io/home)
        
 
 Take a look at the [sample application](https://play.google.com/store/apps/details?id=org.rm3l.maoni.sample) 
