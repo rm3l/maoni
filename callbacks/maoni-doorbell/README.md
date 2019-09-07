@@ -17,8 +17,8 @@ Add this to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:8.0.6'
-    implementation 'org.rm3l:maoni-doorbell:8.0.6'
+    implementation 'org.rm3l:maoni:8.0.6@aar'
+    implementation 'org.rm3l:maoni-doorbell:8.0.6@aar'
   }
 ```
 
