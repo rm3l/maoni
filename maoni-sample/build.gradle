@@ -30,7 +30,7 @@ try {
     localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
 } catch (FileNotFoundException fnfe) {
     //No worries
-    printf(fnfe.getClass().getSimpleName() + " : " + fnfe.getMessage() +
+    logger.info(fnfe.getClass().getSimpleName() + " : " + fnfe.getMessage() +
         " => maoni-github callback will not be available!\n")
 }
 //maoni-github creds

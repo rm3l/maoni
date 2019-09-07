@@ -96,7 +96,7 @@ bintray {
     final propsFile = new File(homePath.toString() + "/.droid/", "maoni.bintray.properties")
 
     if (propsFile.exists()) {
-        printf("[Bintray] Using properties file located at " + propsFile.absolutePath)
+        logger.info("[Bintray] Using properties file located at " + propsFile.absolutePath)
         final props = new Properties()
         props.load(new FileInputStream(propsFile))
         user = props['user']

@@ -64,7 +64,7 @@ task clean(type: Delete) {
 }
 
 task javadoc {
-    printf("Fake Javadoc task from root project")
+    logger.info("Fake Javadoc task from root project")
 }
 
 ext.getPlayStoreConfig = {
@@ -87,7 +87,7 @@ ext.getReleaseSigningInfo = {
         final configName = 'release'
 
         if (propsFile.exists() && android.signingConfigs.hasProperty(configName)) {
-            printf("Using properties file located at " + propsFile.absolutePath)
+            logger.info("Using properties file located at " + propsFile.absolutePath)
             final props = new Properties()
             props.load(new FileInputStream(propsFile))
             storeFile = new File(props['keystore'].toString())
