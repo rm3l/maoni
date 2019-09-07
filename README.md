@@ -126,9 +126,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:8.0.5@aar') {
-        transitive = true
-    }
+    implementation 'org.rm3l:maoni:8.0.5@aar'
   }
 ```
 
@@ -183,13 +181,15 @@ Some common callbacks for Maoni are available as external dependencies to includ
 
 This callback opens up an Intent for sending an email with the feedback collected.
 This is the default fallback listener used in case no other listener has been set explicitly.
+In other words, you need not import `maoni-email` as an extra dependency.
+Just import `maoni` as depicted above, and you're good to go.
 
 Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-email:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.5'
   }
 ```
 
@@ -219,7 +219,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-slack:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.5'
+    implementation 'org.rm3l:maoni-slack:8.0.5'
   }
 ```
 
@@ -248,7 +249,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    compile 'org.rm3l:maoni-github:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.5'
+    implementation 'org.rm3l:maoni-github:8.0.5'
   }
 ```
 
@@ -278,7 +280,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    compile 'org.rm3l:maoni-jira:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.5'
+    implementation 'org.rm3l:maoni-jira:8.0.5'
   }
 ```
 
@@ -309,7 +312,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-doorbell:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.5'
+    implementation 'org.rm3l:maoni-doorbell:8.0.5'
   }
 ```
 
@@ -412,7 +416,7 @@ sdkmanager "build-tools;28.0.3"
 
 Now you can build the project with the `Gradle Wrapper`:
 ```bash
-./gradlew assembleDebug
+./gradlew lintDebug testDebug assembleDebug
 ```
 
 You will then find the artifacts under the following folders:
