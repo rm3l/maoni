@@ -58,15 +58,15 @@ group = maoni_group
 version = VERSION_NAME
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(":maoni-common")
     testImplementation 'junit:junit:4.12'
-    api 'androidx.appcompat:appcompat:1.0.2'
+    api 'androidx.appcompat:appcompat:1.1.0'
     api 'com.google.android.material:material:1.0.0'
     api 'me.panavtec:drawableview:0.6.0'
 
     // Include maoni-email as the default listener
-    implementation project(":callbacks:maoni-email")
+    api project(":callbacks:maoni-email")
 }
 
 task generateSourcesJar(type: Jar) {

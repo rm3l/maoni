@@ -59,7 +59,7 @@ android {
 }
 
 dependencies {
-    implementation project(':maoni-common')
+    api project(':maoni-common')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

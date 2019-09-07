@@ -59,7 +59,7 @@ android {
 }
 
 dependencies {
-    implementation project(':maoni-common')
+    api project(':maoni-common')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 }

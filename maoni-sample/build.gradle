@@ -187,8 +187,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko-sdk27-listeners:$anko_version"
 
     implementation project(":maoni")
-    implementation project(":maoni-common")
-    implementation project(":callbacks:maoni-email")
     implementation project(":callbacks:maoni-github")
     implementation project(":callbacks:maoni-jira")
     implementation project(":callbacks:maoni-slack")
