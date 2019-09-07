@@ -57,7 +57,7 @@ jobs:
       
       - run:
           name: Run Tests
-          command: ./gradlew clean lint testDebug --stacktrace
+          command: ./gradlew clean lintDebug testDebug --stacktrace
       
       - run:
           name: Assemble package
