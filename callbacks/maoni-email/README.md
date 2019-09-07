@@ -16,8 +16,8 @@ Add this to your `build.gradle`:
 
 ```gradle
   dependencies {
-    compile 'org.rm3l:maoni:8.0.4'
-    compile 'org.rm3l:maoni-email:8.0.4'
+    compile 'org.rm3l:maoni:8.0.5'
+    compile 'org.rm3l:maoni-email:8.0.5'
   }
 ```
 

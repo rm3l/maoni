@@ -29,7 +29,7 @@ SOFTWARE.
     <string name="library_maoni_libraryName" translatable="false">Maoni</string>
     <string name="library_maoni_libraryDescription" translatable="false">Maoni is a lightweight library for collecting and handling user feedback from within Android applications</string>
     <string name="library_maoni_libraryWebsite" translatable="false">http://maoni.rm3l.org</string>
-    <string name="library_maoni_libraryVersion" translatable="false">8.0.4</string>
+    <string name="library_maoni_libraryVersion" translatable="false">8.0.5</string>
     <!-- OpenSource section -->
     <string name="library_maoni_isOpenSource" translatable="false">true</string>
     <string name="library_maoni_repositoryLink" translatable="false">https://github.com/rm3l/maoni</string>
