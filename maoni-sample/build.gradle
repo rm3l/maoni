@@ -52,11 +52,11 @@ def slackEmojiIcon = localProperties.getProperty('slack.emoji.icon', "")
 android {
     compileSdkVersion 28
 
-    playAccountConfigs {
-        defaultAccountConfig {
-            jsonFile = rootProject.getPlayStoreConfig()
-        }
-    }
+//    playAccountConfigs {
+//        defaultAccountConfig {
+//            jsonFile = rootProject.getPlayStoreConfig()
+//        }
+//    }
 
     signingConfigs {
         debug {
@@ -118,7 +118,7 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-        playAccountConfig = playAccountConfigs.defaultAccountConfig
+//        playAccountConfig = playAccountConfigs.defaultAccountConfig
     }
 
     buildTypes {
@@ -207,10 +207,19 @@ dependencies {
 }
 
 play {
+    serviceAccountCredentials = rootProject.getPlayStoreConfig()
     // ...
     track = 'beta'
-    untrackOld = true // will un-track 'alpha' while upload to 'beta'
+    userFraction = 1
+    releaseStatus = "inProgress"
 
-    uploadImages = false
-    errorOnSizeLimit = false
+    resolutionStrategy = "auto"
+    outputProcessor { // this: ApkVariantOutput
+        versionNameOverride = "$versionNameOverride.$versionCode"
+    }
+//
+//    untrackOld = true // will un-track 'alpha' while upload to 'beta'
+//
+//    uploadImages = false
+//    errorOnSizeLimit = false
 }
