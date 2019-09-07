@@ -126,9 +126,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:8.0.5@aar') {
-        transitive = true
-    }
+    implementation 'org.rm3l:maoni:8.0.6@aar'
   }
 ```
 
@@ -183,13 +181,15 @@ Some common callbacks for Maoni are available as external dependencies to includ
 
 This callback opens up an Intent for sending an email with the feedback collected.
 This is the default fallback listener used in case no other listener has been set explicitly.
+In other words, you need not import `maoni-email` as an extra dependency.
+Just import `maoni` as depicted above, and you're good to go.
 
 Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-email:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.6'
   }
 ```
 
@@ -219,7 +219,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-slack:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.6'
+    implementation 'org.rm3l:maoni-slack:8.0.6'
   }
 ```
 
@@ -248,7 +249,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    compile 'org.rm3l:maoni-github:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.6'
+    implementation 'org.rm3l:maoni-github:8.0.6'
   }
 ```
 
@@ -278,7 +280,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    compile 'org.rm3l:maoni-jira:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.6'
+    implementation 'org.rm3l:maoni-jira:8.0.6'
   }
 ```
 
@@ -309,7 +312,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-doorbell:8.0.5'
+    implementation 'org.rm3l:maoni:8.0.6'
+    implementation 'org.rm3l:maoni-doorbell:8.0.6'
   }
 ```
 
@@ -412,7 +416,7 @@ sdkmanager "build-tools;28.0.3"
 
 Now you can build the project with the `Gradle Wrapper`:
 ```bash
-./gradlew assembleDebug
+./gradlew lintDebug testDebug assembleDebug
 ```
 
 You will then find the artifacts under the following folders:
@@ -442,7 +446,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    api 'org.rm3l:maoni-common:8.0.5'
+    api 'org.rm3l:maoni-common:8.0.6'
   }
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/maoni-app/maoni-slack) and [maoni-github](https://github.com/maoni-app/maoni-github)), as long as the callback implementation can be called from Maoni.
