@@ -126,7 +126,7 @@ Grab via Gradle, by adding this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile ('org.rm3l:maoni:8.0.2@aar') {
+    compile ('org.rm3l:maoni:8.0.3@aar') {
         transitive = true
     }
   }
@@ -189,7 +189,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-email:8.0.2'
+    compile 'org.rm3l:maoni-email:8.0.3'
   }
 ```
 
@@ -219,7 +219,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-slack:8.0.2'
+    compile 'org.rm3l:maoni-slack:8.0.3'
   }
 ```
 
@@ -248,7 +248,7 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    compile 'org.rm3l:maoni-github:8.0.2'
+    compile 'org.rm3l:maoni-github:8.0.3'
   }
 ```
 
@@ -278,7 +278,7 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    compile 'org.rm3l:maoni-jira:8.0.2'
+    compile 'org.rm3l:maoni-jira:8.0.3'
   }
 ```
 
@@ -309,7 +309,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    compile 'org.rm3l:maoni-doorbell:8.0.2'
+    compile 'org.rm3l:maoni-doorbell:8.0.3'
   }
 ```
 
@@ -442,7 +442,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    api 'org.rm3l:maoni-common:8.0.2'
+    api 'org.rm3l:maoni-common:8.0.3'
   }
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/maoni-app/maoni-slack) and [maoni-github](https://github.com/maoni-app/maoni-github)), as long as the callback implementation can be called from Maoni.
