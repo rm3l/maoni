@@ -23,7 +23,8 @@ final homePath = System.properties['user.home']
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 
 final VERSION_NAME = maoni_version
 final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
@@ -84,6 +85,39 @@ artifacts {
     archives generateSourcesJar
 }
 
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            // Define this explicitly if using implementation or api configurations
+            pom.withXml {
+                def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+
+                // Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.compile.allDependencies.each {
+                    // Ensure dependencies such as fileTree are not included.
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+
+                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.implementation.allDependencies.each {
+                    // Ensure dependencies such as fileTree are not included.
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+        }
+    }
+}
+
 bintray {
 
     //Attempt to read keystore.properties file, if any first
@@ -99,6 +133,8 @@ bintray {
         user = ""
         key = ""
     }
+
+    publications = ['MyPublication']
 
     publish = true //If version should be auto published after an upload
 
