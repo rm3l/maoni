@@ -465,7 +465,7 @@ the following properties:
 The following command can then be run to publish a new version:
 
 ```bash
-./gradlew build javadoc bintrayUpload
+./gradlew build javadoc generatePomFileForMyPublicationPublication bintrayUpload
 ```
 
 ## In use in the following apps
