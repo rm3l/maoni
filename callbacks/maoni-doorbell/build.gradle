@@ -92,23 +92,42 @@ artifacts {
     archives generateSourcesJar
 }
 
+def pomConfig = {
+    licenses {
+        license {
+            name POM_LICENCE_NAME
+            url POM_LICENCE_URL
+            distribution POM_LICENCE_DIST
+        }
+    }
+    developers {
+        developer {
+            id POM_DEVELOPER_ID
+            name POM_DEVELOPER_NAME
+            email 'armel@rm3l.org'
+        }
+    }
+    scm {
+        url POM_SCM_URL
+        connection POM_SCM_CONNECTION
+        developerConnection POM_SCM_DEV_CONNECTION
+    }
+}
+
 publishing {
     publications {
-        MyPublication(MavenPublication) {
+        release(MavenPublication) {
             // Define this explicitly if using implementation or api configurations
             pom.withXml {
-                def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+                def pomNode = asNode()
+                pomNode.remove(pomNode.get('packaging'))
 
-                // Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
-                configurations.compile.allDependencies.each {
-                    // Ensure dependencies such as fileTree are not included.
-                    if (it.name != 'unspecified') {
-                        def dependencyNode = dependenciesNode.appendNode('dependency')
-                        dependencyNode.appendNode('groupId', it.group)
-                        dependencyNode.appendNode('artifactId', it.name)
-                        dependencyNode.appendNode('version', it.version)
-                    }
-                }
+                pomNode.appendNode('name', POM_NAME)
+                pomNode.appendNode('description', POM_DESCRIPTION)
+                pomNode.appendNode('url', POM_URL)
+                pomNode.appendNode('packaging', POM_PACKAGING)
+
+                def dependenciesNode = pomNode.getAt('dependencies')[0] ?: pomNode.appendNode('dependencies')
 
                 // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
                 configurations.implementation.allDependencies.each {
@@ -117,9 +136,16 @@ publishing {
                         def dependencyNode = dependenciesNode.appendNode('dependency')
                         dependencyNode.appendNode('groupId', it.group)
                         dependencyNode.appendNode('artifactId', it.name)
-                        dependencyNode.appendNode('version', it.version)
+                        if (it.name.startsWith('maoni-')) {
+                            dependencyNode.appendNode('version', '8.0.9')
+                            dependencyNode.appendNode('packaging', 'aar')
+                        } else {
+                            dependencyNode.appendNode('version', it.version)
+                        }
                     }
                 }
+
+                pomNode.children().last() + pomConfig
             }
         }
     }
@@ -141,7 +167,7 @@ bintray {
         key = ""
     }
 
-    publications = ['MyPublication']
+    publications = ['release']
 
     publish = true //If version should be auto published after an upload
 
@@ -161,9 +187,9 @@ bintray {
         publicDownloadNumbers = true
 
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/rm3l/maoni-doorbell.git'
-        websiteUrl = 'https://github.com/rm3l/maoni-doorbell'
-        issueTrackerUrl = 'https://github.com/rm3l/maoni-doorbell/issues'
+        vcsUrl = 'https://github.com/rm3l/maoni.git'
+        websiteUrl = 'https://github.com/maoni-app/maoni/tree/8.0.9/callbacks/maoni-doorbell'
+        issueTrackerUrl = 'https://github.com/rm3l/maoni/issues'
 
     }
     configurations = ['archives']
