@@ -8,6 +8,8 @@
 [![CircleCI](https://circleci.com/gh/maoni-app/maoni/tree/master.svg?style=svg)](https://circleci.com/gh/maoni-app/maoni/tree/master)
 [![Issue Count](https://codeclimate.com/github/maoni-app/maoni/badges/issue_count.svg)](https://codeclimate.com/github/maoni-app/maoni)
 
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=maoni-app/maoni)](https://dependabot.com)
+
 [![GitHub watchers](https://img.shields.io/github/watchers/maoni-app/maoni.svg?style=social&label=Watch)](https://github.com/maoni-app/maoni)
 [![GitHub stars](https://img.shields.io/github/stars/maoni-app/maoni.svg?style=social&label=Star)](https://github.com/maoni-app/maoni)
 [![GitHub forks](https://img.shields.io/github/forks/maoni-app/maoni.svg?style=social&label=Fork)](https://github.com/maoni-app/maoni)
