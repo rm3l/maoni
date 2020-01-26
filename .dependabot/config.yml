@@ -33,7 +33,7 @@ update_configs:
       - "dependencies"
 
   - package_manager: "java:gradle"
-    directory: "/maoni-doorbell"
+    directory: "/callbacks/maoni-doorbell"
     update_schedule: "daily"
     default_reviewers:
       - "rm3l"
@@ -41,7 +41,7 @@ update_configs:
       - "dependencies"
 
   - package_manager: "java:gradle"
-    directory: "/maoni-email"
+    directory: "/callbacks/maoni-email"
     update_schedule: "daily"
     default_reviewers:
       - "rm3l"
@@ -49,7 +49,7 @@ update_configs:
       - "dependencies"
 
   - package_manager: "java:gradle"
-    directory: "/maoni-github"
+    directory: "/callbacks/maoni-github"
     update_schedule: "daily"
     default_reviewers:
       - "rm3l"
@@ -57,7 +57,7 @@ update_configs:
       - "dependencies"
 
   - package_manager: "java:gradle"
-    directory: "/maoni-jira"
+    directory: "/callbacks/maoni-jira"
     update_schedule: "daily"
     default_reviewers:
       - "rm3l"
@@ -65,7 +65,7 @@ update_configs:
       - "dependencies"
 
   - package_manager: "java:gradle"
-    directory: "/maoni-slack"
+    directory: "/callbacks/maoni-slack"
     update_schedule: "daily"
     default_reviewers:
       - "rm3l"
