@@ -1,0 +1,73 @@
+version: 1
+update_configs:
+  - package_manager: "java:gradle"
+    directory: "/"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni-sample"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni-common"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni-doorbell"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni-email"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni-github"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni-jira"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
+
+  - package_manager: "java:gradle"
+    directory: "/maoni-slack"
+    update_schedule: "daily"
+    default_reviewers:
+      - "rm3l"
+    default_labels:
+      - "dependencies"
