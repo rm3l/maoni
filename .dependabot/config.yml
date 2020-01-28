@@ -2,7 +2,7 @@ version: 1
 update_configs:
   - package_manager: "java:gradle"
     directory: "/"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -10,7 +10,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/maoni-sample"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -18,7 +18,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/maoni-common"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -26,7 +26,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/maoni"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -34,7 +34,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/callbacks/maoni-doorbell"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -42,7 +42,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/callbacks/maoni-email"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -50,7 +50,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/callbacks/maoni-github"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -58,7 +58,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/callbacks/maoni-jira"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
@@ -66,7 +66,7 @@ update_configs:
 
   - package_manager: "java:gradle"
     directory: "/callbacks/maoni-slack"
-    update_schedule: "daily"
+    update_schedule: "weekly"
     default_reviewers:
       - "rm3l"
     default_labels:
