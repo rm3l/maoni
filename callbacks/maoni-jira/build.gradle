@@ -186,7 +186,7 @@ bintray {
 
         licenses = ['MIT']
         vcsUrl = 'https://github.com/rm3l/maoni.git'
-        websiteUrl = 'https://github.com/maoni-app/maoni/tree/8.0.10/callbacks/maoni-jira'
+        websiteUrl = 'https://github.com/rm3l/maoni/tree/8.0.10/callbacks/maoni-jira'
         issueTrackerUrl = 'https://github.com/rm3l/maoni/issues'
 
     }
