@@ -32,7 +32,7 @@ This is a demo application for Maoni, a lightweight library which provides      
   <string name="default_email_addr">some.one@somewhe.re</string>
   <string name="send_feedback_activity_title">Send Feedback</string>
   <string name="send_feedback_activity_intro"><![CDATA[
-        Hey! Love or hate this app? We would love to hear from you.
+        Hey! Love this app? We would love to hear from you.
         \n\n
         Note: Almost everything in Maoni is customizable.
     ]]></string>

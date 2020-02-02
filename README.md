@@ -160,7 +160,7 @@ To customize every aspect of your Maoni activity, call the fluent methods of `Ma
     //share the screenshot capture file to other apps (depending on your callback implementation)
     new Maoni.Builder(MY_FILE_PROVIDER_AUTHORITY)
         .withWindowTitle("Send Feedback") //Set to an empty string to clear it
-        .withMessage("Hey! Love or hate this app? We would love to hear from you.")
+        .withMessage("Hey! Love this app? We would love to hear from you.")
         .withExtraLayout(R.layout.my_feedback_activity_extra_content)
         .withHandler(myHandlerForMaoni) //Custom Callback for Maoni
         .withFeedbackContentHint("[Custom hint] Write your feedback here")
