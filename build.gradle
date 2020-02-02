@@ -26,7 +26,7 @@ final homePath = System.properties['user.home']
 
 buildscript {
     ext.maoni_group = 'org.rm3l'
-    ext.maoni_version = '8.0.10'
+    ext.maoni_version = '8.1.0'
 
     ext.kotlin_version = '1.3.61'
     ext.anko_version = '0.10.8'

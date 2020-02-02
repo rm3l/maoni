@@ -21,8 +21,8 @@ Now in your app, add this to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:8.0.10@aar'
-    implementation 'org.rm3l:maoni-slack:8.0.10@aar'
+    implementation 'org.rm3l:maoni:8.1.0@aar'
+    implementation 'org.rm3l:maoni-slack:8.1.0@aar'
   }
 ```
 
