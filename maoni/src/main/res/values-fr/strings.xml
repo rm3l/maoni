@@ -22,25 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Bibliothèque Maoni</string>
-  <string name="maoni_screenshot">Capture d\'écran</string>
-  <string name="maoni_feedback_message">Bonjour!\n
-Aimez-vous cette application? Souhaitez-vous suggérer de nouvelles fonctionnalités, signaler des dysfonctionnements ou simplement nous dire bonjour?\n
-Hâte de vous lire.</string>
-  <string name="maoni_feedback_content_hint">Ecrivez votre message ici</string>
-  <string name="maoni_feedback_include_screenshot_checkbox_title">Joindre la capture d\'écran au rapport</string>
-  <string name="maoni_feedback_include_logs_title">Inclure les fichiers journaux</string>
-  <string name="maoni_touch_to_preview">Toucher pour prévisualiser et annoter</string>
-  <string name="maoni_screenshot_informational_text">La capture d\'écran nous permet d\'avoir plus d\'éléments contextuels relatifs à votre commentaire.</string>
-  <string name="maoni_send_feedback">Envoyer un commentaire</string>
-  <string name="maoni_action_settings">Paramètres</string>
-  <string name="maoni_validate_must_not_be_blank">Doit être renseigné</string>
-  <string name="maoni_header">En-tête</string>
-  <string name="maoni_screenshot_preview_internal_error">Erreur interne. Merci de réessayer ultérieurement.</string>
-  <string name="maoni_screenshot_preview">Aperçu</string>
-  <string name="maoni_highlight">Surligner</string>
-  <string name="maoni_blackout">Masquer</string>
-  <string name="maoni_undo">Annuler</string>
-  <string name="maoni_save">Sauvegarder</string>
-  <string name="maoni_close">Fermer</string>
+    <string name="maoni_app_name">Bibliothèque Maoni</string>
+    <string name="maoni_screenshot">Capture d\'écran</string>
+    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_content_hint">Ecrivez votre message ici</string>
+    <string name="maoni_feedback_include_screenshot_checkbox_title">Joindre la capture d\'écran au rapport</string>
+    <string name="maoni_feedback_include_logs_title">Inclure les fichiers journaux</string>
+    <string name="maoni_touch_to_preview">Toucher pour prévisualiser et annoter</string>
+    <string name="maoni_screenshot_informational_text">La capture d\'écran nous permet d\'avoir plus d\'éléments contextuels relatifs à votre commentaire.</string>
+    <string name="maoni_send_feedback">Envoyer un commentaire</string>
+    <string name="maoni_action_settings">Paramètres</string>
+    <string name="maoni_validate_must_not_be_blank">Doit être renseigné</string>
+    <string name="maoni_header">En-tête</string>
+    <string name="maoni_screenshot_preview_internal_error">Erreur interne. Merci de réessayer ultérieurement.</string>
+    <string name="maoni_screenshot_preview">Aperçu</string>
+    <string name="maoni_highlight">Surligner</string>
+    <string name="maoni_blackout">Masquer</string>
+    <string name="maoni_undo">Annuler</string>
+    <string name="maoni_save">Sauvegarder</string>
+    <string name="maoni_close">Fermer</string>
 </resources>

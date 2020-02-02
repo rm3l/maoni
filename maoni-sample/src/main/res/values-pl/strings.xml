@@ -22,12 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Demo Maoni</string>
-  <string name="maoni_settings_activity_name">Ustawienia Demo Maoni</string>
-  <string name="feedback">Opinie</string>
-  <string name="title_activity_maoni_sample_main">Demo Maoni</string>
-  <string name="main_activity_text"><![CDATA[
-        Jest to aplikacja dem dla Maoni, lekka biblioteka która 
+    <string name="maoni_app_name">Demo Maoni</string>
+    <string name="maoni_settings_activity_name">Ustawienia Demo Maoni</string>
+    <string name="feedback">Opinie</string>
+    <string name="title_activity_maoni_sample_main">Demo Maoni</string>
+    <string name="main_activity_text"><![CDATA[        Jest to aplikacja dem dla Maoni, lekka biblioteka która 
         gotowa do użytkowania zmaterializowana aktywność dla zbierania opini użytkowników w istniejącej
         aplikacji
         \n
@@ -39,31 +38,30 @@ SOFTWARE.
         Proszę przejść do http://github.com/rm3l/maoni po dalsze instrukcję.
     
     ]]></string>
-  <string name="action_about">O programie</string>
-  <string name="default_email_addr">some.one@somewhe.re</string>
-  <string name="send_feedback_activity_title">Prześlij opinię</string>
-  <string name="send_feedback_activity_intro"><![CDATA[
-        Hej! Kochasz czy nienawidzisz tą aplikację? Bardzo chcielibyśmy usłyszeć od ciebie.
+    <string name="action_about">O programie</string>
+    <string name="default_email_addr">some.one@somewhe.re</string>
+    <string name="send_feedback_activity_title">Prześlij opinię</string>
+    <string name="send_feedback_activity_intro"><![CDATA[        Hey! Love this app? We would love to hear from you.
         \n\n
-        Uwaga: prawie wszystko w Maoni jest konfigurowalne.
+        Note: Almost everything in Maoni is customizable.
     ]]></string>
-  <string name="feedback_content_hint">Proszę pisać swoję cenne opinie tutaj.</string>
-  <string name="include_app_logs">Załącz logi aplikacji</string>
-  <string name="include_app_screenshot">Załącz zrzut ekranu</string>
-  <string name="touch_edit_screenshot">Dotknij aby wyświetlić podgląd i opisywanie</string>
-  <string name="content_error_message">Jest to niestandardowy tekst błędu, który może być wyświetlany twoim użytkownikom</string>
-  <string name="screenshot_hint">Jest to niestandardowy komunikat, który może być wyświetlany obok przechwytywania ekranu, aby wyjaśnić, dlaczego to może być bardzo pomocne.</string>
-  <string name="email_address">Adres Email</string>
-  <string name="an_extra_text_area">Obszar dla dodatkowego tekstu</string>
-  <string name="edittext_hint_write_something_here">EdytujTekst podpowiedź. Napisz coś tutaj.</string>
-  <string name="an_extra_radiogroup">Dodaj dodatkową Grupę-Radio</string>
-  <string name="rg_1">RG 1</string>
-  <string name="rg_2">RG 2</string>
-  <string name="rg_3">RG 3</string>
-  <string name="send_maoni_email">Wyślij poprzez email (email-maoni)</string>
-  <string name="send_maoni_github">Wyślij jako problem Github (manoi-github)</string>
-  <string name="send_maoni_jira">Wyślij jako problem JIRA (manoi-jira)</string>
-  <string name="send_maoni_slack">"Wyślij do Slack (manoi-slack)"</string>
-  <string name="how_to_send_feedback">Jak chciałbyś/aś przesyłać swoje opinie?</string>
-  <string name="action_settings">Ustawienia</string>
+    <string name="feedback_content_hint">Proszę pisać swoję cenne opinie tutaj.</string>
+    <string name="include_app_logs">Załącz logi aplikacji</string>
+    <string name="include_app_screenshot">Załącz zrzut ekranu</string>
+    <string name="touch_edit_screenshot">Dotknij aby wyświetlić podgląd i opisywanie</string>
+    <string name="content_error_message">Jest to niestandardowy tekst błędu, który może być wyświetlany twoim użytkownikom</string>
+    <string name="screenshot_hint">Jest to niestandardowy komunikat, który może być wyświetlany obok przechwytywania ekranu, aby wyjaśnić, dlaczego to może być bardzo pomocne.</string>
+    <string name="email_address">Adres Email</string>
+    <string name="an_extra_text_area">Obszar dla dodatkowego tekstu</string>
+    <string name="edittext_hint_write_something_here">EdytujTekst podpowiedź. Napisz coś tutaj.</string>
+    <string name="an_extra_radiogroup">Dodaj dodatkową Grupę-Radio</string>
+    <string name="rg_1">RG 1</string>
+    <string name="rg_2">RG 2</string>
+    <string name="rg_3">RG 3</string>
+    <string name="send_maoni_email">Wyślij poprzez email (email-maoni)</string>
+    <string name="send_maoni_github">Wyślij jako problem Github (manoi-github)</string>
+    <string name="send_maoni_jira">Wyślij jako problem JIRA (manoi-jira)</string>
+    <string name="send_maoni_slack">"Wyślij do Slack (manoi-slack)"</string>
+    <string name="how_to_send_feedback">Jak chciałbyś/aś przesyłać swoje opinie?</string>
+    <string name="action_settings">Ustawienia</string>
 </resources>

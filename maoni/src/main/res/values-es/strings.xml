@@ -22,23 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni biblioteca</string>
-  <string name="maoni_screenshot">Captura de pantalla</string>
-  <string name="maoni_feedback_message">! Oye! ¿Te encanta u odias esta aplicación? ¿Te gustaría sugerir una nueva característica, registrar un error o simplemente decir hola? Nos encantaría saber de usted.</string>
-  <string name="maoni_feedback_content_hint">Escriba sus comentarios aquí</string>
-  <string name="maoni_feedback_include_screenshot_checkbox_title">Incluir la captura de pantalla</string>
-  <string name="maoni_feedback_include_logs_title">Incluir registros</string>
-  <string name="maoni_touch_to_preview">Toque para escuchar y editar</string>
-  <string name="maoni_screenshot_informational_text">La captura de pantalla nos permite obtener mas información contextual sobre sus comentarios.</string>
-  <string name="maoni_send_feedback">Enviar comentarios</string>
-  <string name="maoni_action_settings">Configuraciones</string>
-  <string name="maoni_validate_must_not_be_blank">No debe estar en blanco</string>
-  <string name="maoni_header">Encabezado</string>
-  <string name="maoni_screenshot_preview_internal_error">Error interno. Por favor Inténtalo más tarde.</string>
-  <string name="maoni_screenshot_preview">Vista previa</string>
-  <string name="maoni_highlight">Destacar</string>
-  <string name="maoni_blackout">Apagón</string>
-  <string name="maoni_undo">Deshacer</string>
-  <string name="maoni_save">Guardar</string>
-  <string name="maoni_close">Cerrar</string>
+    <string name="maoni_app_name">Maoni biblioteca</string>
+    <string name="maoni_screenshot">Captura de pantalla</string>
+    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_content_hint">Escriba sus comentarios aquí</string>
+    <string name="maoni_feedback_include_screenshot_checkbox_title">Incluir la captura de pantalla</string>
+    <string name="maoni_feedback_include_logs_title">Incluir registros</string>
+    <string name="maoni_touch_to_preview">Toque para escuchar y editar</string>
+    <string name="maoni_screenshot_informational_text">La captura de pantalla nos permite obtener mas información contextual sobre sus comentarios.</string>
+    <string name="maoni_send_feedback">Enviar comentarios</string>
+    <string name="maoni_action_settings">Configuraciones</string>
+    <string name="maoni_validate_must_not_be_blank">No debe estar en blanco</string>
+    <string name="maoni_header">Encabezado</string>
+    <string name="maoni_screenshot_preview_internal_error">Error interno. Por favor Inténtalo más tarde.</string>
+    <string name="maoni_screenshot_preview">Vista previa</string>
+    <string name="maoni_highlight">Destacar</string>
+    <string name="maoni_blackout">Apagón</string>
+    <string name="maoni_undo">Deshacer</string>
+    <string name="maoni_save">Guardar</string>
+    <string name="maoni_close">Cerrar</string>
 </resources>

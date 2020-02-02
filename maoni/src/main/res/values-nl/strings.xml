@@ -22,23 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Bibliotheek</string>
-  <string name="maoni_screenshot">Schermafbeelding</string>
-  <string name="maoni_feedback_message">Hallo! Vindt u deze app leuk? Wilt u nieuwe functies voorstellen, storingen melden of gewoon hallo zeggen?\nWij zou graag iets van u horen.</string>
-  <string name="maoni_feedback_content_hint">Schrijf hier uw feedback</string>
-  <string name="maoni_feedback_include_screenshot_checkbox_title">Schermafbeelding nemen</string>
-  <string name="maoni_feedback_include_logs_title">Logs toevoegen</string>
-  <string name="maoni_touch_to_preview">Raak aan om te bekijken en bewerken</string>
-  <string name="maoni_screenshot_informational_text">Het screenshot geeft ons meer contextuele informatie over uw feedback.</string>
-  <string name="maoni_send_feedback">Feedback verzenden</string>
-  <string name="maoni_action_settings">Instellingen</string>
-  <string name="maoni_validate_must_not_be_blank">Mag niet blanco zijn</string>
-  <string name="maoni_header">Koptekst</string>
-  <string name="maoni_screenshot_preview_internal_error">Interne fout, Probeert het later opnieuw a. u. b.</string>
-  <string name="maoni_screenshot_preview">Voorbeeld</string>
-  <string name="maoni_highlight">Markeren</string>
-  <string name="maoni_blackout">Blackout</string>
-  <string name="maoni_undo">Ongedaan maken</string>
-  <string name="maoni_save">Bewaren</string>
-  <string name="maoni_close">Sluiten</string>
+    <string name="maoni_app_name">Maoni Bibliotheek</string>
+    <string name="maoni_screenshot">Schermafbeelding</string>
+    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_content_hint">Schrijf hier uw feedback</string>
+    <string name="maoni_feedback_include_screenshot_checkbox_title">Schermafbeelding nemen</string>
+    <string name="maoni_feedback_include_logs_title">Logs toevoegen</string>
+    <string name="maoni_touch_to_preview">Raak aan om te bekijken en bewerken</string>
+    <string name="maoni_screenshot_informational_text">Het screenshot geeft ons meer contextuele informatie over uw feedback.</string>
+    <string name="maoni_send_feedback">Feedback verzenden</string>
+    <string name="maoni_action_settings">Instellingen</string>
+    <string name="maoni_validate_must_not_be_blank">Mag niet blanco zijn</string>
+    <string name="maoni_header">Koptekst</string>
+    <string name="maoni_screenshot_preview_internal_error">Interne fout, Probeert het later opnieuw a. u. b.</string>
+    <string name="maoni_screenshot_preview">Voorbeeld</string>
+    <string name="maoni_highlight">Markeren</string>
+    <string name="maoni_blackout">Blackout</string>
+    <string name="maoni_undo">Ongedaan maken</string>
+    <string name="maoni_save">Bewaren</string>
+    <string name="maoni_close">Sluiten</string>
 </resources>

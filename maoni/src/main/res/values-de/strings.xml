@@ -22,23 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Library</string>
-  <string name="maoni_screenshot">Screenshot</string>
-  <string name="maoni_feedback_message">Hey! Du magst diese App oder auch nicht? Du möchtest gerne ein neues Feature vorschlagen, einen Fehler melden oder einfach nur Hallo sagen?\nWir würden gerne von dir hören.</string>
-  <string name="maoni_feedback_content_hint">Hier Feedback hinterlassen</string>
-  <string name="maoni_feedback_include_screenshot_checkbox_title">Screenshot hinzufügen</string>
-  <string name="maoni_feedback_include_logs_title">Protokolle hinzufügen</string>
-  <string name="maoni_touch_to_preview">Berühren, um Vorschau anzuzeigen und zu bearbeiten</string>
-  <string name="maoni_screenshot_informational_text">Der Screenshot liefert uns mehr Kontextinformationen zu deinem Feedback.</string>
-  <string name="maoni_send_feedback">Feedback senden</string>
-  <string name="maoni_action_settings">Einstellungen</string>
-  <string name="maoni_validate_must_not_be_blank">Darf nicht leer sein</string>
-  <string name="maoni_header">Kopfzeile</string>
-  <string name="maoni_screenshot_preview_internal_error">Interner Fehler. Bitte versuche es später nochmal.</string>
-  <string name="maoni_screenshot_preview">Vorschau</string>
-  <string name="maoni_highlight">Markieren</string>
-  <string name="maoni_blackout">Schwärzen</string>
-  <string name="maoni_undo">Rückgängig</string>
-  <string name="maoni_save">Speichern</string>
-  <string name="maoni_close">Schließen</string>
+    <string name="maoni_app_name">Maoni Library</string>
+    <string name="maoni_screenshot">Screenshot</string>
+    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_content_hint">Hier Feedback hinterlassen</string>
+    <string name="maoni_feedback_include_screenshot_checkbox_title">Screenshot hinzufügen</string>
+    <string name="maoni_feedback_include_logs_title">Protokolle hinzufügen</string>
+    <string name="maoni_touch_to_preview">Berühren, um Vorschau anzuzeigen und zu bearbeiten</string>
+    <string name="maoni_screenshot_informational_text">Der Screenshot liefert uns mehr Kontextinformationen zu deinem Feedback.</string>
+    <string name="maoni_send_feedback">Feedback senden</string>
+    <string name="maoni_action_settings">Einstellungen</string>
+    <string name="maoni_validate_must_not_be_blank">Darf nicht leer sein</string>
+    <string name="maoni_header">Kopfzeile</string>
+    <string name="maoni_screenshot_preview_internal_error">Interner Fehler. Bitte versuche es später nochmal.</string>
+    <string name="maoni_screenshot_preview">Vorschau</string>
+    <string name="maoni_highlight">Markieren</string>
+    <string name="maoni_blackout">Schwärzen</string>
+    <string name="maoni_undo">Rückgängig</string>
+    <string name="maoni_save">Speichern</string>
+    <string name="maoni_close">Schließen</string>
 </resources>

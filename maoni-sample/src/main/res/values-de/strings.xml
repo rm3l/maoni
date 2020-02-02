@@ -22,12 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Demo</string>
-  <string name="maoni_settings_activity_name">Maoni Demo Einstellungen</string>
-  <string name="feedback">Feedback</string>
-  <string name="title_activity_maoni_sample_main">Maoni Demo</string>
-  <string name="main_activity_text"><![CDATA[
-        Dies ist eine demo Anwendung für Maoni, eine leichtgewichtige Bibliothek, welches eine einsatzbare 
+    <string name="maoni_app_name">Maoni Demo</string>
+    <string name="maoni_settings_activity_name">Maoni Demo Einstellungen</string>
+    <string name="feedback">Feedback</string>
+    <string name="title_activity_maoni_sample_main">Maoni Demo</string>
+    <string name="main_activity_text"><![CDATA[        Dies ist eine demo Anwendung für Maoni, eine leichtgewichtige Bibliothek, welches eine einsatzbare 
         materialisierte Aktivität bietet für das Sammeln von Benutzer feedbacks innerhalb einer vorhandenen App.
         \n
         Im Gegensatz zu anderen ähnlichen Bibliotheken, Maoni erlaubt es einen Screenshot der aktuellen Aktivität
@@ -37,31 +36,30 @@ SOFTWARE.
         \n\n
         Bitte navigieren Sie zu http://github.com/rm3l/maoni für weitere Anweisungen.
     ]]></string>
-  <string name="action_about">Über</string>
-  <string name="default_email_addr">some.one@somewhe.re</string>
-  <string name="send_feedback_activity_title">Feedback senden</string>
-  <string name="send_feedback_activity_intro"><![CDATA[
-        Hey! Haben Sie die Anwendung geliebt oder nicht? Wir würden gerne geliebt von Ihnen hören.
+    <string name="action_about">Über</string>
+    <string name="default_email_addr">some.one@somewhe.re</string>
+    <string name="send_feedback_activity_title">Feedback senden</string>
+    <string name="send_feedback_activity_intro"><![CDATA[        Hey! Love this app? We would love to hear from you.
         \n\n
-        Hinweis: Fast alles in Maoni ist anpassbar.
+        Note: Almost everything in Maoni is customizable.
     ]]></string>
-  <string name="feedback_content_hint">Bitte schreiben Sie Ihr wertvolles Feedback hier hin.</string>
-  <string name="include_app_logs">Anwendungslogs befestigen</string>
-  <string name="include_app_screenshot">Bildschirmaufnahme befestigen</string>
-  <string name="touch_edit_screenshot">Für Vorschau und Kommentar berühren</string>
-  <string name="content_error_message">Dies ist eine benutzerdefinierte Fehlernachricht, die Sie Ihren Benutzern anzeigen können</string>
-  <string name="screenshot_hint">Dies ist eine benutzerdefinierte Nachricht, die Sie neben der Bildschirmaufnahme angezeigt haben können, um zu erklären, warum dies eine große Hilfe sein könnte.</string>
-  <string name="email_address">E-Mail adresse</string>
-  <string name="an_extra_text_area">Ein extra Text Bereich</string>
-  <string name="edittext_hint_write_something_here">Texthinweis bearbeiten. Schreiben Sie etwas hier.</string>
-  <string name="an_extra_radiogroup">Eine extra Radiogruppe</string>
-  <string name="rg_1">Wahl 1</string>
-  <string name="rg_2">Wahl 2</string>
-  <string name="rg_3">Wahl 3</string>
-  <string name="send_maoni_email">Per E-Mail senden (manoi-email)</string>
-  <string name="send_maoni_github">Als Github ausgabe senden (maoni-github)</string>
-  <string name="send_maoni_jira">Als JIRA ausgabe senden (maoni-jira)</string>
-  <string name="send_maoni_slack">"Zu Slack senden (maoni-slack)"</string>
-  <string name="how_to_send_feedback">Wie würden Sie gerne Ihr feedback senden?</string>
-  <string name="action_settings">Einstellungen</string>
+    <string name="feedback_content_hint">Bitte schreiben Sie Ihr wertvolles Feedback hier hin.</string>
+    <string name="include_app_logs">Anwendungslogs befestigen</string>
+    <string name="include_app_screenshot">Bildschirmaufnahme befestigen</string>
+    <string name="touch_edit_screenshot">Für Vorschau und Kommentar berühren</string>
+    <string name="content_error_message">Dies ist eine benutzerdefinierte Fehlernachricht, die Sie Ihren Benutzern anzeigen können</string>
+    <string name="screenshot_hint">Dies ist eine benutzerdefinierte Nachricht, die Sie neben der Bildschirmaufnahme angezeigt haben können, um zu erklären, warum dies eine große Hilfe sein könnte.</string>
+    <string name="email_address">E-Mail adresse</string>
+    <string name="an_extra_text_area">Ein extra Text Bereich</string>
+    <string name="edittext_hint_write_something_here">Texthinweis bearbeiten. Schreiben Sie etwas hier.</string>
+    <string name="an_extra_radiogroup">Eine extra Radiogruppe</string>
+    <string name="rg_1">Wahl 1</string>
+    <string name="rg_2">Wahl 2</string>
+    <string name="rg_3">Wahl 3</string>
+    <string name="send_maoni_email">Per E-Mail senden (manoi-email)</string>
+    <string name="send_maoni_github">Als Github ausgabe senden (maoni-github)</string>
+    <string name="send_maoni_jira">Als JIRA ausgabe senden (maoni-jira)</string>
+    <string name="send_maoni_slack">"Zu Slack senden (maoni-slack)"</string>
+    <string name="how_to_send_feedback">Wie würden Sie gerne Ihr feedback senden?</string>
+    <string name="action_settings">Einstellungen</string>
 </resources>

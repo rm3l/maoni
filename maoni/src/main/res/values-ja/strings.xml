@@ -22,23 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Library</string>
-  <string name="maoni_screenshot">スクリーンショット</string>
-  <string name="maoni_feedback_message">こんにちは! このアプリはいかがでしょうか? 新しい機能の提案、バグの報告、または単なる挨拶などいかがですか? \nぜひご意見をお聞かせください。</string>
-  <string name="maoni_feedback_content_hint">ここにフィードバックを入力してください</string>
-  <string name="maoni_feedback_include_screenshot_checkbox_title">スクリーンショットを含める</string>
-  <string name="maoni_feedback_include_logs_title">ログを含める</string>
-  <string name="maoni_touch_to_preview">タップすると、プレビューと編集</string>
-  <string name="maoni_screenshot_informational_text">スクリーンショットがあると、私たちがフィードバックの背景について詳しく知ることができます。</string>
-  <string name="maoni_send_feedback">フィードバックを送信</string>
-  <string name="maoni_action_settings">設定</string>
-  <string name="maoni_validate_must_not_be_blank">空白にできません</string>
-  <string name="maoni_header">ヘッダー</string>
-  <string name="maoni_screenshot_preview_internal_error">内部エラーです。後でもう一度やり直してください。</string>
-  <string name="maoni_screenshot_preview">プレビュー</string>
-  <string name="maoni_highlight">ハイライト</string>
-  <string name="maoni_blackout">ブラックアウト</string>
-  <string name="maoni_undo">元に戻す</string>
-  <string name="maoni_save">保存</string>
-  <string name="maoni_close">閉じる</string>
+    <string name="maoni_app_name">Maoni Library</string>
+    <string name="maoni_screenshot">スクリーンショット</string>
+    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_content_hint">ここにフィードバックを入力してください</string>
+    <string name="maoni_feedback_include_screenshot_checkbox_title">スクリーンショットを含める</string>
+    <string name="maoni_feedback_include_logs_title">ログを含める</string>
+    <string name="maoni_touch_to_preview">タップすると、プレビューと編集</string>
+    <string name="maoni_screenshot_informational_text">スクリーンショットがあると、私たちがフィードバックの背景について詳しく知ることができます。</string>
+    <string name="maoni_send_feedback">フィードバックを送信</string>
+    <string name="maoni_action_settings">設定</string>
+    <string name="maoni_validate_must_not_be_blank">空白にできません</string>
+    <string name="maoni_header">ヘッダー</string>
+    <string name="maoni_screenshot_preview_internal_error">内部エラーです。後でもう一度やり直してください。</string>
+    <string name="maoni_screenshot_preview">プレビュー</string>
+    <string name="maoni_highlight">ハイライト</string>
+    <string name="maoni_blackout">ブラックアウト</string>
+    <string name="maoni_undo">元に戻す</string>
+    <string name="maoni_save">保存</string>
+    <string name="maoni_close">閉じる</string>
 </resources>

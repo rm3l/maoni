@@ -22,12 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Demo</string>
-  <string name="maoni_settings_activity_name">Maoni Demo-instellingen</string>
-  <string name="feedback">Feedback</string>
-  <string name="title_activity_maoni_sample_main">Maoni Demo</string>
-  <string name="main_activity_text"><![CDATA[
-        Dit is de demotoepassing voor Maoni, een bibliotheek die een gebruiksklare
+    <string name="maoni_app_name">Maoni Demo</string>
+    <string name="maoni_settings_activity_name">Maoni Demo-instellingen</string>
+    <string name="feedback">Feedback</string>
+    <string name="title_activity_maoni_sample_main">Maoni Demo</string>
+    <string name="main_activity_text"><![CDATA[        Dit is de demotoepassing voor Maoni, een bibliotheek die een gebruiksklare
         vorm biedt voor het verzamelen van opmerkingen en meningen van gebruikers van een Android-applicatie.
         \n
         In tegenstelling tot andere vergelijkbare bibliotheken, biedt Maoni u de mogelijkheid om een screenshot te
@@ -37,31 +36,30 @@ SOFTWARE.
         \n\n
         Voor meer informatie kunt u http://github.com/rm3l/maoni bezoeken.
     ]]></string>
-  <string name="action_about">Over</string>
-  <string name="default_email_addr">some.one@somewhe.re</string>
-  <string name="send_feedback_activity_title">Feedback verzenden</string>
-  <string name="send_feedback_activity_intro"><![CDATA[
-Hallo! Vindt u deze app leuk? Wij zou graag iets van u horen.
+    <string name="action_about">Over</string>
+    <string name="default_email_addr">some.one@somewhe.re</string>
+    <string name="send_feedback_activity_title">Feedback verzenden</string>
+    <string name="send_feedback_activity_intro"><![CDATA[        Hey! Love this app? We would love to hear from you.
         \n\n
-        Note: Bijna alles in Maoni is aapasbaar.
+        Note: Almost everything in Maoni is customizable.
     ]]></string>
-  <string name="feedback_content_hint">Schrijf hier uw waardevolle mening aub.</string>
-  <string name="include_app_logs">Applicatielogboeken bijvoegen</string>
-  <string name="include_app_screenshot">Schermopname bijvoegen</string>
-  <string name="touch_edit_screenshot">Raak aan om te bekijken en annotaties in te vullen</string>
-  <string name="content_error_message">Dit is een standaard fout melding, die u kunt weergeven aan uw gebruikers</string>
-  <string name="screenshot_hint">Dit is een standaard bericht dat u naast de schermafbeelding kunt weergeven om uit te leggen waarom het een grote hulp kan zijn.</string>
-  <string name="email_address">Email adres</string>
-  <string name="an_extra_text_area">Een extra tekstgebied</string>
-  <string name="edittext_hint_write_something_here">Tekstvak. U kunt hier iets schrijven.</string>
-  <string name="an_extra_radiogroup">Een extra RadioGroup</string>
-  <string name="rg_1">RG 1</string>
-  <string name="rg_2">RG 2</string>
-  <string name="rg_3">RG 3</string>
-  <string name="send_maoni_email">Verzenden via e-mail (via maoni-email)</string>
-  <string name="send_maoni_github">Stuur als Github probleem (via \'maoni-github\')</string>
-  <string name="send_maoni_jira">Stuur als JIRA probleem (via \'maoni-jira\')</string>
-  <string name="send_maoni_slack">"Naar Slack Verzenden (via 'maoni-slack')"</string>
-  <string name="how_to_send_feedback">Hoe zou u uw feedback willen doorsturen?</string>
-  <string name="action_settings">Instellingen</string>
+    <string name="feedback_content_hint">Schrijf hier uw waardevolle mening aub.</string>
+    <string name="include_app_logs">Applicatielogboeken bijvoegen</string>
+    <string name="include_app_screenshot">Schermopname bijvoegen</string>
+    <string name="touch_edit_screenshot">Raak aan om te bekijken en annotaties in te vullen</string>
+    <string name="content_error_message">Dit is een standaard fout melding, die u kunt weergeven aan uw gebruikers</string>
+    <string name="screenshot_hint">Dit is een standaard bericht dat u naast de schermafbeelding kunt weergeven om uit te leggen waarom het een grote hulp kan zijn.</string>
+    <string name="email_address">Email adres</string>
+    <string name="an_extra_text_area">Een extra tekstgebied</string>
+    <string name="edittext_hint_write_something_here">Tekstvak. U kunt hier iets schrijven.</string>
+    <string name="an_extra_radiogroup">Een extra RadioGroup</string>
+    <string name="rg_1">RG 1</string>
+    <string name="rg_2">RG 2</string>
+    <string name="rg_3">RG 3</string>
+    <string name="send_maoni_email">Verzenden via e-mail (via maoni-email)</string>
+    <string name="send_maoni_github">Stuur als Github probleem (via \'maoni-github\')</string>
+    <string name="send_maoni_jira">Stuur als JIRA probleem (via \'maoni-jira\')</string>
+    <string name="send_maoni_slack">"Naar Slack Verzenden (via 'maoni-slack')"</string>
+    <string name="how_to_send_feedback">Hoe zou u uw feedback willen doorsturen?</string>
+    <string name="action_settings">Instellingen</string>
 </resources>

@@ -22,23 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Kitaplığı</string>
-  <string name="maoni_screenshot">Ekran Görüntüsü</string>
-  <string name="maoni_feedback_message">Hey! Bu uygulamayı sevdin mi? Ya da sıkıldın mı? Yeni bir özellik önermek, bir bug göndermek veya sadece merhaba demek ister misin?\n Bunu sizden duymak isteriz.</string>
-  <string name="maoni_feedback_content_hint">Geri bildiriminizi buraya yazın</string>
-  <string name="maoni_feedback_include_screenshot_checkbox_title">Ekran görüntüsünü içerir</string>
-  <string name="maoni_feedback_include_logs_title">Günlükleri içerir</string>
-  <string name="maoni_touch_to_preview">Önizlemek ve düzenlemek için dokunun</string>
-  <string name="maoni_screenshot_informational_text">Ekran görüntüsü, görüşlerinizle ilgili daha kavramsal bilgi sahibi olmamızı sağlıyor.</string>
-  <string name="maoni_send_feedback">Geri Bildirim Gönder</string>
-  <string name="maoni_action_settings">Ayarlar</string>
-  <string name="maoni_validate_must_not_be_blank">Boş bırakılamaz</string>
-  <string name="maoni_header">Başlık</string>
-  <string name="maoni_screenshot_preview_internal_error">Dahili sunucu hatası. Lütfen daha sonra tekrar deneyiniz.</string>
-  <string name="maoni_screenshot_preview">Önizleme</string>
-  <string name="maoni_highlight">Vurgula</string>
-  <string name="maoni_blackout">Karart</string>
-  <string name="maoni_undo">Geri al</string>
-  <string name="maoni_save">Kaydet</string>
-  <string name="maoni_close">Kapat</string>
+    <string name="maoni_app_name">Maoni Kitaplığı</string>
+    <string name="maoni_screenshot">Ekran Görüntüsü</string>
+    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_content_hint">Geri bildiriminizi buraya yazın</string>
+    <string name="maoni_feedback_include_screenshot_checkbox_title">Ekran görüntüsünü içerir</string>
+    <string name="maoni_feedback_include_logs_title">Günlükleri içerir</string>
+    <string name="maoni_touch_to_preview">Önizlemek ve düzenlemek için dokunun</string>
+    <string name="maoni_screenshot_informational_text">Ekran görüntüsü, görüşlerinizle ilgili daha kavramsal bilgi sahibi olmamızı sağlıyor.</string>
+    <string name="maoni_send_feedback">Geri Bildirim Gönder</string>
+    <string name="maoni_action_settings">Ayarlar</string>
+    <string name="maoni_validate_must_not_be_blank">Boş bırakılamaz</string>
+    <string name="maoni_header">Başlık</string>
+    <string name="maoni_screenshot_preview_internal_error">Dahili sunucu hatası. Lütfen daha sonra tekrar deneyiniz.</string>
+    <string name="maoni_screenshot_preview">Önizleme</string>
+    <string name="maoni_highlight">Vurgula</string>
+    <string name="maoni_blackout">Karart</string>
+    <string name="maoni_undo">Geri al</string>
+    <string name="maoni_save">Kaydet</string>
+    <string name="maoni_close">Kapat</string>
 </resources>

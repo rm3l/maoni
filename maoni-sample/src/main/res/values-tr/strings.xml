@@ -22,12 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <resources>
-  <string name="maoni_app_name">Maoni Demo</string>
-  <string name="maoni_settings_activity_name">Maoni Demo Ayarları</string>
-  <string name="feedback">Geri bildirim</string>
-  <string name="title_activity_maoni_sample_main">Maoni Demo</string>
-  <string name="main_activity_text"><![CDATA[
-        Bu, mevcut bir uygulama içinden kullanıcı geri bildirimlerini toplamak için hazır kullanımlı
+    <string name="maoni_app_name">Maoni Demo</string>
+    <string name="maoni_settings_activity_name">Maoni Demo Ayarları</string>
+    <string name="feedback">Geri bildirim</string>
+    <string name="title_activity_maoni_sample_main">Maoni Demo</string>
+    <string name="main_activity_text"><![CDATA[        Bu, mevcut bir uygulama içinden kullanıcı geri bildirimlerini toplamak için hazır kullanımlı
         Maddeleştirme etkinliği sağlayan hafif bir kütüphane olan Maoni için bir demo uygulamasıdır.
         \n
         Diğer benzer kütüphanelerin aksine, Maoni, geri arama işlemlerinizde değiştirebileceğiniz
@@ -37,30 +36,30 @@ SOFTWARE.
         \n\n
         Daha fazla talimat için lütfen http://github.com/rm3l/maoni adresine gidin.
     ]]></string>
-  <string name="action_about">Hakkında</string>
-  <string name="default_email_addr">some.one@somewhe.re</string>
-  <string name="send_feedback_activity_title">Geri Bildirim Gönder</string>
-  <string name="send_feedback_activity_intro"><![CDATA[
-        Hey! Bu uygulamayı sevip sevmediğinizi sizden duymak isteriz.
+    <string name="action_about">Hakkında</string>
+    <string name="default_email_addr">some.one@somewhe.re</string>
+    <string name="send_feedback_activity_title">Geri Bildirim Gönder</string>
+    <string name="send_feedback_activity_intro"><![CDATA[        Hey! Love this app? We would love to hear from you.
         \n\n
-        Not: Maoni\'deki neredeyse her şey özelleştirilebilir.    ]]></string>
-  <string name="feedback_content_hint">Lütfen değerli görüşlerinizi buraya yazın.</string>
-  <string name="include_app_logs">Uygulama günlüklerini ekle</string>
-  <string name="include_app_screenshot">Ekran yakalama ekle</string>
-  <string name="touch_edit_screenshot">Önizlemek ve dip not koymak için dokunun</string>
-  <string name="content_error_message">Bu, kullanıcılarınıza gösterebileceğiniz özel bir hata mesajıdır</string>
-  <string name="screenshot_hint">Bu, ekranın yakalanmasının yanında niçin çok yardımcı olabileceğini açıklamak için kullanabileceğiniz bir özel mesajdır.</string>
-  <string name="email_address">E-mail adresi</string>
-  <string name="an_extra_text_area">İlave bir metin alanı</string>
-  <string name="edittext_hint_write_something_here">EditText ipucu. Buraya bir şeyler yaz.</string>
-  <string name="an_extra_radiogroup">İlave bir RadioGroup</string>
-  <string name="rg_1">RG 1</string>
-  <string name="rg_2">RG 2</string>
-  <string name="rg_3">RG 3</string>
-  <string name="send_maoni_email">E-mail ile gönder (maoni e-mail)</string>
-  <string name="send_maoni_github">Github sorunu olarak gönder (maoni-github)</string>
-  <string name="send_maoni_jira">JIRA sorunu olarak gönder (maoni-jira)</string>
-  <string name="send_maoni_slack">"Slack'e gönder (maoni-slack)"</string>
-  <string name="how_to_send_feedback">Geri bildiriminizi nasıl göndermek istersiniz?</string>
-  <string name="action_settings">Ayarlar</string>
+        Note: Almost everything in Maoni is customizable.
+    ]]></string>
+    <string name="feedback_content_hint">Lütfen değerli görüşlerinizi buraya yazın.</string>
+    <string name="include_app_logs">Uygulama günlüklerini ekle</string>
+    <string name="include_app_screenshot">Ekran yakalama ekle</string>
+    <string name="touch_edit_screenshot">Önizlemek ve dip not koymak için dokunun</string>
+    <string name="content_error_message">Bu, kullanıcılarınıza gösterebileceğiniz özel bir hata mesajıdır</string>
+    <string name="screenshot_hint">Bu, ekranın yakalanmasının yanında niçin çok yardımcı olabileceğini açıklamak için kullanabileceğiniz bir özel mesajdır.</string>
+    <string name="email_address">E-mail adresi</string>
+    <string name="an_extra_text_area">İlave bir metin alanı</string>
+    <string name="edittext_hint_write_something_here">EditText ipucu. Buraya bir şeyler yaz.</string>
+    <string name="an_extra_radiogroup">İlave bir RadioGroup</string>
+    <string name="rg_1">RG 1</string>
+    <string name="rg_2">RG 2</string>
+    <string name="rg_3">RG 3</string>
+    <string name="send_maoni_email">E-mail ile gönder (maoni e-mail)</string>
+    <string name="send_maoni_github">Github sorunu olarak gönder (maoni-github)</string>
+    <string name="send_maoni_jira">JIRA sorunu olarak gönder (maoni-jira)</string>
+    <string name="send_maoni_slack">"Slack'e gönder (maoni-slack)"</string>
+    <string name="how_to_send_feedback">Geri bildiriminizi nasıl göndermek istersiniz?</string>
+    <string name="action_settings">Ayarlar</string>
 </resources>
