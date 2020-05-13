@@ -34,7 +34,7 @@
   - [Building from source](#building-from-source)
   - [Translations](#translations)
   - [Contributing callbacks for Maoni](#contributing-callbacks-for-maoni)
-    - [Publishing a new release](#publishing-a-new-release)
+  - [Publishing a new release](#publishing-a-new-release)
 - [In use in the following apps](#in-use-in-the-following-apps)
 - [Credits](#credits)
 - [Developed by](#developed-by)
@@ -453,7 +453,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/rm3l/maoni-slack) and [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
 
-#### Publishing a new release
+### Publishing a new release
 
 All releases (Git tags) are published to [Bintray](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni).
 
