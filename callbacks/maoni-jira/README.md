@@ -17,8 +17,8 @@ Add this to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:8.1.0@aar'
-    implementation 'org.rm3l:maoni-jira:8.1.0@aar'
+    implementation 'org.rm3l:maoni:8.2.0@aar'
+    implementation 'org.rm3l:maoni-jira:8.2.0@aar'
   }
 ```
 
