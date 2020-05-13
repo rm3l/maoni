@@ -22,7 +22,7 @@ SOFTWARE.
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Maoni_AppTheme_Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Maoni_AppTheme_Base" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/maoni_colorPrimary</item>
         <item name="colorPrimaryDark">@color/maoni_colorPrimaryDark</item>
         <item name="colorAccent">@color/maoni_colorAccent</item>
