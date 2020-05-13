@@ -112,8 +112,6 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                     //Pass the fields of your application to the lib so it can find all external lib information
                     .withFields(R.string.class.getFields())
                     .withActivityTitle(getString(R.string.action_about))
-                    //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
-                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                     //start the activity
                     .start(this);
 

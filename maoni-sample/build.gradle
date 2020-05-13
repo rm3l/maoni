@@ -21,6 +21,7 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.mikepenz.aboutlibraries.plugin'
 apply plugin: 'kotlin-android'
 //apply plugin: 'jacoco-android'
 apply plugin: 'com.github.triplet.play'
@@ -198,7 +199,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.facebook.stetho:stetho:1.5.1'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
-    implementation('com.mikepenz:aboutlibraries:8.1.2@aar') {
+    implementation("com.mikepenz:aboutlibraries:${aboutlibraries_version}@aar") {
         transitive = true
     }
 }
