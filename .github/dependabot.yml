@@ -1,0 +1,92 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/callbacks/maoni-jira"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/callbacks/maoni-slack"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/callbacks/maoni-github"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/callbacks/maoni-email"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/callbacks/maoni-doorbell"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/maoni"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/maoni-common"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/maoni-sample"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
