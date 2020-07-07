@@ -23,7 +23,9 @@ SOFTWARE.
 <resources>
     <string name="maoni_app_name">Bibliothèque Maoni</string>
     <string name="maoni_screenshot">Capture d\'écran</string>
-    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_message">Bonjour!\n
+Aimez-vous cette application? Souhaitez-vous suggérer de nouvelles fonctionnalités, signaler des dysfonctionnements ou simplement nous faire un petit coucou?\n
+Hâte de vous lire.</string>
     <string name="maoni_feedback_content_hint">Ecrivez votre message ici</string>
     <string name="maoni_feedback_include_screenshot_checkbox_title">Joindre la capture d\'écran au rapport</string>
     <string name="maoni_feedback_include_logs_title">Inclure les fichiers journaux</string>

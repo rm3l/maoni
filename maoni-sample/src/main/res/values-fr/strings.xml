@@ -36,9 +36,9 @@ Plus d\'infos sur http://rm3l.github.io/maoni.    ]]></string>
     <string name="action_about">À propos de Maoni</string>
     <string name="default_email_addr">some.one@somewhe.re</string>
     <string name="send_feedback_activity_title">Votre commentaire</string>
-    <string name="send_feedback_activity_intro"><![CDATA[        Hey! Love this app? We would love to hear from you.
+    <string name="send_feedback_activity_intro"><![CDATA[        Bonjour! Votre avis compte énormément pour nous! Merci de nous en faire part.
         \n\n
-        Note: Almost everything in Maoni is customizable.
+        Note: Quasiment tous les éléments fournis par Maoni sont personnalisables et adaptables aux spécificités de vos applications.
     ]]></string>
     <string name="feedback_content_hint">Merci d\'écrire votre commentaire ici.</string>
     <string name="include_app_logs">Joindre les journaux de l\'application</string>
