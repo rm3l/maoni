@@ -35,9 +35,9 @@ SOFTWARE.
     <string name="action_about">アプリついて</string>
     <string name="default_email_addr">some.one@somewhe.re</string>
     <string name="send_feedback_activity_title">フィードバックを送信</string>
-    <string name="send_feedback_activity_intro"><![CDATA[        Hey! Love this app? We would love to hear from you.
+    <string name="send_feedback_activity_intro"><![CDATA[        こんにちは! このアプリが気に入っていただけましたか? お聞かせください。
         \n\n
-        Note: Almost everything in Maoni is customizable.
+        注: Maoniはほぼすべてカスタマイズできます。
     ]]></string>
     <string name="feedback_content_hint">貴重なご意見をお聞かせください。</string>
     <string name="include_app_logs">アプリケーションログを添付</string>
