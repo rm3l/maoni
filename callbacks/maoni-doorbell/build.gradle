@@ -61,7 +61,7 @@ dependencies {
     api project(':maoni-common')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
