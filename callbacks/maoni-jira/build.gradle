@@ -64,7 +64,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
 
     implementation 'io.karn:khttp-android:0.1.2'
     implementation "org.jetbrains.anko:anko-sdk27:$anko_version"
