@@ -1,4 +1,4 @@
-[![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni)
+[![Maven Central](https://img.shields.io/maven-central/v/org.rm3l/maoni)](https://search.maven.org/artifact/org.rm3l/maoni)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni/blob/master/LICENSE)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Maoni-blue.svg?style=flat)](http://android-arsenal.com/details/1/3925)
@@ -125,7 +125,8 @@ By the way, as a side note, Maoni is a Swahili word for comments or opinions.
 
 ## Getting started
 
-Grab via Gradle, by adding this to your `build.gradle`:
+This library is published on [Maven Central](https://search.maven.org/artifact/org.rm3l/maoni). So importing it should be straightforward.
+Add this to your `build.gradle`:
 
 ```gradle
   dependencies {
