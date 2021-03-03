@@ -151,8 +151,8 @@ publishing {
             name = "sonatype"
             url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
             credentials {
-                username ossrhUsername
-                password ossrhPassword
+                username rootProject.ext.has('ossrhUsername') ? rootProject.ext.ossrhUsername : ''
+                password rootProject.ext.has('ossrhPassword') ? rootProject.ext.ossrhPassword : ''
             }
         }
     }
