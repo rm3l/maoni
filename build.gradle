@@ -26,7 +26,7 @@ final homePath = System.properties['user.home']
 
 buildscript {
     ext.maoni_group = 'org.rm3l'
-    ext.maoni_version = '8.3.2'
+    ext.maoni_version = '8.4.0'
 
     ext.kotlin_version = '1.4.31'
     ext.anko_version = '0.10.8'
@@ -45,13 +45,18 @@ buildscript {
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:${aboutlibraries_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.android.tools.build:gradle:4.1.2'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
 //        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.github.triplet.gradle:play-publisher:2.3.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "io.github.gradle-nexus:publish-plugin:1.0.0"
     }
 }
+
+apply plugin: "io.github.gradle-nexus.publish-plugin"
+
+group = maoni_group
+version = maoni_version
 
 allprojects {
     repositories {
@@ -127,3 +132,31 @@ subprojects { project ->
     }
 }
 
+File secretPropsFile = project.rootProject.file('local.properties')
+if (secretPropsFile.exists()) {
+    Properties p = new Properties()
+    new FileInputStream(secretPropsFile).withCloseable { is ->
+        p.load(is)
+    }
+    p.each { name, value ->
+        ext[name] = value
+    }
+} else {
+    ext["signing.keyId"] = System.getenv('SIGNING_KEY_ID')
+    ext["signing.password"] = System.getenv('SIGNING_PASSWORD')
+    ext["signing.secretKeyRingFile"] = System.getenv('SIGNING_SECRET_KEY_RING_FILE')
+    ext["ossrhUsername"] = System.getenv('OSSRH_USERNAME')
+    ext["ossrhPassword"] = System.getenv('OSSRH_PASSWORD')
+    ext["sonatypeStagingProfileId"] = System.getenv('SONATYPE_STAGING_PROFILE_ID')
+}
+
+nexusPublishing {
+    // packageGroup = "org.rm3l"  //defaults to 'project.group'
+    repositories {
+        sonatype {
+            stagingProfileId = sonatypeStagingProfileId
+            username = ossrhUsername
+            password = ossrhPassword
+        }
+    }
+}

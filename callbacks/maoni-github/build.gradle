@@ -23,9 +23,9 @@ final homePath = System.properties['user.home']
 
 apply plugin: 'com.android.library'
 apply plugin: "kotlin-android"
-apply plugin: 'com.jfrog.bintray'
 //apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 final VERSION_NAME = maoni_version
 final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
@@ -90,105 +90,79 @@ artifacts {
     archives generateSourcesJar
 }
 
-def pomConfig = {
-    licenses {
-        license {
-            name POM_LICENCE_NAME
-            url POM_LICENCE_URL
-            distribution POM_LICENCE_DIST
-        }
-    }
-    developers {
-        developer {
-            id POM_DEVELOPER_ID
-            name POM_DEVELOPER_NAME
-            email 'armel@rm3l.org'
-        }
-    }
-    scm {
-        url POM_SCM_URL
-        connection POM_SCM_CONNECTION
-        developerConnection POM_SCM_DEV_CONNECTION
-    }
-}
-
 publishing {
     publications {
         release(MavenPublication) {
-            // Define this explicitly if using implementation or api configurations
-            pom.withXml {
-                def pomNode = asNode()
-                pomNode.remove(pomNode.get('packaging'))
+            // The coordinates of the library, being set from variables that
+            // we'll set up later
+            groupId maoni_group
+            artifactId 'maoni-github'
+            version maoni_version
 
-                pomNode.appendNode('name', POM_NAME)
-                pomNode.appendNode('description', POM_DESCRIPTION)
-                pomNode.appendNode('url', POM_URL)
-                pomNode.appendNode('packaging', POM_PACKAGING)
+            // Two artifacts, the `aar` (or `jar`) and the sources
+            if (project.plugins.findPlugin("com.android.library")) {
+                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            } else {
+                artifact("$buildDir/libs/${project.getName()}-${version}.jar")
+            }
+            artifact generateSourcesJar
+            artifact generateJavadocsJar
 
-                def dependenciesNode = pomNode.getAt('dependencies')[0] ?: pomNode.appendNode('dependencies')
+            // Mostly self-explanatory metadata
+            pom {
+                name = 'maoni-github'
+                description = 'Handler for Maoni that tranforms user feedback as Github issues'
+                url = 'https://github.com/rm3l/maoni/tree/master/callbacks/maoni-github'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/rm3l/maoni/blob/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'rm3l'
+                        name = 'Armel Soro'
+                        email = 'armel@rm3l.org'
+                    }
+                    // Add all other devs here...
+                }
+                // Version control info - if you're using GitHub, follow the format as seen here
+                scm {
+                    connection = 'scm:git@github.com:rm3l/maoni.git'
+                    developerConnection = 'scm:git:ssh://github.com/rm3l/maoni.git'
+                    url = 'https://github.com/rm3l/maoni/tree/master/callbacks/maoni-github'
+                }
+                // A slightly hacky fix so that your POM will include any transitive dependencies
+                // that your library builds upon
+                withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
 
-                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
-                configurations.implementation.allDependencies.each {
-                    // Ensure dependencies such as fileTree are not included.
-                    if (it.name != 'unspecified') {
+                    project.configurations.implementation.allDependencies.each {
                         def dependencyNode = dependenciesNode.appendNode('dependency')
                         dependencyNode.appendNode('groupId', it.group)
                         dependencyNode.appendNode('artifactId', it.name)
-                        if (it.name.startsWith('maoni-')) {
-                            dependencyNode.appendNode('version', '8.3.2')
-                            dependencyNode.appendNode('packaging', 'aar')
-                        } else {
-                            dependencyNode.appendNode('version', it.version)
-                        }
+                        dependencyNode.appendNode('version', it.version)
                     }
                 }
-
-                pomNode.children().last() + pomConfig
+            }
+        }
+    }
+    // The repository to publish to, Sonatype/MavenCentral
+    repositories {
+        maven {
+            // This is an arbitrary name, you may also use "mavencentral" or
+            // any other name that's descriptive for you
+            name = "sonatype"
+            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
             }
         }
     }
 }
 
-bintray {
-
-    //Attempt to read keystore.properties file, if any first
-    final propsFile = new File(homePath.toString() + "/.droid/", "maoni.bintray.properties")
-
-    if (propsFile.exists()) {
-        logger.info("[Bintray] Using properties file located at " + propsFile.absolutePath)
-        final props = new Properties()
-        props.load(new FileInputStream(propsFile))
-        user = props['user']
-        key = props['key']
-    } else {
-        user = ""
-        key = ""
-    }
-
-    publications = ['release']
-
-    publish = true //If version should be auto published after an upload
-
-    pkg {
-        repo = 'maven'
-        name = 'org.rm3l:maoni-github'
-        labels = ['maoni', 'android', 'feedback', 'android-lib', 'comments', 'review', 'bug', 'issue']
-
-        //noinspection GroovyAssignabilityCheck
-        version {
-            name = VERSION_NAME
-            desc = 'Maoni Android Library - Github Handler'
-            released = new Date()
-            vcsTag = VERSION_NAME
-        }
-
-        publicDownloadNumbers = true
-
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/rm3l/maoni.git'
-        websiteUrl = 'https://github.com/rm3l/maoni/tree/8.3.2/callbacks/maoni-github'
-        issueTrackerUrl = 'https://github.com/rm3l/maoni/issues'
-
-    }
-    configurations = ['archives']
+signing {
+    sign publishing.publications
 }
