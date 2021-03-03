@@ -154,9 +154,9 @@ nexusPublishing {
     // packageGroup = "org.rm3l"  //defaults to 'project.group'
     repositories {
         sonatype {
-            stagingProfileId = sonatypeStagingProfileId
-            username = ossrhUsername
-            password = ossrhPassword
+            stagingProfileId = sonatypeStagingProfileId ?: ''
+            username = ossrhUsername ?: ''
+            password = ossrhPassword ?: ''
         }
     }
 }
