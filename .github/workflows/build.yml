@@ -85,7 +85,7 @@ jobs:
       - name: Archive sample app artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: maoni-sample build outputs
+          name: maoni-sample_outputs
           path: |
             maoni-sample/build/outputs
 
