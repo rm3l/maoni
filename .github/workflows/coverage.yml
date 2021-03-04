@@ -36,6 +36,8 @@ jobs:
     steps:
 
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Code Coverage
         run: bash <(curl -s https://codecov.io/bash)
