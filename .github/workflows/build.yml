@@ -53,9 +53,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Prepare scripts
-        run: |
-          chmod +x gradlew
-          chmod +x tools/*.sh
+        run: chmod +x gradlew
 
       - name: Prepare local.properties
         run: |
