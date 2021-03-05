@@ -72,7 +72,8 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   git commit -m "Automatic translation import (build #$CIRCLE_BUILD_NUM)." \
     -m "Commit $CIRCLE_SHA1"
   git pull --rebase
-  git push origin master 2>&1
+  #git push origin master 2>&1
+  git status --porcelain
 
   echo -e "... Done with importing translations from Crowdin\n"
 fi
