@@ -41,7 +41,7 @@ jobs:
         env:
           # import-translations-github.sh script is currently tied to Travis CI
           CIRCLE_PULL_REQUEST: ''
-          CIRCLE_BUILD_NUM: "${GITHUB_RUN_ID}/${GITHUB_RUN_NUMBER}"
-          CIRCLE_SHA1: "${GITHUB_SHA}"
+          CIRCLE_BUILD_NUM: "${{ GITHUB_RUN_ID }}/${{ GITHUB_RUN_NUMBER }}"
+          CIRCLE_SHA1: "${{ GITHUB_SHA }}"
           GITHUB_API_KEY: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_API_KEY: ${{ secrets.CROWDIN_API_KEY }}
