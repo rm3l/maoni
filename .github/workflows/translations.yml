@@ -43,5 +43,5 @@ jobs:
           CIRCLE_PULL_REQUEST: ''
           CIRCLE_BUILD_NUM: "${GITHUB_RUN_ID}/${GITHUB_RUN_NUMBER}"
           CIRCLE_SHA1: "${GITHUB_SHA}"
-          GITHUB_API_KEY: "${{ secrets.GITHUB_TOKEN }}"
-          CROWDIN_API_KEY: "${{ secrets.CROWDIN_API_KEY }}"
+          GITHUB_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_API_KEY: ${{ secrets.CROWDIN_API_KEY }}
