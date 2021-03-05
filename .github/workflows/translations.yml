@@ -23,10 +23,6 @@ on:
   push:
     branches:
       - master
-    tags:
-      - '*'
-  pull_request:
-    branches: [ master ]
 
 jobs:
   import_translations:
@@ -42,3 +38,9 @@ jobs:
 
       - name: Import translations from Crowdin if needed
         run: ./tools/import-translations-github.sh
+        env:
+          # import-translations-github.sh script is currently tied to Travis CI
+          CIRCLE_PULL_REQUEST: ''
+          CIRCLE_BUILD_NUM: "${GITHUB_RUN_ID}/${GITHUB_RUN_NUMBER}"
+          CIRCLE_SHA1: "${GITHUB_SHA}"
+          GITHUB_API_KEY: "${{ secrets.GITHUB_TOKEN }}"
