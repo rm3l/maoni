@@ -22,6 +22,8 @@
 #
 #
 
+set -euxo pipefail
+
 if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
 
   echo -e "Starting translation import...\n"
