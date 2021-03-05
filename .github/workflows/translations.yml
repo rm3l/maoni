@@ -22,7 +22,7 @@ name: Translations
 on:
   push:
     branches:
-      - '*'
+      - master
 
 jobs:
   import_translations:
