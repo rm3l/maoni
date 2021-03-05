@@ -70,12 +70,13 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   # git add .
   # git remote rm origin
   # git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
-  git add .
-  git commit -m "Automatic translation import (build #$CIRCLE_BUILD_NUM)." \
-    -m "Commit $CIRCLE_SHA1"
-  git pull --rebase
-  #git push origin master 2>&1
-  git status --porcelain
+
+  [[ -z $(git status --porcelain) ]] || \
+    git add . && \
+    git commit -m "Automatic translation import (build #$CIRCLE_BUILD_NUM)." \
+        -m "Commit $CIRCLE_SHA1" && \
+    git pull --rebase && \
+    #git push origin master 2>&1
 
   echo -e "... Done with importing translations from Crowdin\n"
 fi
