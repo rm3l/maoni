@@ -42,10 +42,11 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   # git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
 
   #add, commit and push files
-  git add index.md
-  git commit -q -m "Automatic README.md => index.md import (build #$CIRCLE_BUILD_NUM)." \
-    -m "Commit $CIRCLE_SHA1"
-  git push -q origin gh-pages > /dev/null
+   [[ -z $(git status --porcelain) ]] || \
+      (
+  git add index.md && \
+  git commit -q -m "Automatic README.md => index.md import (build #$CIRCLE_BUILD_NUM)." -m "Commit $CIRCLE_SHA1" && \
+  git push -q origin gh-pages > /dev/null )
 
   echo -e "... Done with updating gh-pages\n"
 fi
