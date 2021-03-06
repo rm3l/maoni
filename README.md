@@ -1,4 +1,4 @@
-[![Bintray](https://img.shields.io/bintray/v/rm3l/maven/org.rm3l:maoni.svg)](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni)
+[![Maven Central](https://img.shields.io/maven-central/v/org.rm3l/maoni)](https://search.maven.org/artifact/org.rm3l/maoni)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni/blob/master/LICENSE)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Maoni-blue.svg?style=flat)](http://android-arsenal.com/details/1/3925)
@@ -125,12 +125,13 @@ By the way, as a side note, Maoni is a Swahili word for comments or opinions.
 
 ## Getting started
 
-Grab via Gradle, by adding this to your `build.gradle`:
+This library is published on [Maven Central](https://search.maven.org/artifact/org.rm3l/maoni). So importing it should be straightforward.
+Add this to your `build.gradle`:
 
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.3.2@aar'
+    implementation 'org.rm3l:maoni:8.4.0@aar'
   }
 ```
 
@@ -193,7 +194,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.3.2@aar'
+    implementation 'org.rm3l:maoni:8.4.0@aar'
   }
 ```
 
@@ -223,8 +224,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.3.2@aar'
-    implementation 'org.rm3l:maoni-slack:8.3.2@aar'
+    implementation 'org.rm3l:maoni:8.4.0@aar'
+    implementation 'org.rm3l:maoni-slack:8.4.0@aar'
   }
 ```
 
@@ -253,8 +254,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:8.3.2@aar'
-    implementation 'org.rm3l:maoni-github:8.3.2@aar'
+    implementation 'org.rm3l:maoni:8.4.0@aar'
+    implementation 'org.rm3l:maoni-github:8.4.0@aar'
   }
 ```
 
@@ -284,8 +285,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:8.3.2@aar'
-    implementation 'org.rm3l:maoni-jira:8.3.2@aar'
+    implementation 'org.rm3l:maoni:8.4.0@aar'
+    implementation 'org.rm3l:maoni-jira:8.4.0@aar'
   }
 ```
 
@@ -316,8 +317,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.3.2@aar'
-    implementation 'org.rm3l:maoni-doorbell:8.3.2@aar'
+    implementation 'org.rm3l:maoni:8.4.0@aar'
+    implementation 'org.rm3l:maoni-doorbell:8.4.0@aar'
   }
 ```
 
@@ -450,26 +451,30 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    api 'org.rm3l:maoni-common:8.3.2@aar'
+    api 'org.rm3l:maoni-common:8.4.0@aar'
   }
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/rm3l/maoni-slack) and [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
 
 ### Publishing a new release
 
-All releases (Git tags) are published to [Bintray](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni).
+All releases (Git tags) are published to [Maven Central](https://search.maven.org/search?q=g:org.rm3l) via [Sonatype](https://oss.sonatype.org/#welcome).
 
-To publish to Bintray, you need to have the appropriate rights. 
-Additionally, your Bintray credentials are expected to be put on your local machine 
-in `${HOME}/.droid/maoni.bintray.properties`, which should at least contain 
-the following properties:
-- `user` : the username used for publishing
-- `key` : your Bintray API Key, which you can retrieve from your Bintray account
+The `.github/workflows/build.yml` Workflow file contains a Job responsible for publishing libraries to Sonatype whenever a new tag is pushed.
+
+Alternatively, this operation may be performed manually.
+To do so, you can update or create a `local.properties` (local,**not** under version control) file in this repo with the following properties:
+- `signing.keyId` : the GPG Signing Key ID
+- `signing.secretKeyRingFile` : the path to the GPG signing key file, to use for signing files uploaded to Maven Central
+- `signing.password` : the GPG signing key password
+- `ossrhUsername` : the Sonatype Nexus Repository username
+- `ossrhPassword` : the Sonatype Nexus Repository user password
+- `sonatypeStagingProfileId`: the Staging Repo Profile ID (see Sonatype itself to find that information)
 
 The following command can then be run to publish a new version:
 
 ```bash
-./gradlew build javadoc generatePomFileForReleasePublication bintrayUpload
+./gradlew javadoc publishToSonatype closeAndReleaseStagingRepository
 ```
 
 ## In use in the following apps
@@ -521,7 +526,7 @@ In no particular order:
 
     The MIT License (MIT)
     
-    Copyright (c) 2016-2020 Armel Soro
+    Copyright (c) 2016-2021 Armel Soro
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
