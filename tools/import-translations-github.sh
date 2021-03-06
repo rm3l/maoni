@@ -30,8 +30,8 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
 
   #go to home and setup git
   cd $HOME
-  git config --global user.email "maoni+github_actions@rm3l.org"
-  git config --global user.name "Maoni Github Actions"
+  git config --global user.email ${GIT_COMMIT_USER_EMAIL:-circle_ci@rm3l.org}
+  git config --global user.name ${GIT_COMMIT_USER_NAME:-"Circle CI"}
 
   git clone --branch=master https://$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
 

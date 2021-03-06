@@ -48,3 +48,5 @@ jobs:
           CIRCLE_PULL_REQUEST: ''
           GITHUB_API_KEY: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_API_KEY: ${{ secrets.CROWDIN_API_KEY }}
+          GIT_COMMIT_USER_EMAIL: 'maoni+github_actions@rm3l.org'
+          GIT_COMMIT_USER_NAME: 'Maoni Github Actions'
