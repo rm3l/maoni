@@ -6,6 +6,9 @@
 <!-- [![Join the chat at https://gitter.im/rm3l/maoni](https://badges.gitter.im/rm3l/maoni.svg)](https://gitter.im/rm3l/maoni?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) -->
 
 [![CI](https://github.com/rm3l/maoni/actions/workflows/build.yml/badge.svg)](https://github.com/rm3l/maoni/actions/workflows/build.yml)
+[![Translations](https://github.com/rm3l/maoni/actions/workflows/translations.yml/badge.svg)](https://github.com/rm3l/maoni/actions/workflows/translations.yml)
+[![Website](https://github.com/rm3l/maoni/actions/workflows/website.yml/badge.svg)](https://github.com/rm3l/maoni/actions/workflows/website.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6deec1732c359d492b3e/maintainability)](https://codeclimate.com/github/rm3l/maoni/maintainability)
 [![Issue Count](https://codeclimate.com/github/rm3l/maoni/badges/issue_count.svg)](https://codeclimate.com/github/rm3l/maoni)
 
 [![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni.svg?style=social&label=Watch)](https://github.com/rm3l/maoni)
