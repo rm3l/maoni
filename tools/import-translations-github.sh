@@ -33,7 +33,7 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   git config --global user.email "${GIT_COMMIT_USER_EMAIL:-circle_ci@rm3l.org}"
   git config --global user.name "${GIT_COMMIT_USER_NAME:-'Circle CI'}"
 
-  git clone --branch=master https://$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
+  git clone --branch=master https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
 
   cd master
   wget -q https://downloads.crowdin.com/cli/v2/crowdin-cli.zip
