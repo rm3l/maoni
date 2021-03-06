@@ -58,6 +58,12 @@ jobs:
         run: chmod +x gradlew
 
       - name: Prepare local.properties
+        env:
+          MAONI_GITHUB_USERNAME: ${{ secrets.MAONI_GITHUB_USERNAME }}
+          MAONI_GITHUB_PASSWORD_TOKEN: ${{ secrets.MAONI_GITHUB_PASSWORD_TOKEN }}
+          MAONI_JIRA_REST_BASEURL: ${{ secrets.MAONI_JIRA_REST_BASEURL }}
+          MAONI_JIRA_USERNAME: ${{ secrets.MAONI_JIRA_USERNAME }}
+          MAONI_JIRA_PASSWORD: ${{ secrets.MAONI_JIRA_PASSWORD }}
         run: |
           echo "github.username=${MAONI_GITHUB_USERNAME}" > local.properties
           echo "github.passwordToken=${MAONI_GITHUB_PASSWORD_TOKEN}" >> local.properties
@@ -66,12 +72,24 @@ jobs:
           echo "jira.password=${MAONI_JIRA_PASSWORD}" >> local.properties
 
       - name: Prepare maoni-keystore.properties
+        env:
+          KEYSTORE: ''
+          STORE_PASSWORD: ''
+          KEY_ALIAS: ''
+          KEY_PASSWORD: ''
         run: |
           mkdir -p ~/.droid
           echo "keystore=${KEYSTORE}" > ~/.droid/maoni-keystore.properties
           echo "storePassword=${STORE_PASSWORD}" >> ~/.droid/maoni-keystore.properties
           echo "keyAlias=${KEY_ALIAS}" >> ~/.droid/maoni-keystore.properties
           echo "keyPassword=${KEY_PASSWORD}" >> ~/.droid/maoni-keystore.properties
+
+      - name: Prepare PlayStore.keys.json
+        env:
+          PLAYSTORE_KEYS_JSON: ${{ secrets.PLAYSTORE_KEYS_JSON }}
+        run: |
+          mkdir -p ~/.droid
+          echo "${PLAYSTORE_KEYS_JSON}" > ~/.droid/PlayStore.keys.json
 
       - name: Download dependencies
         run: ./gradlew androidDependencies --stacktrace
