@@ -22,7 +22,7 @@
 #
 #
 
-set -euo pipefail
+set -euxo pipefail
 
 if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
 
