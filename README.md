@@ -458,19 +458,23 @@ You can write your project in any JVM language of your choice (e.g., [Kotlin](ht
 
 ### Publishing a new release
 
-All releases (Git tags) are published to [Bintray](https://bintray.com/rm3l/maven/org.rm3l%3Amaoni).
+All releases (Git tags) are published to [Maven Central](https://search.maven.org/search?q=g:org.rm3l) via [Sonatype](https://oss.sonatype.org/#welcome).
 
-To publish to Bintray, you need to have the appropriate rights. 
-Additionally, your Bintray credentials are expected to be put on your local machine 
-in `${HOME}/.droid/maoni.bintray.properties`, which should at least contain 
-the following properties:
-- `user` : the username used for publishing
-- `key` : your Bintray API Key, which you can retrieve from your Bintray account
+The `.github/workflows/build.yml` Workflow file contains a Job responsible for publishing libraries to Sonatype whenever a new tag is pushed.
+
+Alternatively, this operation may be performed manually.
+To do so, you can update or create a `local.properties` (local,**not** under version control) file in this repo with the following properties:
+- `signing.keyId` : the GPG Signing Key ID
+- `signing.secretKeyRingFile` : the path to the GPG signing key file, to use for signing files uploaded to Maven Central
+- `signing.password` : the GPG signing key password
+- `ossrhUsername` : the Sonatype Nexus Repository username
+- `ossrhPassword` : the Sonatype Nexus Repository user password
+- `sonatypeStagingProfileId`: the Staging Repo Profile ID (see Sonatype itself to find that information)
 
 The following command can then be run to publish a new version:
 
 ```bash
-./gradlew build javadoc generatePomFileForReleasePublication bintrayUpload
+./gradlew javadoc publishToSonatype closeAndReleaseStagingRepository
 ```
 
 ## In use in the following apps
@@ -522,7 +526,7 @@ In no particular order:
 
     The MIT License (MIT)
     
-    Copyright (c) 2016-2020 Armel Soro
+    Copyright (c) 2016-2021 Armel Soro
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
