@@ -73,7 +73,7 @@ jobs:
 
       - name: Prepare maoni-keystore.properties
         env:
-          KEYSTORE: ''
+          KEYSTORE: '/dev/null'
           STORE_PASSWORD: ''
           KEY_ALIAS: ''
           KEY_PASSWORD: ''
@@ -98,7 +98,7 @@ jobs:
         run: ./gradlew clean lintDebug testDebug --stacktrace
 
       - name: Build APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew build assembleDebug --stacktrace
 
       - name: Code Coverage
         run: bash <(curl -s https://codecov.io/bash)
