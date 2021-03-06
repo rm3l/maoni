@@ -32,17 +32,14 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   git config --global user.email "${GIT_COMMIT_USER_EMAIL:-circle_ci@rm3l.org}"
   git config --global user.name "${GIT_COMMIT_USER_NAME:-'Circle CI'}"
 
-  git clone --branch=gh-pages https://$GITHUB_API_KEY@github.com/rm3l/maoni.git gh-pages > /dev/null
+  git clone --branch=gh-pages https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git gh-pages > /dev/null
 
   cd gh-pages
   # Import README.md from master
   git show origin/master:README.md > index.md
 
-  # git remote rm origin
-  # git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
-
   #add, commit and push files
-   [[ -z $(git status --porcelain) ]] || \
+  [[ -z $(git status --porcelain) ]] || \
       (
   git add index.md && \
   git commit -q -m "Automatic README.md => index.md import (build #$CIRCLE_BUILD_NUM)." -m "Commit $CIRCLE_SHA1" && \
