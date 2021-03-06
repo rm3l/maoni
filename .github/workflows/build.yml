@@ -54,6 +54,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: "Set environmental variables"
+        run: |
+          echo "KEYSTORE=$(pwd)/debug.keystore" >> $GITHUB_ENV
+
       - name: Prepare scripts
         run: chmod +x gradlew
 
@@ -73,10 +77,9 @@ jobs:
 
       - name: Prepare maoni-keystore.properties
         env:
-          KEYSTORE: '/dev/null'
-          STORE_PASSWORD: ''
-          KEY_ALIAS: ''
-          KEY_PASSWORD: ''
+          STORE_PASSWORD: 'android'
+          KEY_ALIAS: 'androiddebugkey'
+          KEY_PASSWORD: 'android'
         run: |
           mkdir -p ~/.droid
           echo "keystore=${KEYSTORE}" > ~/.droid/maoni-keystore.properties
