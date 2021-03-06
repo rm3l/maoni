@@ -8,6 +8,7 @@
 [![CI](https://github.com/rm3l/maoni/actions/workflows/build.yml/badge.svg)](https://github.com/rm3l/maoni/actions/workflows/build.yml)
 [![Translations](https://github.com/rm3l/maoni/actions/workflows/translations.yml/badge.svg)](https://github.com/rm3l/maoni/actions/workflows/translations.yml)
 [![Website](https://github.com/rm3l/maoni/actions/workflows/website.yml/badge.svg)](https://github.com/rm3l/maoni/actions/workflows/website.yml)
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/6deec1732c359d492b3e/maintainability)](https://codeclimate.com/github/rm3l/maoni/maintainability)
 [![Issue Count](https://codeclimate.com/github/rm3l/maoni/badges/issue_count.svg)](https://codeclimate.com/github/rm3l/maoni)
 
