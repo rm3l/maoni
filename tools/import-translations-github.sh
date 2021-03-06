@@ -22,14 +22,16 @@
 #
 #
 
+set -euo pipefail
+
 if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
 
   echo -e "Starting translation import...\n"
 
   #go to home and setup git
   cd $HOME
-  git config --global user.email "circle_ci@rm3l.org"
-  git config --global user.name "Cir Cle"
+  git config --global user.email ${GIT_COMMIT_USER_EMAIL:-circle_ci@rm3l.org}
+  git config --global user.name ${GIT_COMMIT_USER_NAME:-"Circle CI"}
 
   git clone --branch=master https://$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
 
@@ -68,11 +70,12 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   # git add .
   # git remote rm origin
   # git remote add origin https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git
-  git add .
-  git commit -m "Automatic translation import (build #$CIRCLE_BUILD_NUM)." \
-    -m "Commit $CIRCLE_SHA1"
-  git pull --rebase
-  git push origin master 2>&1
+
+  [[ -z $(git status --porcelain) ]] || \
+    ( git add . && \
+    git commit -m "Automatic translation import (build #$CIRCLE_BUILD_NUM)." -m "Commit $CIRCLE_SHA1" && \
+    git pull --rebase && \
+    git push origin master 2>&1 )
 
   echo -e "... Done with importing translations from Crowdin\n"
 fi

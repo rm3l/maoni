@@ -212,9 +212,9 @@ play {
     releaseStatus = "inProgress"
 
     resolutionStrategy = "auto"
-    outputProcessor { // this: ApkVariantOutput
-        versionNameOverride = "$versionNameOverride.$versionCode"
-    }
+//    outputProcessor { // this: ApkVariantOutput
+//        versionNameOverride = "$versionNameOverride.$versionCode"
+//    }
 //
 //    untrackOld = true // will un-track 'alpha' while upload to 'beta'
 //
