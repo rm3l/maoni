@@ -463,13 +463,15 @@ All releases (Git tags) are published to [Maven Central](https://search.maven.or
 The `.github/workflows/build.yml` Workflow file contains a Job responsible for publishing libraries to Sonatype whenever a new tag is pushed.
 
 Alternatively, this operation may be performed manually.
-To do so, you can update or create a `local.properties` (local,**not** under version control) file in this repo with the following properties:
+To do so, you can update or create a `local.properties` file (local only, **not** under version control) file at the root of this project.
+This file should contain at least the following properties:
+
 - `signing.keyId` : the GPG Signing Key ID
 - `signing.secretKeyRingFile` : the path to the GPG signing key file, to use for signing files uploaded to Maven Central
 - `signing.password` : the GPG signing key password
 - `ossrhUsername` : the Sonatype Nexus Repository username
 - `ossrhPassword` : the Sonatype Nexus Repository user password
-- `sonatypeStagingProfileId`: the Staging Repo Profile ID (see Sonatype itself to find that information)
+- `sonatypeStagingProfileId`: the Staging Repo Profile ID (ask one maintainer to provide such information)
 
 The following command can then be run to publish a new version:
 
