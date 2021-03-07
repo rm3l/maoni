@@ -126,9 +126,14 @@ By the way, as a side note, Maoni is a Swahili word for comments or opinions.
 ## Getting started
 
 This library is published on [Maven Central](https://search.maven.org/artifact/org.rm3l/maoni). So importing it should be straightforward.
-Add this to your `build.gradle`:
+Declare the [Maven Central repository](https://repo.maven.apache.org/maven2/) (if not done yet) and import this project:
 
 ```gradle
+  repositories {
+      //...
+      mavenCentral()
+  }
+
   dependencies {
     // ...
     implementation 'org.rm3l:maoni:9.0.0@aar'
