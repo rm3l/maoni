@@ -131,7 +131,7 @@ Add this to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.5.1@aar'
+    implementation 'org.rm3l:maoni:9.0.0@aar'
   }
 ```
 
@@ -194,7 +194,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.5.1@aar'
+    implementation 'org.rm3l:maoni:9.0.0@aar'
   }
 ```
 
@@ -224,8 +224,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.5.1@aar'
-    implementation 'org.rm3l:maoni-slack:8.5.1@aar'
+    implementation 'org.rm3l:maoni:9.0.0@aar'
+    implementation 'org.rm3l:maoni-slack:9.0.0@aar'
   }
 ```
 
@@ -254,8 +254,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:8.5.1@aar'
-    implementation 'org.rm3l:maoni-github:8.5.1@aar'
+    implementation 'org.rm3l:maoni:9.0.0@aar'
+    implementation 'org.rm3l:maoni-github:9.0.0@aar'
   }
 ```
 
@@ -285,8 +285,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:8.5.1@aar'
-    implementation 'org.rm3l:maoni-jira:8.5.1@aar'
+    implementation 'org.rm3l:maoni:9.0.0@aar'
+    implementation 'org.rm3l:maoni-jira:9.0.0@aar'
   }
 ```
 
@@ -317,8 +317,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:8.5.1@aar'
-    implementation 'org.rm3l:maoni-doorbell:8.5.1@aar'
+    implementation 'org.rm3l:maoni:9.0.0@aar'
+    implementation 'org.rm3l:maoni-doorbell:9.0.0@aar'
   }
 ```
 
@@ -451,7 +451,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    api 'org.rm3l:maoni-common:8.5.1@aar'
+    api 'org.rm3l:maoni-common:9.0.0@aar'
   }
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/rm3l/maoni-slack) and [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
@@ -463,13 +463,15 @@ All releases (Git tags) are published to [Maven Central](https://search.maven.or
 The `.github/workflows/build.yml` Workflow file contains a Job responsible for publishing libraries to Sonatype whenever a new tag is pushed.
 
 Alternatively, this operation may be performed manually.
-To do so, you can update or create a `local.properties` (local,**not** under version control) file in this repo with the following properties:
+To do so, you can update or create a `local.properties` file (local only, **not** under version control) file at the root of this project.
+This file should contain at least the following properties:
+
 - `signing.keyId` : the GPG Signing Key ID
 - `signing.secretKeyRingFile` : the path to the GPG signing key file, to use for signing files uploaded to Maven Central
 - `signing.password` : the GPG signing key password
 - `ossrhUsername` : the Sonatype Nexus Repository username
 - `ossrhPassword` : the Sonatype Nexus Repository user password
-- `sonatypeStagingProfileId`: the Staging Repo Profile ID (see Sonatype itself to find that information)
+- `sonatypeStagingProfileId`: the Staging Repo Profile ID (ask one maintainer to provide such information)
 
 The following command can then be run to publish a new version:
 
