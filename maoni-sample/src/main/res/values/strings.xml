@@ -64,4 +64,5 @@ SOFTWARE.
     <string name="how_to_send_feedback">How would you like to send your feedback?</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_bottom_sheet">Bottom Sheet</string>
 </resources>
