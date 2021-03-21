@@ -314,9 +314,9 @@ public class Maoni {
         if (this.screenCapturingFeatureEnabled) {
             //Create screenshot file
             final File screenshotFile = new File(maoniWorkingDir != null ? maoniWorkingDir : callerActivity.getCacheDir(),
-                    MAONI_FEEDBACK_SCREENSHOT_FILENAME);
+                MAONI_FEEDBACK_SCREENSHOT_FILENAME);
             ViewUtils.exportViewToFile(callerActivity, window.getDecorView(),
-                    screenshotFile);
+                screenshotFile);
             maoniIntent.putExtra(SCREENSHOT_FILE, screenshotFile.getAbsolutePath());
 
             if (screenshotHint != null) {
