@@ -46,6 +46,7 @@ SOFTWARE.
 
     <style name="RoundedBottomSheetDialogStyle" parent="Widget.MaterialComponents.BottomSheet">
         <item name="shapeAppearanceOverlay">@style/RoundedBottomSheetDialogShapeOverlay</item>
+        <item name="backgroundTint">@color/maoni_black</item>
     </style>
 
     <style name="RoundedBottomSheetDialogShapeOverlay" parent="">
