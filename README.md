@@ -516,12 +516,14 @@ The following command can then be run to publish a new version:
 Thanks to the following people who help(ed) improve Maoni, 
 either by suggesting translations or by reporting an issue and/or submitting pull requests.
 
+In no particular order:
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/MariusVolkhart"><img src="https://avatars.githubusercontent.com/u/1709517?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marius Volkhart</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=MariusVolkhart" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/MariusVolkhart"><img src="https://avatars.githubusercontent.com/u/1709517?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marius Volkhart</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=MariusVolkhart" title="Code">💻</a> <a href="https://github.com/rm3l/maoni/issues?q=author%3AMariusVolkhart" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://kalabasa.github.io/"><img src="https://avatars.githubusercontent.com/u/3705081?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lean Rada</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=Kalabasa" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/isacastillor"><img src="https://avatars.githubusercontent.com/u/36340751?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Isamar Castillo</b></sub></a><br /><a href="#translation-isacastillor" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/omersurer"><img src="https://avatars.githubusercontent.com/u/35373108?v=4?s=100" width="100px;" alt=""/><br /><sub><b>omersurer</b></sub></a><br /><a href="#translation-omersurer" title="Translation">🌍</a></td>
@@ -531,8 +533,8 @@ either by suggesting translations or by reporting an issue and/or submitting pul
   </tr>
   <tr>
     <td align="center"><a href="https://crowdin.com/profile/Apsimati"><img src="https://avatars.githubusercontent.com/u/8462938?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Apsimati</b></sub></a><br /><a href="#translation-Apsimati" title="Translation">🌍</a></td>
-    <td align="center"><a href="http://www.carspending.com/"><img src="https://avatars.githubusercontent.com/u/1397692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dimitar Dinchev</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=ddinchev" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/vlad-roid"><img src="https://avatars.githubusercontent.com/u/26101312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vlad-roid</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=vlad-roid" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.carspending.com/"><img src="https://avatars.githubusercontent.com/u/1397692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dimitar Dinchev</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=ddinchev" title="Code">💻</a> <a href="https://github.com/rm3l/maoni/issues?q=author%3Addinchev" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/vlad-roid"><img src="https://avatars.githubusercontent.com/u/26101312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vlad-roid</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=vlad-roid" title="Code">💻</a> <a href="https://github.com/rm3l/maoni/issues?q=author%3Avlad-roid" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/gmiklos-inst"><img src="https://avatars.githubusercontent.com/u/47978769?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gabriel Miklós</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=gmiklos-inst" title="Code">💻</a></td>
   </tr>
 </table>
@@ -541,22 +543,6 @@ either by suggesting translations or by reporting an issue and/or submitting pul
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-In no particular order:
-
-* [Marius Volkhart](https://github.com/MariusVolkhart)
-* [Lean Rada](https://github.com/Kalabasa)
-* [isacastillor](https://crowdin.com/profile/isacastillor)
-* [bobsthinking](https://crowdin.com/profile/bobsthinking)
-* [omersurer](https://crowdin.com/profile/omersurer)
-* [ihtiht](https://crowdin.com/profile/ihtiht)
-* [naofum](https://crowdin.com/profile/naofum)
-* [fuzeh](https://crowdin.com/profile/sebastianbacia)
-* [utopian.io/@kedi](https://crowdin.com/profile/Apsimati)
-* [Dimitar Dinchev](https://github.com/ddinchev)
-* [vlad-roid](https://github.com/vlad-roid)
-* [gmiklos-inst](https://github.com/gmiklos-inst)
-
 
 ## License
 
