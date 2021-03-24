@@ -19,8 +19,8 @@ Add this to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:9.0.0@aar'
-    implementation 'org.rm3l:maoni-github:9.0.0@aar'
+    implementation 'org.rm3l:maoni:9.1.0@aar'
+    implementation 'org.rm3l:maoni-github:9.1.0@aar'
   }
 ```
 
