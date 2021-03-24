@@ -59,4 +59,5 @@ Plus d\'infos sur http://rm3l.github.io/maoni.    ]]></string>
     <string name="send_maoni_slack">"Envoyer sur Slack (via 'maoni-slack')"</string>
     <string name="how_to_send_feedback">De quelle manière souhaitez-vous envoyer vos commentaires ?</string>
     <string name="action_settings">Paramètres</string>
+    <string name="action_bottom_sheet">Bottom Sheet</string>
 </resources>

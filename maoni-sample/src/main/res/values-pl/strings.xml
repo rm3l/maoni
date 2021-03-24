@@ -63,4 +63,5 @@ SOFTWARE.
     <string name="send_maoni_slack">"Wyślij do Slack (manoi-slack)"</string>
     <string name="how_to_send_feedback">Jak chciałbyś/aś przesyłać swoje opinie?</string>
     <string name="action_settings">Ustawienia</string>
+    <string name="action_bottom_sheet">Bottom Sheet</string>
 </resources>

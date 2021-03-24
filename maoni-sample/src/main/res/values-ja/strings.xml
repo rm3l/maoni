@@ -58,4 +58,5 @@ SOFTWARE.
     <string name="send_maoni_slack">"Slack に送信 (maoni slack)"</string>
     <string name="how_to_send_feedback">あなたのフィードバックを送信しますか?</string>
     <string name="action_settings">設定</string>
+    <string name="action_bottom_sheet">Bottom Sheet</string>
 </resources>

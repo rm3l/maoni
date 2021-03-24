@@ -60,4 +60,5 @@ Por favor navegue a http://github.com/rm3l/maoni para obtener más instrucciones
     <string name="send_maoni_slack">"Enviar cuando está estacionario (maoni-slack)"</string>
     <string name="how_to_send_feedback">¿Cómo le gustaría enviar sus recomendaciones?</string>
     <string name="action_settings">Ajustes</string>
+    <string name="action_bottom_sheet">Bottom Sheet</string>
 </resources>

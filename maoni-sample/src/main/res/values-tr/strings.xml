@@ -61,4 +61,5 @@ SOFTWARE.
     <string name="send_maoni_slack">"Slack'e gönder (maoni-slack)"</string>
     <string name="how_to_send_feedback">Geri bildiriminizi nasıl göndermek istersiniz?</string>
     <string name="action_settings">Ayarlar</string>
+    <string name="action_bottom_sheet">Bottom Sheet</string>
 </resources>
