@@ -1,6 +1,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.rm3l/maoni)](https://search.maven.org/artifact/org.rm3l/maoni)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni/blob/master/LICENSE)
 
@@ -526,6 +526,7 @@ either by suggesting translations or by reporting an issue and/or submitting pul
     <td align="center"><a href="https://github.com/isacastillor"><img src="https://avatars.githubusercontent.com/u/36340751?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Isamar Castillo</b></sub></a><br /><a href="#translation-isacastillor" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/omersurer"><img src="https://avatars.githubusercontent.com/u/35373108?v=4?s=100" width="100px;" alt=""/><br /><sub><b>omersurer</b></sub></a><br /><a href="#translation-omersurer" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/ihtiht"><img src="https://avatars.githubusercontent.com/u/36369736?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ihtiht</b></sub></a><br /><a href="#translation-ihtiht" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/naofum"><img src="https://avatars.githubusercontent.com/u/8462938?v=4?s=100" width="100px;" alt=""/><br /><sub><b>naofum</b></sub></a><br /><a href="#translation-naofum" title="Translation">🌍</a></td>
   </tr>
 </table>
 
