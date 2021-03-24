@@ -1,6 +1,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.rm3l/maoni)](https://search.maven.org/artifact/org.rm3l/maoni)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni/blob/master/LICENSE)
 
@@ -519,8 +519,15 @@ either by suggesting translations or by reporting an issue and/or submitting pul
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/MariusVolkhart"><img src="https://avatars.githubusercontent.com/u/1709517?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marius Volkhart</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=MariusVolkhart" title="Code">💻</a></td>
+  </tr>
+</table>
+
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 In no particular order:
