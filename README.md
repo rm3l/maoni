@@ -13,7 +13,7 @@
 [![Issue Count](https://codeclimate.com/github/rm3l/maoni/badges/issue_count.svg)](https://codeclimate.com/github/rm3l/maoni)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![GitHub watchers](https://img.shields.io/github/watchers/rm3l/maoni.svg?style=social&label=Watch)](https://github.com/rm3l/maoni)
 [![GitHub stars](https://img.shields.io/github/stars/rm3l/maoni.svg?style=social&label=Star)](https://github.com/rm3l/maoni)
@@ -536,6 +536,7 @@ In no particular order:
     <td align="center"><a href="http://www.carspending.com/"><img src="https://avatars.githubusercontent.com/u/1397692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dimitar Dinchev</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=ddinchev" title="Code">💻</a> <a href="https://github.com/rm3l/maoni/issues?q=author%3Addinchev" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/vlad-roid"><img src="https://avatars.githubusercontent.com/u/26101312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vlad-roid</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=vlad-roid" title="Code">💻</a> <a href="https://github.com/rm3l/maoni/issues?q=author%3Avlad-roid" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/gmiklos-inst"><img src="https://avatars.githubusercontent.com/u/47978769?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gabriel Miklós</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=gmiklos-inst" title="Code">💻</a></td>
+    <td align="center"><a href="https://sanplot.com"><img src="https://avatars.githubusercontent.com/u/14003063?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dennis Deng</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=dennisdeng2002" title="Code">💻</a></td>
   </tr>
 </table>
 
