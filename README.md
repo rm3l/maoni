@@ -1,6 +1,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.rm3l/maoni)](https://search.maven.org/artifact/org.rm3l/maoni)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/rm3l/maoni/blob/master/LICENSE)
 
@@ -533,6 +533,7 @@ either by suggesting translations or by reporting an issue and/or submitting pul
     <td align="center"><a href="https://crowdin.com/profile/Apsimati"><img src="https://avatars.githubusercontent.com/u/8462938?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Apsimati</b></sub></a><br /><a href="#translation-Apsimati" title="Translation">🌍</a></td>
     <td align="center"><a href="http://www.carspending.com/"><img src="https://avatars.githubusercontent.com/u/1397692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dimitar Dinchev</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=ddinchev" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/vlad-roid"><img src="https://avatars.githubusercontent.com/u/26101312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vlad-roid</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=vlad-roid" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/gmiklos-inst"><img src="https://avatars.githubusercontent.com/u/47978769?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gabriel Miklós</b></sub></a><br /><a href="https://github.com/rm3l/maoni/commits?author=gmiklos-inst" title="Code">💻</a></td>
   </tr>
 </table>
 
