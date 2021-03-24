@@ -81,6 +81,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "ddinchev",
+      "name": "Dimitar Dinchev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1397692?v=4",
+      "profile": "http://www.carspending.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
