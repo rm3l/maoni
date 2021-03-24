@@ -24,7 +24,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.mikepenz.aboutlibraries.plugin'
 apply plugin: 'kotlin-android'
 //apply plugin: 'jacoco-android'
-apply plugin: 'com.github.triplet.play'
 
 Properties localProperties = new Properties()
 try {
@@ -204,14 +203,19 @@ dependencies {
     }
 }
 
-play {
-    serviceAccountCredentials = rootProject.getPlayStoreConfig()
-    // ...
-    track = 'beta'
-    userFraction = 1
-    releaseStatus = "inProgress"
+def playStoreConfig = rootProject.getPlayStoreConfig()
+if (playStoreConfig.exists()) {
 
-    resolutionStrategy = "auto"
+    apply plugin: 'com.github.triplet.play'
+
+    play {
+        serviceAccountCredentials = rootProject.getPlayStoreConfig()
+        // ...
+        track = 'beta'
+        userFraction = 1
+        releaseStatus = "inProgress"
+
+        resolutionStrategy = "auto"
 //    outputProcessor { // this: ApkVariantOutput
 //        versionNameOverride = "$versionNameOverride.$versionCode"
 //    }
@@ -220,4 +224,5 @@ play {
 //
 //    uploadImages = false
 //    errorOnSizeLimit = false
+    }
 }
