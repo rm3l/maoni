@@ -204,7 +204,7 @@ dependencies {
 }
 
 def playStoreConfig = rootProject.getPlayStoreConfig()
-if (playStoreConfig.exists()) {
+if (playStoreConfig.isFile() && !playStoreConfig.text.isBlank()) {
 
     apply plugin: 'com.github.triplet.play'
 
