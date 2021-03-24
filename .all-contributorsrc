@@ -111,7 +111,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dennisdeng2002",
+      "name": "Dennis Deng",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14003063?v=4",
+      "profile": "https://sanplot.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
