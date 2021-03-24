@@ -1,0 +1,117 @@
+{
+  "projectName": "maoni",
+  "projectOwner": "rm3l",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "MariusVolkhart",
+      "name": "Marius Volkhart",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1709517?v=4",
+      "profile": "https://github.com/MariusVolkhart",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "Kalabasa",
+      "name": "Lean Rada",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3705081?v=4",
+      "profile": "https://kalabasa.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "isacastillor",
+      "name": "Isamar Castillo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36340751?v=4",
+      "profile": "https://github.com/isacastillor",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "omersurer",
+      "name": "omersurer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35373108?v=4",
+      "profile": "https://github.com/omersurer",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "ihtiht",
+      "name": "ihtiht",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36369736?v=4",
+      "profile": "https://github.com/ihtiht",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "naofum",
+      "name": "naofum",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8462938?v=4",
+      "profile": "https://github.com/naofum",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "Fuzeh",
+      "name": "fuzeh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34560993?v=4",
+      "profile": "https://github.com/Fuzeh",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "Apsimati",
+      "name": "Apsimati",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8462938?v=4",
+      "profile": "https://crowdin.com/profile/Apsimati",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "ddinchev",
+      "name": "Dimitar Dinchev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1397692?v=4",
+      "profile": "http://www.carspending.com/",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "vlad-roid",
+      "name": "vlad-roid",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26101312?v=4",
+      "profile": "https://github.com/vlad-roid",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "gmiklos-inst",
+      "name": "Gabriel Miklós",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47978769?v=4",
+      "profile": "https://github.com/gmiklos-inst",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
