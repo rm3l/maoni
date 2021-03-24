@@ -23,11 +23,13 @@ package org.rm3l.maoni;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import android.view.Window;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -224,12 +226,33 @@ public class Maoni {
     }
 
     /**
-     * Start the Maoni Activity
+     * Start the Maoni Activity. If screenCapturingFeatureEnabled is true this will take a
+     * screenshot of the activity window
      *
      * @param callerActivity the caller activity
      */
     public void start(@Nullable final Activity callerActivity) {
+        start(callerActivity, callerActivity.getWindow());
+    }
 
+    /**
+     * Start the Maoni Activity. If screenCapturingFeatureEnabled is true this will take a
+     * screenshot of the dialog window
+     *
+     * @param dialog the caller dialog
+     */
+    public void start(@Nullable Dialog dialog) {
+        Activity activity = ContextUtils.scanForActivity(dialog.getContext());
+        start(activity, dialog.getWindow());
+    }
+
+    /**
+     * Internal helper method used to start MaoniActivity
+     *
+     * @param callerActivity activity context
+     * @param window window for screen (if enabled)
+     */
+    private void start(Activity callerActivity, Window window) {
         if (mUsed.getAndSet(true)) {
             this.clear();
             throw new UnsupportedOperationException(
@@ -292,7 +315,7 @@ public class Maoni {
             //Create screenshot file
             final File screenshotFile = new File(maoniWorkingDir != null ? maoniWorkingDir : callerActivity.getCacheDir(),
                 MAONI_FEEDBACK_SCREENSHOT_FILENAME);
-            ViewUtils.exportViewToFile(callerActivity, callerActivity.getWindow().getDecorView(),
+            ViewUtils.exportViewToFile(callerActivity, window.getDecorView(),
                 screenshotFile);
             maoniIntent.putExtra(SCREENSHOT_FILE, screenshotFile.getAbsolutePath());
 
@@ -362,7 +385,6 @@ public class Maoni {
 
         callerActivity.startActivity(maoniIntent);
     }
-
 
     public Maoni unregisterListener() {
         getInstance(context).setListener(null);

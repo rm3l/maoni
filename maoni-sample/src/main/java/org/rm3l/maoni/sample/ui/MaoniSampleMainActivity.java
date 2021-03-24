@@ -22,24 +22,29 @@
 
 package org.rm3l.maoni.sample.ui;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import org.rm3l.maoni.Maoni;
 import org.rm3l.maoni.common.contract.Handler;
 import org.rm3l.maoni.sample.R;
 import org.rm3l.maoni.sample.extensions.ContextUtils;
+import org.rm3l.maoni.sample.utils.MaoniUtils;
 
 public class MaoniSampleMainActivity extends AppCompatActivity {
 
@@ -56,31 +61,11 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
-        final Handler handlerForMaoni = ContextUtils.getMaoniFeedbackHandler(this); //Custom handler for Maoni, which does nothing more than calling any of the maoni-* available callbacks
-        final Maoni.Builder maoniBuilder = ContextUtils.getMaoniFeedbackBuilder(this);
         final FloatingActionButton fab = findViewById(R.id.fab);
         if (fab != null) {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // MaoniActivity de-registers handlers, listeners and validators upon activity destroy,
-                    // so we need to re-register it again by reconstructing a new Maoni instance.
-                    //Also, Maoni.start(...) cannot be called twice,
-                    // but we are reusing the Builder to construct a new instance along with its handler.
-                    //
-                    //Note that if no handler/listener is specified,
-                    //Maoni will fall back to opening an Email Intent, so your users can send
-                    //their feedback via email
-                  final SharedPreferences defaultSharedPreferences =
-                      PreferenceManager.getDefaultSharedPreferences(MaoniSampleMainActivity.this);
-                  mMaoni = maoniBuilder
-                        .withScreenCapturingFeature(defaultSharedPreferences
-                            .getBoolean("maoni_screen_capturing_enabled", true))
-                        .withLogsCapturingFeature(defaultSharedPreferences
-                            .getBoolean("maoni_logs_capturing_enabled", true))
-                        .withHandler(handlerForMaoni).build();
-                    mMaoni.start(MaoniSampleMainActivity.this);
-                }
+            fab.setOnClickListener(view -> {
+                mMaoni = MaoniUtils.buildMaoni(this);
+                mMaoni.start(MaoniSampleMainActivity.this);
             });
         }
     }
@@ -115,6 +100,9 @@ public class MaoniSampleMainActivity extends AppCompatActivity {
                     //start the activity
                     .start(this);
 
+        } else if (itemId == R.id.bottom_sheet) {
+            MaoniBottomSheetDialogFragment fragment = new MaoniBottomSheetDialogFragment();
+            fragment.show(getSupportFragmentManager(), "MaoniBottomSheetDialogFragment");
         }
         return super.onOptionsItemSelected(item);
     }
