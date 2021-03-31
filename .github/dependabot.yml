@@ -1,5 +1,15 @@
 version: 2
 updates:
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+  reviewers:
+  - rm3l
+  labels:
+  - dependencies
 - package-ecosystem: gradle
   directory: "/callbacks/maoni-jira"
   schedule:
