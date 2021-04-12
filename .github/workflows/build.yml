@@ -40,8 +40,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set up JDK 15
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 15
 
       - uses: actions/cache@v2.1.4
@@ -136,8 +137,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up JDK 15
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 15
 
       - uses: actions/cache@v2.1.4
