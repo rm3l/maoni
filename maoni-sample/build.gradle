@@ -212,10 +212,10 @@ if (playStoreConfig.isFile() && !playStoreConfig.text.isBlank()) {
         serviceAccountCredentials = rootProject.getPlayStoreConfig()
         // ...
         track = 'beta'
-        userFraction = 1
-        releaseStatus = "inProgress"
+        userFraction = 1d
+        releaseStatus = com.github.triplet.gradle.androidpublisher.ReleaseStatus.IN_PROGRESS
 
-        resolutionStrategy = "auto"
+        resolutionStrategy = com.github.triplet.gradle.androidpublisher.ResolutionStrategy.AUTO
 //    outputProcessor { // this: ApkVariantOutput
 //        versionNameOverride = "$versionNameOverride.$versionCode"
 //    }
