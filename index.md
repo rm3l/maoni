@@ -547,6 +547,10 @@ In no particular order:
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
 
+## Sponsors
+
+Special thanks to [JetBrains](https://www.jetbrains.com/) for supporting this project by providing us with a free license of [IntelliJ IDEA](https://www.jetbrains.com/idea/).
+
 ## License
 
     The MIT License (MIT)
