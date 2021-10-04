@@ -31,7 +31,7 @@ buildscript {
     ext.kotlin_version = '1.5.31'
     ext.anko_version = '0.10.8'
 
-    ext.aboutlibraries_version = '8.9.1'
+    ext.aboutlibraries_version = '8.9.3'
 
     repositories {
         maven {
