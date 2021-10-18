@@ -44,7 +44,7 @@ buildscript {
     dependencies {
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:${aboutlibraries_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:7.0.3'
 //        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.github.triplet.gradle:play-publisher:3.5.0-agp7.0'
         // NOTE: Do not place your application dependencies here; they belong
