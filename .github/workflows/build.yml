@@ -107,21 +107,21 @@ jobs:
         run: bash <(curl -s https://codecov.io/bash)
 
       - name: Archive sample app artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: maoni-sample_outputs
           path: |
             maoni-sample/build/outputs
 
       - name: Archive build reports
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: reports
           path: |
             **/build/reports
 
       - name: Archive test results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: reports
           path: |
