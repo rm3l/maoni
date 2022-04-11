@@ -551,11 +551,13 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 Special thanks to [JetBrains](https://www.jetbrains.com/) for supporting this project by providing us with a free license of [IntelliJ IDEA](https://www.jetbrains.com/idea/).
 
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
+
 ## License
 
     The MIT License (MIT)
     
-    Copyright (c) 2016-2021 Armel Soro
+    Copyright (c) 2016-2022 Armel Soro
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
