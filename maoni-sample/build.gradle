@@ -52,12 +52,6 @@ def slackEmojiIcon = localProperties.getProperty('slack.emoji.icon', "")
 android {
     compileSdkVersion 28
 
-//    playAccountConfigs {
-//        defaultAccountConfig {
-//            jsonFile = rootProject.getPlayStoreConfig()
-//        }
-//    }
-
     signingConfigs {
         debug {
             (keyAlias, storeFile, storePassword, keyPassword) = rootProject.getDebugSigningConfig()
@@ -200,29 +194,5 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
     implementation("com.mikepenz:aboutlibraries:${aboutlibraries_version}@aar") {
         transitive = true
-    }
-}
-
-def playStoreConfig = rootProject.getPlayStoreConfig()
-if (playStoreConfig.isFile() && !playStoreConfig.text.isBlank()) {
-
-    apply plugin: 'com.github.triplet.play'
-
-    play {
-        serviceAccountCredentials = rootProject.getPlayStoreConfig()
-        // ...
-        track = 'beta'
-        userFraction = 1d
-        releaseStatus = com.github.triplet.gradle.androidpublisher.ReleaseStatus.IN_PROGRESS
-
-        resolutionStrategy = com.github.triplet.gradle.androidpublisher.ResolutionStrategy.AUTO
-//    outputProcessor { // this: ApkVariantOutput
-//        versionNameOverride = "$versionNameOverride.$versionCode"
-//    }
-//
-//    untrackOld = true // will un-track 'alpha' while upload to 'beta'
-//
-//    uploadImages = false
-//    errorOnSizeLimit = false
     }
 }
