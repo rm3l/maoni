@@ -44,6 +44,7 @@
 - [Credits](#credits)
 - [Developed by](#developed-by)
 - [Contributors](#contributors)
+- [Sponsors](#sponsors)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -139,7 +140,7 @@ Declare the [Maven Central repository](https://repo.maven.apache.org/maven2/) (i
 
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:9.1.0@aar'
+    implementation 'org.rm3l:maoni:10.0.0@aar'
   }
 ```
 
@@ -202,7 +203,7 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:9.1.0@aar'
+    implementation 'org.rm3l:maoni:10.0.0@aar'
   }
 ```
 
@@ -232,8 +233,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:9.1.0@aar'
-    implementation 'org.rm3l:maoni-slack:9.1.0@aar'
+    implementation 'org.rm3l:maoni:10.0.0@aar'
+    implementation 'org.rm3l:maoni-slack:10.0.0@aar'
   }
 ```
 
@@ -262,8 +263,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:9.1.0@aar'
-    implementation 'org.rm3l:maoni-github:9.1.0@aar'
+    implementation 'org.rm3l:maoni:10.0.0@aar'
+    implementation 'org.rm3l:maoni-github:10.0.0@aar'
   }
 ```
 
@@ -293,8 +294,8 @@ Add this additional line to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:9.1.0@aar'
-    implementation 'org.rm3l:maoni-jira:9.1.0@aar'
+    implementation 'org.rm3l:maoni:10.0.0@aar'
+    implementation 'org.rm3l:maoni-jira:10.0.0@aar'
   }
 ```
 
@@ -325,8 +326,8 @@ Add this additional line to your `build.gradle`:
 ```gradle
   dependencies {
     // ...
-    implementation 'org.rm3l:maoni:9.1.0@aar'
-    implementation 'org.rm3l:maoni-doorbell:9.1.0@aar'
+    implementation 'org.rm3l:maoni:10.0.0@aar'
+    implementation 'org.rm3l:maoni-doorbell:10.0.0@aar'
   }
 ```
 
@@ -459,7 +460,7 @@ You just have to include `maoni-common` as a dependency in your project, e.g., w
 ```gradle
   dependencies {
     // ...
-    api 'org.rm3l:maoni-common:9.1.0@aar'
+    api 'org.rm3l:maoni-common:10.0.0@aar'
   }
 ```
 You can write your project in any JVM language of your choice (e.g., [Kotlin](https://kotlinlang.org/), as with [maoni-slack](https://github.com/rm3l/maoni-slack) and [maoni-github](https://github.com/rm3l/maoni-github)), as long as the callback implementation can be called from Maoni.
