@@ -25,7 +25,7 @@ SOFTWARE.
     <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application>
-        <activity android:name=".ui.MaoniActivity"/>
+        <activity android:name=".ui.MaoniActivity" android:exported="true"/>
     </application>
 
 </manifest>

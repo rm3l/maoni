@@ -33,11 +33,11 @@ group = maoni_group
 version = VERSION_NAME
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 32
         versionCode VERSION_CODE
         versionName VERSION_NAME
     }

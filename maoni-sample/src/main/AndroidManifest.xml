@@ -48,6 +48,7 @@ SOFTWARE.
 
         <activity
             android:name=".ui.MaoniSampleMainActivity"
+          android:exported="true"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:label="@string/maoni_app_name"
             android:launchMode="singleTop"
@@ -64,6 +65,7 @@ SOFTWARE.
 
         <activity
             android:name=".ui.MaoniSampleSettingsActivity"
+            android:exported="false"
             android:label="@string/maoni_settings_activity_name"
             android:parentActivityName="org.rm3l.maoni.sample.ui.MaoniSampleMainActivity"
             android:windowSoftInputMode="adjustResize">

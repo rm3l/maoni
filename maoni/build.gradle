@@ -29,11 +29,11 @@ final VERSION_NAME = maoni_version
 final VERSION_CODE = VERSION_NAME.replace('.', '').toInteger()
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 32
         versionCode VERSION_CODE
         versionName VERSION_NAME
     }

@@ -82,7 +82,7 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
     var maoniGithubConfigured = context.defaultSharedPreferences.getBoolean("maoni_github_enabled", true)
     if (maoniGithubConfigured &&
-        context.defaultSharedPreferences.getString("maoni_github_username", "").isBlank() && (
+        context.defaultSharedPreferences.getString("maoni_github_username", "")?.isBlank() == true && (
         TextUtils.isEmpty(BuildConfig.GITHUB_USERNAME)
         || TextUtils.isEmpty(BuildConfig.GITHUB_PASSWORD_TOKEN))) {
       //maoni-github not configured properly
@@ -94,8 +94,8 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
     var maoniJiraConfigured = context.defaultSharedPreferences.getBoolean("maoni_jira_enabled", true)
     if (maoniJiraConfigured &&
-        context.defaultSharedPreferences.getString("maoni_jira_rest_base_url", "").isBlank() &&
-        context.defaultSharedPreferences.getString("maoni_jira_username", "").isBlank() &&
+        context.defaultSharedPreferences.getString("maoni_jira_rest_base_url", "")?.isBlank() == true &&
+        context.defaultSharedPreferences.getString("maoni_jira_username", "")?.isBlank() == true &&
         (
         TextUtils.isEmpty(BuildConfig.JIRA_REST_BASE_URL)
         || TextUtils.isEmpty(BuildConfig.JIRA_USERNAME)
@@ -109,7 +109,7 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
     var maoniSlackConfigured = context.defaultSharedPreferences.getBoolean("maoni_slack_enabled", true)
     if  ( maoniSlackConfigured &&
-        context.defaultSharedPreferences.getString("maoni_slack_webhook_url", "").isBlank() &&
+        context.defaultSharedPreferences.getString("maoni_slack_webhook_url", "")?.isBlank() == true &&
       TextUtils.isEmpty(BuildConfig.SLACK_WEBHOOK_URL)) {
       warn { "maoni-slack not configured properly. " +
           "'slack.webhook.url' property missing from local.properties" }
@@ -138,9 +138,8 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
         val textAtPosition = listOfListeners[position]
         val progressDialog = ProgressDialog.show(context, textAtPosition,
                 "Please wait...", true)
-        val listenerSelected: Listener?
 
-        listenerSelected = if (textAtPosition.contains("maoni-email", true)) {
+        val listenerSelected: Listener? = if (textAtPosition.contains("maoni-email", true)) {
           buildMaoniEmailListener(feedback)
         } else if (maoniGithubConfigured &&
                 textAtPosition.contains("maoni-github", ignoreCase = true)) {
@@ -165,18 +164,31 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
   private fun buildMaoniEmailListener(feedback: Feedback?): Listener {
     val customSubject = context.defaultSharedPreferences.getString("maoni_email_subject", "")
-    val useCustomSubject = customSubject.isNotBlank()
-    val customTo = context.defaultSharedPreferences.getString("maoni_email_to", "").split(",").map { it.trim() }
-    val customCc = context.defaultSharedPreferences.getString("maoni_email_cc", "").split(",").map { it.trim() }
-    val customBcc = context.defaultSharedPreferences.getString("maoni_email_bcc", "").split(",").map { it.trim() }
+    val useCustomSubject = customSubject?.isNotBlank()
+    val customTo = context.defaultSharedPreferences.getString("maoni_email_to", "")
+            ?.split(",")
+            ?.map { it.trim() }
+            ?: emptyList()
+    val customCc = context.defaultSharedPreferences.getString("maoni_email_cc", "")
+            ?.split(",")
+            ?.map { it.trim() }
+            ?: emptyList()
+    val customBcc = context.defaultSharedPreferences.getString("maoni_email_bcc", "")
+            ?.split(",")
+            ?.map { it.trim() }
+            ?: emptyList()
     val customBccUpdated = mutableListOf(*customBcc.toTypedArray())
     customBccUpdated.add("apps+maoni_sample@rm3l.org")
     return MaoniEmailListener(
         context,
         "text/html",
-        if (useCustomSubject) customSubject else "[Maoni] Feedback from Maoni Sample App " +
-            "(${feedback?.appInfo?.applicationId ?: "UNKNOWN_APPLICATION_ID"}: " +
-            "${feedback?.appInfo?.versionName ?: "UNKNOWN_VERSION_NAME"})",
+        if (useCustomSubject == true) customSubject else """
+          [Maoni] Feedback from Maoni Sample App 
+          (
+          ${feedback?.appInfo?.applicationId ?: "UNKNOWN_APPLICATION_ID"}: 
+          ${feedback?.appInfo?.versionName ?: "UNKNOWN_VERSION_NAME"}
+          )
+        """.trimIndent(),
         null,
         null,
         if (customTo.isEmpty()) arrayOf("apps+maoni@rm3l.org") else customTo.toTypedArray(),
@@ -186,19 +198,22 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
   private fun buildMaoniGithubListener(): Listener {
     val customUsername = context.defaultSharedPreferences.getString("maoni_github_username", "")
-    val useCustomUsername = customUsername.isNotBlank()
+    val useCustomUsername = customUsername?.isNotBlank()
 
     val customToken = context.defaultSharedPreferences.getString("maoni_github_token", "")
-    val useCustomToken = customToken.isNotBlank()
+    val useCustomToken = customToken?.isNotBlank()
 
-    val customRepo = context.defaultSharedPreferences.getString("maoni_github_repo", "").split("/").map { it.trim() }
+    val customRepo = context.defaultSharedPreferences.getString("maoni_github_repo", "")
+            ?.split("/")
+            ?.map { it.trim() }
+            ?: emptyList()
     val useCustomRepo = (customRepo.size == 2)
 
     val githubRepoOwner = "rm3l"
     val githubRepo = "maoni"
     return MaoniGithubListener(context,
-        if (useCustomUsername) customUsername else BuildConfig.GITHUB_USERNAME,
-        if (useCustomToken) customToken else BuildConfig.GITHUB_PASSWORD_TOKEN,
+        if (useCustomUsername == true) customUsername else BuildConfig.GITHUB_USERNAME,
+        if (useCustomToken == true) customToken else BuildConfig.GITHUB_PASSWORD_TOKEN,
         if (useCustomRepo) customRepo[0] else githubRepoOwner,
         if (useCustomRepo) customRepo[1] else githubRepo,
         BuildConfig.DEBUG,
@@ -215,30 +230,30 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
   private fun buildMaoniJiraListener(): Listener {
     val customApiEndpoint = context.defaultSharedPreferences.getString("maoni_jira_rest_base_url", "")
-    val useCustomApiEndpoint = customApiEndpoint.isNotBlank()
+    val useCustomApiEndpoint = customApiEndpoint?.isNotBlank()
 
     val customUsername = context.defaultSharedPreferences.getString("maoni_jira_username", "")
-    val useCustomUsername = customUsername.isNotBlank()
+    val useCustomUsername = customUsername?.isNotBlank()
 
     val customPassword = context.defaultSharedPreferences.getString("maoni_jira_password", "")
-    val useCustomPassword = customPassword.isNotBlank()
+    val useCustomPassword = customPassword?.isNotBlank()
 
     val customProjectKey = context.defaultSharedPreferences.getString("maoni_jira_project_key", "")
-    val useCustomProjectKey = customProjectKey.isNotBlank()
+    val useCustomProjectKey = customProjectKey?.isNotBlank()
 
     val customIssueType = context.defaultSharedPreferences.getString("maoni_jira_issue_type", "")
-    val useCustomIssueType = customIssueType.isNotBlank()
+    val useCustomIssueType = customIssueType?.isNotBlank()
 
 
-    val jiraProjectKey = if (useCustomProjectKey) customProjectKey else "MAONI"
+    val jiraProjectKey = if (useCustomProjectKey == true) customProjectKey else "MAONI"
     return MaoniJiraListener(
         context,
         BuildConfig.DEBUG,
-        if (useCustomApiEndpoint) customApiEndpoint else BuildConfig.JIRA_REST_BASE_URL,
-        if (useCustomUsername) customUsername else BuildConfig.JIRA_USERNAME,
-        if (useCustomPassword) customPassword else BuildConfig.JIRA_PASSWORD,
+        if (useCustomApiEndpoint == true) customApiEndpoint else BuildConfig.JIRA_REST_BASE_URL,
+        if (useCustomUsername == true) customUsername else BuildConfig.JIRA_USERNAME,
+        if (useCustomPassword == true) customPassword else BuildConfig.JIRA_PASSWORD,
         jiraProjectKey,
-        jiraIssueType = if (useCustomIssueType) customIssueType else "Task",
+        jiraIssueType = if (useCustomIssueType == true) customIssueType else "Task",
         jiraIssueSummaryPrefix = "Maoni Sample App",
         successToastMessage = "Issue has been created in JIRA Project '$jiraProjectKey'. " +
             "Thank you for your feedback!",
@@ -248,28 +263,28 @@ class MaoniSampleCallbackHandler(val context: Context) : Handler, AnkoLogger {
 
   private fun buildMaoniSlackListener(): Listener {
     val customWebhookUrl = context.defaultSharedPreferences.getString("maoni_slack_webhook_url", "")
-    val useCustomWebhookUrl = customWebhookUrl.isNotBlank()
+    val useCustomWebhookUrl = customWebhookUrl?.isNotBlank()
 
     val customChannel = context.defaultSharedPreferences.getString("maoni_slack_channel", "")
-    val useCustomChannel = customChannel.isNotBlank()
+    val useCustomChannel = customChannel?.isNotBlank()
 
     val customUsername = context.defaultSharedPreferences.getString("maoni_slack_username", "")
-    val useCustomUsername = customUsername.isNotBlank()
+    val useCustomUsername = customUsername?.isNotBlank()
 
     val customIconUrl = context.defaultSharedPreferences.getString("maoni_slack_icon_url", "")
-    val useCustomIconUrl = customIconUrl.isNotBlank()
+    val useCustomIconUrl = customIconUrl?.isNotBlank()
 
     val customEmojiIcon = context.defaultSharedPreferences.getString("maoni_slack_emoji_icon", "")
-    val useCustomEmojiIcon = customEmojiIcon.isNotBlank()
+    val useCustomEmojiIcon = customEmojiIcon?.isNotBlank()
 
     return MaoniSlackListener(
         context = context,
-        webhookUrl = if (useCustomWebhookUrl) customWebhookUrl else BuildConfig.SLACK_WEBHOOK_URL,
+        webhookUrl = if (useCustomWebhookUrl == true) customWebhookUrl else BuildConfig.SLACK_WEBHOOK_URL,
         debug = BuildConfig.DEBUG,
-        channel = if (useCustomChannel) customChannel else if (BuildConfig.SLACK_CHANNEL.isNullOrBlank()) null else BuildConfig.SLACK_CHANNEL,
-        username = if (useCustomUsername) customUsername else if (BuildConfig.SLACK_USERNAME.isNullOrBlank()) null else BuildConfig.SLACK_USERNAME,
-        iconUrl = if (useCustomIconUrl) customIconUrl else if (BuildConfig.SLACK_ICON_URL.isNullOrBlank()) null else BuildConfig.SLACK_ICON_URL,
-        emojiIcon = if (useCustomEmojiIcon) customEmojiIcon else if (BuildConfig.SLACK_EMOJI_ICON.isNullOrBlank()) null else BuildConfig.SLACK_EMOJI_ICON,
+        channel = if (useCustomChannel == true) customChannel else if (BuildConfig.SLACK_CHANNEL.isBlank()) null else BuildConfig.SLACK_CHANNEL,
+        username = if (useCustomUsername == true) customUsername else if (BuildConfig.SLACK_USERNAME.isBlank()) null else BuildConfig.SLACK_USERNAME,
+        iconUrl = if (useCustomIconUrl == true) customIconUrl else if (BuildConfig.SLACK_ICON_URL.isBlank()) null else BuildConfig.SLACK_ICON_URL,
+        emojiIcon = if (useCustomEmojiIcon == true) customEmojiIcon else if (BuildConfig.SLACK_EMOJI_ICON.isBlank()) null else BuildConfig.SLACK_EMOJI_ICON,
         successToastMessage = "Feedback sent to Slack Webhook URL '${BuildConfig.SLACK_WEBHOOK_URL}'. " +
             "Thank you for your feedback!",
         failureToastMessage = "An error happened - please try again later"

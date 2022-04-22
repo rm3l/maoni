@@ -50,7 +50,7 @@ def slackIconUrl = localProperties.getProperty('slack.icon.url', "")
 def slackEmojiIcon = localProperties.getProperty('slack.emoji.icon', "")
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 32
 
     signingConfigs {
         debug {
@@ -106,7 +106,7 @@ android {
     defaultConfig {
         applicationId "org.rm3l.maoni.sample"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 32
         versionCode maoni_version.replace('.', '').toInteger()
         versionName "${maoni_version}"
 
