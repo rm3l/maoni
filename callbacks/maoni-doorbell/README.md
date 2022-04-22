@@ -17,8 +17,16 @@ Add this to your `build.gradle`:
 
 ```gradle
   dependencies {
-    implementation 'org.rm3l:maoni:10.0.0@aar'
-    implementation 'org.rm3l:maoni-doorbell:10.0.0@aar'
+    implementation('org.rm3l:maoni:10.0.0@aar') {
+        transitive = true
+        //Needed because of https://github.com/rm3l/maoni/issues/294
+        exclude module: 'unspecified'
+    }
+    implementation('org.rm3l:maoni-doorbell:10.0.0@aar') {
+        transitive = true
+        //Needed because of https://github.com/rm3l/maoni/issues/294
+        exclude module: 'unspecified'
+    }
   }
 ```
 
