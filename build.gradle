@@ -44,7 +44,7 @@ buildscript {
     dependencies {
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:${aboutlibraries_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath 'com.android.tools.build:gradle:7.2.1'
         classpath "io.github.gradle-nexus:publish-plugin:1.1.0"
     }
 }
