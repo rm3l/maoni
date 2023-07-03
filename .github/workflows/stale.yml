@@ -4,6 +4,9 @@ name: Stale issues and PRs
 # to see all config knobs of the stale action.
 
 on:
+  # workflow_dispatch so that it can be triggered manually if needed
+  workflow_dispatch:
+
   schedule:
   - cron: "33 23 * * *"
 
