@@ -191,7 +191,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.facebook.stetho:stetho:1.6.0'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.11'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
     implementation("com.mikepenz:aboutlibraries:${aboutlibraries_version}@aar") {
         transitive = true
     }
