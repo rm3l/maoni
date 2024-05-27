@@ -23,7 +23,7 @@ SOFTWARE.
 <resources>
     <string name="maoni_app_name">Maoni Library</string>
     <string name="maoni_screenshot">Screenshot</string>
-    <string name="maoni_feedback_message">Hey! Love this app? Would you like to suggest a new feature, file a bug or simply say hello?\nWe would love to hear from you.</string>
+    <string name="maoni_feedback_message">Hey! Du magst diese App oder auch nicht? Du möchtest gerne ein neues Feature vorschlagen, einen Fehler melden oder einfach nur Hallo sagen?\nWir würden gerne von dir hören.</string>
     <string name="maoni_feedback_content_hint">Hier Feedback hinterlassen</string>
     <string name="maoni_feedback_include_screenshot_checkbox_title">Screenshot hinzufügen</string>
     <string name="maoni_feedback_include_logs_title">Protokolle hinzufügen</string>
