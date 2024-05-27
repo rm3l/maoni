@@ -103,7 +103,7 @@ files:
            zu: zu
 
   -
-   source: '/maoni-sample/src/main/play/whatsnew*'
+   source: '/maoni-sample/src/main/play/whatsnew'
    translation: '/maoni-sample/src/main/play/%locale%/%original_file_name%'
 
   -
