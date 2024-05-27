@@ -29,6 +29,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
 
       - uses: actions/checkout@v4
@@ -38,14 +41,12 @@ jobs:
 
       - name: "Set environmental variables"
         run: |
-          echo "CIRCLE_BUILD_NUM=$GITHUB_RUN_ID/$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
-          echo "CIRCLE_SHA1=$GITHUB_SHA" >> $GITHUB_ENV
+          echo "CI_BUILD_NUM=$GITHUB_RUN_ID/$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "CI_SHA1=$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Import translations from Crowdin if needed
         run: ./tools/import-translations-github.sh
         env:
-          # import-translations-github.sh script is currently tied to Travis CI
-          CIRCLE_PULL_REQUEST: ''
           GITHUB_API_KEY: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_API_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
