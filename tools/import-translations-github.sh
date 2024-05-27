@@ -36,7 +36,7 @@ if [ "$CIRCLE_PULL_REQUEST" == "" ]; then
   git clone --branch=master https://rm3l:$GITHUB_API_KEY@github.com/rm3l/maoni.git master > /dev/null
 
   cd master
-  wget -q https://github.com/crowdin/crowdin-cli/releases/3.19.4/download/crowdin-cli.zip
+  wget -q https://github.com/crowdin/crowdin-cli/releases/download/3.19.4/crowdin-cli.zip
   unzip -qj crowdin-cli.zip
   # Update sources
   java -jar crowdin-cli.jar upload sources
