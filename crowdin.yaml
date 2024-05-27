@@ -22,8 +22,8 @@
 #
 
 ---
-project_identifier: 'maoni'
-api_key_env: 'CROWDIN_API_KEY'
+project_id: 'maoni'
+api_token_env: 'CROWDIN_API_TOKEN'
 base_url: 'https://api.crowdin.com'
 preserve_hierarchy: true
 
