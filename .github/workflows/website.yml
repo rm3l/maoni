@@ -33,7 +33,7 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Prepare scripts
         run: chmod +x tools/update-github-pages.sh
